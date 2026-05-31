@@ -4,7 +4,7 @@
 > Zero dependencies. < 8KB. Works everywhere.
 
 [![npm version](https://badge.fury.io/js/@smart-mailto%2Fcore.svg)](https://www.npmjs.com/package/@smart-mailto/core)
-[![CI](https://github.com/yourusername/smart-mailto/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/smart-mailto/actions)
+[![CI](https://github.com/namandhakad712/smart-mailto/actions/workflows/ci.yml/badge.svg)](https://github.com/namandhakad712/smart-mailto/actions)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@smart-mailto/core)](https://bundlephobia.com/package/@smart-mailto/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 

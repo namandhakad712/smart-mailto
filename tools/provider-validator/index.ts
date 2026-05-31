@@ -67,7 +67,7 @@ async function validateUrl(id: string, url: string, verbose: boolean): Promise<V
       redirect: 'follow',
       signal: AbortSignal.timeout(10_000),
       headers: {
-        'User-Agent': 'smart-mailto-validator/1.0 (https://github.com/yourusername/smart-mailto)',
+        'User-Agent': 'smart-mailto-validator/1.0 (https://github.com/namandhakad712/smart-mailto)',
       },
     });
 

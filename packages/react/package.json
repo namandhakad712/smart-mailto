@@ -13,7 +13,7 @@
   "homepage": "https://smart-mailto.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/smart-mailto.git",
+    "url": "https://github.com/namandhakad712/smart-mailto.git",
     "directory": "packages/react"
   },
   "license": "MIT",
