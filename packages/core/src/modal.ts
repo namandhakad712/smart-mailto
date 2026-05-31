@@ -382,9 +382,7 @@ function buildModalDOM(
   const subtitle = document.createElement('div');
   subtitle.className = 'sm-subtitle';
   const recipient = params.to[0] ?? '';
-  subtitle.textContent = params.subject
-    ? `${recipient} · ${params.subject}`
-    : recipient;
+  subtitle.textContent = params.subject ? `${recipient} · ${params.subject}` : recipient;
   subtitle.title = subtitle.textContent;
 
   titleArea.appendChild(title);

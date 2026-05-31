@@ -15,36 +15,36 @@ import * as path from 'path';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const PROVIDER_TEST_URLS: Record<string, string> = {
-  'gmail':            'https://mail.google.com/mail/?view=cm&fs=1&to=test%40example.com',
+  gmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=test%40example.com',
   'outlook-personal': 'https://outlook.live.com/mail/0/deeplink/compose?to=test%40example.com',
-  'outlook-work':     'https://outlook.office.com/mail/deeplink/compose?to=test%40example.com',
-  'yahoo':            'https://compose.mail.yahoo.com/?to=test%40example.com',
-  'protonmail':       'https://mail.proton.me/u/0/inbox',
-  'icloud':           'https://www.icloud.com/mail/',
-  'fastmail':         'https://app.fastmail.com/mail/compose',
-  'zoho':             'https://mail.zoho.com/zm/#compose',
-  'tutanota':         'https://app.tuta.com/mail',
-  'yandex':           'https://mail.yandex.ru/compose',
-  'mailru':           'https://e.mail.ru/compose/',
-  'gmx':              'https://navigator.gmx.net/mail/compose/',
-  'webde':            'https://web.de/email/compose/',
-  'naver':            'https://mail.naver.com/v2/new',
-  'yahoo-japan':      'https://mail.yahoo.co.jp/compose',
-  'qq':               'https://mail.qq.com/cgi-bin/compose_send',
-  'mail163':          'https://mail.163.com/js5/write.do',
-  'seznam':           'https://email.seznam.cz/?compose',
-  'laposte':          'https://www.laposte.net/accueil',
-  'daum':             'https://mail.daum.net/',
-  'posteo':           'https://posteo.de/en',
-  'mailboxorg':       'https://office.mailbox.org/',
-  'mailfence':        'https://mailfence.com',
-  'runbox':           'https://runbox.com',
-  'libero':           'https://mail.libero.it/',
-  'onet':             'https://poczta.onet.pl/',
-  'wp':               'https://poczta.wp.pl/',
-  'rediff':           'https://mail.rediff.com/',
-  'ukrnet':           'https://mail.ukr.net/',
-  'sina':             'https://mail.sina.com.cn/',
+  'outlook-work': 'https://outlook.office.com/mail/deeplink/compose?to=test%40example.com',
+  yahoo: 'https://compose.mail.yahoo.com/?to=test%40example.com',
+  protonmail: 'https://mail.proton.me/u/0/inbox',
+  icloud: 'https://www.icloud.com/mail/',
+  fastmail: 'https://app.fastmail.com/mail/compose',
+  zoho: 'https://mail.zoho.com/zm/#compose',
+  tutanota: 'https://app.tuta.com/mail',
+  yandex: 'https://mail.yandex.ru/compose',
+  mailru: 'https://e.mail.ru/compose/',
+  gmx: 'https://navigator.gmx.net/mail/compose/',
+  webde: 'https://web.de/email/compose/',
+  naver: 'https://mail.naver.com/v2/new',
+  'yahoo-japan': 'https://mail.yahoo.co.jp/compose',
+  qq: 'https://mail.qq.com/cgi-bin/compose_send',
+  mail163: 'https://mail.163.com/js5/write.do',
+  seznam: 'https://email.seznam.cz/?compose',
+  laposte: 'https://www.laposte.net/accueil',
+  daum: 'https://mail.daum.net/',
+  posteo: 'https://posteo.de/en',
+  mailboxorg: 'https://office.mailbox.org/',
+  mailfence: 'https://mailfence.com',
+  runbox: 'https://runbox.com',
+  libero: 'https://mail.libero.it/',
+  onet: 'https://poczta.onet.pl/',
+  wp: 'https://poczta.wp.pl/',
+  rediff: 'https://mail.rediff.com/',
+  ukrnet: 'https://mail.ukr.net/',
+  sina: 'https://mail.sina.com.cn/',
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -59,11 +59,7 @@ interface ValidationResult {
   durationMs?: number;
 }
 
-async function validateUrl(
-  id: string,
-  url: string,
-  verbose: boolean,
-): Promise<ValidationResult> {
+async function validateUrl(id: string, url: string, verbose: boolean): Promise<ValidationResult> {
   const start = Date.now();
   try {
     const res = await fetch(url, {
@@ -71,8 +67,7 @@ async function validateUrl(
       redirect: 'follow',
       signal: AbortSignal.timeout(10_000),
       headers: {
-        'User-Agent':
-          'smart-mailto-validator/1.0 (https://github.com/yourusername/smart-mailto)',
+        'User-Agent': 'smart-mailto-validator/1.0 (https://github.com/yourusername/smart-mailto)',
       },
     });
 
@@ -125,9 +120,7 @@ async function main() {
   const BATCH_SIZE = 8;
   for (let i = 0; i < entries.length; i += BATCH_SIZE) {
     const batch = entries.slice(i, i + BATCH_SIZE);
-    const results = await Promise.all(
-      batch.map(([id, url]) => validateUrl(id, url, verbose)),
-    );
+    const results = await Promise.all(batch.map(([id, url]) => validateUrl(id, url, verbose)));
     batch.forEach(([id], idx) => {
       report[id] = results[idx]!;
     });

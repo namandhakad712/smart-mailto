@@ -19,19 +19,25 @@ describe('getGeoOrderedProviderIds', () => {
   // ── Russia ─────────────────────────────────────────────────────────────────
 
   it('prioritizes Yandex + Mail.ru for Moscow timezone', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Europe/Moscow', locale: 'ru-RU' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Europe/Moscow', locale: 'ru-RU' }),
+    );
     expect(ids[0]).toBe('yandex');
     expect(ids[1]).toBe('mailru');
     expect(ids).toContain('gmail');
   });
 
   it('prioritizes Yandex for Vladivostok (far-east Russia)', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Asia/Vladivostok', locale: 'ru' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Asia/Vladivostok', locale: 'ru' }),
+    );
     expect(ids[0]).toBe('yandex');
   });
 
   it('prioritizes Yandex + Mail.ru for Yekaterinburg', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Asia/Yekaterinburg', locale: 'ru-RU' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Asia/Yekaterinburg', locale: 'ru-RU' }),
+    );
     expect(ids[0]).toBe('yandex');
     expect(ids[1]).toBe('mailru');
   });
@@ -39,7 +45,9 @@ describe('getGeoOrderedProviderIds', () => {
   // ── China ─────────────────────────────────────────────────────────────────
 
   it('prioritizes QQ Mail for Shanghai timezone', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Asia/Shanghai', locale: 'zh-CN' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Asia/Shanghai', locale: 'zh-CN' }),
+    );
     expect(ids[0]).toBe('qq');
     expect(ids).toContain('mail163');
   });
@@ -73,7 +81,9 @@ describe('getGeoOrderedProviderIds', () => {
   // ── India ─────────────────────────────────────────────────────────────────
 
   it('prioritizes Gmail for Kolkata timezone (India)', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Asia/Kolkata', locale: 'en-IN' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Asia/Kolkata', locale: 'en-IN' }),
+    );
     expect(ids[0]).toBe('gmail');
     expect(ids).toContain('zoho');
     expect(ids).toContain('rediff');
@@ -82,21 +92,27 @@ describe('getGeoOrderedProviderIds', () => {
   // ── Germany ───────────────────────────────────────────────────────────────
 
   it('prioritizes GMX + WEB.DE for Berlin timezone', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Europe/Berlin', locale: 'de-DE' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Europe/Berlin', locale: 'de-DE' }),
+    );
     expect(ids[0]).toBe('gmx');
     expect(ids[1]).toBe('webde');
     expect(ids).toContain('gmail');
   });
 
   it('prioritizes ProtonMail for Switzerland', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Europe/Zurich', locale: 'de-CH' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Europe/Zurich', locale: 'de-CH' }),
+    );
     expect(ids[0]).toBe('protonmail');
   });
 
   // ── France ────────────────────────────────────────────────────────────────
 
   it('includes LaPoste for France', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Europe/Paris', locale: 'fr-FR' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Europe/Paris', locale: 'fr-FR' }),
+    );
     expect(ids).toContain('laposte');
     expect(ids[0]).toBe('gmail');
   });
@@ -104,14 +120,18 @@ describe('getGeoOrderedProviderIds', () => {
   // ── Czech Republic ────────────────────────────────────────────────────────
 
   it('prioritizes Seznam for Prague timezone', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Europe/Prague', locale: 'cs-CZ' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Europe/Prague', locale: 'cs-CZ' }),
+    );
     expect(ids[0]).toBe('seznam');
   });
 
   // ── Poland ────────────────────────────────────────────────────────────────
 
   it('prioritizes Onet + WP for Warsaw timezone', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Europe/Warsaw', locale: 'pl-PL' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Europe/Warsaw', locale: 'pl-PL' }),
+    );
     expect(ids[0]).toBe('onet');
     expect(ids[1]).toBe('wp');
   });
@@ -119,7 +139,9 @@ describe('getGeoOrderedProviderIds', () => {
   // ── Australia ─────────────────────────────────────────────────────────────
 
   it('includes Fastmail for Australia', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'Australia/Sydney', locale: 'en-AU' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'Australia/Sydney', locale: 'en-AU' }),
+    );
     expect(ids).toContain('fastmail');
     expect(ids[0]).toBe('gmail');
   });
@@ -142,44 +164,54 @@ describe('getGeoOrderedProviderIds', () => {
   // ── USA ───────────────────────────────────────────────────────────────────
 
   it('prioritizes Gmail + Outlook for US timezones', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'America/New_York', locale: 'en-US' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'America/New_York', locale: 'en-US' }),
+    );
     expect(ids[0]).toBe('gmail');
     expect(ids[1]).toBe('outlook-personal');
   });
 
   it('includes iCloud for US', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({ timeZone: 'America/Los_Angeles', locale: 'en-US' }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({ timeZone: 'America/Los_Angeles', locale: 'en-US' }),
+    );
     expect(ids).toContain('icloud');
   });
 
   // ── Locale Fallback ───────────────────────────────────────────────────────
 
   it('falls back to locale when timezone is not in map', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({
-      timeZone: 'Unknown/Timezone',
-      locale: 'de-DE',
-      locales: ['de-DE', 'de', 'en'],
-    }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({
+        timeZone: 'Unknown/Timezone',
+        locale: 'de-DE',
+        locales: ['de-DE', 'de', 'en'],
+      }),
+    );
     expect(ids[0]).toBe('gmx');
   });
 
   it('falls back to short locale (de from de-DE)', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({
-      timeZone: 'Unknown/Timezone',
-      locale: 'de-AT',
-      locales: ['de-AT'],  // de-AT not in map, should try 'de'
-    }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({
+        timeZone: 'Unknown/Timezone',
+        locale: 'de-AT',
+        locales: ['de-AT'], // de-AT not in map, should try 'de'
+      }),
+    );
     expect(ids).toContain('gmx');
   });
 
   // ── Global Default ────────────────────────────────────────────────────────
 
   it('returns sensible global default for unknown region', () => {
-    const ids = getGeoOrderedProviderIds(makeSignals({
-      timeZone: 'Unknown/Unknown',
-      locale: 'xx-XX',
-      locales: ['xx-XX'],
-    }));
+    const ids = getGeoOrderedProviderIds(
+      makeSignals({
+        timeZone: 'Unknown/Unknown',
+        locale: 'xx-XX',
+        locales: ['xx-XX'],
+      }),
+    );
     expect(ids).toContain('gmail');
     expect(ids).toContain('outlook-personal');
     expect(ids.length).toBeGreaterThan(0);

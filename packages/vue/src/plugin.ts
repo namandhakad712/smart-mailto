@@ -44,12 +44,7 @@ export const SmartMailtoPlugin: Plugin<SmartMailtoConfig> = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { h, inject, defineComponent, type PropType } from 'vue';
-import {
-  parseMailto,
-  isValidMailtoParams,
-  resolveProviders,
-  spawnModal,
-} from '@smart-mailto/core';
+import { parseMailto, isValidMailtoParams, resolveProviders, spawnModal } from '@smart-mailto/core';
 
 /**
  * SmartMailto Vue component.
@@ -115,7 +110,7 @@ export const SmartMailtoComponent = defineComponent({
         includeNative: props.includeNative,
         includeCopy: props.includeCopy,
         onOpen: (provider, params) => emit('open', provider, params),
-        onCopy: (email) => emit('copy', email),
+        onCopy: email => emit('copy', email),
         onClose: () => emit('close'),
       };
 

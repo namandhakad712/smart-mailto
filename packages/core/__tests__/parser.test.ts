@@ -121,9 +121,7 @@ describe('parseMailto', () => {
   // ── Body with Special Characters ───────────────────────────────────────────
 
   it('handles body with question marks (does not split on second ?)', () => {
-    const result = parseMailto(
-      'mailto:x@x.com?body=What%3F%20Yes%3F&subject=Test',
-    );
+    const result = parseMailto('mailto:x@x.com?body=What%3F%20Yes%3F&subject=Test');
     expect(result.body).toBe('What? Yes?');
     expect(result.subject).toBe('Test');
   });

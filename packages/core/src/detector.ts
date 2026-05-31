@@ -15,7 +15,7 @@ const DOMAIN_TO_PROVIDER: Readonly<Record<string, string>> = {
   // Google / Gmail
   'gmail.com': 'gmail',
   'googlemail.com': 'gmail',
-  'google.com': 'gmail',  // Google Workspace
+  'google.com': 'gmail', // Google Workspace
 
   // Microsoft / Outlook
   'outlook.com': 'outlook-personal',
@@ -170,7 +170,7 @@ const DOMAIN_TO_PROVIDER: Readonly<Record<string, string>> = {
 
   // QQ (China)
   'qq.com': 'qq',
-  'foxmail.com': 'qq',  // Tencent-owned
+  'foxmail.com': 'qq', // Tencent-owned
 
   // NetEase (China)
   '163.com': 'mail163',
@@ -220,14 +220,10 @@ const DOMAIN_TO_PROVIDER: Readonly<Record<string, string>> = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Patterns that suggest Microsoft 365 (work Outlook, not personal) */
-const MICROSOFT_365_INDICATORS = [
-  /\.onmicrosoft\.com$/,
-];
+const MICROSOFT_365_INDICATORS = [/\.onmicrosoft\.com$/];
 
 /** Patterns that suggest Google Workspace */
-const GOOGLE_WORKSPACE_INDICATORS = [
-  /\.google\.com$/,
-];
+const GOOGLE_WORKSPACE_INDICATORS = [/\.google\.com$/];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Public API

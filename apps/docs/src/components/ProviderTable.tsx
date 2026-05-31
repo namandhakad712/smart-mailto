@@ -24,12 +24,12 @@ export function ProviderTable() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {providers.map((p) => (
+                {providers.map(p => (
                   <tr key={p.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center">
-                        <span 
-                          className="w-3 h-3 rounded-full mr-3" 
+                        <span
+                          className="w-3 h-3 rounded-full mr-3"
                           style={{ backgroundColor: p.color || '#fff' }}
                         />
                         <span className="text-zinc-200 font-medium">{p.name}</span>

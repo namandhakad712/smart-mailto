@@ -20,9 +20,4 @@
 
 export { SmartMailtoPlugin, SmartMailtoComponent } from './plugin.js';
 
-export type {
-  MailtoParams,
-  Provider,
-  SmartMailtoConfig,
-  Theme,
-} from '@smart-mailto/core';
+export type { MailtoParams, Provider, SmartMailtoConfig, Theme } from '@smart-mailto/core';

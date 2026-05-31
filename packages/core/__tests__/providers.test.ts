@@ -212,7 +212,17 @@ describe('Special character encoding', () => {
   });
 
   it('All providers build parseable URLs with special chars', () => {
-    const mainProviders = ['gmail', 'outlook-personal', 'outlook-work', 'yahoo', 'fastmail', 'zoho', 'gmx', 'naver', 'seznam'];
+    const mainProviders = [
+      'gmail',
+      'outlook-personal',
+      'outlook-work',
+      'yahoo',
+      'fastmail',
+      'zoho',
+      'gmx',
+      'naver',
+      'seznam',
+    ];
     for (const id of mainProviders) {
       const url = PROVIDERS[id]!.buildUrl(specialParams);
       expect(() => new URL(url), `${id} URL should be parseable`).not.toThrow();
@@ -241,7 +251,9 @@ describe('getAllProviders', () => {
     for (const provider of getAllProviders()) {
       expect(provider.id, `${provider.id} must have id`).toBeTruthy();
       expect(provider.name, `${provider.id} must have name`).toBeTruthy();
-      expect(typeof provider.buildUrl, `${provider.id} buildUrl must be a function`).toBe('function');
+      expect(typeof provider.buildUrl, `${provider.id} buildUrl must be a function`).toBe(
+        'function',
+      );
       expect(provider.color, `${provider.id} must have color`).toBeTruthy();
     }
   });

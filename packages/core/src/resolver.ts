@@ -33,9 +33,10 @@ export function resolveProviders(
   const savedPreference = config.rememberChoice !== false ? loadPreference(storageKey) : null;
 
   // Step 1: Start with geo-ordered provider IDs
-  let orderedIds: string[] = config.autoDetectGeo !== false
-    ? getGeoOrderedProviderIds(signals)
-    : ['gmail', 'outlook-personal', 'yahoo', 'icloud', 'native'];
+  let orderedIds: string[] =
+    config.autoDetectGeo !== false
+      ? getGeoOrderedProviderIds(signals)
+      : ['gmail', 'outlook-personal', 'yahoo', 'icloud', 'native'];
 
   // Step 2: Apply email domain detection
   const detectedFromEmail = detectProviderFromEmail(params.to[0] ?? '');
@@ -78,9 +79,10 @@ export function resolveProviders(
 
   // Step 9: Prepend custom providers
   if (config.customProviders?.length) {
-    providers = [...config.customProviders, ...providers.filter(
-      p => !config.customProviders!.some(cp => cp.id === p.id)
-    )];
+    providers = [
+      ...config.customProviders,
+      ...providers.filter(p => !config.customProviders!.some(cp => cp.id === p.id)),
+    ];
   }
 
   // Step 10: Apply maxProviders limit (before adding copy)

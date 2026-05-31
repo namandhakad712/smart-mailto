@@ -47,8 +47,9 @@ That's it. Every `mailto:` link on your site now opens a beautiful modal:
 ```
 
 **Auto-detects the user's region** and reorders providers accordingly:
+
 - 🇷🇺 Russia → Yandex + Mail.ru first
-- 🇯🇵 Japan → Yahoo Japan first  
+- 🇯🇵 Japan → Yahoo Japan first
 - 🇰🇷 Korea → Naver + Daum first
 - 🇩🇪 Germany → GMX + WEB.DE first
 - 🇨🇳 China → QQ + 163 first
@@ -88,10 +89,10 @@ import { initSmartMailto } from '@smart-mailto/core';
 
 // One line. Intercepts ALL mailto: links on your page.
 const destroy = initSmartMailto({
-  theme: 'dark',           // 'dark' | 'light' | 'auto'
-  autoDetectGeo: true,     // Orders providers by user's region
-  includeCopy: true,       // Always show "Copy Address" button
-  maxProviders: 6,         // Show at most 6 providers
+  theme: 'dark', // 'dark' | 'light' | 'auto'
+  autoDetectGeo: true, // Orders providers by user's region
+  includeCopy: true, // Always show "Copy Address" button
+  maxProviders: 6, // Show at most 6 providers
 });
 
 // Optional: clean up
@@ -112,7 +113,7 @@ function App() {
 }
 
 // Then any existing mailto: link just works:
-<a href="mailto:hello@example.com">Contact Us</a>
+<a href="mailto:hello@example.com">Contact Us</a>;
 ```
 
 ### Vue 3
@@ -137,22 +138,22 @@ app.use(SmartMailtoPlugin, { theme: 'dark', autoDetectGeo: true });
 
 ## Supported Providers (80+)
 
-| Region | Providers |
-|--------|-----------|
-| 🌍 Global | Gmail, Outlook, Yahoo, ProtonMail, iCloud, Fastmail, Zoho, Tutanota |
-| 🇷🇺 Russia/CIS | Yandex Mail, Mail.ru |
-| 🇨🇳 China | QQ Mail, 163 Mail |
-| 🇯🇵 Japan | Yahoo! Japan |
-| 🇰🇷 South Korea | Naver Mail, Daum/Kakao |
-| 🇩🇪 Germany | GMX, WEB.DE, T-Online, Posteo, mailbox.org |
-| 🇫🇷 France | La Poste |
-| 🇮🇹 Italy | Libero Mail |
-| 🇵🇱 Poland | Onet Poczta, WP Poczta |
-| 🇨🇿 Czech Republic | Seznam Email |
-| 🇺🇦 Ukraine | UKR.NET |
-| 🇮🇳 India | Rediffmail, Zoho |
-| 🇧🇪 Belgium | Mailfence |
-| 🇳🇴 Norway | Runbox |
+| Region                               | Providers                                                           |
+| ------------------------------------ | ------------------------------------------------------------------- |
+| 🌍 Global                            | Gmail, Outlook, Yahoo, ProtonMail, iCloud, Fastmail, Zoho, Tutanota |
+| 🇷🇺 Russia/CIS                        | Yandex Mail, Mail.ru                                                |
+| 🇨🇳 China                             | QQ Mail, 163 Mail                                                   |
+| 🇯🇵 Japan                             | Yahoo! Japan                                                        |
+| 🇰🇷 South Korea                       | Naver Mail, Daum/Kakao                                              |
+| 🇩🇪 Germany                           | GMX, WEB.DE, T-Online, Posteo, mailbox.org                          |
+| 🇫🇷 France                            | La Poste                                                            |
+| 🇮🇹 Italy                             | Libero Mail                                                         |
+| 🇵🇱 Poland                            | Onet Poczta, WP Poczta                                              |
+| 🇨🇿 Czech Republic                    | Seznam Email                                                        |
+| 🇺🇦 Ukraine                           | UKR.NET                                                             |
+| 🇮🇳 India                             | Rediffmail, Zoho                                                    |
+| 🇧🇪 Belgium                           | Mailfence                                                           |
+| 🇳🇴 Norway                            | Runbox                                                              |
 | + Native Mail App, Copy to Clipboard |
 
 ---
@@ -161,16 +162,16 @@ app.use(SmartMailtoPlugin, { theme: 'dark', autoDetectGeo: true });
 
 ```ts
 interface SmartMailtoConfig {
-  theme?: 'dark' | 'light' | 'auto';     // Default: 'auto'
-  autoDetectGeo?: boolean;               // Default: true
-  preferredProvider?: string;            // Force a provider to the top
-  maxProviders?: number;                 // Default: 6
-  includeNative?: boolean;               // Include "Open in Mail App"
-  includeCopy?: boolean;                 // Default: true
-  excludeProviders?: string[];           // e.g. ['yahoo', 'mailru']
-  rememberChoice?: boolean;              // Persist to localStorage (default: true)
-  customProviders?: Provider[];          // Add your own providers
-  
+  theme?: 'dark' | 'light' | 'auto'; // Default: 'auto'
+  autoDetectGeo?: boolean; // Default: true
+  preferredProvider?: string; // Force a provider to the top
+  maxProviders?: number; // Default: 6
+  includeNative?: boolean; // Include "Open in Mail App"
+  includeCopy?: boolean; // Default: true
+  excludeProviders?: string[]; // e.g. ['yahoo', 'mailru']
+  rememberChoice?: boolean; // Persist to localStorage (default: true)
+  customProviders?: Provider[]; // Add your own providers
+
   // Headless mode (bring your own CSS)
   classNames?: {
     overlay?: string;
@@ -178,13 +179,13 @@ interface SmartMailtoConfig {
     providerButton?: string;
     copyButton?: string;
   };
-  
+
   // Analytics hooks
-  onOpen?: (provider, params) => void;   // Fired when user picks a provider
-  onCopy?: (email) => void;              // Fired when user copies
-  onClose?: () => void;                  // Fired when modal closes
-  onShow?: (params, providers) => void;  // Fired when modal opens
-  
+  onOpen?: (provider, params) => void; // Fired when user picks a provider
+  onCopy?: (email) => void; // Fired when user copies
+  onClose?: () => void; // Fired when modal closes
+  onShow?: (params, providers) => void; // Fired when modal opens
+
   // i18n
   i18n?: Partial<{
     title: string;
@@ -203,7 +204,7 @@ interface SmartMailtoConfig {
 ```ts
 // This runs in < 1ms, zero network requests:
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; // "Europe/Moscow"
-const locale = navigator.language;                                  // "ru-RU"
+const locale = navigator.language; // "ru-RU"
 
 // Maps to → ['yandex', 'mailru', 'gmail', ...]
 ```
@@ -219,6 +220,7 @@ mailto:hello@site.com?cc=boss@site.com&subject=Hello%20World&body=Hi%20there
 ```
 
 smart-mailto parses all RFC 6068 parameters and injects them into every provider's compose URL:
+
 - `to`, `cc`, `bcc` — all recipients
 - `subject` — URL-decoded and re-encoded for each provider
 - `body` — same (note: ProtonMail blocks body pre-fill due to E2EE)
@@ -238,6 +240,7 @@ smart-mailto parses all RFC 6068 parameters and injects them into every provider
 ## Contributing
 
 We welcome PRs for:
+
 - **New providers** — edit `tools/provider-generator/data/providers.json` (no TypeScript needed!)
 - **Broken provider URLs** — use the [Provider Update](.github/ISSUE_TEMPLATE/provider_update.yml) issue template
 - **New geo-mappings** — edit `packages/core/src/geo.ts`
@@ -252,4 +255,4 @@ MIT © smart-mailto contributors
 
 ---
 
-*"I finally fixed mailto: links."*
+_"I finally fixed mailto: links."_

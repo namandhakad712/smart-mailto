@@ -27,7 +27,7 @@ function initDemo() {
     onOpen: (provider, params) => {
       console.log(`[smart-mailto] Opening ${provider.name} for ${params.to[0]}`);
     },
-    onCopy: (email) => {
+    onCopy: email => {
       console.log(`[smart-mailto] Copied: ${email}`);
     },
   });
@@ -89,13 +89,15 @@ function renderProviderGrid() {
   const grid = document.getElementById('providers-grid');
   if (!grid) return;
 
-  grid.innerHTML = REGIONS.map(r => `
+  grid.innerHTML = REGIONS.map(
+    r => `
     <div class="region-card">
       <div class="region-flag">${r.flag}</div>
       <div class="region-name">${r.name}</div>
       <div class="region-providers">${r.providers}</div>
     </div>
-  `).join('');
+  `,
+  ).join('');
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -192,7 +194,9 @@ npm install @smart-mailto/svelte
     const btn = document.getElementById('copy-btn') as HTMLButtonElement;
     if (btn) {
       btn.textContent = '✓ Copied!';
-      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+      }, 2000);
     }
   } catch {
     // clipboard blocked

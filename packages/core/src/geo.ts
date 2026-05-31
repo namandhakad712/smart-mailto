@@ -26,13 +26,10 @@ export function collectGeoSignals(): GeoSignals {
     // Intl not available (very old browser)
   }
 
-  const locale =
-    typeof navigator !== 'undefined' ? (navigator.language ?? 'en') : 'en';
+  const locale = typeof navigator !== 'undefined' ? (navigator.language ?? 'en') : 'en';
 
   const locales: readonly string[] =
-    typeof navigator !== 'undefined' && navigator.languages
-      ? navigator.languages
-      : [locale];
+    typeof navigator !== 'undefined' && navigator.languages ? navigator.languages : [locale];
 
   const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
   const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
@@ -61,19 +58,19 @@ export const TIMEZONE_PROVIDERS: Readonly<Record<string, string[]>> = {
   'Asia/Sakhalin': ['yandex', 'mailru', 'gmail'],
   'Asia/Magadan': ['yandex', 'mailru', 'gmail'],
   'Asia/Kamchatka': ['yandex', 'mailru', 'gmail'],
-  'Europe/Minsk': ['yandex', 'mailru', 'gmail'],        // Belarus
-  'Asia/Tashkent': ['yandex', 'mailru', 'gmail'],       // Uzbekistan
+  'Europe/Minsk': ['yandex', 'mailru', 'gmail'], // Belarus
+  'Asia/Tashkent': ['yandex', 'mailru', 'gmail'], // Uzbekistan
   'Asia/Samarkand': ['yandex', 'mailru', 'gmail'],
-  'Asia/Almaty': ['yandex', 'mailru', 'gmail'],         // Kazakhstan
+  'Asia/Almaty': ['yandex', 'mailru', 'gmail'], // Kazakhstan
   'Asia/Qyzylorda': ['yandex', 'mailru', 'gmail'],
   'Asia/Aqtau': ['yandex', 'mailru', 'gmail'],
   'Asia/Aqtobe': ['yandex', 'mailru', 'gmail'],
-  'Asia/Baku': ['yandex', 'mailru', 'gmail'],           // Azerbaijan
-  'Asia/Yerevan': ['yandex', 'mailru', 'gmail'],        // Armenia
-  'Asia/Tbilisi': ['yandex', 'mailru', 'gmail'],        // Georgia
-  'Asia/Dushanbe': ['yandex', 'mailru', 'gmail'],       // Tajikistan
-  'Asia/Ashgabat': ['yandex', 'mailru', 'gmail'],       // Turkmenistan
-  'Asia/Bishkek': ['yandex', 'mailru', 'gmail'],        // Kyrgyzstan
+  'Asia/Baku': ['yandex', 'mailru', 'gmail'], // Azerbaijan
+  'Asia/Yerevan': ['yandex', 'mailru', 'gmail'], // Armenia
+  'Asia/Tbilisi': ['yandex', 'mailru', 'gmail'], // Georgia
+  'Asia/Dushanbe': ['yandex', 'mailru', 'gmail'], // Tajikistan
+  'Asia/Ashgabat': ['yandex', 'mailru', 'gmail'], // Turkmenistan
+  'Asia/Bishkek': ['yandex', 'mailru', 'gmail'], // Kyrgyzstan
 
   // ── Ukraine ──────────────────────────────────────────────────────────────
   'Europe/Kiev': ['gmail', 'ukrnet', 'outlook-personal', 'yandex'],
@@ -101,7 +98,7 @@ export const TIMEZONE_PROVIDERS: Readonly<Record<string, string[]>> = {
   'Europe/Berlin': ['gmx', 'webde', 'gmail', 't-online', 'outlook-personal', 'protonmail'],
   'Europe/Vienna': ['gmx', 'gmail', 'outlook-personal', 'protonmail'],
   'Europe/Zurich': ['protonmail', 'gmail', 'gmx', 'outlook-personal', 'mailboxorg'],
-  'Europe/Vaduz': ['protonmail', 'gmail', 'gmx'],        // Liechtenstein
+  'Europe/Vaduz': ['protonmail', 'gmail', 'gmx'], // Liechtenstein
 
   // ── France ────────────────────────────────────────────────────────────────
   'Europe/Paris': ['gmail', 'outlook-personal', 'laposte', 'protonmail'],
@@ -142,22 +139,22 @@ export const TIMEZONE_PROVIDERS: Readonly<Record<string, string[]>> = {
   'Atlantic/Azores': ['gmail', 'outlook-personal'],
 
   // ── Eastern Europe ────────────────────────────────────────────────────────
-  'Europe/Bucharest': ['gmail', 'yahoo', 'outlook-personal'],   // Romania
-  'Europe/Sofia': ['gmail', 'yahoo', 'outlook-personal'],       // Bulgaria
-  'Europe/Athens': ['gmail', 'yahoo', 'outlook-personal'],      // Greece
-  'Europe/Budapest': ['gmail', 'outlook-personal', 'yahoo'],    // Hungary
+  'Europe/Bucharest': ['gmail', 'yahoo', 'outlook-personal'], // Romania
+  'Europe/Sofia': ['gmail', 'yahoo', 'outlook-personal'], // Bulgaria
+  'Europe/Athens': ['gmail', 'yahoo', 'outlook-personal'], // Greece
+  'Europe/Budapest': ['gmail', 'outlook-personal', 'yahoo'], // Hungary
   'Europe/Bratislava': ['seznam', 'gmail', 'outlook-personal'], // Slovakia
-  'Europe/Ljubljana': ['gmail', 'outlook-personal'],            // Slovenia
-  'Europe/Zagreb': ['gmail', 'outlook-personal'],               // Croatia
-  'Europe/Belgrade': ['gmail', 'yahoo', 'outlook-personal'],    // Serbia
-  'Europe/Sarajevo': ['gmail', 'yahoo', 'outlook-personal'],    // Bosnia
-  'Europe/Skopje': ['gmail', 'yahoo', 'outlook-personal'],      // N. Macedonia
-  'Europe/Podgorica': ['gmail', 'yahoo', 'outlook-personal'],   // Montenegro
-  'Europe/Tirane': ['gmail', 'yahoo', 'outlook-personal'],      // Albania
-  'Europe/Riga': ['gmail', 'outlook-personal', 'yandex'],       // Latvia
-  'Europe/Tallinn': ['gmail', 'outlook-personal'],              // Estonia
-  'Europe/Vilnius': ['gmail', 'outlook-personal'],              // Lithuania
-  'Europe/Chisinau': ['gmail', 'yandex', 'mailru'],             // Moldova
+  'Europe/Ljubljana': ['gmail', 'outlook-personal'], // Slovenia
+  'Europe/Zagreb': ['gmail', 'outlook-personal'], // Croatia
+  'Europe/Belgrade': ['gmail', 'yahoo', 'outlook-personal'], // Serbia
+  'Europe/Sarajevo': ['gmail', 'yahoo', 'outlook-personal'], // Bosnia
+  'Europe/Skopje': ['gmail', 'yahoo', 'outlook-personal'], // N. Macedonia
+  'Europe/Podgorica': ['gmail', 'yahoo', 'outlook-personal'], // Montenegro
+  'Europe/Tirane': ['gmail', 'yahoo', 'outlook-personal'], // Albania
+  'Europe/Riga': ['gmail', 'outlook-personal', 'yandex'], // Latvia
+  'Europe/Tallinn': ['gmail', 'outlook-personal'], // Estonia
+  'Europe/Vilnius': ['gmail', 'outlook-personal'], // Lithuania
+  'Europe/Chisinau': ['gmail', 'yandex', 'mailru'], // Moldova
 
   // ── Turkey ────────────────────────────────────────────────────────────────
   'Europe/Istanbul': ['gmail', 'yandex', 'outlook-personal', 'yahoo'],
@@ -179,24 +176,24 @@ export const TIMEZONE_PROVIDERS: Readonly<Record<string, string[]>> = {
   'Asia/Tehran': ['gmail', 'yahoo', 'outlook-personal'],
 
   // ── South / Southeast Asia ────────────────────────────────────────────────
-  'Asia/Karachi': ['gmail', 'yahoo', 'outlook-personal'],       // Pakistan
-  'Asia/Dhaka': ['gmail', 'yahoo', 'outlook-personal'],         // Bangladesh
-  'Asia/Colombo': ['gmail', 'yahoo', 'outlook-personal'],       // Sri Lanka
-  'Asia/Kathmandu': ['gmail', 'yahoo', 'outlook-personal'],     // Nepal
-  'Asia/Thimphu': ['gmail', 'outlook-personal'],                // Bhutan
-  'Asia/Yangon': ['gmail', 'yahoo', 'outlook-personal'],        // Myanmar
-  'Asia/Bangkok': ['gmail', 'outlook-personal', 'yahoo'],       // Thailand
-  'Asia/Phnom_Penh': ['gmail', 'yahoo', 'outlook-personal'],    // Cambodia
-  'Asia/Vientiane': ['gmail', 'yahoo', 'outlook-personal'],     // Laos
-  'Asia/Ho_Chi_Minh': ['gmail', 'yahoo', 'outlook-personal'],   // Vietnam
+  'Asia/Karachi': ['gmail', 'yahoo', 'outlook-personal'], // Pakistan
+  'Asia/Dhaka': ['gmail', 'yahoo', 'outlook-personal'], // Bangladesh
+  'Asia/Colombo': ['gmail', 'yahoo', 'outlook-personal'], // Sri Lanka
+  'Asia/Kathmandu': ['gmail', 'yahoo', 'outlook-personal'], // Nepal
+  'Asia/Thimphu': ['gmail', 'outlook-personal'], // Bhutan
+  'Asia/Yangon': ['gmail', 'yahoo', 'outlook-personal'], // Myanmar
+  'Asia/Bangkok': ['gmail', 'outlook-personal', 'yahoo'], // Thailand
+  'Asia/Phnom_Penh': ['gmail', 'yahoo', 'outlook-personal'], // Cambodia
+  'Asia/Vientiane': ['gmail', 'yahoo', 'outlook-personal'], // Laos
+  'Asia/Ho_Chi_Minh': ['gmail', 'yahoo', 'outlook-personal'], // Vietnam
   'Asia/Hanoi': ['gmail', 'yahoo', 'outlook-personal'],
   'Asia/Saigon': ['gmail', 'yahoo', 'outlook-personal'],
   'Asia/Singapore': ['gmail', 'outlook-personal', 'yahoo'],
-  'Asia/Kuala_Lumpur': ['gmail', 'outlook-personal', 'yahoo'],  // Malaysia
-  'Asia/Jakarta': ['gmail', 'yahoo', 'outlook-personal'],       // Indonesia
+  'Asia/Kuala_Lumpur': ['gmail', 'outlook-personal', 'yahoo'], // Malaysia
+  'Asia/Jakarta': ['gmail', 'yahoo', 'outlook-personal'], // Indonesia
   'Asia/Makassar': ['gmail', 'yahoo', 'outlook-personal'],
   'Asia/Jayapura': ['gmail', 'yahoo', 'outlook-personal'],
-  'Asia/Manila': ['yahoo', 'gmail', 'outlook-personal'],        // Philippines — Yahoo is king
+  'Asia/Manila': ['yahoo', 'gmail', 'outlook-personal'], // Philippines — Yahoo is king
 
   // ── Latin America ─────────────────────────────────────────────────────────
   'America/Sao_Paulo': ['gmail', 'outlook-personal', 'yahoo'],
@@ -264,20 +261,20 @@ export const TIMEZONE_PROVIDERS: Readonly<Record<string, string[]>> = {
   'Pacific/Chatham': ['gmail', 'outlook-personal'],
 
   // ── Africa ────────────────────────────────────────────────────────────────
-  'Africa/Cairo': ['gmail', 'outlook-personal', 'yahoo'],      // Egypt
-  'Africa/Lagos': ['gmail', 'yahoo', 'outlook-personal'],      // Nigeria
+  'Africa/Cairo': ['gmail', 'outlook-personal', 'yahoo'], // Egypt
+  'Africa/Lagos': ['gmail', 'yahoo', 'outlook-personal'], // Nigeria
   'Africa/Johannesburg': ['gmail', 'outlook-personal', 'yahoo'], // South Africa
-  'Africa/Nairobi': ['gmail', 'yahoo', 'outlook-personal'],    // Kenya
-  'Africa/Accra': ['gmail', 'yahoo', 'outlook-personal'],      // Ghana
+  'Africa/Nairobi': ['gmail', 'yahoo', 'outlook-personal'], // Kenya
+  'Africa/Accra': ['gmail', 'yahoo', 'outlook-personal'], // Ghana
   'Africa/Casablanca': ['gmail', 'yahoo', 'outlook-personal'], // Morocco
-  'Africa/Tunis': ['gmail', 'yahoo', 'outlook-personal'],      // Tunisia
-  'Africa/Algiers': ['gmail', 'yahoo', 'outlook-personal'],    // Algeria
-  'Africa/Tripoli': ['gmail', 'yahoo', 'outlook-personal'],    // Libya
+  'Africa/Tunis': ['gmail', 'yahoo', 'outlook-personal'], // Tunisia
+  'Africa/Algiers': ['gmail', 'yahoo', 'outlook-personal'], // Algeria
+  'Africa/Tripoli': ['gmail', 'yahoo', 'outlook-personal'], // Libya
   'Africa/Addis_Ababa': ['gmail', 'yahoo', 'outlook-personal'], // Ethiopia
   'Africa/Dar_es_Salaam': ['gmail', 'yahoo', 'outlook-personal'], // Tanzania
-  'Africa/Kampala': ['gmail', 'yahoo', 'outlook-personal'],    // Uganda
-  'Africa/Khartoum': ['gmail', 'yahoo', 'outlook-personal'],   // Sudan
-  'Africa/Kinshasa': ['gmail', 'yahoo', 'outlook-personal'],   // DRC
+  'Africa/Kampala': ['gmail', 'yahoo', 'outlook-personal'], // Uganda
+  'Africa/Khartoum': ['gmail', 'yahoo', 'outlook-personal'], // Sudan
+  'Africa/Kinshasa': ['gmail', 'yahoo', 'outlook-personal'], // DRC
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -286,49 +283,55 @@ export const TIMEZONE_PROVIDERS: Readonly<Record<string, string[]>> = {
 
 /** Locale-based provider ordering — overrides timezone when confidence is higher */
 export const LOCALE_PROVIDERS: Readonly<Record<string, string[]>> = {
-  'ru': ['yandex', 'mailru', 'gmail', 'outlook-personal'],
+  ru: ['yandex', 'mailru', 'gmail', 'outlook-personal'],
   'ru-RU': ['yandex', 'mailru', 'gmail', 'outlook-personal'],
   'ru-UA': ['gmail', 'ukrnet', 'yandex', 'mailru'],
   'ru-BY': ['yandex', 'mailru', 'gmail'],
   'ru-KZ': ['yandex', 'mailru', 'gmail'],
-  'zh': ['qq', 'mail163', 'gmail'],
+  zh: ['qq', 'mail163', 'gmail'],
   'zh-CN': ['qq', 'mail163', 'gmail'],
   'zh-TW': ['gmail', 'yahoo', 'outlook-personal'],
   'zh-HK': ['gmail', 'yahoo', 'outlook-personal'],
-  'ja': ['yahoo-japan', 'gmail', 'icloud', 'outlook-personal'],
+  ja: ['yahoo-japan', 'gmail', 'icloud', 'outlook-personal'],
   'ja-JP': ['yahoo-japan', 'gmail', 'icloud'],
-  'ko': ['naver', 'daum', 'gmail', 'outlook-personal'],
+  ko: ['naver', 'daum', 'gmail', 'outlook-personal'],
   'ko-KR': ['naver', 'daum', 'gmail'],
-  'de': ['gmx', 'webde', 'gmail', 't-online', 'outlook-personal'],
+  de: ['gmx', 'webde', 'gmail', 't-online', 'outlook-personal'],
   'de-DE': ['gmx', 'webde', 'gmail', 't-online'],
   'de-AT': ['gmx', 'gmail', 'outlook-personal'],
   'de-CH': ['protonmail', 'gmail', 'gmx', 'mailboxorg'],
-  'fr': ['gmail', 'outlook-personal', 'laposte'],
+  fr: ['gmail', 'outlook-personal', 'laposte'],
   'fr-FR': ['gmail', 'outlook-personal', 'laposte'],
   'fr-CH': ['protonmail', 'gmail', 'outlook-personal'],
   'fr-BE': ['gmail', 'mailfence', 'outlook-personal'],
-  'it': ['libero', 'gmail', 'outlook-personal'],
+  it: ['libero', 'gmail', 'outlook-personal'],
   'it-IT': ['libero', 'gmail', 'outlook-personal'],
-  'pl': ['onet', 'wp', 'gmail', 'outlook-personal'],
+  pl: ['onet', 'wp', 'gmail', 'outlook-personal'],
   'pl-PL': ['onet', 'wp', 'gmail'],
-  'cs': ['seznam', 'gmail', 'outlook-personal'],
+  cs: ['seznam', 'gmail', 'outlook-personal'],
   'cs-CZ': ['seznam', 'gmail'],
-  'uk': ['gmail', 'ukrnet', 'outlook-personal'],
+  uk: ['gmail', 'ukrnet', 'outlook-personal'],
   'uk-UA': ['gmail', 'ukrnet', 'outlook-personal'],
-  'tr': ['gmail', 'yandex', 'outlook-personal', 'yahoo'],
+  tr: ['gmail', 'yandex', 'outlook-personal', 'yahoo'],
   'tr-TR': ['gmail', 'yandex', 'outlook-personal'],
-  'nb': ['runbox', 'gmail', 'protonmail'],
-  'no': ['runbox', 'gmail', 'protonmail'],
-  'fi': ['gmail', 'outlook-personal', 'protonmail'],
-  'sv': ['gmail', 'outlook-personal', 'protonmail'],
-  'da': ['gmail', 'outlook-personal', 'protonmail'],
-  'nl': ['gmail', 'outlook-personal', 'protonmail'],
+  nb: ['runbox', 'gmail', 'protonmail'],
+  no: ['runbox', 'gmail', 'protonmail'],
+  fi: ['gmail', 'outlook-personal', 'protonmail'],
+  sv: ['gmail', 'outlook-personal', 'protonmail'],
+  da: ['gmail', 'outlook-personal', 'protonmail'],
+  nl: ['gmail', 'outlook-personal', 'protonmail'],
   'nl-NL': ['gmail', 'outlook-personal', 'protonmail'],
   'nl-BE': ['gmail', 'mailfence', 'outlook-personal'],
 };
 
 /** Default provider ordering (global fallback) */
-export const DEFAULT_PROVIDERS = ['gmail', 'outlook-personal', 'yahoo', 'icloud', 'native'] as const;
+export const DEFAULT_PROVIDERS = [
+  'gmail',
+  'outlook-personal',
+  'yahoo',
+  'icloud',
+  'native',
+] as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Main Export

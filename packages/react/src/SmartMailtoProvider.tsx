@@ -5,13 +5,7 @@
  * Initializes the global event listener once on mount.
  */
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  type ReactNode,
-} from 'react';
+import React, { createContext, useContext, useEffect, useRef, type ReactNode } from 'react';
 import {
   initSmartMailto,
   destroySmartMailto,
@@ -47,10 +41,7 @@ export interface SmartMailtoProviderProps extends SmartMailtoConfig {
  *   <App />
  * </SmartMailtoProvider>
  */
-export function SmartMailtoProvider({
-  children,
-  ...config
-}: SmartMailtoProviderProps) {
+export function SmartMailtoProvider({ children, ...config }: SmartMailtoProviderProps) {
   const destroyRef = useRef<(() => void) | null>(null);
 
   // Initialize on mount, clean up on unmount
@@ -78,9 +69,7 @@ export function SmartMailtoProvider({
   };
 
   return (
-    <SmartMailtoContext.Provider value={{ config, open }}>
-      {children}
-    </SmartMailtoContext.Provider>
+    <SmartMailtoContext.Provider value={{ config, open }}>{children}</SmartMailtoContext.Provider>
   );
 }
 
@@ -100,9 +89,7 @@ export function SmartMailtoProvider({
 export function useSmartMailto(): SmartMailtoContextValue {
   const ctx = useContext(SmartMailtoContext);
   if (!ctx) {
-    throw new Error(
-      '[smart-mailto] useSmartMailto must be used within a <SmartMailtoProvider>.',
-    );
+    throw new Error('[smart-mailto] useSmartMailto must be used within a <SmartMailtoProvider>.');
   }
   return ctx;
 }

@@ -25,11 +25,7 @@
  * </SmartMailto>
  */
 
-import React, {
-  type AnchorHTMLAttributes,
-  type ReactNode,
-  type MouseEvent,
-} from 'react';
+import React, { type AnchorHTMLAttributes, type ReactNode, type MouseEvent } from 'react';
 import {
   parseMailto,
   isValidMailtoParams,
@@ -39,7 +35,8 @@ import {
 } from '@smart-mailto/core';
 
 export interface SmartMailtoProps
-  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'onCopy'>,
+  extends
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'onCopy'>,
     SmartMailtoConfig {
   /** The mailto: href. Required. */
   href: string;
@@ -112,12 +109,7 @@ export function SmartMailto({
   };
 
   return (
-    <a
-      href={href}
-      onClick={handleClick}
-      data-smart-mailto="true"
-      {...anchorProps}
-    >
+    <a href={href} onClick={handleClick} data-smart-mailto="true" {...anchorProps}>
       {children}
     </a>
   );

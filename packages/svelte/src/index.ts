@@ -46,10 +46,7 @@ import {
  *   Contact Us
  * </a>
  */
-export function smartMailto(
-  node: HTMLAnchorElement,
-  config: SmartMailtoConfig = {},
-) {
+export function smartMailto(node: HTMLAnchorElement, config: SmartMailtoConfig = {}) {
   function handleClick(e: MouseEvent) {
     const href = node.getAttribute('href') ?? '';
     if (!href.toLowerCase().startsWith('mailto:')) return;

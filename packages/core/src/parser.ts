@@ -87,7 +87,8 @@ export function parseMailto(href: string): MailtoParams {
     // RFC 6068: header names are case-insensitive
     const cc = searchParams.get('cc') ?? searchParams.get('CC');
     const bcc = searchParams.get('bcc') ?? searchParams.get('BCC');
-    const subject = searchParams.get('subject') ?? searchParams.get('Subject') ?? searchParams.get('SUBJECT');
+    const subject =
+      searchParams.get('subject') ?? searchParams.get('Subject') ?? searchParams.get('SUBJECT');
     const body = searchParams.get('body') ?? searchParams.get('Body') ?? searchParams.get('BODY');
 
     if (cc) params.cc = parseAddressList(cc);

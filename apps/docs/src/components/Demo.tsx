@@ -1,18 +1,57 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { SmartMailto } from '@smart-mailto/react';
 
 const MailIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+  <svg
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    stroke="currentColor"
+    strokeWidth="2"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+  </svg>
 );
 
 const ArrowRightIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+  <svg
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    stroke="currentColor"
+    strokeWidth="2"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M5 12h14"></path>
+    <path d="m12 5 7 7-7 7"></path>
+  </svg>
 );
 
 const CheckCircleIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>
+  <svg
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    stroke="currentColor"
+    strokeWidth="2"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+    <path d="m9 11 3 3L22 4"></path>
+  </svg>
 );
 
 export function Demo() {
@@ -30,15 +69,14 @@ export function Demo() {
           <div className="w-16 h-16 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(59,130,246,0.5)]">
             <MailIcon className="w-8 h-8 text-white" />
           </div>
-          
-          <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">
-            Try the Live Demo
-          </h2>
+
+          <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Try the Live Demo</h2>
           <p className="text-zinc-400 max-w-lg mb-10 text-lg">
-            Click the button below to see smart-mailto in action. It will automatically detect your best webmail options.
+            Click the button below to see smart-mailto in action. It will automatically detect your
+            best webmail options.
           </p>
-          
-          <SmartMailto 
+
+          <SmartMailto
             href="mailto:hello@example.com?subject=Hello%20from%20smart-mailto!&body=This%20is%20amazing."
             theme="dark"
             className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white transition-all duration-200 bg-white/10 hover:bg-white/15 border border-white/10 rounded-full hover:scale-[1.02] active:scale-[0.98]"
