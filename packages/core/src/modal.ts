@@ -445,7 +445,7 @@ function buildModalDOM(
 
   const poweredBy = document.createElement('a');
   poweredBy.className = 'sm-powered-by';
-  poweredBy.href = 'https://smart-mailto.dev';
+  poweredBy.href = 'https://smart-mailto.vercel.app';
   poweredBy.target = '_blank';
   poweredBy.rel = 'noopener noreferrer';
   poweredBy.textContent = 'smart-mailto';

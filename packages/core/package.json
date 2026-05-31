@@ -11,7 +11,7 @@
     "geo-detection",
     "typescript"
   ],
-  "homepage": "https://smart-mailto.dev",
+  "homepage": "https://smart-mailto.vercel.app",
   "repository": {
     "type": "git",
     "url": "https://github.com/namandhakad712/smart-mailto.git",
