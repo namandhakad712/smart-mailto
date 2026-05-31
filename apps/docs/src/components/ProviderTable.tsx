@@ -5,48 +5,49 @@ export function ProviderTable() {
   const providers = getAllProviders().filter(p => !p.isCopy && p.id !== 'native');
 
   return (
-    <div className="w-full max-w-5xl mx-auto mt-32 px-4">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-white mb-4">Supported Providers</h2>
-        <p className="text-zinc-400">
-          Over 80 webmail providers supported globally. Out of the box.
-        </p>
+    <div>
+      <div className="text-center mb-6">
+        <h3 className="font-headline text-2xl font-normal tracking-[-0.01em] text-ink dark:text-text">All supported providers</h3>
+        <p className="font-body text-sm italic text-ink-soft dark:text-text-soft mt-1">Over 80 webmail providers. Out of the box.</p>
       </div>
 
-      <div className="p-[1px] bg-gradient-to-b from-white/10 to-transparent rounded-2xl">
-        <div className="bg-black/50 backdrop-blur-md rounded-2xl border border-white/5 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-white/5 border-b border-white/10">
-                  <th className="px-6 py-4 text-sm font-semibold text-zinc-300">Provider Name</th>
-                  <th className="px-6 py-4 text-sm font-semibold text-zinc-300">ID</th>
+      <div className="bg-surface dark:bg-surface-container border border-border dark:border-border overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left font-body text-sm">
+            <thead>
+              <tr className="border-b border-border dark:border-border font-mono text-[0.5625rem] text-ink-muted dark:text-text-muted uppercase tracking-[0.06em]">
+                <th className="px-4 py-3 font-medium">Provider name</th>
+                <th className="px-4 py-3 font-medium">ID</th>
+                <th className="px-4 py-3 font-medium hidden sm:table-cell">Regions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border dark:divide-border">
+              {providers.map(p => (
+                <tr key={p.id} className="hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors">
+                  <td className="px-4 py-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: p.color || '#888' }} />
+                      <span className="text-ink dark:text-text font-medium">{p.name}</span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-2.5">
+                    <code className="font-mono text-[0.6875rem] text-red bg-red/10 px-1.5 py-0.5 border border-border dark:border-border">
+                      {p.id}
+                    </code>
+                  </td>
+                  <td className="px-4 py-2.5 hidden sm:table-cell font-mono text-[0.625rem] text-ink-muted dark:text-text-muted">
+                    {p.regions?.join(', ') || 'global'}
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5">
-                {providers.map(p => (
-                  <tr key={p.id} className="hover:bg-white/[0.02] transition-colors">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center">
-                        <span
-                          className="w-3 h-3 rounded-full mr-3"
-                          style={{ backgroundColor: p.color || '#fff' }}
-                        />
-                        <span className="text-zinc-200 font-medium">{p.name}</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <code className="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">
-                        {p.id}
-                      </code>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
+
+      <p className="font-mono text-[0.5rem] text-ink-muted dark:text-text-muted text-center mt-3 tracking-[0.06em] uppercase">
+        Geo-detection via Intl APIs · zero network requests · &lt;1ms
+      </p>
     </div>
   );
 }

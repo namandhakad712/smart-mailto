@@ -1,180 +1,220 @@
+'use client';
+
 import { Demo } from '@/components/Demo';
 import { ProviderTable } from '@/components/ProviderTable';
+import { SmartMailto } from '@smart-mailto/react';
+import { getAllProviders } from '@smart-mailto/core';
+import { useState, useEffect, useCallback } from 'react';
 
-const GithubIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    width="24"
-    height="24"
-    stroke="currentColor"
-    strokeWidth="2"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-4 h-4"
-  >
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
+const MailIcon = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>
 );
 
-const ZapIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    width="24"
-    height="24"
-    stroke="currentColor"
-    strokeWidth="2"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-10 h-10 text-blue-400 mb-6"
-  >
-    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-  </svg>
-);
+const allProviders = getAllProviders();
+const featuredProviders = allProviders.slice(0, 8);
 
-const Globe2Icon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    width="24"
-    height="24"
-    stroke="currentColor"
-    strokeWidth="2"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-10 h-10 text-purple-400 mb-6"
-  >
-    <circle cx="12" cy="12" r="10"></circle>
-    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-    <path d="M2 12h20"></path>
-  </svg>
-);
+const QUICK_START_CODE = `import { initSmartMailto } from '@smart-mailto/core';
 
-const ShieldIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    width="24"
-    height="24"
-    stroke="currentColor"
-    strokeWidth="2"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-10 h-10 text-emerald-400 mb-6"
-  >
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-  </svg>
-);
+initSmartMailto({
+  theme: 'dark',
+  autoDetectGeo: true
+});`;
+
+function CopyButton({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = useCallback(async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, [code]);
+  return (
+    <button
+      onClick={copy}
+      className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-text-muted dark:text-text-muted hover:text-red transition-colors"
+    >
+      {copied ? (
+        <>
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2"><path d="m20 6-11 11-5-5"/></svg>
+          Copied!
+        </>
+      ) : (
+        <>
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          Copy
+        </>
+      )}
+    </button>
+  );
+}
 
 export default function Home() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains('dark'));
+    const obs = new MutationObserver(() => setIsDark(document.documentElement.classList.contains('dark')));
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black text-zinc-50 font-sans selection:bg-blue-500/30">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/50 backdrop-blur-lg">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="font-bold text-xl tracking-tighter flex items-center gap-2">
-            <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-500 rounded-md"></div>
-            smart-mailto
-          </div>
-          <div className="flex items-center gap-6 text-sm font-medium text-zinc-400">
-            <a href="#features" className="hover:text-white transition-colors">
-              Features
-            </a>
-            <a href="#providers" className="hover:text-white transition-colors">
-              Providers
-            </a>
-            <a
-              href="https://github.com/namandhakad712/smart-mailto"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full transition-colors"
-            >
-              <GithubIcon />
-              GitHub
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      <main className="pt-32 pb-24 px-6 overflow-hidden">
-        {/* Hero Section */}
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-8 border border-blue-500/20">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            v1.0.0 is now live
-          </div>
-
-          <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-8 leading-[1.1]">
-            Stop breaking <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-600">
-              email links.
-            </span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto mb-12 font-medium">
-            A framework-agnostic, zero-dependency library that intelligently intercepts mailto links
-            and routes users to their preferred webmail.
+    <>
+    <div className="newspaper-grid">
+      <article className="space-y-8">
+        <header>
+          <span className="font-mono text-xs font-bold text-red uppercase tracking-widest block mb-3">Open Source · JavaScript Library</span>
+          <h2 className="text-5xl md:text-7xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text">
+            Fix mailto: links once. Ship and done.
+          </h2>
+          <p className="text-xl md:text-2xl font-body font-light text-ink-soft dark:text-text-soft mt-4 leading-relaxed max-w-3xl">
+            Zero-dependency library that intercepts broken mailto: links and shows a smart picker. Works in under 1ms with zero network requests.
           </p>
+          <div className="mt-6 font-mono text-xs uppercase tracking-tight text-ink-muted dark:text-text-muted border-b border-border dark:border-border pb-4">
+            npm · github.com/namandhakad712/smart-mailto · 31 May 2026
+          </div>
+        </header>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <code className="bg-white/5 border border-white/10 px-6 py-4 rounded-xl font-mono text-sm text-zinc-300 flex items-center">
-              <span className="text-blue-400 mr-2">$</span> pnpm add @smart-mailto/react
-            </code>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-4 text-ink dark:text-text leading-relaxed text-lg">
+            <p className="drop-cap">
+              The <code className="font-mono bg-surface dark:bg-surface-container px-1">mailto:</code> protocol was designed in 1997 for a world where every computer had a desktop email client. That world no longer exists. Today, 40% of users have no mail client configured, and corporate users are locked into webmail.
+            </p>
+            <p className="text-ink-soft dark:text-text-soft">
+              smart-mailto intercepts every <code className="font-mono bg-surface dark:bg-surface-container px-1">mailto:</code> link on your page and shows a beautiful modal with the user&apos;s preferred email provider. It detects region automatically using only browser APIs — no IP lookup, no cookies.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <blockquote className="border-l-4 border-red pl-6 py-2">
+              <p className="text-2xl font-headline italic font-light leading-snug text-ink dark:text-text">
+                &ldquo;One line of code. Every mailto: link on your site now works for everyone, everywhere.&rdquo;
+              </p>
+              <cite className="block mt-4 font-mono text-xs uppercase text-ink-muted dark:text-text-muted">— README, @smart-mailto/core</cite>
+            </blockquote>
+
+            <div className="bg-code-bg dark:bg-code-bg p-6 rounded-sm border border-border dark:border-border overflow-hidden">
+              <div className="flex justify-between items-center mb-4 border-b border-border dark:border-border pb-2">
+                <span className="font-mono text-[10px] text-text-muted dark:text-text-muted uppercase tracking-[0.2em]">Quick Start</span>
+                <CopyButton code={QUICK_START_CODE} />
+              </div>
+              <pre className="font-mono text-xs md:text-sm text-text dark:text-text overflow-x-auto"><code><span className="text-red">import</span> {'{ initSmartMailto }'} <span className="text-red">from</span> <span className="text-text-soft dark:text-text-soft">&apos;@smart-mailto/core&apos;</span>;
+
+<span className="text-ink-muted dark:text-text-muted">// One line. That&apos;s it.</span>
+initSmartMailto(&#123;
+  theme: <span className="text-text-soft dark:text-text-soft">&apos;dark&apos;</span>,
+  autoDetectGeo: <span className="text-red">true</span>
+&#125;);</code></pre>
+            </div>
           </div>
         </div>
 
-        {/* Live Demo */}
-        <Demo />
-
-        {/* Features Grid */}
-        <div
-          id="features"
-          className="max-w-6xl mx-auto mt-40 grid grid-cols-1 md:grid-cols-3 gap-8"
-        >
-          <div className="bg-white/[0.02] border border-white/5 p-8 rounded-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[50px] -mr-16 -mt-16 transition-opacity opacity-0 group-hover:opacity-100" />
-            <ZapIcon />
-            <h3 className="text-xl font-bold mb-3">Zero Dependencies</h3>
-            <p className="text-zinc-400 leading-relaxed">
-              Built in Vanilla TypeScript. Extremely lightweight at under 8KB gzipped. Doesn't
-              pollute your bundle.
-            </p>
-          </div>
-          <div className="bg-white/[0.02] border border-white/5 p-8 rounded-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-[50px] -mr-16 -mt-16 transition-opacity opacity-0 group-hover:opacity-100" />
-            <Globe2Icon />
-            <h3 className="text-xl font-bold mb-3">Geo-Aware</h3>
-            <p className="text-zinc-400 leading-relaxed">
-              Intelligently suggests providers based on the user's locale without making a single
-              IP/network request.
-            </p>
-          </div>
-          <div className="bg-white/[0.02] border border-white/5 p-8 rounded-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-[50px] -mr-16 -mt-16 transition-opacity opacity-0 group-hover:opacity-100" />
-            <ShieldIcon />
-            <h3 className="text-xl font-bold mb-3">Privacy First</h3>
-            <p className="text-zinc-400 leading-relaxed">
-              Everything runs locally in the browser. No tracking, no external pings. Fully GDPR
-              compliant by default.
-            </p>
-          </div>
+        <div className="flex flex-col sm:flex-row items-start gap-4 pt-8 border-t border-border dark:border-border">
+          <SmartMailto
+            href="mailto:hello@smart-mailto.org?subject=Nice%20work&body=Just%20wanted%20to%20say%20thanks."
+            theme={isDark ? 'dark' : 'light'}
+            className="bg-red hover:bg-red-dark text-white px-8 py-4 font-body font-semibold flex items-center gap-3 transition-colors duration-200 cursor-pointer"
+          >
+            <MailIcon />
+            Try it now
+          </SmartMailto>
+          <a
+            href="/providers"
+            className="border border-border dark:border-border text-ink dark:text-text px-8 py-4 font-body font-semibold flex items-center gap-3 hover:border-red dark:hover:border-red transition-colors duration-200"
+          >
+            View all providers
+            <span className="material-symbols-outlined text-lg">arrow_forward</span>
+          </a>
         </div>
+      </article>
 
-        {/* Provider Table */}
-        <div id="providers">
-          <ProviderTable />
-        </div>
-      </main>
+      <aside className="space-y-12 border-l border-border dark:border-border pl-8 hidden lg:block">
+        <section>
+          <h3 className="font-mono text-[10px] font-bold text-red uppercase tracking-[0.3em] mb-4">Package Stats</h3>
+          <div className="space-y-3">
+            {[
+              { label: 'Bundle Size', value: '< 8KB' },
+              { label: 'Dependencies', value: 'Zero' },
+              { label: 'Providers', value: allProviders.length + '+' },
+              { label: 'Regions', value: '30+' },
+            ].map((item) => (
+              <div key={item.label} className="flex justify-between items-end border-b border-border dark:border-border pb-1">
+                <span className="text-xs font-body text-ink-soft dark:text-text-soft uppercase">{item.label}</span>
+                <span className="font-mono font-medium text-lg text-ink dark:text-text">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      <footer className="border-t border-white/10 bg-black/50 py-12 text-center text-zinc-500">
-        <p>Built with precision. Designed for the world.</p>
-        <p className="mt-2 text-sm">MIT Licensed forever. We are going to change history.</p>
-      </footer>
+        <section>
+          <h3 className="font-mono text-[10px] font-bold text-red uppercase tracking-[0.3em] mb-6">Geo Detection</h3>
+          <div className="relative pl-6 border-l border-border dark:border-border">
+            <div className="space-y-6">
+              {[
+                { region: '🇷🇺 Russia', providers: 'Yandex, Mail.ru' },
+                { region: '🇩🇪 Germany', providers: 'GMX, WEB.DE' },
+                { region: '🇯🇵 Japan', providers: 'Yahoo! Japan' },
+                { region: '🌍 Global', providers: 'Gmail, Outlook' },
+              ].map((item) => (
+                <div key={item.region} className="relative">
+                  <div className="absolute -left-[27px] top-1 w-2 h-2 rounded-full border-2 border-paper dark:border-bg bg-red" />
+                  <span className="font-mono text-xs font-bold text-ink dark:text-text block">{item.region}</span>
+                  <p className="text-xs text-ink-soft dark:text-text-soft mt-0.5 leading-tight">{item.providers}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3 className="font-mono text-[10px] font-bold text-red uppercase tracking-[0.3em] mb-4">Supported Providers</h3>
+          <div className="flex flex-wrap gap-2">
+            {featuredProviders.map((p) => (
+              <span key={p.id} className="px-2 py-1 border border-border dark:border-border font-mono text-[10px] text-ink-muted dark:text-text-muted hover:border-red hover:text-red transition-colors cursor-default uppercase">{p.name.split(' ')[0]}</span>
+            ))}
+          </div>
+          <a href="/providers" className="mt-3 font-mono text-[10px] text-red hover:text-red-dark transition-colors uppercase tracking-widest block">
+            View all {allProviders.length}+ providers →
+          </a>
+        </section>
+
+        <section>
+          <h3 className="font-mono text-[10px] font-bold text-red uppercase tracking-[0.3em] mb-4">Quick Links</h3>
+          <div className="space-y-2">
+            {[
+              { label: 'Documentation', href: '/spec' },
+              { label: 'Provider Registry', href: '/providers' },
+              { label: 'GitHub', href: 'https://github.com/namandhakad712/smart-mailto' },
+              { label: 'npm', href: 'https://npmjs.com/package/@smart-mailto/core' },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="flex items-center justify-between px-2 py-1 border border-border dark:border-border font-mono text-[10px] text-ink-soft dark:text-text-soft hover:border-red hover:text-red transition-colors"
+              >
+                {link.label}
+                <span className="text-red">↗</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      </aside>
     </div>
+
+    <div className="mt-16 pt-8 border-t border-border dark:border-border">
+      <div className="text-center mb-8">
+        <span className="font-mono text-[10px] font-bold text-red uppercase tracking-[0.3em] block mb-2">Live Demo</span>
+        <h3 className="text-3xl font-headline font-normal text-ink dark:text-text">Try it yourself</h3>
+        <p className="font-body italic text-ink-soft dark:text-text-soft mt-2">Click the button below to see smart-mailto in action.</p>
+      </div>
+      <Demo />
+    </div>
+
+    <div className="mt-16 pt-8 border-t border-border dark:border-border">
+      <ProviderTable />
+    </div>
+    </>
   );
 }
