@@ -14,6 +14,7 @@
 
 import type { MailtoParams, Provider, ResolvedProviders, SmartMailtoConfig } from './types.js';
 import { savePreference } from './storage.js';
+import { ICONS } from './icons.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // i18n Defaults
@@ -489,7 +490,7 @@ function createProviderButton(
   // Logo
   const logoWrap = document.createElement('div');
   logoWrap.className = 'sm-provider-logo';
-  logoWrap.innerHTML = provider.logoSvg;
+  logoWrap.innerHTML = provider.logoSvg || ICONS[provider.id] || ICONS['native'] || '';
   btn.appendChild(logoWrap);
 
   // Name
@@ -546,10 +547,11 @@ function createCopyButton(
   btn.setAttribute('type', 'button');
   btn.setAttribute('aria-label', `Copy ${email} to clipboard`);
 
+  const icon = provider.logoSvg || ICONS[provider.id] || ICONS['copy'] || '';
   const updateContent = (copied: boolean) => {
     btn.innerHTML = copied
-      ? `<span class="sm-check-icon">${provider.logoSvg}</span><span>${i18n.copied}</span>`
-      : `${provider.logoSvg}<span>${i18n.copy}</span>`;
+      ? `<span class="sm-check-icon">${icon}</span><span>${i18n.copied}</span>`
+      : `${icon}<span>${i18n.copy}</span>`;
   };
   updateContent(false);
 

@@ -34,8 +34,8 @@ export interface Provider {
   name: string;
   /** Builds the compose URL for this provider given mailto params */
   buildUrl: (params: MailtoParams) => string;
-  /** Inline SVG string (data URI) for the provider logo */
-  logoSvg: string;
+  /** Inline SVG string (data URI) for the provider logo. If omitted, will be loaded dynamically */
+  logoSvg?: string;
   /** Brand hex color, e.g. "#EA4335" */
   color: string;
   /** Text color for contrast on the brand color background */

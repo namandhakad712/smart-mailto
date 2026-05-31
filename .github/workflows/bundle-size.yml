@@ -1,0 +1,40 @@
+name: Bundle Size
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Build
+        run: pnpm build
+        
+      - name: Check bundle size
+        run: |
+          node -e "
+            const fs = require('fs');
+            const zlib = require('zlib');
+            const file = fs.readFileSync('packages/core/dist/index.js');
+            const zipped = zlib.gzipSync(file);
+            console.log('GZIPPED BUNDLE SIZE: ' + zipped.length + ' bytes');
+            if (zipped.length > 8192) {
+              console.error('Error: Bundle size exceeds 8KB!');
+              process.exit(1);
+            }
+          "

@@ -1,0 +1,55 @@
+{
+  "name": "@smart-mailto/vue",
+  "version": "0.1.0",
+  "description": "Vue 3 wrapper for smart-mailto — geo-aware webmail picker",
+  "keywords": [
+    "mailto",
+    "email",
+    "vue",
+    "vue3",
+    "webmail",
+    "gmail",
+    "typescript"
+  ],
+  "homepage": "https://smart-mailto.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/smart-mailto.git",
+    "directory": "packages/vue"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "dependencies": {
+    "@smart-mailto/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@vue/tsconfig": "^0.5.1",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vue": "^3.5.13"
+  }
+}

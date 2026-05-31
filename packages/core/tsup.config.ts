@@ -6,9 +6,9 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  minify: false,
+  minify: true,
   treeshake: true,
-  splitting: false,
+  splitting: true,
   // Ensure zero external dependencies
   noExternal: [],
   external: [],

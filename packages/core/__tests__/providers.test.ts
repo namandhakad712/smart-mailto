@@ -242,7 +242,6 @@ describe('getAllProviders', () => {
       expect(provider.id, `${provider.id} must have id`).toBeTruthy();
       expect(provider.name, `${provider.id} must have name`).toBeTruthy();
       expect(typeof provider.buildUrl, `${provider.id} buildUrl must be a function`).toBe('function');
-      expect(provider.logoSvg, `${provider.id} must have logoSvg`).toBeTruthy();
       expect(provider.color, `${provider.id} must have color`).toBeTruthy();
     }
   });

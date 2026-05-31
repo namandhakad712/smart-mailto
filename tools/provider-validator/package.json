@@ -1,0 +1,14 @@
+{
+  "name": "@smart-mailto/provider-validator",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Validates smart-mailto provider deep links are still alive",
+  "scripts": {
+    "validate": "tsx index.ts",
+    "validate:verbose": "tsx index.ts --verbose"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3"
+  }
+}

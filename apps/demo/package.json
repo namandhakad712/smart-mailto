@@ -1,0 +1,18 @@
+{
+  "name": "@smart-mailto/demo",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Interactive demo for smart-mailto",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@smart-mailto/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vite": "^6.3.5"
+  }
+}
