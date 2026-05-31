@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+.next
+.turbo
+*.log
+.env*
+.DS_Store
+Thumbs.db
+smart_mailto_master_plan.md

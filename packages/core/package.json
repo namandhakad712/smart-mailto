@@ -1,0 +1,52 @@
+{
+  "name": "@smart-mailto/core",
+  "version": "0.1.0",
+  "description": "Zero-dependency, framework-agnostic core engine for smart-mailto — geo-aware webmail picker",
+  "keywords": [
+    "mailto",
+    "email",
+    "webmail",
+    "gmail",
+    "outlook",
+    "geo-detection",
+    "typescript"
+  ],
+  "homepage": "https://smart-mailto.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/smart-mailto.git",
+    "directory": "packages/core"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "clean": "rimraf dist coverage"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.8",
+    "jsdom": "^25.0.1",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}
