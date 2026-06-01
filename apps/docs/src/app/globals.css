@@ -8,22 +8,22 @@
   --font-label: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --paper: #F2EDE3;
-  --ink: #1A1A1A;
+  --paper: #f2ede3;
+  --ink: #1a1a1a;
   --ink-soft: #555555;
   --ink-muted: #888888;
-  --red: #E85D4A;
-  --red-dark: #B53B2C;
-  --border: #D6CFC0;
-  --surface: #E8E2D4;
-  --code-bg: #1A1A1A;
-  --bg: #F2EDE3;
-  --text: #1A1A1A;
+  --red: #e85d4a;
+  --red-dark: #b53b2c;
+  --border: #d6cfc0;
+  --surface: #e8e2d4;
+  --code-bg: #1a1a1a;
+  --bg: #f2ede3;
+  --text: #1a1a1a;
   --text-soft: #555555;
   --text-muted: #888888;
-  --surface-container: #E8E2D4;
-  --surface-container-high: #DED8C8;
-  --surface-container-low: #F5F0E5;
+  --surface-container: #e8e2d4;
+  --surface-container-high: #ded8c8;
+  --surface-container-low: #f5f0e5;
 
   --radius-sm: 0.25rem;
   --radius-lg: 0.5rem;
@@ -32,15 +32,15 @@
 }
 
 html.dark {
-  --paper: #0F0F0D;
-  --ink: #E8E4DA;
+  --paper: #0f0f0d;
+  --ink: #e8e4da;
   --ink-soft: rgba(232, 228, 218, 0.55);
   --ink-muted: rgba(232, 228, 218, 0.25);
   --border: rgba(232, 228, 218, 0.08);
   --surface: #1a1918;
   --code-bg: #1a1918;
-  --bg: #0F0F0D;
-  --text: #E8E4DA;
+  --bg: #0f0f0d;
+  --text: #e8e4da;
   --text-soft: rgba(232, 228, 218, 0.55);
   --text-muted: rgba(232, 228, 218, 0.25);
   --surface-container: #1f1e1c;

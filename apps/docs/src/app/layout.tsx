@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Inter, JetBrains_Mono, Sora } from 'next/font/google';
 import { ThemeScript, ThemeToggle } from './theme';
 import './globals.css';
@@ -23,17 +24,26 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'smart-mailto · The Internet Times',
-  description: 'All the protocols that are fit to fix. A zero-dependency JavaScript library that fixes the internet\'s broken mailto: links.',
+  description:
+    "All the protocols that are fit to fix. A zero-dependency JavaScript library that fixes the internet's broken mailto: links.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <ThemeScript />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="min-h-screen flex flex-col font-body selection:bg-red selection:text-white">
         <header className="bg-paper dark:bg-bg border-b border-border dark:border-border flex flex-col items-center w-full px-6 py-4 max-w-screen-2xl mx-auto top-0">
@@ -46,31 +56,75 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
           <div className="text-center mb-6">
-            <span className="font-mono text-xs font-bold text-red tracking-[0.3em] uppercase block mb-2">✦ TECHNOLOGY SPECIAL</span>
-            <h1 className="text-4xl md:text-8xl font-headline font-light tracking-tighter text-ink dark:text-text uppercase">The Internet Times</h1>
-            <p className="font-body italic text-ink-soft dark:text-text-soft mt-2 tracking-tight">All the protocols that are fit to fix.</p>
+            <span className="font-mono text-xs font-bold text-red tracking-[0.3em] uppercase block mb-2">
+              ✦ TECHNOLOGY SPECIAL
+            </span>
+            <h1 className="text-4xl md:text-8xl font-headline font-light tracking-tighter text-ink dark:text-text uppercase">
+              The Internet Times
+            </h1>
+            <p className="font-body italic text-ink-soft dark:text-text-soft mt-2 tracking-tight">
+              All the protocols that are fit to fix.
+            </p>
           </div>
           <nav className="w-full border-t border-b border-ink dark:border-text py-2 flex justify-center gap-8">
-            <a className="font-label tracking-tighter uppercase text-ink dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80" href="/">The Protocol</a>
-            <a className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80" href="/providers">Provider Support</a>
-            <a className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80" href="/spec">Technical Specs</a>
+            <Link
+              className="font-label tracking-tighter uppercase text-ink dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
+              href="/"
+            >
+              The Protocol
+            </Link>
+            <Link
+              className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
+              href="/providers"
+            >
+              Provider Support
+            </Link>
+            <Link
+              className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
+              href="/spec"
+            >
+              Technical Specs
+            </Link>
           </nav>
         </header>
 
-        <main className="flex-1 max-w-screen-2xl mx-auto px-6 py-12 w-full">
-          {children}
-        </main>
+        <main className="flex-1 max-w-screen-2xl mx-auto px-6 py-12 w-full">{children}</main>
 
         <footer className="bg-paper dark:bg-bg border-t-4 border-double border-border dark:border-border flex flex-col md:flex-row justify-between items-center w-full px-6 py-8 mt-auto">
           <div className="font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted mb-4 md:mb-0">
             © 2026 smart-mailto — All the protocols that are fit to fix.
           </div>
           <div className="flex gap-6 font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted">
-            <a className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline" href="#">Terms of Service</a>
-            <a className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline" href="#">Privacy Policy</a>
-            <a className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline" href="#">Style Guide</a>
-            <a className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline" href="#">Masthead</a>
-            <a className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline" href="#">RSS</a>
+            <a
+              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
+              href="#"
+            >
+              Terms of Service
+            </a>
+            <a
+              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
+              href="#"
+            >
+              Privacy Policy
+            </a>
+            <a
+              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
+              href="#"
+            >
+              Style Guide
+            </a>
+            <a
+              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
+              href="#"
+            >
+              Masthead
+            </a>
+            <a
+              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
+              href="#"
+            >
+              RSS
+            </a>
           </div>
         </footer>
       </body>

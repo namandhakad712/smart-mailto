@@ -1,0 +1,36 @@
+name: Provider Update
+description: Report a broken provider URL or suggest a new provider
+labels: [providers]
+body:
+  - type: input
+    id: provider
+    attributes:
+      label: Provider ID
+      description: The provider ID (e.g. gmail, yandex)
+    validations:
+      required: true
+
+  - type: input
+    id: current_url
+    attributes:
+      label: Current URL
+      description: The current compose URL (if updating)
+    validations:
+      required: false
+
+  - type: input
+    id: new_url
+    attributes:
+      label: New / Correct URL
+      description: The verified compose URL
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: How did you verify this URL works?
+      placeholder: Tested in Chrome 125 on Windows — opens compose window correctly
+    validations:
+      required: true

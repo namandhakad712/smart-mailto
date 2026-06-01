@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Script from 'next/script';
 
 export function ThemeScript() {
@@ -16,18 +16,21 @@ export function ThemeScript() {
   );
 }
 
-export function ThemeToggle() {
-  const [dark, setDark] = useState(false);
+function getInitialDark(): boolean {
+  if (typeof document === 'undefined') return false;
+  return document.documentElement.classList.contains('dark');
+}
 
-  useEffect(() => {
-    setDark(document.documentElement.classList.contains('dark'));
-  }, []);
+export function ThemeToggle() {
+  const [dark, setDark] = useState(getInitialDark);
 
   const toggle = () => {
     const next = !dark;
     setDark(next);
     document.documentElement.classList.toggle('dark', next);
-    try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {}
+    try {
+      localStorage.setItem('theme', next ? 'dark' : 'light');
+    } catch {}
   };
 
   return (
@@ -36,7 +39,7 @@ export function ThemeToggle() {
       className="font-mono text-[0.625rem] uppercase tracking-[0.15em] text-ink-muted dark:text-text-muted hover:text-red dark:hover:text-red transition-colors"
       aria-label="Toggle theme"
     >
-      {dark ? '☀ light' : '✦ dark'}
+      {dark ? '☀ light' : '\u2726 dark'}
     </button>
   );
 }

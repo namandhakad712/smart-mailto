@@ -241,7 +241,7 @@ smart-mailto parses all RFC 6068 parameters and injects them into every provider
 
 We welcome PRs for:
 
-- **New providers** — edit `tools/provider-generator/data/providers.json` (no TypeScript needed!)
+- **New providers** — edit `packages/core/src/providers.ts` (follow the existing pattern)
 - **Broken provider URLs** — use the [Provider Update](.github/ISSUE_TEMPLATE/provider_update.yml) issue template
 - **New geo-mappings** — edit `packages/core/src/geo.ts`
 

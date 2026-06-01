@@ -346,7 +346,7 @@ export const PROVIDERS: Readonly<Record<string, Provider>> = {
   mail163: {
     id: 'mail163',
     name: '网易163邮箱',
-    buildUrl: (p: MailtoParams) => {
+    buildUrl: (_p: MailtoParams) => {
       return `https://mail.163.com/js6/main.jsp?sid=&df=mail163`;
     },
     color: '#D81B25',

@@ -7,8 +7,12 @@ export function ProviderTable() {
   return (
     <div>
       <div className="text-center mb-6">
-        <h3 className="font-headline text-2xl font-normal tracking-[-0.01em] text-ink dark:text-text">All supported providers</h3>
-        <p className="font-body text-sm italic text-ink-soft dark:text-text-soft mt-1">Over 80 webmail providers. Out of the box.</p>
+        <h3 className="font-headline text-2xl font-normal tracking-[-0.01em] text-ink dark:text-text">
+          All supported providers
+        </h3>
+        <p className="font-body text-sm italic text-ink-soft dark:text-text-soft mt-1">
+          Over 80 webmail providers. Out of the box.
+        </p>
       </div>
 
       <div className="bg-surface dark:bg-surface-container border border-border dark:border-border overflow-hidden">
@@ -23,10 +27,16 @@ export function ProviderTable() {
             </thead>
             <tbody className="divide-y divide-border dark:divide-border">
               {providers.map(p => (
-                <tr key={p.id} className="hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors">
+                <tr
+                  key={p.id}
+                  className="hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors"
+                >
                   <td className="px-4 py-2.5">
                     <div className="flex items-center gap-2.5">
-                      <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: p.color || '#888' }} />
+                      <span
+                        className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: p.color || '#888' }}
+                      />
                       <span className="text-ink dark:text-text font-medium">{p.name}</span>
                     </div>
                   </td>
