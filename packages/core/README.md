@@ -1,0 +1,76 @@
+# @smart-mailto/core
+
+Zero-dependency, framework-agnostic engine that replaces broken `mailto:` links with a geo-aware webmail picker modal. **7.4 KB gzipped. 80+ providers. Zero network requests.**
+
+```bash
+npm i @smart-mailto/core
+```
+
+## Quick Start
+
+```ts
+import { initSmartMailto } from '@smart-mailto/core';
+
+initSmartMailto({
+  theme: 'auto', // 'dark' | 'light' | 'auto'
+  autoDetectGeo: true, // Reorder providers by region
+});
+```
+
+Every `mailto:` link on the page now opens a provider picker modal instead of triggering the OS default mail app.
+
+## Manual / Programmatic
+
+```ts
+import { parseMailto, resolveProviders, spawnModal } from '@smart-mailto/core';
+
+const params = parseMailto('mailto:hello@example.com?subject=Hi');
+const resolved = resolveProviders(params, { autoDetectGeo: true });
+await spawnModal(params, resolved, { theme: 'dark' });
+```
+
+## Exports
+
+| Export                                  | Purpose                          |
+| --------------------------------------- | -------------------------------- |
+| `initSmartMailto(config?)`              | Attach global mailto interceptor |
+| `destroySmartMailto()`                  | Remove interceptor               |
+| `parseMailto(href)`                     | RFC 6068 parser                  |
+| `buildMailtoHref(params)`               | Reconstruct URI                  |
+| `getAllProviders()`                     | 80+ provider registry            |
+| `getGeoOrderedProviderIds(signals)`     | Region-aware sort                |
+| `collectGeoSignals()`                   | Read timeZone, locale, device    |
+| `resolveProviders(params, config?)`     | Resolve + order providers        |
+| `spawnModal(params, resolved, config?)` | Programmatic modal               |
+| `VERSION`                               | Library version string           |
+
+## Architecture
+
+- **Capture-phase delegation** — one `click` listener on `document` intercepts all mailto: anchors
+- **Lazy modal** — `modal.ts` (~15 KB) is dynamically imported on first click; core stays tiny
+- **Shadow DOM** — modal mounts in `attachShadow({mode:'open'})` for full CSS isolation
+- **Safari-safe** — `window.open()` called synchronously within click handler
+- **Zero network** — geo detection uses `Intl.DateTimeFormat` + `navigator.language` only
+
+## Supported Providers
+
+| Region     | Providers                                                           |
+| ---------- | ------------------------------------------------------------------- |
+| Global     | Gmail, Outlook, Yahoo, ProtonMail, iCloud, Fastmail, Zoho, Tutanota |
+| Russia/CIS | Yandex, Mail.ru                                                     |
+| China      | QQ Mail, 163 Mail                                                   |
+| Japan      | Yahoo! Japan                                                        |
+| Korea      | Naver, Daum/Kakao                                                   |
+| Germany    | GMX, WEB.DE, T-Online, Posteo, mailbox.org                          |
+| France     | La Poste                                                            |
+| Italy      | Libero                                                              |
+| Poland     | Onet, WP                                                            |
+| Czechia    | Seznam                                                              |
+| Ukraine    | UKR.NET                                                             |
+| India      | Rediffmail, Zoho                                                    |
+| Belgium    | Mailfence                                                           |
+| Norway     | Runbox                                                              |
+
+## License
+
+MIT
