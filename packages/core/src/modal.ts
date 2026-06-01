@@ -354,9 +354,6 @@ function buildModalDOM(
   // Create overlay
   const overlay = document.createElement('div');
   overlay.className = 'sm-overlay';
-  overlay.setAttribute('role', 'dialog');
-  overlay.setAttribute('aria-modal', 'true');
-  overlay.setAttribute('aria-label', i18n.title);
 
   // Close on overlay click
   overlay.addEventListener('click', e => {
@@ -366,6 +363,9 @@ function buildModalDOM(
   // Create modal
   const modal = document.createElement('div');
   modal.className = 'sm-modal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', i18n.title);
   modal.setAttribute('tabindex', '-1');
 
   // ── Header ────────────────────────────────────────────────────────────────
@@ -649,6 +649,20 @@ export function spawnModal(
   style.textContent = themeCSS + getSharedCSS();
   shadow.appendChild(style);
 
+  // Save the previously focused element to restore on close
+  const previousFocus = document.activeElement as HTMLElement | null;
+
+  // Inert background content
+  const rootNodes: HTMLElement[] = [];
+  document
+    .querySelectorAll<HTMLElement>('body > :not(script):not(style):not(#__smart-mailto-host__)')
+    .forEach(el => {
+      if (el.getAttribute('aria-hidden') !== 'true') {
+        rootNodes.push(el);
+        el.setAttribute('aria-hidden', 'true');
+      }
+    });
+
   // Cleanup function
   let cleanupFocusTrap: (() => void) | null = null;
   let keyHandler: ((e: KeyboardEvent) => void) | null = null;
@@ -661,6 +675,8 @@ export function spawnModal(
         host.remove();
         cleanupFocusTrap?.();
         if (keyHandler) document.removeEventListener('keydown', keyHandler);
+        rootNodes.forEach(el => el.removeAttribute('aria-hidden'));
+        previousFocus?.focus();
         config.onClose?.();
       }, 280);
     }
