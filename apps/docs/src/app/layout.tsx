@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Inter, JetBrains_Mono, Sora } from 'next/font/google';
-import { ThemeScript, ThemeToggle } from './theme';
+import { ThemeInit, ThemeToggle } from './theme';
 import './globals.css';
 
 const sora = Sora({
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        <ThemeScript />
+        <ThemeInit />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
@@ -84,6 +84,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               href="/spec"
             >
               Technical Specs
+            </Link>
+            <Link
+              className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
+              href="/examples"
+            >
+              Examples
             </Link>
           </nav>
         </header>

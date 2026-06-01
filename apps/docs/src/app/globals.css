@@ -86,6 +86,48 @@ body {
   font-family: var(--font-body);
 }
 
+/* Focus ring — subtle, visible only on keyboard nav */
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar — fits newspaper aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-muted);
+}
+
+/* Code blocks — consistent styling */
+pre,
+code {
+  font-family: var(--font-mono);
+}
+pre {
+  tab-size: 2;
+  overflow-x: auto;
+}
+pre code {
+  background: none !important;
+  padding: 0 !important;
+}
+
+/* Selection — brand color */
 ::selection {
   background: var(--red);
   color: white;

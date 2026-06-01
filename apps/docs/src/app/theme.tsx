@@ -1,19 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import Script from 'next/script';
+import { useServerInsertedHTML } from 'next/navigation';
 
-export function ThemeScript() {
-  return (
-    <Script id="theme-init" strategy="beforeInteractive">{`
-      try {
-        var t = localStorage.getItem('theme');
-        if (t === 'dark') {
-          document.documentElement.classList.add('dark');
-        }
-      } catch(e) {}
-    `}</Script>
-  );
+export function ThemeInit() {
+  useServerInsertedHTML(() => (
+    <script
+      id="theme-init"
+      dangerouslySetInnerHTML={{
+        __html:
+          'try{var t=localStorage.getItem("theme");if(t==="dark"){document.documentElement.classList.add("dark")}}catch(e){}',
+      }}
+    />
+  ));
+  return null;
 }
 
 function getInitialDark(): boolean {
