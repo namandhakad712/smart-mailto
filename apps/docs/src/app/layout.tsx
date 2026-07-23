@@ -91,14 +91,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               Examples
             </Link>
+            <Link
+              className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
+              href="/guides/replace-mailto"
+            >
+              Guide
+            </Link>
           </nav>
         </header>
 
         <main className="flex-1 max-w-screen-2xl mx-auto px-6 py-12 w-full">{children}</main>
 
         <footer className="bg-paper dark:bg-bg border-t-4 border-double border-border dark:border-border flex flex-col md:flex-row justify-between items-center w-full px-6 py-8 mt-auto">
-          <div className="font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted mb-4 md:mb-0">
-            © 2026 smart-mailto — All the protocols that are fit to fix.
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted mb-4 md:mb-0">
+            <span>© 2026 smart-mailto — All the protocols that are fit to fix.</span>
+            <a
+              className="inline-flex items-center gap-1.5 normal-case tracking-normal hover:text-ink dark:hover:text-text transition-colors"
+              href="https://tin.computer"
+            >
+              <span aria-hidden="true" className="inline-block h-[1em] w-[1em] bg-[#66DC9D]" />
+              Growth by Tin
+            </a>
           </div>
           <div className="flex gap-6 font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted">
             <a
