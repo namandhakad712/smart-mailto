@@ -23,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'smart-mailto · The Internet Times',
+  title: 'smart-mailto · A JavaScript mailto: Alternative',
   description:
     "All the protocols that are fit to fix. A zero-dependency JavaScript library that fixes the internet's broken mailto: links.",
 };
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span className="hidden md:inline">DIGITAL EDITION</span>
             <div className="flex items-center gap-4">
               <ThemeToggle />
-              <span>MAY 31, 2026</span>
+              <span>PACKAGE v0.2.0</span>
             </div>
           </div>
           <div className="text-center mb-6">
