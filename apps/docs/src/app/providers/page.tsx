@@ -350,24 +350,34 @@ export default function ProvidersPage() {
       </header>
 
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between border-b border-border dark:border-border pb-6">
-        <div className="relative w-full sm:w-80">
-          <input
-            type="text"
-            placeholder="Search providers..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="w-full bg-surface dark:bg-surface-container border border-border dark:border-border px-4 py-2.5 font-body text-sm text-ink dark:text-text placeholder:text-ink-muted dark:placeholder:text-text-muted focus:outline-none focus:border-red transition-colors"
-          />
-          <svg
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-muted dark:text-text-muted"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
+        <div className="w-full sm:w-80">
+          <label
+            htmlFor="provider-search"
+            className="mb-2 block font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft dark:text-text-soft"
           >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.35-4.35" />
-          </svg>
+            Search providers
+          </label>
+          <div className="relative">
+            <input
+              id="provider-search"
+              type="text"
+              placeholder="Search providers..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="w-full bg-surface dark:bg-surface-container border border-border dark:border-border px-4 py-2.5 pr-10 font-body text-sm text-ink dark:text-text placeholder:text-ink-muted dark:placeholder:text-text-muted focus:outline-none focus:border-red transition-colors"
+            />
+            <svg
+              aria-hidden="true"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-muted dark:text-text-muted"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+          </div>
         </div>
         <div className="flex flex-wrap gap-2">
           <button
