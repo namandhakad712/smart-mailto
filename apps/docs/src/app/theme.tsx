@@ -37,7 +37,6 @@ export function ThemeToggle() {
     <button
       onClick={toggle}
       className="font-mono text-[0.625rem] uppercase tracking-[0.15em] text-ink-muted dark:text-text-muted hover:text-red dark:hover:text-red transition-colors"
-      aria-label="Toggle theme"
     >
       {dark ? '☀ light' : '\u2726 dark'}
     </button>
