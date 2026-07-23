@@ -207,9 +207,27 @@ const DOMAIN_TO_PROVIDER: Readonly<Record<string, string>> = {
 
   // WP (Poland)
   'wp.pl': 'wp',
-  'o2.pl': 'wp',
-  'interia.pl': 'wp',
-  'interia.eu': 'wp',
+  'o2.pl': 'o2',
+
+  // Interia (Poland)
+  'interia.pl': 'interia',
+  'interia.eu': 'interia',
+
+  // Rambler (Russia)
+  'rambler.ru': 'rambler',
+  'lenta.ru': 'rambler',
+  'autorambler.ru': 'rambler',
+  'myrambler.ru': 'rambler',
+  'ro.ru': 'rambler',
+
+  // Alibaba / Aliyun (China, Enterprise)
+  'aliyun.com': 'aliyun',
+
+  // Disroot (FOSS / Privacy)
+  'disroot.org': 'disroot',
+
+  // Riseup (Activist / Privacy)
+  'riseup.net': 'riseup',
 
   // Yahoo Japan (separate URL)
   'ybb.ne.jp': 'yahoo-japan',

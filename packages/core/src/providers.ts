@@ -458,6 +458,89 @@ export const PROVIDERS: Readonly<Record<string, Provider>> = {
     regions: ['no', 'privacy'],
   },
 
+  disroot: {
+    id: 'disroot',
+    name: 'Disroot',
+    buildUrl: (p: MailtoParams) => {
+      return `https://webmail.disroot.org/?_task=mail&_action=compose&_to=${e(p.to.join(','))}`;
+    },
+    color: '#2E8B57',
+    textColor: '#ffffff',
+    regions: ['eu', 'privacy'],
+  },
+
+  riseup: {
+    id: 'riseup',
+    name: 'Riseup',
+    buildUrl: (p: MailtoParams) => {
+      return `https://mail.riseup.net/?_task=mail&_action=compose&_to=${e(p.to.join(','))}`;
+    },
+    color: '#E1003C',
+    textColor: '#ffffff',
+    regions: ['us', 'privacy'],
+  },
+
+  spike: {
+    id: 'spike',
+    name: 'Spike Mail',
+    buildUrl: (p: MailtoParams) => {
+      return `https://app.spike.email/compose?to=${e(p.to.join(','))}`;
+    },
+    color: '#7C3AED',
+    textColor: '#ffffff',
+    regions: ['global', 'power-user'],
+  },
+
+  // ── Russia / CIS (additional) ─────────────────────────────────────────────
+
+  rambler: {
+    id: 'rambler',
+    name: 'Rambler Mail',
+    buildUrl: (p: MailtoParams) => {
+      return `https://mail.rambler.ru/compose?mailto=${e(p.to.join(','))}`;
+    },
+    color: '#315EFB',
+    textColor: '#ffffff',
+    regions: ['ru', 'cis'],
+  },
+
+  // ── China (Enterprise) ────────────────────────────────────────────────────
+
+  aliyun: {
+    id: 'aliyun',
+    name: 'Alibaba Mail',
+    buildUrl: (p: MailtoParams) => {
+      return `https://mail.aliyun.com/alimail/compose?to=${e(p.to.join(','))}`;
+    },
+    color: '#FF6A00',
+    textColor: '#ffffff',
+    regions: ['cn', 'enterprise'],
+  },
+
+  // ── Poland (additional) ───────────────────────────────────────────────────
+
+  o2: {
+    id: 'o2',
+    name: 'O2 Poczta',
+    buildUrl: (p: MailtoParams) => {
+      return `https://poczta.o2.pl/compose/?to=${e(p.to.join(','))}`;
+    },
+    color: '#003298',
+    textColor: '#ffffff',
+    regions: ['pl'],
+  },
+
+  interia: {
+    id: 'interia',
+    name: 'Interia Poczta',
+    buildUrl: (p: MailtoParams) => {
+      return `https://poczta.interia.pl/?compose=1&to=${e(p.to.join(','))}`;
+    },
+    color: '#B20000',
+    textColor: '#ffffff',
+    regions: ['pl'],
+  },
+
   // ── Special Actions (not real providers) ───────────────────────────────────
 
   native: {

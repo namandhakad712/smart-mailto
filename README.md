@@ -16,8 +16,9 @@
 [![CI](https://github.com/namandhakad712/smart-mailto/actions/workflows/ci.yml/badge.svg)](https://github.com/namandhakad712/smart-mailto/actions)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@smart-mailto/core)](https://bundlephobia.com/package/@smart-mailto/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#license)
+[![Try Demo](https://img.shields.io/badge/Try%20Demo-%E2%86%92-6366f1?style=flat&logo=vercel)](https://smart-mailto.vercel.app)
 
-[Documentation](https://smart-mailto.vercel.app/spec) · [Examples](https://smart-mailto.vercel.app/examples) · [npm: @smart-mailto/core](https://www.npmjs.com/package/@smart-mailto/core)
+[Documentation](https://smart-mailto.vercel.app/spec) · [Examples](https://smart-mailto.vercel.app/examples) · [npm: @smart-mailto/core](https://www.npmjs.com/package/@smart-mailto/core) · [Live Demo](https://smart-mailto.vercel.app)
 
 <!-- ═══════════════════════════════════════════════════════════════
   HERO — animated isometric SVG with brand tokens
