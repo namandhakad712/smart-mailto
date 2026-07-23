@@ -341,7 +341,7 @@ export default function ProvidersPage() {
           Provider Registry
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          30 Webmail Providers. Zero Compromise.
+          37 Webmail Providers. Zero Compromise.
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
           Every provider listed here has been manually verified. Real compose URLs. Real deep links.

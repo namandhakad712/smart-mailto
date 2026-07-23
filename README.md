@@ -10,7 +10,7 @@
 
 # smart-mailto
 
-> Framework-agnostic, zero-dependency engine that replaces broken `mailto:` links with a geo-aware webmail picker modal. Sub-8KB gzipped. 30 webmail providers. Zero network requests.
+> Framework-agnostic, zero-dependency engine that replaces broken `mailto:` links with a geo-aware webmail picker modal. Sub-8KB gzipped. 37 webmail providers. Zero network requests.
 
 [![npm version](https://badge.fury.io/js/@smart-mailto%2Fcore.svg)](https://www.npmjs.com/package/@smart-mailto/core)
 [![CI](https://github.com/namandhakad712/smart-mailto/actions/workflows/ci.yml/badge.svg)](https://github.com/namandhakad712/smart-mailto/actions)
@@ -217,7 +217,7 @@ Every `mailto:` link now opens a geo-aware, provider-rich modal:
 └─────────────────────────────────────────────┘
 ```
 
-30 webmail providers, reordered by region automatically:
+37 webmail providers, reordered by region automatically:
 
 | Location       | Priority Providers                         |
 | -------------- | ------------------------------------------ |
@@ -377,7 +377,7 @@ interface SmartMailtoConfig {
 │  └──────────┘ └─────────┘ └──────────┘ └────────────────────────┘ │
 │       ↑                   ↑         ↑                               │
 │   geo.ts            provider.ts           storage                    │
-│   150+ TZ           30 webmail providers  localStorage              │
+│   150+ TZ           37 webmail providers  localStorage              │
 │   locale map        buildUrl()            provider id only          │
 └────────────────────────────────────────────────────────────────────┘
 ```
@@ -499,7 +499,7 @@ test('opens the mailto modal on click', async ({ page }) => {
 
 ### Automated Provider Health Checks
 
-Weekly GitHub Actions workflow HEAD-checks all 30 webmail provider compose URLs. A failure auto-opens a GitHub issue against the maintainer.
+Weekly GitHub Actions workflow HEAD-checks all 37 webmail provider compose URLs. A failure auto-opens a GitHub issue against the maintainer.
 
 ---
 
