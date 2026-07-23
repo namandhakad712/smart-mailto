@@ -1193,7 +1193,7 @@ export default function ExamplesPage() {
       {/* HEADER */}
       <div className="text-center">
         <p className="font-headline text-xl md:text-2xl font-semibold text-ink dark:text-text mt-2 max-w-3xl mx-auto leading-snug">
-          Even Google's official{' '}
+          Even Google&apos;s official{' '}
           <a
             href="https://blog.google/image-library/"
             target="_blank"
