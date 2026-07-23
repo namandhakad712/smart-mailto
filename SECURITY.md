@@ -20,6 +20,7 @@ You should receive a response within 48 hours. If not, please follow up.
 ## Scope
 
 The following are in scope:
+
 - `@smart-mailto/core` — the core engine
 - `@smart-mailto/react` — React wrapper
 - `@smart-mailto/vue` — Vue wrapper
@@ -28,6 +29,7 @@ The following are in scope:
 ## Out of Scope
 
 The following are NOT considered vulnerabilities:
+
 - Missing autocomplete attributes on modal inputs
 - CSP bypass through legitimate provider URLs
 - Social engineering of project maintainers
@@ -35,12 +37,13 @@ The following are NOT considered vulnerabilities:
 ## Supported Versions
 
 | Version | Supported |
-|---------|-----------|
+| ------- | --------- |
 | 0.x     | ✅ Yes    |
 
 ## Disclosure Policy
 
 We follow a 90-day disclosure timeline:
+
 1. Report received and acknowledged within 48 hours
 2. Fix developed and tested within 30 days
 3. Patch released within 90 days

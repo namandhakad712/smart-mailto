@@ -24,7 +24,8 @@ const MailIcon = () => (
 );
 
 const allProviders = getAllProviders();
-const featuredProviders = allProviders.slice(0, 8);
+const webmailProviders = allProviders.filter(provider => !provider.isNative && !provider.isCopy);
+const featuredProviders = webmailProviders.slice(0, 8);
 
 const INSTALL_COMMAND = 'npm install @smart-mailto/core@0.2.0';
 
@@ -281,7 +282,7 @@ export default function Home() {
               {[
                 { label: 'Bundle Size', value: '< 8KB' },
                 { label: 'Dependencies', value: 'Zero' },
-                { label: 'Providers', value: allProviders.length + '+' },
+                { label: 'Webmail Providers', value: webmailProviders.length.toString() },
                 { label: 'Regions', value: '30+' },
               ].map(item => (
                 <div
@@ -343,7 +344,7 @@ export default function Home() {
               href="/providers"
               className="mt-3 font-mono text-[10px] text-red hover:text-red-dark transition-colors uppercase tracking-widest block"
             >
-              View all {allProviders.length}+ providers →
+              View all {webmailProviders.length} webmail providers →
             </a>
           </section>
 

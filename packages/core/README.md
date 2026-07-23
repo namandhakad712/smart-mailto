@@ -1,6 +1,6 @@
 # @smart-mailto/core
 
-Zero-dependency, framework-agnostic engine that replaces broken `mailto:` links with a geo-aware webmail picker modal. **7.4 KB gzipped. 80+ providers. Zero network requests.**
+Zero-dependency, framework-agnostic engine that replaces broken `mailto:` links with a geo-aware webmail picker modal. **7.4 KB gzipped. 37 webmail providers. Zero network requests.**
 
 ```bash
 npm i @smart-mailto/core
@@ -31,18 +31,18 @@ await spawnModal(params, resolved, { theme: 'dark' });
 
 ## Exports
 
-| Export                                  | Purpose                          |
-| --------------------------------------- | -------------------------------- |
-| `initSmartMailto(config?)`              | Attach global mailto interceptor |
-| `destroySmartMailto()`                  | Remove interceptor               |
-| `parseMailto(href)`                     | RFC 6068 parser                  |
-| `buildMailtoHref(params)`               | Reconstruct URI                  |
-| `getAllProviders()`                     | 80+ provider registry            |
-| `getGeoOrderedProviderIds(signals)`     | Region-aware sort                |
-| `collectGeoSignals()`                   | Read timeZone, locale, device    |
-| `resolveProviders(params, config?)`     | Resolve + order providers        |
-| `spawnModal(params, resolved, config?)` | Programmatic modal               |
-| `VERSION`                               | Library version string           |
+| Export                                  | Purpose                                           |
+| --------------------------------------- | ------------------------------------------------- |
+| `initSmartMailto(config?)`              | Attach global mailto interceptor                  |
+| `destroySmartMailto()`                  | Remove interceptor                                |
+| `parseMailto(href)`                     | RFC 6068 parser                                   |
+| `buildMailtoHref(params)`               | Reconstruct URI                                   |
+| `getAllProviders()`                     | 37 webmail providers plus native and copy actions |
+| `getGeoOrderedProviderIds(signals)`     | Region-aware sort                                 |
+| `collectGeoSignals()`                   | Read timeZone, locale, device                     |
+| `resolveProviders(params, config?)`     | Resolve + order providers                         |
+| `spawnModal(params, resolved, config?)` | Programmatic modal                                |
+| `VERSION`                               | Library version string                            |
 
 ## Architecture
 

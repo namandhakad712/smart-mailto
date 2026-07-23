@@ -11,7 +11,7 @@ export function ProviderTable() {
           All supported providers
         </h3>
         <p className="font-body text-sm italic text-ink-soft dark:text-text-soft mt-1">
-          Over 80 webmail providers. Out of the box.
+          37 webmail providers. Out of the box.
         </p>
       </div>
 
