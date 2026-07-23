@@ -37,4 +37,3 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           playwright: true
-          autoAcceptChanges: 'fix/provider-count-task_cycle3_correct_provider_count_20260723'
