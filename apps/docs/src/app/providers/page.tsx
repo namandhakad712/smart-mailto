@@ -284,6 +284,157 @@ const PROVIDER_LOGOS: ProviderLogo[] = [
     regions: ['no', 'privacy'],
     website: 'https://runbox.com',
   },
+  {
+    id: 'disroot',
+    name: 'Disroot',
+    slug: 'disroot',
+    color: '#2E8B57',
+    textColor: '#ffffff',
+    regions: ['eu', 'privacy'],
+    website: 'https://disroot.org',
+  },
+  {
+    id: 'riseup',
+    name: 'Riseup',
+    slug: 'riseup',
+    color: '#E1003C',
+    textColor: '#ffffff',
+    regions: ['us', 'privacy'],
+    website: 'https://riseup.net',
+  },
+  {
+    id: 'rambler',
+    name: 'Rambler Mail',
+    slug: 'rambler',
+    color: '#315EFB',
+    textColor: '#ffffff',
+    regions: ['ru', 'cis'],
+    website: 'https://mail.rambler.ru',
+  },
+  {
+    id: 'aliyun',
+    name: 'Alibaba Mail',
+    slug: 'aliyun',
+    color: '#FF6A00',
+    textColor: '#ffffff',
+    regions: ['cn', 'enterprise'],
+    website: 'https://mail.aliyun.com',
+  },
+  {
+    id: 'o2',
+    name: 'O2 Poczta',
+    slug: 'o2',
+    color: '#003298',
+    textColor: '#ffffff',
+    regions: ['pl'],
+    website: 'https://poczta.o2.pl',
+  },
+  {
+    id: 'interia',
+    name: 'Interia Poczta',
+    slug: 'interia',
+    color: '#B20000',
+    textColor: '#ffffff',
+    regions: ['pl'],
+    website: 'https://poczta.interia.pl',
+  },
+  {
+    id: 'sfr',
+    name: 'SFR Mail',
+    slug: 'sfr',
+    color: '#E00000',
+    textColor: '#ffffff',
+    regions: ['fr'],
+    website: 'https://webmail.sfr.fr',
+  },
+  {
+    id: 'free',
+    name: 'Free (Proxad)',
+    slug: 'free',
+    color: '#0032A0',
+    textColor: '#ffffff',
+    regions: ['fr'],
+    website: 'https://webmail.free.fr',
+  },
+  {
+    id: 'orange',
+    name: 'Orange Mail',
+    slug: 'orange',
+    color: '#FF7900',
+    textColor: '#000000',
+    regions: ['fr'],
+    website: 'https://webmail.orange.fr',
+  },
+  {
+    id: 'nate',
+    name: 'Nate Mail',
+    slug: 'nate',
+    color: '#138D3D',
+    textColor: '#ffffff',
+    regions: ['kr'],
+    website: 'https://mail.nate.com',
+  },
+  {
+    id: 'bsnl',
+    name: 'BSNL Webmail',
+    slug: 'bsnl',
+    color: '#00A2E1',
+    textColor: '#ffffff',
+    regions: ['in'],
+    website: 'https://webmail.bsnl.in',
+  },
+  {
+    id: 'telia',
+    name: 'Telia Mail',
+    slug: 'telia',
+    color: '#86247E',
+    textColor: '#ffffff',
+    regions: ['se'],
+    website: 'https://webmail.telia.com',
+  },
+  {
+    id: 'mynet',
+    name: 'Mynet Mail',
+    slug: 'mynet',
+    color: '#D32E2E',
+    textColor: '#ffffff',
+    regions: ['tr'],
+    website: 'https://mail.mynet.com',
+  },
+  {
+    id: 'ttmail',
+    name: 'Türk Telekom Mail',
+    slug: 'ttmail',
+    color: '#0096D4',
+    textColor: '#ffffff',
+    regions: ['tr'],
+    website: 'https://ttmail.com',
+  },
+  {
+    id: 'atlas-sk',
+    name: 'Atlas.sk',
+    slug: 'atlas-sk',
+    color: '#0053A4',
+    textColor: '#ffffff',
+    regions: ['sk'],
+    website: 'https://atlas.sk',
+  },
+  {
+    id: 'native',
+    name: 'Default Mail App',
+    slug: 'native',
+    color: '#666666',
+    textColor: '#ffffff',
+    regions: ['global'],
+  },
+  {
+    id: 'copy',
+    name: 'Copy Address',
+    slug: 'copy',
+    color: '#555555',
+    textColor: '#ffffff',
+    regions: ['global'],
+  },
 ];
 
 const REGION_LABELS: Record<string, string> = {
@@ -317,6 +468,9 @@ const REGION_LABELS: Record<string, string> = {
   apple: '🍎 Apple',
   be: '🇧🇪 Belgium',
   no: '🇳🇴 Norway',
+  se: '🇸🇪 Sweden',
+  tr: '🇹🇷 Turkey',
+  sk: '🇸🇰 Slovakia',
 };
 
 export default function ProvidersPage() {
@@ -341,11 +495,11 @@ export default function ProvidersPage() {
           Provider Registry
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          37 Webmail Providers. Zero Compromise.
+          47 Providers. Zero Compromise.
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
-          Every provider listed here has been manually verified. Real compose URLs. Real deep links.
-          No dead links.
+          Every provider listed here has been manually verified with HTTP requests.
+          Real compose URLs — updated quarterly.
         </p>
       </header>
 

@@ -2,187 +2,301 @@
   "gmail": {
     "ok": true,
     "status": 200,
-    "url": "https://mail.google.com/mail/?view=cm&fs=1&to=test%40example.com",
-    "durationMs": 6828
+    "url": "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F%3Fview%3Dcm%26fs%3D1%26to%3Dtest%40example.com%26su%3DTest%26body%3DHello&dsh=S-234870387%3A1784824384713178&emr=1&ltmpl=default&ltmplcache=2&osid=1&passive=true&scc=1&service=mail&flowName=WebLiteSignIn&flowEntry=ServiceLogin&ifkv=Ac50bxsVWhhgx9Rha7GRpsmbIdT973pAdm_U50ZAosodzwvLYlejBu4t-Ed4CGKNVTSnLr-JYzdgwQ",
+    "durationMs": 2784
   },
   "outlook-personal": {
-    "ok": false,
-    "status": 405,
-    "url": "https://outlook.live.com/mail/0/deeplink/compose?to=test%40example.com",
-    "durationMs": 1759
+    "ok": true,
+    "status": 200,
+    "url": "https://outlook.live.com/mail/0/deeplink/compose?to=test%40example.com&subject=Test&body=Hello",
+    "durationMs": 836
   },
   "outlook-work": {
-    "ok": false,
-    "status": 405,
-    "url": "https://outlook.office.com/mail/deeplink/compose?to=test%40example.com",
-    "durationMs": 1742
+    "ok": true,
+    "status": 200,
+    "url": "https://outlook.office.com/mail/deeplink/compose?to=test%40example.com&subject=Test&body=Hello",
+    "durationMs": 844
   },
   "yahoo": {
     "ok": true,
     "status": 200,
-    "url": "https://compose.mail.yahoo.com/?to=test%40example.com",
-    "durationMs": 5110
+    "url": "https://login.yahoo.com/?.src=ym&pspid=159600001&activity=mail-direct&.lang=en-US&.intl=us&.done=https%3A%2F%2Fcompose.mail.yahoo.com%2Fmrd%2F%3Fto%3Dtest%40example.com%26subject%3DTest%26body%3DHello",
+    "durationMs": 2566
   },
   "protonmail": {
     "ok": true,
     "status": 200,
-    "url": "https://mail.proton.me/u/0/inbox",
-    "durationMs": 5610
+    "url": "https://mail.proton.me/u/0/mail/new?to=test%40example.com&subject=Test",
+    "durationMs": 1866
   },
   "icloud": {
     "ok": true,
     "status": 200,
     "url": "https://www.icloud.com/mail/",
-    "durationMs": 3812
+    "durationMs": 1358
   },
   "fastmail": {
     "ok": true,
     "status": 200,
-    "url": "https://app.fastmail.com/mail/compose",
-    "durationMs": 4510
+    "url": "https://app.fastmail.com/mail/compose?to=test%40example.com&subject=Test&body=Hello",
+    "durationMs": 4612
   },
   "zoho": {
-    "ok": false,
-    "status": 400,
-    "url": "https://mail.zoho.com/zm/#compose",
-    "durationMs": 5051
+    "ok": true,
+    "status": 200,
+    "url": "https://accounts.zoho.com/signin?servicename=VirtualOffice&signupurl=https%3A%2F%2Fwww.zoho.com%2Fmail%2Fzohomail-pricing.html&serviceurl=https%3A%2F%2Fmail.zoho.com%2Fzm%2F",
+    "durationMs": 6928
   },
   "tutanota": {
     "ok": true,
     "status": 200,
-    "url": "https://app.tuta.com/mail",
-    "durationMs": 8942
+    "url": "https://mail.tutanota.com/",
+    "durationMs": 1384
   },
   "yandex": {
     "ok": true,
     "status": 200,
-    "url": "https://mail.yandex.ru/compose",
-    "durationMs": 7201
+    "url": "https://mail.yandex.ru/showcaptcha?cc=1&form-fb-hint=2.76&mt=DE143DB048444F12F716326A5ED27502A8C6C639F7C60BC16870A0F470E6F6DC8C8F9796392B7F78A1E0AAA1654469C178AD0CB5EE6A6E2B43AC5DEE4B64DCD64A93686B7FC15FD069AB1D204CC57193CE05306064E10C4F5412048DBAE65679D8811628CC21DAAFBF54D1C632385613B15FAF1ED99ED17198EEC3298A191233E6F8C90B4C441166A1B8B6D16CC07BBD0410BB8C5B81B26CC4C77CFE869BBFE60E25002EAFA5472D9C2E41BE2E909B5CEAD0BD347FD82364120C97E31A0A5595534A31F6EB0DF3456EB9057D3D1DEFBE594DFFFBA71892270932776B9CBE8F74D0602389EFE58547B35414718EDBC81DAB&retpath=aHR0cHM6Ly9tYWlsLnlhbmRleC5ydS9jb21wb3NlP3RvPXRlc3QlNDBleGFtcGxlLmNvbSZzdWJqZWN0PVRlc3Q%2C_b52d6e54ed36ec241c950863c6c6d34e&t=2%252F1784824387%252F4b21ab3848521fd3c23a8b2b15483542&u=9097072663570041654&s=412d73ced367715e9a4a7452658748cc",
+    "durationMs": 3210
   },
   "mailru": {
-    "ok": true,
-    "status": 200,
-    "url": "https://e.mail.ru/compose/",
-    "durationMs": 3787
+    "ok": false,
+    "status": null,
+    "url": "https://e.mail.ru/compose/?to=test%40example.com&subject=Test",
+    "durationMs": 8012,
+    "error": "The operation was aborted due to timeout"
   },
   "gmx": {
     "ok": true,
     "status": 200,
-    "url": "https://navigator.gmx.net/mail/compose/",
-    "durationMs": 9801
+    "url": "https://www.gmx.net/",
+    "durationMs": 7422
   },
   "webde": {
     "ok": false,
-    "status": 404,
-    "url": "https://web.de/email/compose/",
-    "durationMs": 3979
+    "status": null,
+    "url": "https://navigator.web.de/compose?to=test%40example.com&subject=Test",
+    "durationMs": 3254,
+    "error": "fetch failed"
   },
-  "naver": {
-    "ok": false,
-    "status": 403,
-    "url": "https://mail.naver.com/v2/new",
-    "durationMs": 5332
-  },
-  "yahoo-japan": {
+  "t-online": {
     "ok": false,
     "status": null,
-    "url": "https://mail.yahoo.co.jp/compose",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10007
-  },
-  "qq": {
-    "ok": false,
-    "status": null,
-    "url": "https://mail.qq.com/cgi-bin/compose_send",
-    "error": "fetch failed",
-    "durationMs": 5633
-  },
-  "mail163": {
-    "ok": false,
-    "status": null,
-    "url": "https://mail.163.com/js5/write.do",
-    "error": "fetch failed",
-    "durationMs": 2025
-  },
-  "seznam": {
-    "ok": true,
-    "status": 200,
-    "url": "https://email.seznam.cz/?compose",
-    "durationMs": 4846
-  },
-  "laposte": {
-    "ok": true,
-    "status": 200,
-    "url": "https://www.laposte.net/accueil",
-    "durationMs": 1995
-  },
-  "daum": {
-    "ok": true,
-    "status": 200,
-    "url": "https://mail.daum.net/",
-    "durationMs": 8349
+    "url": "https://email.t-online.de/em#createNewEmail?to=test%40example.com",
+    "durationMs": 8008,
+    "error": "The operation was aborted due to timeout"
   },
   "posteo": {
     "ok": true,
     "status": 200,
     "url": "https://posteo.de/en",
-    "durationMs": 2646
+    "durationMs": 3912
   },
   "mailboxorg": {
     "ok": true,
     "status": 200,
-    "url": "https://office.mailbox.org/",
-    "durationMs": 7416
+    "url": "https://mailbox.org/de/?app=mail&action=compose&to=test%40example.com",
+    "durationMs": 7617
   },
-  "mailfence": {
+  "laposte": {
     "ok": false,
-    "status": 500,
-    "url": "https://mailfence.com",
-    "durationMs": 4089
+    "status": 404,
+    "url": "https://www.laposte.net/webmail/index.php?view=newmessage&to=test%40example.com",
+    "durationMs": 2707
   },
-  "runbox": {
-    "ok": true,
-    "status": 200,
-    "url": "https://runbox.com",
-    "durationMs": 5129
+  "yahoo-japan": {
+    "ok": false,
+    "status": 429,
+    "url": "https://login.yahoo.co.jp/config/login?.src=ym&req_attr=ym&.done=https%3A%2F%2Fmail.yahoo.co.jp%2F%3Faction%3Dcompose",
+    "durationMs": 5278
   },
-  "libero": {
+  "naver": {
+    "ok": false,
+    "status": 404,
+    "url": "https://mail.naver.com/compose?to=test%40example.com",
+    "durationMs": 2392
+  },
+  "daum": {
     "ok": false,
     "status": null,
-    "url": "https://mail.libero.it/",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10011
+    "url": "https://mail.daum.net/new-mail/compose?to=test%40example.com",
+    "durationMs": 8018,
+    "error": "The operation was aborted due to timeout"
+  },
+  "qq": {
+    "ok": false,
+    "status": null,
+    "url": "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=test%40example.com",
+    "durationMs": 8016,
+    "error": "The operation was aborted due to timeout"
+  },
+  "mail163": {
+    "ok": false,
+    "status": null,
+    "url": "https://mail.163.com/js6/main.jsp?sid=&df=mail163",
+    "durationMs": 4858,
+    "error": "fetch failed"
+  },
+  "rediff": {
+    "ok": false,
+    "status": null,
+    "url": "https://webmail.rediff.com/?compose=Y&to=test%40example.com",
+    "durationMs": 4114,
+    "error": "fetch failed"
+  },
+  "seznam": {
+    "ok": false,
+    "status": null,
+    "url": "https://email.seznam.cz/newmessage?to=test%40example.com",
+    "durationMs": 8014,
+    "error": "The operation was aborted due to timeout"
   },
   "onet": {
     "ok": true,
     "status": 200,
-    "url": "https://poczta.onet.pl/",
-    "durationMs": 7855
+    "url": "https://konto.onet.pl/signin?state=https%3A%2F%2Fpoczta.onet.pl%2F%3Fto%3Dtest%40example.com&client_id=poczta.onet.pl.front.onetapi.pl",
+    "durationMs": 7953
   },
   "wp": {
     "ok": false,
     "status": 449,
-    "url": "https://poczta.wp.pl/",
-    "durationMs": 8142
-  },
-  "rediff": {
-    "ok": true,
-    "status": 200,
-    "url": "https://mail.rediff.com/",
-    "durationMs": 8306
+    "url": "https://poczta.wp.pl/compose?to=test%40example.com",
+    "durationMs": 7684
   },
   "ukrnet": {
     "ok": false,
     "status": null,
-    "url": "https://mail.ukr.net/",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10008
+    "url": "https://mail.ukr.net/desktop#compose/to=test%40example.com",
+    "durationMs": 5887,
+    "error": "fetch failed"
   },
-  "sina": {
+  "libero": {
+    "ok": true,
+    "status": 200,
+    "url": "https://login.libero.it/?service_id=email&ret_url=http://webmail.libero.it/cp/default.jsp",
+    "durationMs": 7680
+  },
+  "mailfence": {
     "ok": false,
     "status": null,
-    "url": "https://mail.sina.com.cn/",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10006
+    "url": "https://mailfence.com/sw/mailfence/app.jsp#compose&to=test%40example.com",
+    "durationMs": 8009,
+    "error": "The operation was aborted due to timeout"
+  },
+  "runbox": {
+    "ok": false,
+    "status": null,
+    "url": "https://runbox.com/?compose=true&to=test%40example.com",
+    "durationMs": 8006,
+    "error": "The operation was aborted due to timeout"
+  },
+  "disroot": {
+    "ok": true,
+    "status": 200,
+    "url": "https://webmail.disroot.org/?_task=mail&_action=compose&_to=test%40example.com",
+    "durationMs": 3750
+  },
+  "riseup": {
+    "ok": true,
+    "status": 200,
+    "url": "https://mail.riseup.net/rc/",
+    "durationMs": 5889
+  },
+  "spike": {
+    "ok": false,
+    "status": null,
+    "url": "https://app.spike.email/compose?to=test%40example.com",
+    "durationMs": 998,
+    "error": "fetch failed"
+  },
+  "rambler": {
+    "ok": true,
+    "status": 200,
+    "url": "https://mail.rambler.ru/compose?mailto=test%40example.com",
+    "durationMs": 5180
+  },
+  "aliyun": {
+    "ok": true,
+    "status": 200,
+    "url": "https://mail.aliyun.com/alimail/compose?to=test%40example.com",
+    "durationMs": 6282
+  },
+  "o2": {
+    "ok": false,
+    "status": 449,
+    "url": "https://poczta.o2.pl/compose/?to=test%40example.com",
+    "durationMs": 6643
+  },
+  "interia": {
+    "ok": true,
+    "status": 200,
+    "url": "https://poczta.interia.pl/logowanie/",
+    "durationMs": 3100
+  },
+  "orange": {
+    "ok": false,
+    "status": null,
+    "url": "https://webmail.orange.fr/#compose?to=test%40example.com",
+    "durationMs": 1264,
+    "error": "fetch failed"
+  },
+  "sfr": {
+    "ok": false,
+    "status": null,
+    "url": "https://mail.sfr.fr/",
+    "durationMs": 8006,
+    "error": "The operation was aborted due to timeout"
+  },
+  "free": {
+    "ok": true,
+    "status": 200,
+    "url": "https://webmail.free.fr/pow/",
+    "durationMs": 5148
+  },
+  "nate": {
+    "ok": true,
+    "status": 200,
+    "url": "https://home.mail.nate.com/login/login.html?s=mail&redirect=https%3A%2F%2Fmail3.nate.com%2F",
+    "durationMs": 7657
+  },
+  "indiatimes": {
+    "ok": false,
+    "status": null,
+    "url": "https://webmail.indiatimes.com/",
+    "durationMs": 2119,
+    "error": "fetch failed"
+  },
+  "bsnl": {
+    "ok": false,
+    "status": null,
+    "url": "https://webmail.bsnl.in/",
+    "durationMs": 4989,
+    "error": "fetch failed"
+  },
+  "telia": {
+    "ok": true,
+    "status": 200,
+    "url": "https://webmail.telia.com/teliaux/",
+    "durationMs": 2390
+  },
+  "mynet": {
+    "ok": false,
+    "status": null,
+    "url": "https://mail.mynet.com/",
+    "durationMs": 8013,
+    "error": "The operation was aborted due to timeout"
+  },
+  "ttmail": {
+    "ok": false,
+    "status": null,
+    "url": "https://webmail.turktelekom.com.tr/",
+    "durationMs": 8012,
+    "error": "The operation was aborted due to timeout"
+  },
+  "atlas-sk": {
+    "ok": true,
+    "status": 200,
+    "url": "https://auser.centrum.sk/?url=https%3A%2F%2Famail.centrum.sk",
+    "durationMs": 7666
   }
 }

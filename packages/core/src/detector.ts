@@ -231,6 +231,47 @@ const DOMAIN_TO_PROVIDER: Readonly<Record<string, string>> = {
 
   // Yahoo Japan (separate URL)
   'ybb.ne.jp': 'yahoo-japan',
+
+  // SFR (France)
+  'sfr.fr': 'sfr',
+
+  // Free (France)
+  'free.fr': 'free',
+
+  // Telia (Nordics)
+  'telia.com': 'telia',
+
+  // Mynet (Turkey)
+  'mynet.com': 'mynet',
+
+  // Türk Telekom (Turkey)
+  'ttmail.com': 'ttmail',
+
+  // Nate (South Korea)
+  'nate.com': 'nate',
+  'nate.co.kr': 'nate',
+
+  // Indiatimes (India)
+  'indiatimes.com': 'indiatimes',
+
+  // BSNL (India)
+  'bsnl.in': 'bsnl',
+
+  // Atlas.sk (Slovakia)
+  'atlas.sk': 'atlas-sk',
+
+  // Aliyun (China, Enterprise)
+  'alibaba.com': 'aliyun',
+
+  // Spike (Conversational Email)
+  'spike.email': 'spike',
+
+  // ISP mail domains — map to personal Outlook (common pattern)
+  'optusnet.com.au': 'outlook-personal',
+  'bigpond.com': 'outlook-personal',
+  'virginmedia.com': 'outlook-personal',
+  'btinternet.com': 'outlook-personal',
+  'sky.com': 'outlook-personal',
 };
 
 // ─────────────────────────────────────────────────────────────────────────────

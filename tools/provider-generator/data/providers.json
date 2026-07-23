@@ -1,0 +1,482 @@
+{
+  "schema": "https://raw.githubusercontent.com/namandhakad712/smart-mailto/main/tools/provider-generator/data/providers-schema.json",
+  "version": 1,
+  "providers": [
+    {
+      "id": "gmail",
+      "name": "Gmail",
+      "urlTemplate": "https://mail.google.com/mail/?view=cm&fs=1&to={to}&cc={cc}&bcc={bcc}&su={subject}&body={body}",
+      "urlType": "template",
+      "color": "#EA4335",
+      "textColor": "#ffffff",
+      "regions": ["global"]
+    },
+    {
+      "id": "outlook-personal",
+      "name": "Outlook",
+      "urlType": "searchParams",
+      "baseUrl": "https://outlook.live.com/mail/0/deeplink/compose",
+      "color": "#0078D4",
+      "textColor": "#ffffff",
+      "regions": ["global"]
+    },
+    {
+      "id": "outlook-work",
+      "name": "Outlook 365",
+      "urlType": "searchParams",
+      "baseUrl": "https://outlook.office.com/mail/deeplink/compose",
+      "color": "#0078D4",
+      "textColor": "#ffffff",
+      "regions": ["enterprise", "global"]
+    },
+    {
+      "id": "yahoo",
+      "name": "Yahoo Mail",
+      "urlType": "searchParams",
+      "baseUrl": "https://compose.mail.yahoo.com/",
+      "color": "#720E9E",
+      "textColor": "#ffffff",
+      "regions": ["us", "in", "latam", "ph"]
+    },
+    {
+      "id": "protonmail",
+      "name": "Proton Mail",
+      "urlType": "searchParams",
+      "baseUrl": "https://mail.proton.me/u/0/mail/new",
+      "noBody": true,
+      "color": "#6D4AFF",
+      "textColor": "#ffffff",
+      "noBodyPreFill": true,
+      "regions": ["privacy", "eu", "nordics", "ch"]
+    },
+    {
+      "id": "icloud",
+      "name": "iCloud Mail",
+      "urlTemplate": "https://www.icloud.com/mail/#compose?to={to}&subject={subject}",
+      "urlType": "template",
+      "color": "#1C84C6",
+      "textColor": "#ffffff",
+      "regions": ["apple", "us", "au", "jp"]
+    },
+    {
+      "id": "fastmail",
+      "name": "Fastmail",
+      "urlType": "searchParams",
+      "baseUrl": "https://www.fastmail.com/mail/compose",
+      "noCcBcc": true,
+      "color": "#C82E2E",
+      "textColor": "#ffffff",
+      "regions": ["au", "us", "power-users"]
+    },
+    {
+      "id": "zoho",
+      "name": "Zoho Mail",
+      "urlTemplate": "https://mail.zoho.com/zm/#compose?to={to}&subject={subject}&body={body}",
+      "urlType": "template",
+      "color": "#E42527",
+      "textColor": "#ffffff",
+      "regions": ["in", "smb", "global"]
+    },
+    {
+      "id": "tutanota",
+      "name": "Tuta Mail",
+      "urlTemplate": "https://mail.tutanota.com/#mail?to={to}&subject={subject}",
+      "urlType": "template",
+      "noBody": true,
+      "color": "#840010",
+      "textColor": "#ffffff",
+      "noBodyPreFill": true,
+      "regions": ["eu", "privacy"]
+    },
+    {
+      "id": "yandex",
+      "name": "Яндекс Почта",
+      "urlType": "searchParams",
+      "baseUrl": "https://mail.yandex.ru/compose",
+      "noCcBcc": true,
+      "color": "#FC3F1D",
+      "textColor": "#ffffff",
+      "regions": ["ru", "cis", "ua", "kz", "by"]
+    },
+    {
+      "id": "mailru",
+      "name": "Mail.ru",
+      "urlType": "searchParams",
+      "baseUrl": "https://e.mail.ru/compose/",
+      "noCcBcc": true,
+      "color": "#005FF9",
+      "textColor": "#ffffff",
+      "regions": ["ru", "cis"]
+    },
+    {
+      "id": "gmx",
+      "name": "GMX Mail",
+      "urlType": "searchParams",
+      "baseUrl": "https://navigator.gmx.net/compose",
+      "noCcBcc": true,
+      "color": "#1D4F96",
+      "textColor": "#ffffff",
+      "regions": ["de", "at", "ch"]
+    },
+    {
+      "id": "webde",
+      "name": "WEB.DE",
+      "urlType": "searchParams",
+      "baseUrl": "https://navigator.web.de/compose",
+      "noCcBcc": true,
+      "color": "#FFCC00",
+      "textColor": "#000000",
+      "regions": ["de"]
+    },
+    {
+      "id": "t-online",
+      "name": "Telekom Mail",
+      "urlTemplate": "https://email.t-online.de/em#createNewEmail?to={to}",
+      "urlType": "template",
+      "noSubjectBody": true,
+      "color": "#E20074",
+      "textColor": "#ffffff",
+      "regions": ["de"]
+    },
+    {
+      "id": "posteo",
+      "name": "Posteo",
+      "urlType": "searchParams",
+      "baseUrl": "https://posteo.de/webmail/",
+      "urlParams": { "_task": "mail", "_action": "compose" },
+      "noSubjectBody": true,
+      "noCcBcc": true,
+      "color": "#2E8B57",
+      "textColor": "#ffffff",
+      "regions": ["de", "privacy"]
+    },
+    {
+      "id": "mailboxorg",
+      "name": "mailbox.org",
+      "urlType": "searchParams",
+      "baseUrl": "https://office.mailbox.org/",
+      "urlParams": { "app": "mail", "action": "compose" },
+      "noSubjectBody": true,
+      "noCcBcc": true,
+      "color": "#00529B",
+      "textColor": "#ffffff",
+      "regions": ["de", "privacy"]
+    },
+    {
+      "id": "laposte",
+      "name": "La Poste Mail",
+      "urlType": "none",
+      "color": "#FFD700",
+      "textColor": "#000000",
+      "regions": ["fr"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "yahoo-japan",
+      "name": "Yahoo!メール",
+      "urlType": "searchParams",
+      "baseUrl": "https://mail.yahoo.co.jp/compose/",
+      "noCcBcc": true,
+      "color": "#FF0033",
+      "textColor": "#ffffff",
+      "regions": ["jp"]
+    },
+    {
+      "id": "naver",
+      "name": "네이버 메일",
+      "urlType": "none",
+      "color": "#03C75A",
+      "textColor": "#ffffff",
+      "regions": ["kr"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "daum",
+      "name": "카카오메일",
+      "urlType": "searchParams",
+      "baseUrl": "https://mail.daum.net/new-mail/compose",
+      "noCcBcc": true,
+      "noBody": true,
+      "color": "#FFCD00",
+      "textColor": "#000000",
+      "regions": ["kr"]
+    },
+    {
+      "id": "qq",
+      "name": "QQ邮箱",
+      "urlTemplate": "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#12B7F5",
+      "textColor": "#ffffff",
+      "regions": ["cn"]
+    },
+    {
+      "id": "mail163",
+      "name": "网易163邮箱",
+      "urlTemplate": "https://mail.163.com/js6/main.jsp?sid=&df=mail163",
+      "urlType": "none",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#D81B25",
+      "textColor": "#ffffff",
+      "regions": ["cn"]
+    },
+    {
+      "id": "rediff",
+      "name": "Rediffmail",
+      "urlTemplate": "https://webmail.rediff.com/?compose=Y&to={to}&subject={subject}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noBody": true,
+      "color": "#D10000",
+      "textColor": "#ffffff",
+      "regions": ["in"]
+    },
+    {
+      "id": "seznam",
+      "name": "Seznam Email",
+      "urlType": "searchParams",
+      "baseUrl": "https://email.seznam.cz/newmessage",
+      "noCcBcc": true,
+      "color": "#CC0000",
+      "textColor": "#ffffff",
+      "regions": ["cz"]
+    },
+    {
+      "id": "onet",
+      "name": "Onet Poczta",
+      "urlTemplate": "https://poczta.onet.pl/?to={to}&subject={subject}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noBody": true,
+      "color": "#E40000",
+      "textColor": "#ffffff",
+      "regions": ["pl"]
+    },
+    {
+      "id": "wp",
+      "name": "WP Poczta",
+      "urlTemplate": "https://poczta.wp.pl/compose?to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#003298",
+      "textColor": "#ffffff",
+      "regions": ["pl"]
+    },
+    {
+      "id": "ukrnet",
+      "name": "UKR.NET Mail",
+      "urlTemplate": "https://mail.ukr.net/desktop#compose/to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#007BB5",
+      "textColor": "#ffffff",
+      "regions": ["ua"]
+    },
+    {
+      "id": "libero",
+      "name": "Libero Mail",
+      "urlTemplate": "https://webmail.libero.it/?compose&to={to}&subject={subject}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noBody": true,
+      "color": "#FF6600",
+      "textColor": "#ffffff",
+      "regions": ["it"]
+    },
+    {
+      "id": "mailfence",
+      "name": "Mailfence",
+      "urlTemplate": "https://mailfence.com/sw/mailfence/app.jsp#compose&to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#37A000",
+      "textColor": "#ffffff",
+      "regions": ["be", "eu", "privacy"]
+    },
+    {
+      "id": "runbox",
+      "name": "Runbox",
+      "urlTemplate": "https://runbox.com/?compose=true&to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#5B5EA6",
+      "textColor": "#ffffff",
+      "regions": ["no", "privacy"]
+    },
+    {
+      "id": "disroot",
+      "name": "Disroot",
+      "urlTemplate": "https://webmail.disroot.org/?_task=mail&_action=compose&_to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#2E8B57",
+      "textColor": "#ffffff",
+      "regions": ["eu", "privacy"]
+    },
+    {
+      "id": "riseup",
+      "name": "Riseup",
+      "urlTemplate": "https://mail.riseup.net/?_task=mail&_action=compose&_to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#E1003C",
+      "textColor": "#ffffff",
+      "regions": ["us", "privacy"]
+    },
+
+    {
+      "id": "rambler",
+      "name": "Rambler Mail",
+      "urlTemplate": "https://mail.rambler.ru/compose?mailto={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#315EFB",
+      "textColor": "#ffffff",
+      "regions": ["ru", "cis"]
+    },
+    {
+      "id": "aliyun",
+      "name": "Alibaba Mail",
+      "urlTemplate": "https://mail.aliyun.com/alimail/compose?to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#FF6A00",
+      "textColor": "#ffffff",
+      "regions": ["cn", "enterprise"]
+    },
+    {
+      "id": "o2",
+      "name": "O2 Poczta",
+      "urlTemplate": "https://poczta.o2.pl/compose/?to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#003298",
+      "textColor": "#ffffff",
+      "regions": ["pl"]
+    },
+    {
+      "id": "interia",
+      "name": "Interia Poczta",
+      "urlTemplate": "https://poczta.interia.pl/?compose=1&to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#B20000",
+      "textColor": "#ffffff",
+      "regions": ["pl"]
+    },
+    {
+      "id": "sfr",
+      "name": "SFR Mail",
+      "urlType": "none",
+      "color": "#E00000",
+      "textColor": "#ffffff",
+      "regions": ["fr"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "free",
+      "name": "Free (Proxad)",
+      "urlType": "none",
+      "color": "#0032A0",
+      "textColor": "#ffffff",
+      "regions": ["fr"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "orange",
+      "name": "Orange Mail",
+      "urlType": "none",
+      "color": "#FF7900",
+      "textColor": "#000000",
+      "regions": ["fr"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "nate",
+      "name": "Nate Mail",
+      "urlType": "none",
+      "color": "#138D3D",
+      "textColor": "#ffffff",
+      "regions": ["kr"],
+      "fallbackOnly": true
+    },
+
+    {
+      "id": "bsnl",
+      "name": "BSNL Webmail",
+      "urlType": "none",
+      "color": "#00A2E1",
+      "textColor": "#ffffff",
+      "regions": ["in"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "telia",
+      "name": "Telia Mail",
+      "urlType": "none",
+      "color": "#86247E",
+      "textColor": "#ffffff",
+      "regions": ["se"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "mynet",
+      "name": "Mynet Mail",
+      "urlType": "none",
+      "color": "#D32E2E",
+      "textColor": "#ffffff",
+      "regions": ["tr"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "ttmail",
+      "name": "Türk Telekom Mail",
+      "urlType": "none",
+      "color": "#0096D4",
+      "textColor": "#ffffff",
+      "regions": ["tr"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "atlas-sk",
+      "name": "Atlas.sk",
+      "urlType": "none",
+      "color": "#0053A4",
+      "textColor": "#ffffff",
+      "domains": ["atlas.sk"],
+      "regions": ["sk"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "native",
+      "name": "Default Mail App",
+      "urlType": "none",
+      "color": "#666666",
+      "textColor": "#ffffff",
+      "regions": ["global"],
+      "isNative": true
+    },
+    {
+      "id": "copy",
+      "name": "Copy Address",
+      "urlType": "none",
+      "color": "#555555",
+      "textColor": "#ffffff",
+      "regions": ["global"],
+      "isCopy": true
+    }
+  ]
+}

@@ -48,6 +48,8 @@ export interface Provider {
   regions?: string[];
   /** If true, body pre-fill is not supported (e.g., ProtonMail E2EE) */
   noBodyPreFill?: boolean;
+  /** If true, this provider has no working compose URL — shown as informational only */
+  fallbackOnly?: boolean;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

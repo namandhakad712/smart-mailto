@@ -30,7 +30,7 @@ describe('Provider URL builders', () => {
       expect(url).toContain('to=test%40example.com');
       expect(url).toContain('cc=cc%40example.com');
       expect(url).toContain('bcc=bcc%40example.com');
-      expect(url).toContain('su=Hello+World+%26+Special+%3CChars%3E');
+      expect(url).toContain('su=Hello%20World%20%26%20Special%20%3CChars%3E');
     });
 
     it('produces a parseable URL', () => {
@@ -129,9 +129,8 @@ describe('Provider URL builders', () => {
   // ── Naver (South Korea) ───────────────────────────────────────────────────
 
   describe('naver', () => {
-    it('uses mail.naver.com', () => {
-      const url = PROVIDERS['naver']!.buildUrl(SIMPLE_PARAMS);
-      expect(url).toContain('mail.naver.com');
+    it('is fallback only (no compose URL)', () => {
+      expect(PROVIDERS['naver']!.fallbackOnly).toBe(true);
     });
   });
 
@@ -220,7 +219,6 @@ describe('Special character encoding', () => {
       'fastmail',
       'zoho',
       'gmx',
-      'naver',
       'seznam',
     ];
     for (const id of mainProviders) {
@@ -247,12 +245,12 @@ describe('getAllProviders', () => {
     expect(all.length).toBeGreaterThan(20);
   });
 
-  it('contains 37 webmail providers plus native and copy fallback actions', () => {
+  it('contains 45 webmail providers plus native and copy fallback actions', () => {
     const all = getAllProviders();
     const webmailProviders = all.filter(provider => !provider.isNative && !provider.isCopy);
 
-    expect(webmailProviders).toHaveLength(37);
-    expect(all).toHaveLength(39);
+    expect(webmailProviders).toHaveLength(45);
+    expect(all).toHaveLength(47);
   });
 
   it('all providers have required fields and buildUrl produces valid output', () => {
