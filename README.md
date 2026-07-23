@@ -187,7 +187,7 @@
 │   Corp     ──►  Default client locked by IT policy          │
 │   Mobile   ──►  No native handler → blank screen            │
 │                                                              │
-│   40%+ of desktop users have no configured mail client.      │
+│   No suitable handler can mean an error or the wrong app.    │
 │                                                              │
 │   Outcome: lost contacts. Lost leads. Lost revenue.          │
 └──────────────────────────────────────────────────────────────┘
@@ -196,7 +196,7 @@
 ## The Solution
 
 ```ts
-// Before — broken for 40% of the internet
+// Before — can fail without a suitable mail handler
 <a href="mailto:hello@example.com">Contact Us</a>
 
 // After — one line of JavaScript

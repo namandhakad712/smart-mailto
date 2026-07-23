@@ -181,9 +181,9 @@ export default function Home() {
               <p className="drop-cap">
                 The{' '}
                 <code className="font-mono bg-surface dark:bg-surface-container px-1">mailto:</code>{' '}
-                protocol was designed in 1997 for a world where every computer had a desktop email
-                client. That world no longer exists. Today, 40% of users have no mail client
-                configured, and corporate users are locked into webmail.
+                protocol assumes the browser can hand an address to a configured email app. When
+                that handler is missing or unwanted, the click can fail or open the wrong desktop
+                client.
               </p>
               <p className="text-ink-soft dark:text-text-soft">
                 smart-mailto intercepts every{' '}
