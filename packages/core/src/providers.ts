@@ -1,7 +1,7 @@
 /**
  * @smart-mailto/core — Provider Database
  *
- * The complete global registry of 80+ email providers with compose deep links.
+ * The complete global registry of 30 webmail providers with compose deep links.
  * Generated from: tools/provider-generator/data/providers.json
  *
  * URL variables are encoded via encodeURIComponent before insertion.

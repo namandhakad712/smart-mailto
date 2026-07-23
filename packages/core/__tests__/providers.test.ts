@@ -247,6 +247,14 @@ describe('getAllProviders', () => {
     expect(all.length).toBeGreaterThan(20);
   });
 
+  it('contains 30 webmail providers plus native and copy fallback actions', () => {
+    const all = getAllProviders();
+    const webmailProviders = all.filter(provider => !provider.isNative && !provider.isCopy);
+
+    expect(webmailProviders).toHaveLength(30);
+    expect(all).toHaveLength(32);
+  });
+
   it('all providers have required fields and buildUrl produces valid output', () => {
     for (const provider of getAllProviders()) {
       expect(provider.id, `${provider.id} must have id`).toBeTruthy();

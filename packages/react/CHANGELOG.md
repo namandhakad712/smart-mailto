@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- ee3ca35: First public release — zero-dependency, geo-aware webmail picker with 80+ providers
+- ee3ca35: First public release — zero-dependency, geo-aware webmail picker with 30 webmail providers
 
 ### Patch Changes
 
