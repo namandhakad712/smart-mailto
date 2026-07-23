@@ -18,6 +18,14 @@ let destroy: (() => void) | null = null;
 // ─────────────────────────────────────────────────────────────────────────────
 
 function initDemo() {
+  const webmailProviderCount = getAllProviders().filter(
+    provider => !provider.isNative && !provider.isCopy,
+  ).length;
+
+  document.querySelectorAll<HTMLElement>('[data-provider-count]').forEach(element => {
+    element.textContent = String(webmailProviderCount);
+  });
+
   // Initialize smart-mailto
   destroy = initSmartMailto({
     theme: currentTheme,

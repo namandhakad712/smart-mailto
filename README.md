@@ -10,7 +10,7 @@
 
 # smart-mailto
 
-> Framework-agnostic, zero-dependency engine that replaces broken `mailto:` links with a geo-aware webmail picker modal. Sub-8KB gzipped. 37 webmail providers. Zero network requests.
+> Framework-agnostic, zero-dependency engine that replaces broken `mailto:` links with a geo-aware webmail picker modal. Sub-8KB gzipped. 45 webmail providers. Zero network requests.
 
 [![npm version](https://badge.fury.io/js/@smart-mailto%2Fcore.svg)](https://www.npmjs.com/package/@smart-mailto/core)
 [![CI](https://github.com/namandhakad712/smart-mailto/actions/workflows/ci.yml/badge.svg)](https://github.com/namandhakad712/smart-mailto/actions)
@@ -131,7 +131,7 @@
       <text x="0" y="124" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="13" fill="#9CA3AF">Providers</text>
       <rect x="0" y="136" width="200" height="9" rx="4.5" fill="#1A2225" stroke="#283034" stroke-width="1"/>
       <rect x="0" y="136" width="200" height="9" rx="4.5" fill="url(#teal)" opacity="0.9"/>
-      <text x="212" y="145" font-family="JetBrains Mono, monospace" font-size="11" fill="#2DD4BF">30</text>
+      <text x="212" y="145" font-family="JetBrains Mono, monospace" font-size="11" fill="#2DD4BF">45</text>
 
       <!-- deps -->
       <text x="0" y="186" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="13" fill="#9CA3AF">Runtime dependencies</text>
@@ -217,7 +217,7 @@ Every `mailto:` link now opens a geo-aware, provider-rich modal:
 └─────────────────────────────────────────────┘
 ```
 
-37 webmail providers, reordered by region automatically:
+45 webmail providers, reordered by region automatically:
 
 | Location       | Priority Providers                         |
 | -------------- | ------------------------------------------ |
@@ -377,7 +377,7 @@ interface SmartMailtoConfig {
 │  └──────────┘ └─────────┘ └──────────┘ └────────────────────────┘ │
 │       ↑                   ↑         ↑                               │
 │   geo.ts            provider.ts           storage                    │
-│   150+ TZ           37 webmail providers  localStorage              │
+│   150+ TZ           45 webmail providers  localStorage              │
 │   locale map        buildUrl()            provider id only          │
 └────────────────────────────────────────────────────────────────────┘
 ```
@@ -499,7 +499,7 @@ test('opens the mailto modal on click', async ({ page }) => {
 
 ### Automated Provider Health Checks
 
-Weekly GitHub Actions workflow HEAD-checks all 37 webmail provider compose URLs. A failure auto-opens a GitHub issue against the maintainer.
+Weekly GitHub Actions workflow HEAD-checks the maintained webmail provider compose URLs. A failure auto-opens a GitHub issue against the maintainer.
 
 ---
 

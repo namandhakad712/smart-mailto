@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, it, expect } from 'vitest';
 import { PROVIDERS, getProvider, getAllProviders } from '../src/providers.js';
 import type { MailtoParams } from '../src/types.js';
@@ -268,5 +270,44 @@ describe('getAllProviders', () => {
       const fullUrl = provider.buildUrl(BASE_PARAMS);
       expect(fullUrl, `${provider.id} full URL must be a non-empty string`).toBeTruthy();
     }
+  });
+});
+
+describe('Maintained provider count claims', () => {
+  const repositoryFile = (path: string) =>
+    readFileSync(resolve(process.cwd(), '../..', path), 'utf8');
+
+  it('keeps static documentation and demo fallbacks aligned with the registry', () => {
+    const webmailProviderCount = getAllProviders().filter(
+      provider => !provider.isNative && !provider.isCopy,
+    ).length;
+    const rootReadme = repositoryFile('README.md');
+    const packageReadme = repositoryFile('packages/core/README.md');
+    const demoHtml = repositoryFile('apps/demo/index.html');
+
+    const maintainedClaims = [
+      ...rootReadme.matchAll(/(\d+) webmail providers/g),
+      ...packageReadme.matchAll(/(\d+) webmail providers/g),
+      ...demoHtml.matchAll(/data-provider-count[^>]*>(\d+)</g),
+      rootReadme.match(/<!-- providers -->[\s\S]*?<text[^>]*>(\d+)<\/text>[\s\S]*?<!-- deps -->/),
+    ];
+
+    expect(maintainedClaims).not.toContain(null);
+    expect(maintainedClaims).toHaveLength(8);
+    expect(maintainedClaims.map(claim => Number(claim![1]))).toEqual(
+      Array(maintainedClaims.length).fill(webmailProviderCount),
+    );
+  });
+
+  it('renders current documentation counts from the provider registry', () => {
+    const providerTable = repositoryFile('apps/docs/src/components/ProviderTable.tsx');
+    const providerPage = repositoryFile('apps/docs/src/app/providers/page.tsx');
+    const specPage = repositoryFile('apps/docs/src/app/spec/page.tsx');
+
+    expect(providerTable).toContain('{providers.length} webmail providers');
+    expect(providerPage).toContain('{WEBMAIL_PROVIDER_COUNT} Webmail Providers. Zero Compromise.');
+    expect(specPage).toContain(
+      '{WEBMAIL_PROVIDER_COUNT} webmail providers with verified compose URLs',
+    );
   });
 });

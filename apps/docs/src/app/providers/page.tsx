@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { SmartMailto } from '@smart-mailto/react';
+import { getAllProviders } from '@smart-mailto/core';
 import { useIsDark } from '@/hooks/useIsDark';
 
 interface ProviderLogo {
@@ -473,6 +474,10 @@ const REGION_LABELS: Record<string, string> = {
   sk: '🇸🇰 Slovakia',
 };
 
+const WEBMAIL_PROVIDER_COUNT = getAllProviders().filter(
+  provider => !provider.isNative && !provider.isCopy,
+).length;
+
 export default function ProvidersPage() {
   const isDark = useIsDark();
   const [search, setSearch] = useState('');
@@ -495,7 +500,7 @@ export default function ProvidersPage() {
           Provider Registry
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          47 Providers. Zero Compromise.
+          {WEBMAIL_PROVIDER_COUNT} Webmail Providers. Zero Compromise.
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
           Every provider listed here has been manually verified with HTTP requests. Real compose

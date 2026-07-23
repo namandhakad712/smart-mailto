@@ -7,11 +7,16 @@ import {
   parseMailto,
   resolveProviders,
   PROVIDERS,
+  getAllProviders,
   getProvider,
   collectGeoSignals,
   isValidMailtoParams,
   ResolvedProviders,
 } from '@smart-mailto/core';
+
+const WEBMAIL_PROVIDER_COUNT = getAllProviders().filter(
+  provider => !provider.isNative && !provider.isCopy,
+).length;
 
 const MailIcon = () => (
   <svg
@@ -609,8 +614,8 @@ updateConfig({ theme: 'light' });  // Update config at runtime`}</pre>
 
       <Section id="providers" title="Provider Registry">
         <p className="text-sm text-ink-soft dark:text-text-soft mb-6">
-          {Object.keys(PROVIDERS).length}+ email providers with verified compose URLs. Registry is
-          in{' '}
+          {WEBMAIL_PROVIDER_COUNT} webmail providers with verified compose URLs, plus native and
+          copy fallback actions. Registry is in{' '}
           <code className="text-[10px] font-mono bg-surface dark:bg-surface-container px-1">
             packages/core/src/providers.ts
           </code>
