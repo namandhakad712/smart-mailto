@@ -17,6 +17,9 @@
     "url": "https://github.com/namandhakad712/smart-mailto.git",
     "directory": "packages/vue"
   },
+  "bugs": {
+    "url": "https://github.com/namandhakad712/smart-mailto/issues"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
