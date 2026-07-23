@@ -69,7 +69,12 @@ ${indent}  },`;
 
   if (urlType === 'template' && urlTemplate) {
     return `${indent}buildUrl: (p: MailtoParams) => {
-${indent}  return '${urlTemplate.replace(/\{to\}/g, `' + ${eShort}(p.to.join(',')) + '`).replace(/\{subject\}/g, `' + ${eShort}(p.subject ?? '') + '`).replace(/\{body\}/g, `' + ${eShort}(p.body ?? '') + '`).replace(/\{cc\}/g, `' + ${eShort}(joinAddresses(p.cc)) + '`).replace(/\{bcc\}/g, `' + ${eShort}(joinAddresses(p.bcc)) + '`)}';
+${indent}  return '${urlTemplate
+      .replace(/\{to\}/g, `' + ${eShort}(p.to.join(',')) + '`)
+      .replace(/\{subject\}/g, `' + ${eShort}(p.subject ?? '') + '`)
+      .replace(/\{body\}/g, `' + ${eShort}(p.body ?? '') + '`)
+      .replace(/\{cc\}/g, `' + ${eShort}(joinAddresses(p.cc)) + '`)
+      .replace(/\{bcc\}/g, `' + ${eShort}(joinAddresses(p.bcc)) + '`)}';
 ${indent}  },`;
   }
 
@@ -88,7 +93,9 @@ ${indent}  },`;
 
     if (!noCcBcc) {
       lines.push(`${indent}  if (p.cc?.length) url.searchParams.set('cc', joinAddresses(p.cc));`);
-      lines.push(`${indent}  if (p.bcc?.length) url.searchParams.set('bcc', joinAddresses(p.bcc));`);
+      lines.push(
+        `${indent}  if (p.bcc?.length) url.searchParams.set('bcc', joinAddresses(p.bcc));`,
+      );
     }
 
     if (!noSubjectBody) {

@@ -498,8 +498,8 @@ export default function ProvidersPage() {
           47 Providers. Zero Compromise.
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
-          Every provider listed here has been manually verified with HTTP requests.
-          Real compose URLs — updated quarterly.
+          Every provider listed here has been manually verified with HTTP requests. Real compose
+          URLs — updated quarterly.
         </p>
       </header>
 
