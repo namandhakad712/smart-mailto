@@ -16,6 +16,9 @@
     "url": "https://github.com/namandhakad712/smart-mailto.git",
     "directory": "packages/svelte"
   },
+  "bugs": {
+    "url": "https://github.com/namandhakad712/smart-mailto/issues"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
