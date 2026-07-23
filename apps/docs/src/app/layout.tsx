@@ -107,45 +107,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span>© 2026 smart-mailto — All the protocols that are fit to fix.</span>
             <a
               className="inline-flex items-center gap-1 normal-case tracking-normal hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
-              href="#"
+              href="https://tin.computer"
             >
               <svg aria-hidden="true" className="h-[1em] w-[1em]" viewBox="0 0 32 32">
                 <rect width="32" height="32" fill="#66DC9D" />
               </svg>
-              Growth by Human
+              Growth by Tin
             </a>
           </div>
           <div className="flex gap-6 font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted">
-            <a
-              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
-              href="#"
-            >
-              Terms of Service
-            </a>
-            <a
-              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
-              href="#"
-            >
-              Privacy Policy
-            </a>
-            <a
-              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
-              href="#"
-            >
-              Style Guide
-            </a>
-            <a
-              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
-              href="#"
-            >
-              Masthead
-            </a>
-            <a
-              className="hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
-              href="#"
-            >
-              RSS
-            </a>
+            <span>Terms of Service</span>
+            <span>Privacy Policy</span>
+            <span>Style Guide</span>
+            <span>Masthead</span>
+            <span>RSS</span>
           </div>
         </footer>
       </body>
