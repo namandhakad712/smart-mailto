@@ -102,7 +102,7 @@ export default function Home() {
               Works in under 1ms with zero network requests.
             </p>
             <div className="mt-6 font-mono text-xs uppercase tracking-tight text-ink-muted dark:text-text-muted border-b border-border dark:border-border pb-4">
-              npm · github.com/namandhakad712/smart-mailto · 31 May 2026
+              npm · github.com/namandhakad712/smart-mailto · PACKAGE v0.2.0
             </div>
           </header>
 
