@@ -4,7 +4,7 @@ on:
   schedule:
     # Every Monday at 00:00 UTC
     - cron: '0 0 * * 1'
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   validate-providers:
@@ -40,12 +40,16 @@ jobs:
             try {
               report = fs.readFileSync('tools/provider-validator/report.json', 'utf8');
             } catch (e) {}
-            
+
             const result = JSON.parse(report);
             const failing = Object.entries(result)
-              .filter(([, v]) => !v.ok)
-              .map(([id, v]) => `- **${id}**: Status ${v.status} — ${v.url}`);
-            
+              .filter(([, v]) => v.classification === 'unreachable')
+              .map(([id, v]) => {
+                const status = v.status ?? 'request error';
+                const detail = v.error ? ` (${v.error})` : '';
+                return `- **${id}**: ${status} — ${v.url}${detail}`;
+              });
+
             if (failing.length > 0) {
               await github.rest.issues.create({
                 owner: context.repo.owner,
@@ -54,11 +58,11 @@ jobs:
                 body: [
                   '## Weekly Provider Health Check Failed',
                   '',
-                  'The following providers returned unexpected status codes:',
+                  'The following compose destinations were genuinely unreachable:',
                   '',
                   ...failing,
                   '',
-                  '**Action required**: Please update the provider URLs in `packages/core/src/providers.ts`.',
+                  '**Action required**: Please update the provider source in `tools/provider-generator/data/providers.json` and regenerate the registry.',
                   '',
                   `Report generated at: ${new Date().toISOString()}`,
                 ].join('\n'),

@@ -4,6 +4,8 @@
   "private": true,
   "description": "Validates smart-mailto provider deep links are still alive",
   "scripts": {
+    "test": "tsx --test validator.test.ts",
+    "typecheck": "tsc --noEmit",
     "validate": "tsx index.ts",
     "validate:verbose": "tsx index.ts --verbose"
   },
