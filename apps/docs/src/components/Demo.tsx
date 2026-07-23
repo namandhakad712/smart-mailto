@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { SmartMailto } from '@smart-mailto/react';
+import posthog from 'posthog-js';
 import { useIsDark } from '@/hooks/useIsDark';
 
 const MailIcon = () => (
@@ -77,7 +78,23 @@ export function Demo() {
         href="mailto:hello@example.com?subject=Hello%20from%20smart-mailto!&body=This%20is%20amazing."
         theme={isDark ? 'dark' : 'light'}
         className="group inline-flex items-center gap-2 bg-red hover:bg-red-dark text-white font-body text-sm font-medium px-6 py-2.5 transition-colors cursor-pointer"
+        onShow={() => {
+          posthog.capture('demo_picker_shown', {
+            demo_location: 'homepage_live_demo',
+          });
+        }}
+        onOpen={provider => {
+          posthog.capture('demo_provider_selected', {
+            demo_location: 'homepage_live_demo',
+            provider_id: provider.id,
+            outcome: 'provider_opened',
+          });
+        }}
         onCopy={() => {
+          posthog.capture('demo_address_copied', {
+            demo_location: 'homepage_live_demo',
+            outcome: 'address_copied',
+          });
           setCopied(true);
           setTimeout(() => setCopied(false), 2000);
         }}
