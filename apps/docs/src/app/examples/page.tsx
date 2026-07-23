@@ -966,7 +966,8 @@ export default function ExamplesPage() {
           <code className="font-mono text-sm bg-red-50 dark:bg-red-950/30 px-1.5 py-0.5 rounded text-red-600 dark:text-red-400 font-bold">
             mailto:
           </code>{' '}
-          links that break when no mail client is configured.
+          links that break when no mail client is configured. By default, the picker also lets
+          visitors copy the email address instead of opening a listed provider.
         </p>
         <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg text-xs text-red-700 dark:text-red-400">
           <span className="font-bold">This is a visualization of a real problem:</span> even the
