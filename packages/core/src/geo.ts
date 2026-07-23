@@ -350,12 +350,13 @@ export function getGeoOrderedProviderIds(signals: GeoSignals): string[] {
   const tzMatch = TIMEZONE_PROVIDERS[timeZone];
   if (tzMatch) return tzMatch;
 
-  // 2. Timezone prefix match (e.g. "Europe/London_Summer" → "Europe/London")
-  const tzPrefix = Object.keys(TIMEZONE_PROVIDERS).find(tz =>
-    timeZone.startsWith(tz.split('/')[0] ?? ''),
-  );
-  if (tzPrefix) {
-    const prefixMatch = TIMEZONE_PROVIDERS[tzPrefix];
+  // 2. Timezone prefix match (e.g. "America/Argentina/Buenos_Aires_Summer" → try "America/Argentina/Buenos_Aires")
+  //    Falls back by shortening the timezone path one segment at a time.
+  const tzParts = timeZone.split('/');
+  while (tzParts.length > 1) {
+    tzParts.pop();
+    const parentPath = tzParts.join('/');
+    const prefixMatch = TIMEZONE_PROVIDERS[parentPath];
     if (prefixMatch) return prefixMatch;
   }
 
