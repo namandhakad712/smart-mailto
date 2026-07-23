@@ -142,16 +142,13 @@ export default function Home() {
                   <code>
                     <span className="text-red">import</span> {'{ initSmartMailto }'}{' '}
                     <span className="text-red">from</span>{' '}
-                    <span className="text-[#b7b7b7]">
-                      &apos;@smart-mailto/core&apos;
-                    </span>
-                    ;
+                    <span className="text-[#b7b7b7]">&apos;@smart-mailto/core&apos;</span>;
                     <span className="text-ink-muted dark:text-text-muted">
                       {'// One line. That\u2019s it.'}
                     </span>
                     initSmartMailto(&#123; theme:{' '}
-                    <span className="text-[#b7b7b7]">&apos;dark&apos;</span>,
-                    autoDetectGeo: <span className="text-red">true</span>
+                    <span className="text-[#b7b7b7]">&apos;dark&apos;</span>, autoDetectGeo:{' '}
+                    <span className="text-red">true</span>
                     &#125;);
                   </code>
                 </pre>
