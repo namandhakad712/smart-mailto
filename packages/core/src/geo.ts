@@ -260,6 +260,18 @@ export const TIMEZONE_PROVIDERS: Readonly<Record<string, string[]>> = {
   'Pacific/Auckland': ['gmail', 'outlook-personal', 'icloud', 'fastmail'],
   'Pacific/Chatham': ['gmail', 'outlook-personal'],
 
+  // ── Pacific Islands ───────────────────────────────────────────────────────
+  'Pacific/Fiji': ['gmail', 'outlook-personal', 'yahoo'],
+  'Pacific/Guam': ['gmail', 'outlook-personal', 'yahoo'],
+  'Pacific/Samoa': ['gmail', 'outlook-personal'],
+  'Pacific/Tahiti': ['gmail', 'outlook-personal'],
+  'Pacific/Port_Moresby': ['gmail', 'yahoo', 'outlook-personal'],
+  'Pacific/Noumea': ['gmail', 'outlook-personal'],
+  'Pacific/Majuro': ['gmail', 'outlook-personal'],
+  'Pacific/Apia': ['gmail', 'outlook-personal'],
+  'Pacific/Tongatapu': ['gmail', 'outlook-personal'],
+  'Pacific/Efate': ['gmail', 'outlook-personal'],
+
   // ── Africa ────────────────────────────────────────────────────────────────
   'Africa/Cairo': ['gmail', 'outlook-personal', 'yahoo'], // Egypt
   'Africa/Lagos': ['gmail', 'yahoo', 'outlook-personal'], // Nigeria
