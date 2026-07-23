@@ -16,7 +16,6 @@
     "typecheck": "turbo run typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
-    "generate:providers": "tsx tools/provider-generator/index.ts",
     "validate:providers": "tsx tools/provider-validator/index.ts",
     "clean": "turbo run clean && rimraf node_modules"
   },

@@ -3,192 +3,186 @@
     "ok": true,
     "status": 200,
     "url": "https://mail.google.com/mail/?view=cm&fs=1&to=test%40example.com",
-    "durationMs": 3454
+    "durationMs": 6828
   },
   "outlook-personal": {
     "ok": false,
     "status": 405,
     "url": "https://outlook.live.com/mail/0/deeplink/compose?to=test%40example.com",
-    "durationMs": 1113
+    "durationMs": 1759
   },
   "outlook-work": {
     "ok": false,
     "status": 405,
     "url": "https://outlook.office.com/mail/deeplink/compose?to=test%40example.com",
-    "durationMs": 923
+    "durationMs": 1742
   },
   "yahoo": {
     "ok": true,
     "status": 200,
     "url": "https://compose.mail.yahoo.com/?to=test%40example.com",
-    "durationMs": 3157
+    "durationMs": 5110
   },
   "protonmail": {
     "ok": true,
     "status": 200,
     "url": "https://mail.proton.me/u/0/inbox",
-    "durationMs": 1402
+    "durationMs": 5610
   },
   "icloud": {
     "ok": true,
     "status": 200,
     "url": "https://www.icloud.com/mail/",
-    "durationMs": 2113
+    "durationMs": 3812
   },
   "fastmail": {
     "ok": true,
     "status": 200,
     "url": "https://app.fastmail.com/mail/compose",
-    "durationMs": 2547
+    "durationMs": 4510
   },
   "zoho": {
     "ok": false,
     "status": 400,
     "url": "https://mail.zoho.com/zm/#compose",
-    "durationMs": 2451
+    "durationMs": 5051
   },
   "tutanota": {
     "ok": true,
     "status": 200,
     "url": "https://app.tuta.com/mail",
-    "durationMs": 1882
+    "durationMs": 8942
   },
   "yandex": {
     "ok": true,
     "status": 200,
     "url": "https://mail.yandex.ru/compose",
-    "durationMs": 2295
+    "durationMs": 7201
   },
   "mailru": {
-    "ok": false,
-    "status": null,
+    "ok": true,
+    "status": 200,
     "url": "https://e.mail.ru/compose/",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10007
+    "durationMs": 3787
   },
   "gmx": {
-    "ok": false,
-    "status": null,
+    "ok": true,
+    "status": 200,
     "url": "https://navigator.gmx.net/mail/compose/",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10003
+    "durationMs": 9801
   },
   "webde": {
     "ok": false,
-    "status": null,
+    "status": 404,
     "url": "https://web.de/email/compose/",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10002
+    "durationMs": 3979
   },
   "naver": {
     "ok": false,
     "status": 403,
     "url": "https://mail.naver.com/v2/new",
-    "durationMs": 2202
+    "durationMs": 5332
   },
   "yahoo-japan": {
     "ok": false,
-    "status": 404,
+    "status": null,
     "url": "https://mail.yahoo.co.jp/compose",
-    "durationMs": 3127
+    "error": "The operation was aborted due to timeout",
+    "durationMs": 10007
   },
   "qq": {
     "ok": false,
     "status": null,
     "url": "https://mail.qq.com/cgi-bin/compose_send",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10013
+    "error": "fetch failed",
+    "durationMs": 5633
   },
   "mail163": {
     "ok": false,
     "status": null,
     "url": "https://mail.163.com/js5/write.do",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10013
+    "error": "fetch failed",
+    "durationMs": 2025
   },
   "seznam": {
     "ok": true,
     "status": 200,
     "url": "https://email.seznam.cz/?compose",
-    "durationMs": 2538
+    "durationMs": 4846
   },
   "laposte": {
     "ok": true,
     "status": 200,
     "url": "https://www.laposte.net/accueil",
-    "durationMs": 1181
+    "durationMs": 1995
   },
   "daum": {
     "ok": true,
     "status": 200,
     "url": "https://mail.daum.net/",
-    "durationMs": 3392
+    "durationMs": 8349
   },
   "posteo": {
     "ok": true,
     "status": 200,
     "url": "https://posteo.de/en",
-    "durationMs": 3065
+    "durationMs": 2646
   },
   "mailboxorg": {
     "ok": true,
     "status": 200,
     "url": "https://office.mailbox.org/",
-    "durationMs": 3988
+    "durationMs": 7416
   },
   "mailfence": {
     "ok": false,
-    "status": null,
+    "status": 500,
     "url": "https://mailfence.com",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10013
+    "durationMs": 4089
   },
   "runbox": {
-    "ok": false,
-    "status": null,
+    "ok": true,
+    "status": 200,
     "url": "https://runbox.com",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10012
+    "durationMs": 5129
   },
   "libero": {
     "ok": false,
     "status": null,
     "url": "https://mail.libero.it/",
     "error": "The operation was aborted due to timeout",
-    "durationMs": 10000
+    "durationMs": 10011
   },
   "onet": {
     "ok": true,
     "status": 200,
     "url": "https://poczta.onet.pl/",
-    "durationMs": 3108
+    "durationMs": 7855
   },
   "wp": {
     "ok": false,
-    "status": null,
+    "status": 449,
     "url": "https://poczta.wp.pl/",
-    "error": "The operation was aborted due to timeout",
-    "durationMs": 10013
+    "durationMs": 8142
   },
   "rediff": {
-    "ok": false,
-    "status": null,
+    "ok": true,
+    "status": 200,
     "url": "https://mail.rediff.com/",
-    "error": "fetch failed",
-    "durationMs": 6481
+    "durationMs": 8306
   },
   "ukrnet": {
     "ok": false,
     "status": null,
     "url": "https://mail.ukr.net/",
     "error": "The operation was aborted due to timeout",
-    "durationMs": 10012
+    "durationMs": 10008
   },
   "sina": {
     "ok": false,
     "status": null,
     "url": "https://mail.sina.com.cn/",
     "error": "The operation was aborted due to timeout",
-    "durationMs": 10011
+    "durationMs": 10006
   }
 }

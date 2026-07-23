@@ -247,7 +247,7 @@ describe('getAllProviders', () => {
     expect(all.length).toBeGreaterThan(20);
   });
 
-  it('all providers have required fields', () => {
+  it('all providers have required fields and buildUrl produces valid output', () => {
     for (const provider of getAllProviders()) {
       expect(provider.id, `${provider.id} must have id`).toBeTruthy();
       expect(provider.name, `${provider.id} must have name`).toBeTruthy();
@@ -255,6 +255,12 @@ describe('getAllProviders', () => {
         'function',
       );
       expect(provider.color, `${provider.id} must have color`).toBeTruthy();
+
+      const simpleUrl = provider.buildUrl(SIMPLE_PARAMS);
+      expect(simpleUrl, `${provider.id} simple URL must be a non-empty string`).toBeTruthy();
+
+      const fullUrl = provider.buildUrl(BASE_PARAMS);
+      expect(fullUrl, `${provider.id} full URL must be a non-empty string`).toBeTruthy();
     }
   });
 });
