@@ -37,3 +37,4 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           playwright: true
+          autoAcceptChanges: fix/remove-unsupported-mail-client-stat-task_remove_uncited_mail_client_claim_20260723
