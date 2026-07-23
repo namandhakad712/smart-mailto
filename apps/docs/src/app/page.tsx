@@ -33,6 +33,15 @@ initSmartMailto({
   autoDetectGeo: true
 });`;
 
+type FaqItem = {
+  question: string;
+  answer: string;
+  link?: {
+    href: string;
+    label: string;
+  };
+};
+
 const FAQS = [
   {
     question: 'What is a mailto link, and what does smart-mailto change?',
@@ -65,16 +74,20 @@ const FAQS = [
       'The zero-dependency core stays under 8 KB gzipped. The modal UI is loaded separately on the first mailto click, so it does not inflate the initial core bundle.',
   },
   {
-    question: 'Is smart-mailto free and open source?',
+    question: 'Is smart-mailto free, and is there a paid plan?',
     answer:
-      'Yes. The packages and source code are free to use under the MIT License, including in commercial projects.',
+      'Yes. The public packages and source code are free under the MIT License, including for commercial projects. The public project currently lists no paid plan, trial limit, or usage cap.',
+    link: {
+      href: 'https://www.npmjs.com/package/@smart-mailto/core',
+      label: 'View @smart-mailto/core on npm.',
+    },
   },
   {
     question: 'How do I disable or remove smart-mailto?',
     answer:
       'Call the cleanup function returned by initSmartMailto, or call destroySmartMailto directly. Remove the initialization and package when uninstalling; your original mailto links will return to normal browser behavior.',
   },
-] as const;
+] satisfies ReadonlyArray<FaqItem>;
 
 const FAQ_SCHEMA = {
   '@context': 'https://schema.org',
@@ -84,7 +97,7 @@ const FAQ_SCHEMA = {
     name: item.question,
     acceptedAnswer: {
       '@type': 'Answer',
-      text: item.answer,
+      text: [item.answer, item.link?.label].filter(Boolean).join(' '),
     },
   })),
 };
@@ -394,6 +407,17 @@ export default function Home() {
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-ink-soft dark:text-text-soft text-pretty">
                     {item.answer}
+                    {item.link ? (
+                      <>
+                        {' '}
+                        <a
+                          href={item.link.href}
+                          className="font-medium text-red underline decoration-red/30 underline-offset-4 hover:decoration-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2 dark:focus-visible:ring-offset-surface"
+                        >
+                          {item.link.label}
+                        </a>
+                      </>
+                    ) : null}
                   </p>
                 </div>
               </article>
