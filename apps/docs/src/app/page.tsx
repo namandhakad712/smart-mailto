@@ -33,6 +33,62 @@ initSmartMailto({
   autoDetectGeo: true
 });`;
 
+const FAQS = [
+  {
+    question: 'What is a mailto link, and what does smart-mailto change?',
+    answer:
+      'A mailto link is a normal web link that asks the browser to start an email. smart-mailto keeps that link intact, but intercepts the click and offers a webmail picker so visitors are not limited to a configured desktop mail app.',
+  },
+  {
+    question: 'How do I add smart-mailto to a site?',
+    answer:
+      'Install @smart-mailto/core, import initSmartMailto, and call it once. Its single delegated click listener covers existing and future mailto links, so you do not have to rewrite each anchor.',
+  },
+  {
+    question: 'Which browsers and frameworks does it support?',
+    answer:
+      'The core package uses modern browser APIs and works with plain JavaScript or TypeScript. Official packages are also available for React, Vue 3, and Svelte.',
+  },
+  {
+    question: 'What happens when an email provider is not recognized?',
+    answer:
+      'The picker still shows common providers ranked for the visitor. A copy-address option is included by default, and mobile visitors can also use their native mail app when available.',
+  },
+  {
+    question: 'How does geo-detection work?',
+    answer:
+      'Provider order is inferred from the browser time zone and language. There is no IP lookup, cookie, external request, or precise-location tracking.',
+  },
+  {
+    question: 'How much does it add to my bundle?',
+    answer:
+      'The zero-dependency core stays under 8 KB gzipped. The modal UI is loaded separately on the first mailto click, so it does not inflate the initial core bundle.',
+  },
+  {
+    question: 'Is smart-mailto free and open source?',
+    answer:
+      'Yes. The packages and source code are free to use under the MIT License, including in commercial projects.',
+  },
+  {
+    question: 'How do I disable or remove smart-mailto?',
+    answer:
+      'Call the cleanup function returned by initSmartMailto, or call destroySmartMailto directly. Remove the initialization and package when uninstalling; your original mailto links will return to normal browser behavior.',
+  },
+] as const;
+
+const FAQ_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
 function CopyButton({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);
   const copy = useCallback(async () => {
@@ -292,6 +348,59 @@ export default function Home() {
         </div>
         <Demo />
       </div>
+
+      <section
+        aria-labelledby="faq-heading"
+        className="mt-20 pt-10 border-t-4 border-double border-border dark:border-border"
+      >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(FAQ_SCHEMA).replace(/</g, '\\u003c'),
+          }}
+        />
+        <div className="grid grid-cols-1 lg:grid-cols-[17rem_minmax(0,1fr)] gap-10 lg:gap-16">
+          <header className="lg:pt-1">
+            <span className="font-mono text-[10px] font-bold text-red uppercase tracking-[0.3em] block mb-3">
+              Reader Desk
+            </span>
+            <h2
+              id="faq-heading"
+              className="text-4xl md:text-5xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text text-balance"
+            >
+              Questions before you install
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-soft dark:text-text-soft max-w-[28rem] text-pretty">
+              The short answers on setup, compatibility, fallback behavior, privacy, and what the
+              library costs.
+            </p>
+          </header>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
+            {FAQS.map((item, index) => (
+              <article
+                key={item.question}
+                className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 py-6 border-t border-border dark:border-border"
+              >
+                <span
+                  aria-hidden="true"
+                  className="font-mono text-[10px] font-bold text-red tabular-nums pt-1"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 className="font-headline text-xl font-medium leading-snug text-ink dark:text-text text-balance">
+                    {item.question}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-soft dark:text-text-soft text-pretty">
+                    {item.answer}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <div className="mt-16 pt-8 border-t border-border dark:border-border">
         <ProviderTable />
