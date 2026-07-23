@@ -1,32 +1,28 @@
 'use client';
 
-import { useState } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
+import { useIsDark } from '@/hooks/useIsDark';
+
+const THEME_INIT_SCRIPT =
+  'try{var t=localStorage.getItem("theme");var d=t==="dark"||(t==="system"&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)}catch(e){}';
 
 export function ThemeInit() {
   useServerInsertedHTML(() => (
     <script
       id="theme-init"
       dangerouslySetInnerHTML={{
-        __html:
-          'try{var t=localStorage.getItem("theme");if(t==="dark"){document.documentElement.classList.add("dark")}}catch(e){}',
+        __html: THEME_INIT_SCRIPT,
       }}
     />
   ));
   return null;
 }
 
-function getInitialDark(): boolean {
-  if (typeof document === 'undefined') return false;
-  return document.documentElement.classList.contains('dark');
-}
-
 export function ThemeToggle() {
-  const [dark, setDark] = useState(getInitialDark);
+  const dark = useIsDark();
 
   const toggle = () => {
     const next = !dark;
-    setDark(next);
     document.documentElement.classList.toggle('dark', next);
     try {
       localStorage.setItem('theme', next ? 'dark' : 'light');
