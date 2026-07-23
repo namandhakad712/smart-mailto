@@ -17,6 +17,8 @@
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@smart-mailto/core)](https://bundlephobia.com/package/@smart-mailto/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#license)
 
+[Documentation](https://smart-mailto.vercel.app/spec) · [Examples](https://smart-mailto.vercel.app/examples) · [npm: @smart-mailto/core](https://www.npmjs.com/package/@smart-mailto/core)
+
 <!-- ═══════════════════════════════════════════════════════════════
   HERO — animated isometric SVG with brand tokens
   ═══════════════════════════════════════════════════════════════ -->
@@ -97,7 +99,7 @@
     <text x="59" y="17" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#2DD4BF">MIT LICENSE</text>
 
     <rect x="126" y="0" width="148" height="26" rx="13" fill="#1A2225" stroke="#283034" stroke-width="1"/>
-    <text x="200" y="17" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9CA3AF">v0.1.0</text>
+    <text x="200" y="17" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9CA3AF">v0.2.0</text>
 
     <rect x="282" y="0" width="118" height="26" rx="13" fill="#1A2225" stroke="#283034" stroke-width="1"/>
     <text x="341" y="17" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9CA3AF">2026 · Live</text>
