@@ -26,6 +26,8 @@ const MailIcon = () => (
 const allProviders = getAllProviders();
 const featuredProviders = allProviders.slice(0, 8);
 
+const INSTALL_COMMAND = 'npm install @smart-mailto/core@0.2.0';
+
 const QUICK_START_CODE = `import { initSmartMailto } from '@smart-mailto/core';
 
 initSmartMailto({
@@ -33,7 +35,7 @@ initSmartMailto({
   autoDetectGeo: true
 });`;
 
-function CopyButton({ code }: { code: string }) {
+function CopyButton({ code, label }: { code: string; label: string }) {
   const [copied, setCopied] = useState(false);
   const copy = useCallback(async () => {
     await navigator.clipboard.writeText(code);
@@ -42,8 +44,10 @@ function CopyButton({ code }: { code: string }) {
   }, [code]);
   return (
     <button
+      type="button"
       onClick={copy}
-      className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-text-muted dark:text-text-muted hover:text-red transition-colors"
+      aria-label={`Copy ${label}`}
+      className="flex min-h-11 shrink-0 items-center gap-1.5 px-2 font-mono text-[10px] uppercase tracking-widest text-text-muted dark:text-text-muted hover:text-red focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red transition-colors"
     >
       {copied ? (
         <>
@@ -132,29 +136,50 @@ export default function Home() {
               </blockquote>
 
               <div className="bg-code-bg dark:bg-code-bg p-6 rounded-sm border border-border dark:border-border overflow-hidden">
-                <div className="flex justify-between items-center mb-4 border-b border-border dark:border-border pb-2">
+                <div className="mb-4 border-b border-border dark:border-border pb-2">
                   <span className="font-mono text-[10px] text-text-muted dark:text-text-muted uppercase tracking-[0.2em]">
                     Quick Start
                   </span>
-                  <CopyButton code={QUICK_START_CODE} />
                 </div>
-                <pre className="font-mono text-xs md:text-sm text-text dark:text-text overflow-x-auto">
-                  <code>
-                    <span className="text-red">import</span> {'{ initSmartMailto }'}{' '}
-                    <span className="text-red">from</span>{' '}
-                    <span className="text-text-soft dark:text-text-soft">
-                      &apos;@smart-mailto/core&apos;
-                    </span>
-                    ;
-                    <span className="text-ink-muted dark:text-text-muted">
-                      {'// One line. That\u2019s it.'}
-                    </span>
-                    initSmartMailto(&#123; theme:{' '}
-                    <span className="text-text-soft dark:text-text-soft">&apos;dark&apos;</span>,
-                    autoDetectGeo: <span className="text-red">true</span>
-                    &#125;);
-                  </code>
-                </pre>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-text-muted dark:text-text-muted">
+                        Install
+                      </span>
+                      <CopyButton code={INSTALL_COMMAND} label="install command" />
+                    </div>
+                    <pre className="font-mono text-xs md:text-sm text-white overflow-x-auto">
+                      <code>{INSTALL_COMMAND}</code>
+                    </pre>
+                  </div>
+
+                  <div className="border-t border-border dark:border-border pt-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-text-muted dark:text-text-muted">
+                        Initialize
+                      </span>
+                      <CopyButton code={QUICK_START_CODE} label="initialization code" />
+                    </div>
+                    <pre className="font-mono text-xs md:text-sm text-text dark:text-text overflow-x-auto">
+                      <code>
+                        <span className="text-red">import</span> {'{ initSmartMailto }'}{' '}
+                        <span className="text-red">from</span>{' '}
+                        <span className="text-text-soft dark:text-text-soft">
+                          &apos;@smart-mailto/core&apos;
+                        </span>
+                        ;
+                        <span className="text-ink-muted dark:text-text-muted">
+                          {'// One line. That\u2019s it.'}
+                        </span>
+                        initSmartMailto(&#123; theme:{' '}
+                        <span className="text-text-soft dark:text-text-soft">&apos;dark&apos;</span>
+                        , autoDetectGeo: <span className="text-red">true</span>
+                        &#125;);
+                      </code>
+                    </pre>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
