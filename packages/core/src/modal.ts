@@ -255,6 +255,7 @@ function getSharedCSS(): string {
       line-height: 1.2;
       color: var(--sm-text);
     }
+    .sm-body-note,
     .sm-no-body-note {
       font-size: 9px;
       color: var(--sm-text-xs);
@@ -390,7 +391,9 @@ function buildModalDOM(
   subtitle.className = 'sm-subtitle';
   appendCustomClass(subtitle, config.classNames?.emailPreview);
   const recipient = params.to[0] ?? '';
-  subtitle.textContent = params.subject ? `${recipient} · ${params.subject}` : recipient;
+  subtitle.textContent = params.subject
+    ? `${i18n.toLabel}: ${recipient} · ${i18n.subjectLabel}: ${params.subject}`
+    : `${i18n.toLabel}: ${recipient}`;
   subtitle.title = subtitle.textContent;
 
   titleArea.appendChild(title);
@@ -489,7 +492,8 @@ function createProviderButton(
   }
   btn.setAttribute('role', 'listitem');
   btn.setAttribute('type', 'button');
-  btn.setAttribute('aria-label', `Open in ${provider.name}`);
+  const providerName = provider.isNative ? i18n.native : provider.name;
+  btn.setAttribute('aria-label', `Open in ${providerName}`);
 
   // Preferred badge dot
   if (provider.id === preferredId) {
@@ -510,14 +514,14 @@ function createProviderButton(
   const name = document.createElement('div');
   name.className = 'sm-provider-name';
   appendCustomClass(name, config.classNames?.providerName);
-  name.textContent = provider.name;
+  name.textContent = providerName;
   btn.appendChild(name);
 
-  // No-body note for E2EE providers
-  if (provider.noBodyPreFill && params.body) {
+  // Body handling note
+  if (params.body) {
     const note = document.createElement('div');
-    note.className = 'sm-no-body-note';
-    note.textContent = i18n.noBodyPreFillNote;
+    note.className = provider.noBodyPreFill ? 'sm-no-body-note' : 'sm-body-note';
+    note.textContent = provider.noBodyPreFill ? i18n.noBodyPreFillNote : i18n.bodyTruncatedNote;
     btn.appendChild(note);
   }
 
