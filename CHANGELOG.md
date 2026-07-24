@@ -24,16 +24,11 @@
 
 - Add React wrapper test run to CI pipeline
 
-## 0.3.0
-
-### Minor Changes
+### Additional merged changes
 
 - 8509bd6: Add versioned install command (npm/yarn/pnpm/bun) alongside existing snippet
 - ab338ad: Add privacy-safe product analytics via PostHog to docs and demo
 - 03821c8: Add replace-mailto integration guide (PR #5)
-
-### Patch Changes
-
 - c52992d: Expand core test coverage to 98% with new test suites for init, icons, providers, resolver, and storage modules
 - 55c34fb: Resolve Lighthouse accessibility failures — improve contrast ratios and restore focus-visible states
 - 3277200: Add homepage FAQ section with 8 questions and JSON-LD FAQPage structured data
@@ -47,13 +42,14 @@
 - 2949b46: Merge fix/provider-search-label changes resolving merge conflicts
 - a67dc0c: Remove PostHog analytics integration and posthog-js dependency
 
-### Dependency Updates
+### Planned package versions
 
 - @smart-mailto/core: 0.2.0 → 0.3.0
-- @smart-mailto/react: 0.2.0 → 0.3.0
-- @smart-mailto/vue: 0.2.0 → 0.3.0
-- @smart-mailto/svelte: 0.2.0 → 0.3.0
-- @smart-mailto/demo: 0.0.2 → 0.0.3
+- @smart-mailto/react: 0.2.0 → 0.2.1
+- @smart-mailto/vue: 0.2.0 → 0.2.1
+- @smart-mailto/svelte: 0.2.0 → 0.2.1
+- @smart-mailto/demo: 0.0.2 → 0.0.3 (private)
+- docs: 0.1.1 → 0.1.2 (private)
 
 ---
 
