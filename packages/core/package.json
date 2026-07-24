@@ -1,11 +1,12 @@
 {
   "name": "@smart-mailto/core",
   "version": "0.2.0",
-  "description": "Zero-dependency, framework-agnostic core engine for smart-mailto — geo-aware webmail picker",
+  "description": "Zero-dependency, privacy-first mailto enhancer with a geo-aware picker for 37 webmail providers",
   "keywords": [
     "mailto",
     "email",
     "webmail",
+    "picker",
     "gmail",
     "outlook",
     "geo-detection",
