@@ -47,6 +47,12 @@ jobs:
       - name: Run React wrapper tests
         run: pnpm --filter @smart-mailto/react test
 
+      - name: Install framework smoke test browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run framework integration smoke tests
+        run: pnpm test:frameworks
+
       - name: Upload coverage
         uses: codecov/codecov-action@v4
         if: always()
