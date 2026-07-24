@@ -47,6 +47,7 @@ export interface SmartMailtoProviderProps extends SmartMailtoConfig {
  */
 export function SmartMailtoProvider({ children, ...config }: SmartMailtoProviderProps) {
   const destroyRef = useRef<(() => void) | null>(null);
+  const previousConfigRef = useRef(config);
 
   // Initialize on mount, clean up on unmount
   useEffect(() => {
@@ -60,9 +61,31 @@ export function SmartMailtoProvider({ children, ...config }: SmartMailtoProvider
 
   // Sync config changes without re-attaching the listener
   useEffect(() => {
-    updateConfig(config);
+    const clearedConfig = Object.fromEntries(
+      Object.keys(previousConfigRef.current).map(key => [key, undefined]),
+    ) as Partial<SmartMailtoConfig>;
+
+    updateConfig({ ...clearedConfig, ...config });
+    previousConfigRef.current = config;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config.theme, config.preferredProvider, config.maxProviders]);
+  }, [
+    config.theme,
+    config.autoDetectGeo,
+    config.preferredProvider,
+    config.maxProviders,
+    config.includeNative,
+    config.includeCopy,
+    config.customProviders,
+    config.excludeProviders,
+    config.classNames,
+    config.i18n,
+    config.rememberChoice,
+    config.storageKey,
+    config.onOpen,
+    config.onCopy,
+    config.onClose,
+    config.onShow,
+  ]);
 
   const open = (email: string, options: SmartMailtoOpenOptions = {}) => {
     const { subject, body, ...overrides } = options;
