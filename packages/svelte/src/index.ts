@@ -24,55 +24,28 @@
  * ```
  */
 
-import {
-  parseMailto,
-  isValidMailtoParams,
-  resolveProviders,
-  spawnModal,
-  initSmartMailto,
-  destroySmartMailto,
-  type SmartMailtoConfig,
-} from '@smart-mailto/core';
+import { initSmartMailto, destroySmartMailto, type SmartMailtoConfig } from '@smart-mailto/core';
+import type { SvelteComponent, ComponentType } from 'svelte';
+import type { HTMLAnchorAttributes } from 'svelte/elements';
+import SmartMailtoComponent from './SmartMailto.svelte';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Svelte Action
+// Svelte Action & Component
 // ─────────────────────────────────────────────────────────────────────────────
+
+export { smartMailto } from './action.js';
+
+export type SmartMailtoProps = SmartMailtoConfig &
+  Omit<HTMLAnchorAttributes, 'href'> & {
+    /** The mailto: href. Required. */
+    href: string;
+  };
 
 /**
- * Svelte action that adds smart-mailto behavior to an anchor element.
- *
- * @example
- * <a href="mailto:hello@example.com" use:smartMailto={{ theme: 'dark' }}>
- *   Contact Us
- * </a>
+ * A smart `<a>` component that opens the provider picker.
+ * Accepts all SmartMailtoConfig options plus standard anchor attributes.
  */
-export function smartMailto(node: HTMLAnchorElement, config: SmartMailtoConfig = {}) {
-  function handleClick(e: MouseEvent) {
-    const href = node.getAttribute('href') ?? '';
-    if (!href.toLowerCase().startsWith('mailto:')) return;
-
-    const params = parseMailto(href);
-    if (!isValidMailtoParams(params)) return;
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    const resolved = resolveProviders(params, config);
-    config.onShow?.(params, resolved.providers);
-    spawnModal(params, resolved, config);
-  }
-
-  node.addEventListener('click', handleClick);
-
-  return {
-    update(newConfig: SmartMailtoConfig) {
-      config = newConfig;
-    },
-    destroy() {
-      node.removeEventListener('click', handleClick);
-    },
-  };
-}
+export const SmartMailto = SmartMailtoComponent as ComponentType<SvelteComponent<SmartMailtoProps>>;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Global Init (for app-level "magic mode")

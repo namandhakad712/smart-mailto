@@ -26,5 +26,9 @@ for (const framework of ['react', 'vue', 'svelte'] as const) {
 
     await expect(page.locator('#__smart-mailto-host__')).toHaveCount(1);
     await expect.poll(() => page.evaluate(() => window.frameworkSmoke.getShowCount())).toBe(2);
+
+    if (framework === 'svelte') {
+      expect(await page.evaluate(() => window.frameworkSmoke.getLegacyExports?.())).toBe(true);
+    }
   });
 }

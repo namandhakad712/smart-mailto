@@ -3,6 +3,7 @@ interface FrameworkSmokeApi {
   unmount(): void;
   probeAfterUnmount(): boolean;
   getShowCount(): number;
+  getLegacyExports?(): boolean;
 }
 
 interface Window {
