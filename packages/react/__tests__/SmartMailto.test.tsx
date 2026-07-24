@@ -7,8 +7,10 @@ const mockParseMailto = vi.fn();
 const mockIsValidMailtoParams = vi.fn();
 const mockResolveProviders = vi.fn();
 const mockSpawnModal = vi.fn();
-const mockInitSmartMailto = vi.fn(() => vi.fn());
 const mockBuildMailtoHref = vi.fn();
+const mockDestroySmartMailto = vi.fn();
+const mockInitSmartMailto = vi.fn(() => mockDestroySmartMailto);
+const mockUpdateConfig = vi.fn();
 
 vi.mock('@smart-mailto/core', () => ({
   parseMailto: (...args: unknown[]) => mockParseMailto(...args),
@@ -18,7 +20,7 @@ vi.mock('@smart-mailto/core', () => ({
   spawnModal: (...args: unknown[]) => mockSpawnModal(...args),
   initSmartMailto: (...args: unknown[]) => mockInitSmartMailto(...args),
   destroySmartMailto: vi.fn(),
-  updateConfig: vi.fn(),
+  updateConfig: (...args: unknown[]) => mockUpdateConfig(...args),
 }));
 
 import { SmartMailto } from '../src/SmartMailto';
@@ -171,6 +173,89 @@ describe('SmartMailtoProvider', () => {
     );
     expect(mockInitSmartMailto).toHaveBeenCalledTimes(1);
     expect(mockInitSmartMailto).toHaveBeenCalledWith({ theme: 'dark' });
+  });
+
+  it('syncs primitive config changes without reinitializing', () => {
+    const { rerender } = render(
+      <SmartMailtoProvider includeCopy>
+        <div>content</div>
+      </SmartMailtoProvider>,
+    );
+    mockUpdateConfig.mockClear();
+
+    rerender(
+      <SmartMailtoProvider includeCopy={false}>
+        <div>content</div>
+      </SmartMailtoProvider>,
+    );
+
+    expect(mockUpdateConfig).toHaveBeenCalledTimes(1);
+    expect(mockUpdateConfig).toHaveBeenCalledWith({ includeCopy: false });
+    expect(mockInitSmartMailto).toHaveBeenCalledTimes(1);
+  });
+
+  it('clears config values when their props are removed', () => {
+    const { rerender } = render(
+      <SmartMailtoProvider preferredProvider="gmail">
+        <div>content</div>
+      </SmartMailtoProvider>,
+    );
+    mockUpdateConfig.mockClear();
+
+    rerender(
+      <SmartMailtoProvider>
+        <div>content</div>
+      </SmartMailtoProvider>,
+    );
+
+    expect(mockUpdateConfig).toHaveBeenCalledTimes(1);
+    expect(mockUpdateConfig).toHaveBeenCalledWith({ preferredProvider: undefined });
+    expect(mockInitSmartMailto).toHaveBeenCalledTimes(1);
+  });
+
+  it('syncs object config changes without reinitializing', () => {
+    const { rerender } = render(
+      <SmartMailtoProvider i18n={{ title: 'Choose a provider' }}>
+        <div>content</div>
+      </SmartMailtoProvider>,
+    );
+    mockUpdateConfig.mockClear();
+
+    rerender(
+      <SmartMailtoProvider i18n={{ title: 'Choisissez un fournisseur' }}>
+        <div>content</div>
+      </SmartMailtoProvider>,
+    );
+
+    expect(mockUpdateConfig).toHaveBeenCalledTimes(1);
+    expect(mockUpdateConfig).toHaveBeenCalledWith({
+      i18n: { title: 'Choisissez un fournisseur' },
+    });
+    expect(mockInitSmartMailto).toHaveBeenCalledTimes(1);
+  });
+
+  it('syncs lifecycle callback changes and cleans up once', () => {
+    const firstOnOpen = vi.fn();
+    const nextOnOpen = vi.fn();
+    const { rerender, unmount } = render(
+      <SmartMailtoProvider onOpen={firstOnOpen}>
+        <div>content</div>
+      </SmartMailtoProvider>,
+    );
+    mockUpdateConfig.mockClear();
+
+    rerender(
+      <SmartMailtoProvider onOpen={nextOnOpen}>
+        <div>content</div>
+      </SmartMailtoProvider>,
+    );
+
+    expect(mockUpdateConfig).toHaveBeenCalledTimes(1);
+    expect(mockUpdateConfig).toHaveBeenCalledWith({ onOpen: nextOnOpen });
+    expect(mockInitSmartMailto).toHaveBeenCalledTimes(1);
+
+    unmount();
+    expect(mockDestroySmartMailto).toHaveBeenCalledTimes(1);
   });
 });
 
