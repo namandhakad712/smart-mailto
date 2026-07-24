@@ -337,6 +337,10 @@ function getSharedCSS(): string {
 // DOM Builder
 // ─────────────────────────────────────────────────────────────────────────────
 
+function appendCustomClass(element: HTMLElement, customClass: string | undefined): void {
+  if (customClass) element.className += ` ${customClass}`;
+}
+
 function buildModalDOM(
   params: MailtoParams,
   resolved: ResolvedProviders,
@@ -354,6 +358,7 @@ function buildModalDOM(
   // Create overlay
   const overlay = document.createElement('div');
   overlay.className = 'sm-overlay';
+  appendCustomClass(overlay, config.classNames?.overlay);
 
   // Close on overlay click
   overlay.addEventListener('click', e => {
@@ -363,6 +368,7 @@ function buildModalDOM(
   // Create modal
   const modal = document.createElement('div');
   modal.className = 'sm-modal';
+  appendCustomClass(modal, config.classNames?.modal);
   modal.setAttribute('role', 'dialog');
   modal.setAttribute('aria-modal', 'true');
   modal.setAttribute('aria-label', i18n.title);
@@ -371,6 +377,7 @@ function buildModalDOM(
   // ── Header ────────────────────────────────────────────────────────────────
   const header = document.createElement('div');
   header.className = 'sm-header';
+  appendCustomClass(header, config.classNames?.header);
 
   const titleArea = document.createElement('div');
   titleArea.className = 'sm-title-area';
@@ -381,6 +388,7 @@ function buildModalDOM(
 
   const subtitle = document.createElement('div');
   subtitle.className = 'sm-subtitle';
+  appendCustomClass(subtitle, config.classNames?.emailPreview);
   const recipient = params.to[0] ?? '';
   subtitle.textContent = params.subject ? `${recipient} · ${params.subject}` : recipient;
   subtitle.title = subtitle.textContent;
@@ -390,6 +398,7 @@ function buildModalDOM(
 
   const closeBtn = document.createElement('button');
   closeBtn.className = 'sm-close-btn';
+  appendCustomClass(closeBtn, config.classNames?.closeButton);
   closeBtn.setAttribute('aria-label', i18n.close);
   closeBtn.textContent = '✕';
   closeBtn.addEventListener('click', onClose);
@@ -401,6 +410,7 @@ function buildModalDOM(
   // ── Provider Grid ─────────────────────────────────────────────────────────
   const grid = document.createElement('div');
   grid.className = 'sm-grid';
+  appendCustomClass(grid, config.classNames?.providerGrid);
   grid.setAttribute('role', 'list');
 
   const preferredId = resolved.detectedFromEmail ?? config.preferredProvider ?? null;
@@ -472,7 +482,11 @@ function createProviderButton(
 ): HTMLElement {
   const btn = document.createElement('button');
   btn.className = 'sm-provider-btn';
-  if (provider.id === preferredId) btn.classList.add('sm-preferred');
+  appendCustomClass(btn, config.classNames?.providerButton);
+  if (provider.id === preferredId) {
+    btn.classList.add('sm-preferred');
+    appendCustomClass(btn, config.classNames?.providerButtonActive);
+  }
   btn.setAttribute('role', 'listitem');
   btn.setAttribute('type', 'button');
   btn.setAttribute('aria-label', `Open in ${provider.name}`);
@@ -488,12 +502,14 @@ function createProviderButton(
   // Logo
   const logoWrap = document.createElement('div');
   logoWrap.className = 'sm-provider-logo';
+  appendCustomClass(logoWrap, config.classNames?.providerLogo);
   logoWrap.innerHTML = provider.logoSvg || ICONS[provider.id] || ICONS['native'] || '';
   btn.appendChild(logoWrap);
 
   // Name
   const name = document.createElement('div');
   name.className = 'sm-provider-name';
+  appendCustomClass(name, config.classNames?.providerName);
   name.textContent = provider.name;
   btn.appendChild(name);
 
@@ -542,6 +558,7 @@ function createCopyButton(
 
   const btn = document.createElement('button');
   btn.className = 'sm-copy-btn';
+  appendCustomClass(btn, config.classNames?.copyButton);
   btn.setAttribute('type', 'button');
   btn.setAttribute('aria-label', `Copy ${email} to clipboard`);
 
@@ -637,17 +654,19 @@ export function spawnModal(
 
   const shadow = host.attachShadow({ mode: 'open' });
 
-  // Build styles
-  const style = document.createElement('style');
-  const themeCSS =
-    config.theme === 'dark'
-      ? getDarkThemeCSS()
-      : config.theme === 'light'
-        ? getLightThemeCSS()
-        : getAutoThemeCSS();
+  // Supplying class names activates the documented headless/unstyled mode.
+  if (!config.classNames) {
+    const style = document.createElement('style');
+    const themeCSS =
+      config.theme === 'dark'
+        ? getDarkThemeCSS()
+        : config.theme === 'light'
+          ? getLightThemeCSS()
+          : getAutoThemeCSS();
 
-  style.textContent = themeCSS + getSharedCSS();
-  shadow.appendChild(style);
+    style.textContent = themeCSS + getSharedCSS();
+    shadow.appendChild(style);
+  }
 
   // Save the previously focused element to restore on close
   const previousFocus = document.activeElement as HTMLElement | null;
