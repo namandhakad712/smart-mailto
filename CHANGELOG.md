@@ -5,6 +5,7 @@
 ### Features
 
 - Add Japanese carrier email support (NTT Docomo, au/KDDI, SoftBank) — 3 new providers (50 total)
+- Add Sina Mail, Indiatimes Mail, Spike Mail — 3 new providers (53 total), closes detector→registry gap
 - Add UMD bundle format to core package for CDN/script-tag usage
 - Add 12 React wrapper tests (component, provider, hook)
 - Create JSON Schema for provider-generator data validation (providers-schema.json)
@@ -16,7 +17,8 @@
 - Create CDN usage guide (UMD, ESM import maps, framework wrappers)
 - Create blog placeholder page
 - Update nav with Geo, CDN, Blog links
-- Update providers page: 47 → 50 providers, add Japanese carrier entries
+- Update providers page: 47 → 53 providers, add Japanese carriers + Sina/Indiatimes/Spike
+- Add verified/unverified status badges to provider cards
 
 ### Infrastructure
 

@@ -491,6 +491,35 @@
       "fallbackOnly": true
     },
     {
+      "id": "sina",
+      "name": "Sina Mail",
+      "urlType": "none",
+      "color": "#E00000",
+      "textColor": "#ffffff",
+      "regions": ["cn"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "indiatimes",
+      "name": "Indiatimes Mail",
+      "urlType": "none",
+      "color": "#FF9933",
+      "textColor": "#000000",
+      "regions": ["in"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "spike",
+      "name": "Spike Mail",
+      "urlTemplate": "https://app.spike.email/compose?to={to}",
+      "urlType": "template",
+      "noCcBcc": true,
+      "noSubjectBody": true,
+      "color": "#6C5CE7",
+      "textColor": "#ffffff",
+      "regions": ["global"]
+    },
+    {
       "id": "native",
       "name": "Default Mail App",
       "urlType": "none",

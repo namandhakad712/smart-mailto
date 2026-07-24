@@ -248,6 +248,19 @@ const ALL_PROVIDERS: ProviderEntry[] = [
     notes: 'ISP, no compose URL',
   },
   { id: 'atlas-sk', name: 'Atlas.sk', testUrl: 'https://mail.atlas.sk/', notes: 'No compose URL' },
+  { id: 'sina', name: 'Sina Mail', testUrl: 'https://mail.sina.com.cn/', notes: 'No compose URL' },
+  {
+    id: 'indiatimes',
+    name: 'Indiatimes Mail',
+    testUrl: 'https://webmail.indiatimes.com/',
+    notes: 'No compose URL',
+  },
+  {
+    id: 'spike',
+    name: 'Spike Mail',
+    testUrl: 'https://app.spike.email/compose?to=test%40example.com',
+    notes: 'Conversational email',
+  },
 ];
 
 interface ValidationResult {

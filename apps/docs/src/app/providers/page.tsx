@@ -12,7 +12,59 @@ interface ProviderLogo {
   textColor: string;
   regions: string[];
   website?: string;
+  valid?: boolean;
 }
+
+const PROVIDER_VALIDATION: Record<string, boolean> = {
+  gmail: true,
+  'outlook-personal': true,
+  'outlook-work': true,
+  yahoo: true,
+  protonmail: true,
+  icloud: true,
+  fastmail: true,
+  zoho: true,
+  tutanota: true,
+  yandex: true,
+  mailru: false,
+  gmx: true,
+  webde: false,
+  't-online': false,
+  posteo: true,
+  mailboxorg: true,
+  laposte: false,
+  'yahoo-japan': false,
+  naver: false,
+  daum: false,
+  qq: false,
+  mail163: false,
+  rediff: false,
+  seznam: false,
+  onet: true,
+  wp: false,
+  ukrnet: false,
+  libero: true,
+  mailfence: false,
+  runbox: false,
+  disroot: true,
+  riseup: true,
+  rambler: true,
+  aliyun: true,
+  o2: false,
+  interia: true,
+  orange: false,
+  sfr: false,
+  free: true,
+  nate: true,
+  bsnl: false,
+  telia: true,
+  mynet: false,
+  ttmail: false,
+  'atlas-sk': true,
+  spike: false,
+  indiatimes: false,
+  sina: false,
+};
 
 const PROVIDER_LOGOS: ProviderLogo[] = [
   {
@@ -420,6 +472,31 @@ const PROVIDER_LOGOS: ProviderLogo[] = [
     website: 'https://atlas.sk',
   },
   {
+    id: 'sina',
+    name: 'Sina Mail',
+    slug: 'sina',
+    color: '#E00000',
+    textColor: '#ffffff',
+    regions: ['cn'],
+  },
+  {
+    id: 'indiatimes',
+    name: 'Indiatimes Mail',
+    slug: 'indiatimes',
+    color: '#FF9933',
+    textColor: '#000000',
+    regions: ['in'],
+  },
+  {
+    id: 'spike',
+    name: 'Spike Mail',
+    slug: 'spike',
+    color: '#6C5CE7',
+    textColor: '#ffffff',
+    regions: ['global'],
+    website: 'https://spike.email',
+  },
+  {
     id: 'native',
     name: 'Default Mail App',
     slug: 'native',
@@ -502,7 +579,10 @@ export default function ProvidersPage() {
   const [search, setSearch] = useState('');
   const [regionFilter, setRegionFilter] = useState<string | null>(null);
 
-  const filteredProviders = PROVIDER_LOGOS.filter(p => {
+  const filteredProviders = PROVIDER_LOGOS.map(p => ({
+    ...p,
+    valid: p.id in PROVIDER_VALIDATION ? PROVIDER_VALIDATION[p.id] : undefined,
+  })).filter(p => {
     const matchesSearch =
       p.name.toLowerCase().includes(search.toLowerCase()) ||
       p.id.toLowerCase().includes(search.toLowerCase());
@@ -519,7 +599,7 @@ export default function ProvidersPage() {
           Provider Registry
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          50 Providers. Zero Compromise.
+          53 Providers. Zero Compromise.
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
           Every provider listed here has been manually verified with HTTP requests. Real compose
@@ -613,6 +693,17 @@ export default function ProvidersPage() {
             </div>
 
             <div className="flex flex-wrap gap-1 mb-4">
+              {provider.valid !== undefined && (
+                <span
+                  className={`px-2 py-0.5 font-mono text-[9px] border ${
+                    provider.valid
+                      ? 'bg-green-50 dark:bg-green-950 border-green-300 dark:border-green-700 text-green-700 dark:text-green-400'
+                      : 'bg-yellow-50 dark:bg-yellow-950 border-yellow-300 dark:border-yellow-700 text-yellow-700 dark:text-yellow-400'
+                  }`}
+                >
+                  {provider.valid ? 'verified' : 'unverified'}
+                </span>
+              )}
               {provider.regions.map(r => (
                 <span
                   key={r}

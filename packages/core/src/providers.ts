@@ -676,6 +676,41 @@ export const PROVIDERS: Readonly<Record<string, Provider>> = {
     regions: ['sk'],
   },
 
+  // sina — fallback only (no working compose URL)
+  sina: {
+    id: 'sina',
+    name: 'Sina Mail',
+    buildUrl: () => '#',
+    // sina has no working compose URL
+    color: '#E00000',
+    textColor: '#ffffff',
+    fallbackOnly: true,
+    regions: ['cn'],
+  },
+
+  // indiatimes — fallback only (no working compose URL)
+  indiatimes: {
+    id: 'indiatimes',
+    name: 'Indiatimes Mail',
+    buildUrl: () => '#',
+    // indiatimes has no working compose URL
+    color: '#FF9933',
+    textColor: '#000000',
+    fallbackOnly: true,
+    regions: ['in'],
+  },
+
+  spike: {
+    id: 'spike',
+    name: 'Spike Mail',
+    buildUrl: (p: MailtoParams) => {
+      return 'https://app.spike.email/compose?to=' + e(p.to.join(',')) + '';
+    },
+    color: '#6C5CE7',
+    textColor: '#ffffff',
+    regions: ['global'],
+  },
+
   native: {
     id: 'native',
     name: 'Default Mail App',

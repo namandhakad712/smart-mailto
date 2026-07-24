@@ -245,12 +245,12 @@ describe('getAllProviders', () => {
     expect(all.length).toBeGreaterThan(20);
   });
 
-  it('contains 45 webmail providers plus native and copy fallback actions', () => {
+  it('contains 51 webmail providers plus native and copy fallback actions', () => {
     const all = getAllProviders();
     const webmailProviders = all.filter(provider => !provider.isNative && !provider.isCopy);
 
-    expect(webmailProviders).toHaveLength(48);
-    expect(all).toHaveLength(50);
+    expect(webmailProviders).toHaveLength(51);
+    expect(all).toHaveLength(53);
   });
 
   it('all providers have required fields and buildUrl produces valid output', () => {
