@@ -1,441 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { getCatalogProviders } from '@smart-mailto/core';
 import { SmartMailto } from '@smart-mailto/react';
 import { useIsDark } from '@/hooks/useIsDark';
 
-interface ProviderLogo {
-  id: string;
-  name: string;
-  slug: string;
-  color: string;
-  textColor: string;
-  regions: string[];
-  website?: string;
-}
+const PROVIDERS = getCatalogProviders();
 
-const PROVIDER_LOGOS: ProviderLogo[] = [
-  {
-    id: 'gmail',
-    name: 'Gmail',
-    slug: 'gmail',
-    color: '#EA4335',
-    textColor: '#ffffff',
-    regions: ['global'],
-    website: 'https://gmail.com',
-  },
-  {
-    id: 'outlook-personal',
-    name: 'Outlook',
-    slug: 'outlook-personal',
-    color: '#0078D4',
-    textColor: '#ffffff',
-    regions: ['global'],
-    website: 'https://outlook.live.com',
-  },
-  {
-    id: 'outlook-work',
-    name: 'Outlook 365',
-    slug: 'outlook-work',
-    color: '#0078D4',
-    textColor: '#ffffff',
-    regions: ['enterprise', 'global'],
-    website: 'https://outlook.office.com',
-  },
-  {
-    id: 'yahoo',
-    name: 'Yahoo Mail',
-    slug: 'yahoo',
-    color: '#720E9E',
-    textColor: '#ffffff',
-    regions: ['us', 'in', 'latam', 'ph'],
-  },
-  {
-    id: 'protonmail',
-    name: 'Proton Mail',
-    slug: 'protonmail',
-    color: '#6D4AFF',
-    textColor: '#ffffff',
-    regions: ['privacy', 'eu', 'nordics', 'ch'],
-    website: 'https://proton.me/mail',
-  },
-  {
-    id: 'icloud',
-    name: 'iCloud Mail',
-    slug: 'icloud',
-    color: '#1C84C6',
-    textColor: '#ffffff',
-    regions: ['apple', 'us', 'au', 'jp'],
-    website: 'https://www.icloud.com/mail',
-  },
-  {
-    id: 'fastmail',
-    name: 'Fastmail',
-    slug: 'fastmail',
-    color: '#C82E2E',
-    textColor: '#ffffff',
-    regions: ['au', 'us', 'power-users'],
-    website: 'https://fastmail.com',
-  },
-  {
-    id: 'zoho',
-    name: 'Zoho Mail',
-    slug: 'zoho',
-    color: '#E42527',
-    textColor: '#ffffff',
-    regions: ['in', 'smb', 'global'],
-    website: 'https://zoho.com/mail',
-  },
-  {
-    id: 'tutanota',
-    name: 'Tuta Mail',
-    slug: 'tutanota',
-    color: '#840010',
-    textColor: '#ffffff',
-    regions: ['eu', 'privacy'],
-    website: 'https://tutanota.com',
-  },
-  {
-    id: 'yandex',
-    name: 'Yandex Mail',
-    slug: 'yandex',
-    color: '#FC3F1D',
-    textColor: '#ffffff',
-    regions: ['ru', 'cis', 'ua', 'kz', 'by'],
-    website: 'https://mail.yandex.ru',
-  },
-  {
-    id: 'mailru',
-    name: 'Mail.ru',
-    slug: 'mailru',
-    color: '#005FF9',
-    textColor: '#ffffff',
-    regions: ['ru', 'cis'],
-    website: 'https://mail.ru',
-  },
-  {
-    id: 'gmx',
-    name: 'GMX Mail',
-    slug: 'gmx',
-    color: '#1D4F96',
-    textColor: '#ffffff',
-    regions: ['de', 'at', 'ch'],
-    website: 'https://gmx.com',
-  },
-  {
-    id: 'webde',
-    name: 'WEB.DE',
-    slug: 'webde',
-    color: '#FFCC00',
-    textColor: '#000000',
-    regions: ['de'],
-    website: 'https://web.de',
-  },
-  {
-    id: 't-online',
-    name: 'Telekom Mail',
-    slug: 't-online',
-    color: '#E20074',
-    textColor: '#ffffff',
-    regions: ['de'],
-    website: 'https://email.t-online.de',
-  },
-  {
-    id: 'posteo',
-    name: 'Posteo',
-    slug: 'posteo',
-    color: '#2E8B57',
-    textColor: '#ffffff',
-    regions: ['de', 'privacy'],
-    website: 'https://posteo.de',
-  },
-  {
-    id: 'mailboxorg',
-    name: 'mailbox.org',
-    slug: 'mailboxorg',
-    color: '#00529B',
-    textColor: '#ffffff',
-    regions: ['de', 'privacy'],
-    website: 'https://mailbox.org',
-  },
-  {
-    id: 'laposte',
-    name: 'La Poste Mail',
-    slug: 'laposte',
-    color: '#FFD700',
-    textColor: '#000000',
-    regions: ['fr'],
-    website: 'https://laposte.net',
-  },
-  {
-    id: 'yahoo-japan',
-    name: 'Yahoo! Japan Mail',
-    slug: 'yahoo-japan',
-    color: '#FF0033',
-    textColor: '#ffffff',
-    regions: ['jp'],
-    website: 'https://mail.yahoo.co.jp',
-  },
-  {
-    id: 'naver',
-    name: 'Naver Mail',
-    slug: 'naver',
-    color: '#03C75A',
-    textColor: '#ffffff',
-    regions: ['kr'],
-    website: 'https://mail.naver.com',
-  },
-  {
-    id: 'daum',
-    name: 'Kakao Mail',
-    slug: 'daum',
-    color: '#FFCD00',
-    textColor: '#000000',
-    regions: ['kr'],
-    website: 'https://mail.daum.net',
-  },
-  {
-    id: 'qq',
-    name: 'QQ Mail',
-    slug: 'qq',
-    color: '#12B7F5',
-    textColor: '#ffffff',
-    regions: ['cn'],
-    website: 'https://mail.qq.com',
-  },
-  {
-    id: 'mail163',
-    name: '163 Mail',
-    slug: 'mail163',
-    color: '#D81B25',
-    textColor: '#ffffff',
-    regions: ['cn'],
-    website: 'https://mail.163.com',
-  },
-  {
-    id: 'rediff',
-    name: 'Rediffmail',
-    slug: 'rediff',
-    color: '#D10000',
-    textColor: '#ffffff',
-    regions: ['in'],
-    website: 'https://rediff.com',
-  },
-  {
-    id: 'seznam',
-    name: 'Seznam Email',
-    slug: 'seznam',
-    color: '#CC0000',
-    textColor: '#ffffff',
-    regions: ['cz'],
-    website: 'https://email.seznam.cz',
-  },
-  {
-    id: 'onet',
-    name: 'Onet Poczta',
-    slug: 'onet',
-    color: '#E40000',
-    textColor: '#ffffff',
-    regions: ['pl'],
-    website: 'https://poczta.onet.pl',
-  },
-  {
-    id: 'wp',
-    name: 'WP Poczta',
-    slug: 'wp',
-    color: '#003298',
-    textColor: '#ffffff',
-    regions: ['pl'],
-    website: 'https://poczta.wp.pl',
-  },
-  {
-    id: 'ukrnet',
-    name: 'UKR.NET Mail',
-    slug: 'ukrnet',
-    color: '#007BB5',
-    textColor: '#ffffff',
-    regions: ['ua'],
-    website: 'https://mail.ukr.net',
-  },
-  {
-    id: 'libero',
-    name: 'Libero Mail',
-    slug: 'libero',
-    color: '#FF6600',
-    textColor: '#ffffff',
-    regions: ['it'],
-    website: 'https://libero.it',
-  },
-  {
-    id: 'mailfence',
-    name: 'Mailfence',
-    slug: 'mailfence',
-    color: '#37A000',
-    textColor: '#ffffff',
-    regions: ['be', 'eu', 'privacy'],
-    website: 'https://mailfence.com',
-  },
-  {
-    id: 'runbox',
-    name: 'Runbox',
-    slug: 'runbox',
-    color: '#5B5EA6',
-    textColor: '#ffffff',
-    regions: ['no', 'privacy'],
-    website: 'https://runbox.com',
-  },
-  {
-    id: 'disroot',
-    name: 'Disroot',
-    slug: 'disroot',
-    color: '#2E8B57',
-    textColor: '#ffffff',
-    regions: ['eu', 'privacy'],
-    website: 'https://disroot.org',
-  },
-  {
-    id: 'riseup',
-    name: 'Riseup',
-    slug: 'riseup',
-    color: '#E1003C',
-    textColor: '#ffffff',
-    regions: ['us', 'privacy'],
-    website: 'https://riseup.net',
-  },
-  {
-    id: 'rambler',
-    name: 'Rambler Mail',
-    slug: 'rambler',
-    color: '#315EFB',
-    textColor: '#ffffff',
-    regions: ['ru', 'cis'],
-    website: 'https://mail.rambler.ru',
-  },
-  {
-    id: 'aliyun',
-    name: 'Alibaba Mail',
-    slug: 'aliyun',
-    color: '#FF6A00',
-    textColor: '#ffffff',
-    regions: ['cn', 'enterprise'],
-    website: 'https://mail.aliyun.com',
-  },
-  {
-    id: 'o2',
-    name: 'O2 Poczta',
-    slug: 'o2',
-    color: '#003298',
-    textColor: '#ffffff',
-    regions: ['pl'],
-    website: 'https://poczta.o2.pl',
-  },
-  {
-    id: 'interia',
-    name: 'Interia Poczta',
-    slug: 'interia',
-    color: '#B20000',
-    textColor: '#ffffff',
-    regions: ['pl'],
-    website: 'https://poczta.interia.pl',
-  },
-  {
-    id: 'sfr',
-    name: 'SFR Mail',
-    slug: 'sfr',
-    color: '#E00000',
-    textColor: '#ffffff',
-    regions: ['fr'],
-    website: 'https://webmail.sfr.fr',
-  },
-  {
-    id: 'free',
-    name: 'Free (Proxad)',
-    slug: 'free',
-    color: '#0032A0',
-    textColor: '#ffffff',
-    regions: ['fr'],
-    website: 'https://webmail.free.fr',
-  },
-  {
-    id: 'orange',
-    name: 'Orange Mail',
-    slug: 'orange',
-    color: '#FF7900',
-    textColor: '#000000',
-    regions: ['fr'],
-    website: 'https://webmail.orange.fr',
-  },
-  {
-    id: 'nate',
-    name: 'Nate Mail',
-    slug: 'nate',
-    color: '#138D3D',
-    textColor: '#ffffff',
-    regions: ['kr'],
-    website: 'https://mail.nate.com',
-  },
-  {
-    id: 'bsnl',
-    name: 'BSNL Webmail',
-    slug: 'bsnl',
-    color: '#00A2E1',
-    textColor: '#ffffff',
-    regions: ['in'],
-    website: 'https://webmail.bsnl.in',
-  },
-  {
-    id: 'telia',
-    name: 'Telia Mail',
-    slug: 'telia',
-    color: '#86247E',
-    textColor: '#ffffff',
-    regions: ['se'],
-    website: 'https://webmail.telia.com',
-  },
-  {
-    id: 'mynet',
-    name: 'Mynet Mail',
-    slug: 'mynet',
-    color: '#D32E2E',
-    textColor: '#ffffff',
-    regions: ['tr'],
-    website: 'https://mail.mynet.com',
-  },
-  {
-    id: 'ttmail',
-    name: 'Türk Telekom Mail',
-    slug: 'ttmail',
-    color: '#0096D4',
-    textColor: '#ffffff',
-    regions: ['tr'],
-    website: 'https://ttmail.com',
-  },
-  {
-    id: 'atlas-sk',
-    name: 'Atlas.sk',
-    slug: 'atlas-sk',
-    color: '#0053A4',
-    textColor: '#ffffff',
-    regions: ['sk'],
-    website: 'https://atlas.sk',
-  },
-  {
-    id: 'native',
-    name: 'Default Mail App',
-    slug: 'native',
-    color: '#666666',
-    textColor: '#ffffff',
-    regions: ['global'],
-  },
-  {
-    id: 'copy',
-    name: 'Copy Address',
-    slug: 'copy',
-    color: '#555555',
-    textColor: '#ffffff',
-    regions: ['global'],
-  },
-];
+const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
+  yandex: 'Yandex Mail',
+  'yahoo-japan': 'Yahoo! Japan Mail',
+  naver: 'Naver Mail',
+  daum: 'Kakao Mail',
+  qq: 'QQ Mail',
+  mail163: '163 Mail',
+};
 
 const REGION_LABELS: Record<string, string> = {
   global: '🌍 Global',
@@ -462,6 +41,7 @@ const REGION_LABELS: Record<string, string> = {
   latam: '🌎 Latin America',
   nordics: '🇸🇪 Nordics',
   privacy: '🔒 Privacy-focused',
+  'power-user': '⚡ Power Users',
   'power-users': '⚡ Power Users',
   enterprise: '🏢 Enterprise',
   smb: '🏪 SMB',
@@ -473,20 +53,69 @@ const REGION_LABELS: Record<string, string> = {
   sk: '🇸🇰 Slovakia',
 };
 
+function getInitials(name: string): string {
+  return name
+    .split(/\s+/)
+    .map(part => part.charAt(0))
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+function getDisplayName(provider: (typeof PROVIDERS)[number]): string {
+  return PROVIDER_DISPLAY_NAMES[provider.id] ?? provider.name;
+}
+
+function ProviderLogo({
+  provider,
+  displayName,
+}: {
+  provider: (typeof PROVIDERS)[number];
+  displayName: string;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="w-12 h-12 flex-shrink-0 overflow-hidden rounded-sm bg-white/80 border border-border">
+      {failed ? (
+        <span
+          aria-hidden="true"
+          className="flex h-full w-full items-center justify-center font-mono text-sm font-bold"
+          style={{ backgroundColor: provider.color, color: provider.textColor }}
+        >
+          {getInitials(displayName)}
+        </span>
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={`/provider-logos/${provider.id}.svg`}
+          alt=""
+          className="w-full h-full p-1"
+          onError={() => setFailed(true)}
+        />
+      )}
+    </div>
+  );
+}
+
 export default function ProvidersPage() {
   const isDark = useIsDark();
   const [search, setSearch] = useState('');
   const [regionFilter, setRegionFilter] = useState<string | null>(null);
 
-  const filteredProviders = PROVIDER_LOGOS.filter(p => {
+  const normalizedSearch = search.trim().toLowerCase();
+  const filteredProviders = PROVIDERS.filter(provider => {
     const matchesSearch =
-      p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.id.toLowerCase().includes(search.toLowerCase());
-    const matchesRegion = !regionFilter || p.regions.includes(regionFilter);
+      provider.name.toLowerCase().includes(normalizedSearch) ||
+      getDisplayName(provider).toLowerCase().includes(normalizedSearch) ||
+      provider.id.toLowerCase().includes(normalizedSearch);
+    const matchesRegion = !regionFilter || provider.regions?.includes(regionFilter);
     return matchesSearch && matchesRegion;
   });
 
-  const allRegions = Array.from(new Set(PROVIDER_LOGOS.flatMap(p => p.regions))).sort();
+  const allRegions = Array.from(
+    new Set(PROVIDERS.flatMap(provider => provider.regions ?? [])),
+  ).sort();
 
   return (
     <div className="space-y-12">
@@ -495,7 +124,7 @@ export default function ProvidersPage() {
           Provider Registry
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          47 Providers. Zero Compromise.
+          {PROVIDERS.length} Providers. Zero Compromise.
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
           Every provider listed here has been manually verified with HTTP requests. Real compose
@@ -517,7 +146,7 @@ export default function ProvidersPage() {
               type="text"
               placeholder="Search providers..."
               value={search}
-              onChange={e => setSearch(e.target.value)}
+              onChange={event => setSearch(event.target.value)}
               className="w-full bg-surface dark:bg-surface-container border border-border dark:border-border px-4 py-2.5 pr-10 font-body text-sm text-ink dark:text-text placeholder:text-ink-muted dark:placeholder:text-text-muted focus:outline-none focus:border-red transition-colors"
             />
             <svg
@@ -561,53 +190,46 @@ export default function ProvidersPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {filteredProviders.map(provider => (
-          <div
-            key={provider.id}
-            className="group bg-surface dark:bg-surface-container border border-border dark:border-border p-5 hover:border-red dark:hover:border-red transition-colors"
-          >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 flex-shrink-0 rounded-sm bg-white/80 backdrop-blur-sm border border-border">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`/provider-logos/${provider.slug}.svg`}
-                  alt={provider.name}
-                  className="w-full h-full p-1"
-                  onError={e => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    target.parentElement!.innerHTML = `<span class="text-xs font-bold text-ink">${provider.name.charAt(0)}</span>`;
-                  }}
-                />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-headline text-base font-medium text-ink dark:text-text truncate">
-                  {provider.name}
-                </h3>
-                <code className="font-mono text-[10px] text-red">{provider.id}</code>
-              </div>
-            </div>
+        {filteredProviders.map(provider => {
+          const displayName = getDisplayName(provider);
 
-            <div className="flex flex-wrap gap-1 mb-4">
-              {provider.regions.map(r => (
-                <span
-                  key={r}
-                  className="px-2 py-0.5 bg-surface dark:bg-surface-container-high border border-border dark:border-border font-mono text-[9px] text-ink-muted dark:text-text-muted"
-                >
-                  {REGION_LABELS[r] || r}
-                </span>
-              ))}
-            </div>
-
-            <SmartMailto
-              href={`mailto:hello@example.com?subject=Test email to ${provider.name}&body=This is a test email.`}
-              theme={isDark ? 'dark' : 'light'}
-              className="w-full flex items-center justify-center gap-2 bg-red hover:bg-red-dark text-white font-body text-xs font-medium px-4 py-2 transition-colors cursor-pointer"
+          return (
+            <div
+              key={provider.id}
+              className="group bg-surface dark:bg-surface-container border border-border dark:border-border p-5 hover:border-red dark:hover:border-red transition-colors"
             >
-              Try compose ↗
-            </SmartMailto>
-          </div>
-        ))}
+              <div className="flex items-start gap-4 mb-4">
+                <ProviderLogo provider={provider} displayName={displayName} />
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-headline text-base font-medium text-ink dark:text-text truncate">
+                    {displayName}
+                  </h3>
+                  <code className="font-mono text-[10px] text-red">{provider.id}</code>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-1 mb-4">
+                {(provider.regions ?? []).map(region => (
+                  <span
+                    key={region}
+                    className="px-2 py-0.5 bg-surface dark:bg-surface-container-high border border-border dark:border-border font-mono text-[9px] text-ink-muted dark:text-text-muted"
+                  >
+                    {REGION_LABELS[region] || region}
+                  </span>
+                ))}
+              </div>
+
+              <SmartMailto
+                href={`mailto:hello@example.com?subject=Test email to ${displayName}&body=This is a test email.`}
+                theme={isDark ? 'dark' : 'light'}
+                preferredProvider={provider.id}
+                className="w-full flex items-center justify-center gap-2 bg-red hover:bg-red-dark text-white font-body text-xs font-medium px-4 py-2 transition-colors cursor-pointer"
+              >
+                Try compose ↗
+              </SmartMailto>
+            </div>
+          );
+        })}
       </div>
 
       {filteredProviders.length === 0 && (

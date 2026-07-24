@@ -1,13 +1,10 @@
 /**
  * @smart-mailto/core — Provider Database
  *
- * The complete global registry of 45 email providers with compose deep links.
+ * The complete global registry of email providers with compose deep links.
  * GENERATED FILE — DO NOT EDIT DIRECTLY.
  * Source: tools/provider-generator/data/providers.json
  * Regenerate: pnpm generate:providers
- *
- * URL variables are encoded via encodeURIComponent before insertion.
- * Each buildUrl() function is pure and synchronous.
  */
 
 import type { MailtoParams, Provider } from './types.js';
@@ -687,4 +684,14 @@ export function getProvider(id: string): Provider | null {
  */
 export function getAllProviders(): Provider[] {
   return Object.values(PROVIDERS);
+}
+
+/**
+ * Returns the complete public provider catalog.
+ *
+ * Public catalog surfaces should use this helper so their IDs, names, regions,
+ * colors, and compose behavior cannot drift from the shipped registry.
+ */
+export function getCatalogProviders(): Provider[] {
+  return getAllProviders();
 }

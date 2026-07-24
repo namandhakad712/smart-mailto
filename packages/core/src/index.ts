@@ -19,7 +19,7 @@
 
 // Public API surface
 export { parseMailto, buildMailtoHref, isValidMailtoParams } from './parser.js';
-export { PROVIDERS, getProvider, getAllProviders } from './providers.js';
+export { PROVIDERS, getProvider, getAllProviders, getCatalogProviders } from './providers.js';
 export { collectGeoSignals, getGeoOrderedProviderIds, detectRegionLabel } from './geo.js';
 export { detectProviderFromEmail, getDomainsForProvider } from './detector.js';
 export { resolveProviders } from './resolver.js';

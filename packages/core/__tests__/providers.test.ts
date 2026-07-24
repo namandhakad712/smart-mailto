@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { PROVIDERS, getProvider, getAllProviders } from '../src/providers.js';
+import { PROVIDERS, getProvider, getAllProviders, getCatalogProviders } from '../src/providers.js';
 import type { MailtoParams } from '../src/types.js';
 
 const BASE_PARAMS: MailtoParams = {
@@ -268,5 +268,23 @@ describe('getAllProviders', () => {
       const fullUrl = provider.buildUrl(BASE_PARAMS);
       expect(fullUrl, `${provider.id} full URL must be a non-empty string`).toBeTruthy();
     }
+  });
+});
+
+describe('getCatalogProviders', () => {
+  it('keeps the public catalog in parity with the shipped registry', () => {
+    const registryIds = Object.values(PROVIDERS).map(provider => provider.id);
+    const catalogIds = getCatalogProviders().map(provider => provider.id);
+
+    expect(catalogIds).toEqual(registryIds);
+    expect(catalogIds).toHaveLength(47);
+  });
+
+  it('includes the providers that were missing from the previous public catalog', () => {
+    const catalogIds = getCatalogProviders().map(provider => provider.id);
+
+    expect(catalogIds).toEqual(
+      expect.arrayContaining(['disroot', 'riseup', 'rambler', 'aliyun', 'o2', 'interia']),
+    );
   });
 });

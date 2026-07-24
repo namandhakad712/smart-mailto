@@ -220,6 +220,16 @@ function main() {
   lines.push('  return Object.values(PROVIDERS);');
   lines.push('}');
   lines.push('');
+  lines.push('/**');
+  lines.push(' * Returns the complete public provider catalog.');
+  lines.push(' *');
+  lines.push(' * Public catalog surfaces should use this helper so their IDs, names, regions,');
+  lines.push(' * colors, and compose behavior cannot drift from the shipped registry.');
+  lines.push(' */');
+  lines.push('export function getCatalogProviders(): Provider[] {');
+  lines.push('  return getAllProviders();');
+  lines.push('}');
+  lines.push('');
 
   writeFileSync(OUTPUT_FILE, lines.join('\n'), 'utf-8');
   console.log(`✅ Generated ${OUTPUT_FILE} (${providers.length} providers)`);
