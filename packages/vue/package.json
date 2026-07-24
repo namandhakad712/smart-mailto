@@ -1,13 +1,14 @@
 {
   "name": "@smart-mailto/vue",
   "version": "0.2.0",
-  "description": "Vue 3 wrapper for smart-mailto — geo-aware webmail picker",
+  "description": "Vue 3 plugin and component for the smart-mailto webmail provider picker",
   "keywords": [
     "mailto",
     "email",
+    "webmail",
+    "picker",
     "vue",
     "vue3",
-    "webmail",
     "gmail",
     "typescript"
   ],

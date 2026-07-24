@@ -1,12 +1,13 @@
 {
   "name": "@smart-mailto/react",
   "version": "0.2.0",
-  "description": "React wrapper for smart-mailto — geo-aware webmail picker",
+  "description": "React components and hooks for the smart-mailto webmail provider picker",
   "keywords": [
     "mailto",
     "email",
-    "react",
     "webmail",
+    "picker",
+    "react",
     "gmail",
     "typescript"
   ],
