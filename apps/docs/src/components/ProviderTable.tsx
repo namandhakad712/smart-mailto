@@ -2,7 +2,9 @@ import React from 'react';
 import { getAllProviders } from '@smart-mailto/core';
 
 export function ProviderTable() {
-  const providers = getAllProviders().filter(p => !p.isCopy && p.id !== 'native');
+  const providers = getAllProviders().filter(provider => !provider.isCopy && !provider.isNative);
+  const composeProviderCount = providers.filter(provider => !provider.fallbackOnly).length;
+  const fallbackProviderCount = providers.filter(provider => provider.fallbackOnly).length;
 
   return (
     <div>
@@ -11,7 +13,8 @@ export function ProviderTable() {
           All supported providers
         </h3>
         <p className="font-body text-sm italic text-ink-soft dark:text-text-soft mt-1">
-          37 webmail providers. Out of the box.
+          {providers.length} webmail entries: {composeProviderCount} compose links and{' '}
+          {fallbackProviderCount} fallback pages.
         </p>
       </div>
 

@@ -636,8 +636,10 @@
         <p class="hero-sub">
           A geo-aware webmail picker that intercepts broken
           <code style="font-family: monospace; color: #a5b4fc">mailto:</code>
-          links and shows Gmail, Outlook, Yahoo, and 37 webmail providers — ranked by where your
-          user actually lives.
+          links and ranks
+          <span data-provider-count="webmail">51</span> webmail entries for each visitor:
+          <span data-provider-count="compose">31</span> provider compose links and
+          <span data-provider-count="fallback">20</span> official webmail fallback pages.
         </p>
 
         <div class="cta-row">
@@ -662,8 +664,8 @@
       <!-- ── Stats ─────────────────────────────────────────────────────────── -->
       <div class="stats-strip">
         <div class="stat">
-          <span class="stat-value" id="stat-providers">30</span>
-          <span class="stat-label">Webmail Providers</span>
+          <span class="stat-value" id="stat-providers" data-provider-count="webmail">51</span>
+          <span class="stat-label">Webmail Entries</span>
         </div>
         <div class="stat">
           <span class="stat-value">150+</span>
