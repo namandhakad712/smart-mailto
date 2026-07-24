@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/namandhakad712/smart-mailto/main/tools/provider-generator/data/providers-schema.json",
+  "title": "smart-mailto Provider Schema",
+  "description": "Schema for tools/provider-generator/data/providers.json — the source-of-truth for all email providers in smart-mailto.",
+  "type": "object",
+  "required": ["version", "providers"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "description": "URL to this schema file",
+      "format": "uri"
+    },
+    "version": {
+      "type": "integer",
+      "description": "Schema version for migration tracking",
+      "minimum": 1
+    },
+    "providers": {
+      "type": "array",
+      "description": "All registered email providers",
+      "items": {
+        "$ref": "#/definitions/Provider"
+      }
+    }
+  },
+  "definitions": {
+    "Provider": {
+      "type": "object",
+      "required": ["id", "name", "urlType", "color", "textColor", "regions"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique provider identifier (kebab-case)",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable provider name"
+        },
+        "urlType": {
+          "type": "string",
+          "enum": ["searchParams", "template", "none"],
+          "description": "How the compose URL is constructed:\n- 'searchParams': baseUrl + URLSearchParams\n- 'template': urlTemplate with {to}/{subject}/{body}/{cc}/{bcc} placeholders\n- 'none': no compose URL (fallbackOnly or isNative/isCopy)"
+        },
+        "baseUrl": {
+          "type": "string",
+          "description": "Base URL for searchParams-type providers",
+          "format": "uri"
+        },
+        "urlTemplate": {
+          "type": "string",
+          "description": "Template URL for template-type providers with {to}/{subject}/{body}/{cc}/{bcc} placeholders"
+        },
+        "urlParams": {
+          "type": "object",
+          "description": "Additional fixed query params for searchParams-type providers",
+          "additionalProperties": { "type": "string" }
+        },
+        "color": {
+          "type": "string",
+          "description": "Brand primary color (hex)",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "textColor": {
+          "type": "string",
+          "description": "Text color on brand background (hex)",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "noCcBcc": {
+          "type": "boolean",
+          "description": "Provider does not support CC/BCC params"
+        },
+        "noBody": {
+          "type": "boolean",
+          "description": "Provider does not support body pre-fill"
+        },
+        "noSubjectBody": {
+          "type": "boolean",
+          "description": "Provider does not support subject or body pre-fill"
+        },
+        "noBodyPreFill": {
+          "type": "boolean",
+          "description": "Provider's webmail strips body content on redirect (pre-fill body disabled)"
+        },
+        "domains": {
+          "type": "array",
+          "description": "Email domains associated with this provider (e.g. ['gmail.com', 'googlemail.com'])",
+          "items": { "type": "string" }
+        },
+        "regions": {
+          "type": "array",
+          "description": "Region tags for geo-routing and docs display",
+          "items": { "type": "string" }
+        },
+        "fallbackOnly": {
+          "type": "boolean",
+          "description": "No working compose URL; shown as fallback/copy-only option"
+        },
+        "isNative": {
+          "type": "boolean",
+          "description": "Built-in 'Default Mail App' option using mailto: protocol"
+        },
+        "isCopy": {
+          "type": "boolean",
+          "description": "Built-in 'Copy Address' option"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "urlType": { "const": "searchParams" } } },
+          "then": { "required": ["baseUrl"] }
+        },
+        {
+          "if": { "properties": { "urlType": { "const": "template" } } },
+          "then": { "required": ["urlTemplate"] }
+        }
+      ]
+    }
+  }
+}

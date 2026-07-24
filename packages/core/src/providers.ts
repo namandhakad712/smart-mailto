@@ -1,13 +1,10 @@
 /**
  * @smart-mailto/core — Provider Database
  *
- * The complete global registry of 45 email providers with compose deep links.
+ * The complete global registry of email providers with compose deep links.
  * GENERATED FILE — DO NOT EDIT DIRECTLY.
  * Source: tools/provider-generator/data/providers.json
  * Regenerate: pnpm generate:providers
- *
- * URL variables are encoded via encodeURIComponent before insertion.
- * Each buildUrl() function is pure and synchronous.
  */
 
 import type { MailtoParams, Provider } from './types.js';
@@ -522,6 +519,42 @@ export const PROVIDERS: Readonly<Record<string, Provider>> = {
     color: '#003298',
     textColor: '#ffffff',
     regions: ['pl'],
+  },
+
+  // docomo — fallback only (no working compose URL)
+  docomo: {
+    id: 'docomo',
+    name: 'docomo mail',
+    buildUrl: () => '#',
+    // docomo has no working compose URL
+    color: '#C41230',
+    textColor: '#ffffff',
+    fallbackOnly: true,
+    regions: ['jp'],
+  },
+
+  // au — fallback only (no working compose URL)
+  au: {
+    id: 'au',
+    name: 'au mail',
+    buildUrl: () => '#',
+    // au has no working compose URL
+    color: '#E63A2E',
+    textColor: '#ffffff',
+    fallbackOnly: true,
+    regions: ['jp'],
+  },
+
+  // softbank — fallback only (no working compose URL)
+  softbank: {
+    id: 'softbank',
+    name: 'SoftBank Mail',
+    buildUrl: () => '#',
+    // softbank has no working compose URL
+    color: '#00A1E4',
+    textColor: '#ffffff',
+    fallbackOnly: true,
+    regions: ['jp'],
   },
 
   interia: {

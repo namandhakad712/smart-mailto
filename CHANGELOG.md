@@ -1,5 +1,17 @@
 # smart-mailto
 
+## Unreleased
+
+### Features
+
+- Add Japanese carrier email support (NTT Docomo, au/KDDI, SoftBank) — 3 new providers (50 total)
+- Create JSON Schema for provider-generator data validation (providers-schema.json)
+- Add CI sync check for provider-generator output drift detection
+
+### Documentation
+
+- Update providers page: 47 → 50 providers, add Japanese carrier entries
+
 ## 0.3.0
 
 ### Minor Changes

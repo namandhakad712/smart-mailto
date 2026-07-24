@@ -428,6 +428,30 @@ const PROVIDER_LOGOS: ProviderLogo[] = [
     regions: ['global'],
   },
   {
+    id: 'docomo',
+    name: 'docomo mail',
+    slug: 'docomo',
+    color: '#C41230',
+    textColor: '#ffffff',
+    regions: ['jp'],
+  },
+  {
+    id: 'au',
+    name: 'au mail',
+    slug: 'au',
+    color: '#E63A2E',
+    textColor: '#ffffff',
+    regions: ['jp'],
+  },
+  {
+    id: 'softbank',
+    name: 'SoftBank Mail',
+    slug: 'softbank',
+    color: '#00A1E4',
+    textColor: '#ffffff',
+    regions: ['jp'],
+  },
+  {
     id: 'copy',
     name: 'Copy Address',
     slug: 'copy',
@@ -495,7 +519,7 @@ export default function ProvidersPage() {
           Provider Registry
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          47 Providers. Zero Compromise.
+          50 Providers. Zero Compromise.
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
           Every provider listed here has been manually verified with HTTP requests. Real compose

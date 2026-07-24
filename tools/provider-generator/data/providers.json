@@ -367,6 +367,36 @@
       "regions": ["pl"]
     },
     {
+      "id": "docomo",
+      "name": "docomo mail",
+      "urlType": "none",
+      "color": "#C41230",
+      "textColor": "#ffffff",
+      "regions": ["jp"],
+      "domains": ["docomo.ne.jp"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "au",
+      "name": "au mail",
+      "urlType": "none",
+      "color": "#E63A2E",
+      "textColor": "#ffffff",
+      "regions": ["jp"],
+      "domains": ["ezweb.ne.jp", "au.com"],
+      "fallbackOnly": true
+    },
+    {
+      "id": "softbank",
+      "name": "SoftBank Mail",
+      "urlType": "none",
+      "color": "#00A1E4",
+      "textColor": "#ffffff",
+      "regions": ["jp"],
+      "domains": ["softbank.ne.jp", "i.softbank.jp"],
+      "fallbackOnly": true
+    },
+    {
       "id": "interia",
       "name": "Interia Poczta",
       "urlTemplate": "https://poczta.interia.pl/?compose=1&to={to}",

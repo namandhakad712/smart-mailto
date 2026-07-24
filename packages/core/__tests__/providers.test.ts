@@ -249,8 +249,8 @@ describe('getAllProviders', () => {
     const all = getAllProviders();
     const webmailProviders = all.filter(provider => !provider.isNative && !provider.isCopy);
 
-    expect(webmailProviders).toHaveLength(45);
-    expect(all).toHaveLength(47);
+    expect(webmailProviders).toHaveLength(48);
+    expect(all).toHaveLength(50);
   });
 
   it('all providers have required fields and buildUrl produces valid output', () => {

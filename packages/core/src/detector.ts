@@ -251,6 +251,13 @@ const DOMAIN_TO_PROVIDER: Readonly<Record<string, string>> = {
   'nate.com': 'nate',
   'nate.co.kr': 'nate',
 
+  // Japanese carriers (fallbackOnly — no compose deep links)
+  'docomo.ne.jp': 'docomo',
+  'ezweb.ne.jp': 'au',
+  'au.com': 'au',
+  'softbank.ne.jp': 'softbank',
+  'i.softbank.jp': 'softbank',
+
   // Indiatimes (India)
   'indiatimes.com': 'indiatimes',
 
