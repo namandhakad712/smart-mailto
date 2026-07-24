@@ -6,6 +6,8 @@ Zero-dependency, framework-agnostic engine that replaces broken `mailto:` links 
 npm i @smart-mailto/core
 ```
 
+[Browser and framework support matrix](https://smart-mailto.vercel.app/docs/browser-support)
+
 ## Quick Start
 
 ```ts

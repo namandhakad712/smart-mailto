@@ -8,6 +8,8 @@ npm i @smart-mailto/vue
 
 Requires `vue >= 3.0.0`. Includes `@smart-mailto/core` as a dependency.
 
+[Browser and framework support matrix](https://smart-mailto.vercel.app/docs/browser-support)
+
 ## Usage
 
 ### Plugin (app-level — intercepts all mailto: links)

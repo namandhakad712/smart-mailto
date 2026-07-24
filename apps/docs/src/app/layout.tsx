@@ -132,6 +132,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </svg>
               Growth by Human
             </a>
+            <a
+              className="inline-flex items-center gap-1 normal-case tracking-normal hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
+              href="https://tin.computer"
+            >
+              <svg aria-hidden="true" className="h-[1em] w-[1em]" viewBox="0 0 32 32">
+                <rect width="32" height="32" fill="#66DC9D" />
+              </svg>
+              Growth by Tin
+            </a>
           </div>
           <div className="flex gap-6 font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted">
             <a

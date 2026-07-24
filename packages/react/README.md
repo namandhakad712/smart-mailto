@@ -8,6 +8,8 @@ npm i @smart-mailto/react
 
 Requires `react >= 17.0.0`. Includes `@smart-mailto/core` as a dependency.
 
+[Browser and framework support matrix](https://smart-mailto.vercel.app/docs/browser-support)
+
 ## Usage
 
 ### Magic Mode (app-level — intercepts all mailto: links)
