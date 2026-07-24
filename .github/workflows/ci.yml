@@ -35,6 +35,9 @@ jobs:
       - name: Lint
         run: pnpm format:check
 
+      - name: Test provider validator
+        run: pnpm --filter @smart-mailto/provider-validator test
+
       - name: Run tests with coverage
         run: pnpm --filter @smart-mailto/core exec vitest run --coverage
 
