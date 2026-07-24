@@ -1,5 +1,14 @@
 # docs
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [4b75556]
+- Updated dependencies [7143396]
+  - @smart-mailto/core@0.3.0
+  - @smart-mailto/react@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

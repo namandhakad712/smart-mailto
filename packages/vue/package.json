@@ -1,6 +1,6 @@
 {
   "name": "@smart-mailto/vue",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Vue 3 wrapper for smart-mailto — geo-aware webmail picker",
   "keywords": [
     "mailto",
