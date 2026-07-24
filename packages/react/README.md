@@ -1,12 +1,12 @@
 # @smart-mailto/react
 
-React components and hooks for [smart-mailto](https://github.com/namandhakad712/smart-mailto) — a geo-aware webmail picker that replaces broken `mailto:` links.
+React components and hooks for the [smart-mailto](https://github.com/namandhakad712/smart-mailto) webmail provider picker.
 
 ```bash
 npm i @smart-mailto/react
 ```
 
-Requires `react >= 17.0.0`. Peer: `@smart-mailto/core`.
+Requires `react >= 17.0.0`. Includes `@smart-mailto/core` as a dependency.
 
 ## Usage
 
@@ -67,7 +67,7 @@ Wraps a child element (typically text or a button). Same props as `SmartMailtoCo
 
 ### `useSmartMailto()`
 
-Returns `{ open: (email: string, subject?, body?) => void }`.
+Returns `{ open: (email: string, overrides?: Partial<SmartMailtoConfig>) => void }`.
 
 ## License
 

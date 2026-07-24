@@ -1,12 +1,13 @@
 {
   "name": "@smart-mailto/svelte",
   "version": "0.2.0",
-  "description": "Svelte wrapper for smart-mailto — geo-aware webmail picker",
+  "description": "Svelte action and global initializer for the smart-mailto webmail provider picker",
   "keywords": [
     "mailto",
     "email",
-    "svelte",
     "webmail",
+    "picker",
+    "svelte",
     "gmail",
     "typescript"
   ],

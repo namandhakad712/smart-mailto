@@ -1,16 +1,16 @@
 # @smart-mailto/svelte
 
-Svelte action, component, and global init for [smart-mailto](https://github.com/namandhakad712/smart-mailto) — a geo-aware webmail picker that replaces broken `mailto:` links.
+Svelte action and global initializer for the [smart-mailto](https://github.com/namandhakad712/smart-mailto) webmail provider picker.
 
 ```bash
 npm i @smart-mailto/svelte
 ```
 
-Requires `svelte >= 4.0.0`. Peer: `@smart-mailto/core`.
+Requires `svelte >= 4.0.0`. Includes `@smart-mailto/core` as a dependency.
 
 ## Usage
 
-### Svelte Action (on any anchor)
+### Svelte action (on any anchor)
 
 ```svelte
 <script>
@@ -22,19 +22,7 @@ Requires `svelte >= 4.0.0`. Peer: `@smart-mailto/core`.
 </a>
 ```
 
-### Component
-
-```svelte
-<script>
-  import { SmartMailto } from '@smart-mailto/svelte';
-</script>
-
-<SmartMailto href="mailto:hello@example.com" theme="dark">
-  Contact Us
-</SmartMailto>
-```
-
-### Global Init (app-level — intercepts all mailto: links)
+### Global init (app-level — intercepts all mailto: links)
 
 ```svelte
 <!-- +layout.svelte (SvelteKit) -->

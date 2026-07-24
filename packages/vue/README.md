@@ -1,12 +1,12 @@
 # @smart-mailto/vue
 
-Vue 3 plugin and component for [smart-mailto](https://github.com/namandhakad712/smart-mailto) — a geo-aware webmail picker that replaces broken `mailto:` links.
+Vue 3 plugin and component for the [smart-mailto](https://github.com/namandhakad712/smart-mailto) webmail provider picker.
 
 ```bash
 npm i @smart-mailto/vue
 ```
 
-Requires `vue >= 3.0.0`. Peer: `@smart-mailto/core`.
+Requires `vue >= 3.0.0`. Includes `@smart-mailto/core` as a dependency.
 
 ## Usage
 
