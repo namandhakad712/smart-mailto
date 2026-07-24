@@ -6,6 +6,9 @@ import { SmartMailto } from '@smart-mailto/react';
 import { useIsDark } from '@/hooks/useIsDark';
 
 const PROVIDERS = getCatalogProviders();
+const WEBMAIL_PROVIDERS = PROVIDERS.filter(provider => !provider.isNative && !provider.isCopy);
+const COMPOSE_PROVIDER_COUNT = WEBMAIL_PROVIDERS.filter(provider => !provider.fallbackOnly).length;
+const FALLBACK_PROVIDER_COUNT = WEBMAIL_PROVIDERS.filter(provider => provider.fallbackOnly).length;
 
 const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
   yandex: 'Yandex Mail',
@@ -175,11 +178,12 @@ export default function ProvidersPage() {
           Provider Registry
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          {PROVIDERS.length} Providers. Zero Compromise.
+          {WEBMAIL_PROVIDERS.length} Webmail Entries.
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
-          Every provider listed here has been manually verified with HTTP requests. Real compose
-          URLs — updated quarterly.
+          {COMPOSE_PROVIDER_COUNT} provider compose links and {FALLBACK_PROVIDER_COUNT} official
+          webmail fallback pages. Prefill support varies by provider; native mail and copy-address
+          remain separate fallback actions.
         </p>
       </header>
 

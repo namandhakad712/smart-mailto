@@ -1,7 +1,7 @@
 {
   "name": "@smart-mailto/core",
   "version": "0.2.0",
-  "description": "Zero-dependency, privacy-first mailto enhancer with a geo-aware picker for 37 webmail providers",
+  "description": "Zero-dependency, privacy-first mailto enhancer with a geo-aware 51-entry webmail registry",
   "keywords": [
     "mailto",
     "email",

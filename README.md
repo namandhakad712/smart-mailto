@@ -6,7 +6,7 @@
 <p>
   <img src="https://img.shields.io/badge/Zero_Dependencies-0?style=for-the-badge&color=0D9488&logo=vercel&logoColor=white" alt="Zero Dependencies"/>
   <img src="https://img.shields.io/badge/Bundle-<8KB?style=for-the-badge&color=14B8A6&logo=webpack&logoColor=white" alt="Bundle Size"/>
-  <img src="https://img.shields.io/badge/Providers-37%2B?style=for-the-badge&color=2DD4BF&logo=google&logoColor=white" alt="Providers"/>
+  <img src="https://img.shields.io/badge/Webmail_Entries-51?style=for-the-badge&color=2DD4BF&logo=google&logoColor=white" alt="51 webmail entries"/>
   <img src="https://img.shields.io/badge/Coverage-90%25?style=for-the-badge&color=5EEAD4&logo=jest&logoColor=white" alt="Coverage"/>
   <img src="https://img.shields.io/badge/Privacy-100%25?style=for-the-badge&color=115E59&logo=privacy&logoColor=white" alt="Privacy"/>
 </p>
@@ -99,16 +99,16 @@ The `mailto:` protocol was designed in 1997 for a world where every computer had
 
 ## 📊 Performance Metrics
 
-| Metric                      | Value               | Status            |
-| --------------------------- | ------------------- | ----------------- |
-| 📦 **Gzipped bundle**       | **< 8 KB**          | ✅ 7.4 KB         |
-| 🔌 **Runtime dependencies** | **0**               | ✅ Zero           |
-| 🌐 **Providers**            | **37+** globally    | ✅                |
-| ⚡ **Geo detection**        | **< 1 ms** (~0.4ms) | ✅                |
-| 🚀 **Link-to-modal**        | **< 20 ms**         | ✅                |
-| 🧪 **Test coverage**        | **90%+**            | ✅ Enforced in CI |
-| 🔒 **Network requests**     | **0**               | ✅ Privacy-safe   |
-| 🌍 **Regions supported**    | **30+**             | ✅                |
+| Metric                      | Value               | Status                                          |
+| --------------------------- | ------------------- | ----------------------------------------------- |
+| 📦 **Gzipped bundle**       | **< 8 KB**          | ✅ 7.4 KB                                       |
+| 🔌 **Runtime dependencies** | **0**               | ✅ Zero                                         |
+| 🌐 **Webmail registry**     | **51** entries      | ✅ **31** compose links + **20** fallback pages |
+| ⚡ **Geo detection**        | **< 1 ms** (~0.4ms) | ✅                                              |
+| 🚀 **Link-to-modal**        | **< 20 ms**         | ✅                                              |
+| 🧪 **Test coverage**        | **90%+**            | ✅ Enforced in CI                               |
+| 🔒 **Network requests**     | **0**               | ✅ Privacy-safe                                 |
+| 🌍 **Regions supported**    | **30+**             | ✅                                              |
 
 > 💡 **CI rejects any build where gzipped `dist/index.js` exceeds 8,192 bytes.**
 

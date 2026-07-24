@@ -18,6 +18,21 @@ let destroy: (() => void) | null = null;
 // ─────────────────────────────────────────────────────────────────────────────
 
 function initDemo() {
+  const webmailProviders = getAllProviders().filter(
+    provider => !provider.isNative && !provider.isCopy,
+  );
+  const providerCounts = {
+    webmail: webmailProviders.length,
+    compose: webmailProviders.filter(provider => !provider.fallbackOnly).length,
+    fallback: webmailProviders.filter(provider => provider.fallbackOnly).length,
+  };
+
+  for (const [kind, count] of Object.entries(providerCounts)) {
+    document.querySelectorAll<HTMLElement>(`[data-provider-count="${kind}"]`).forEach(element => {
+      element.textContent = String(count);
+    });
+  }
+
   // Initialize smart-mailto
   destroy = initSmartMailto({
     theme: currentTheme,
