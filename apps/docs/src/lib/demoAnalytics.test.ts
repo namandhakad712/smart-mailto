@@ -93,7 +93,7 @@ describe('privacy-safe homepage demo analytics', () => {
         uuid: 'random-event-id',
         event: '$pageview',
         properties: { token: 'public-project-key' },
-      })
+      }),
     ).toBeNull();
     expect(JSON.stringify(sanitized)).not.toContain('private');
   });
