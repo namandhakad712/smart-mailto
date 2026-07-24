@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { spawnModal } from '../src/modal.js';
 import type { Provider, ResolvedProviders, SmartMailtoConfig } from '../src/types.js';
 
@@ -65,6 +65,8 @@ function expectClasses(shadow: ShadowRoot, selector: string, ...classes: string[
 }
 
 afterEach(() => {
+  vi.useRealTimers();
+  vi.restoreAllMocks();
   document.getElementById('__smart-mailto-host__')?.remove();
 });
 
@@ -119,5 +121,90 @@ describe('modal class names', () => {
 
     expect(shadow.querySelector('style')).toBeNull();
     expect(shadow.querySelector('.sm-modal')).not.toBeNull();
+  });
+});
+
+describe('modal lifecycle hooks', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  it.each([
+    {
+      method: 'close button',
+      dismiss: (shadow: ShadowRoot) =>
+        shadow.querySelector<HTMLButtonElement>('.sm-close-btn')?.click(),
+    },
+    {
+      method: 'overlay',
+      dismiss: (shadow: ShadowRoot) => shadow.querySelector<HTMLElement>('.sm-overlay')?.click(),
+    },
+    {
+      method: 'Escape key',
+      dismiss: () => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })),
+    },
+  ])('fires onClose after dismissal with the $method', ({ dismiss }) => {
+    const previousFocus = document.createElement('button');
+    document.body.appendChild(previousFocus);
+    previousFocus.focus();
+    const onClose = vi.fn();
+    const shadow = render({ onClose });
+
+    dismiss(shadow);
+    vi.advanceTimersByTime(280);
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(document.getElementById('__smart-mailto-host__')).toBeNull();
+    expect(document.activeElement).toBe(previousFocus);
+    previousFocus.remove();
+  });
+
+  it('cleans up after provider selection without firing onClose', () => {
+    const previousFocus = document.createElement('button');
+    document.body.appendChild(previousFocus);
+    previousFocus.focus();
+    const onOpen = vi.fn();
+    const onClose = vi.fn();
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+    const shadow = render({ onOpen, onClose });
+
+    shadow.querySelector<HTMLButtonElement>('.sm-provider-btn')?.click();
+
+    expect(openSpy).toHaveBeenCalledWith(
+      'https://mail.google.com/',
+      '_blank',
+      'noopener,noreferrer',
+    );
+    expect(onOpen).toHaveBeenCalledWith(
+      gmail,
+      expect.objectContaining({ to: ['hello@example.com'], subject: 'Hello' }),
+    );
+    expect(onClose).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(280);
+
+    expect(onClose).not.toHaveBeenCalled();
+    expect(document.getElementById('__smart-mailto-host__')).toBeNull();
+    expect(document.activeElement).toBe(previousFocus);
+    previousFocus.remove();
+  });
+
+  it('fires onCopy without dismissing the modal', async () => {
+    const onCopy = vi.fn();
+    const onClose = vi.fn();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText },
+    });
+    const shadow = render({ onCopy, onClose });
+
+    shadow.querySelector<HTMLButtonElement>('.sm-copy-btn')?.click();
+    await Promise.resolve();
+
+    expect(writeText).toHaveBeenCalledWith('hello@example.com');
+    expect(onCopy).toHaveBeenCalledWith('hello@example.com');
+    expect(onClose).not.toHaveBeenCalled();
+    expect(document.getElementById('__smart-mailto-host__')).not.toBeNull();
   });
 });
