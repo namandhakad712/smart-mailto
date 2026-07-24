@@ -5,12 +5,22 @@
 ### Features
 
 - Add Japanese carrier email support (NTT Docomo, au/KDDI, SoftBank) — 3 new providers (50 total)
+- Add UMD bundle format to core package for CDN/script-tag usage
+- Add 12 React wrapper tests (component, provider, hook)
 - Create JSON Schema for provider-generator data validation (providers-schema.json)
 - Add CI sync check for provider-generator output drift detection
 
 ### Documentation
 
+- Create geo-routing docs page explaining zero-network geolocation
+- Create CDN usage guide (UMD, ESM import maps, framework wrappers)
+- Create blog placeholder page
+- Update nav with Geo, CDN, Blog links
 - Update providers page: 47 → 50 providers, add Japanese carrier entries
+
+### Infrastructure
+
+- Add React wrapper test run to CI pipeline
 
 ## 0.3.0
 

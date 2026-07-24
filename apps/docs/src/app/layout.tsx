@@ -93,9 +93,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <Link
               className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
+              href="/docs/geo-routing"
+            >
+              Geo
+            </Link>
+            <Link
+              className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
               href="/guides/replace-mailto"
             >
               Guide
+            </Link>
+            <Link
+              className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
+              href="/docs/cdn"
+            >
+              CDN
+            </Link>
+            <Link
+              className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
+              href="/blog"
+            >
+              Blog
             </Link>
           </nav>
         </header>

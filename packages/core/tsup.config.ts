@@ -2,13 +2,19 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['esm', 'cjs'],
+  format: ['esm', 'cjs', 'umd'],
   dts: true,
   sourcemap: true,
   clean: true,
   minify: true,
   treeshake: true,
   splitting: true,
+  globalName: 'SmartMailto',
+  outExtension({ format }) {
+    return {
+      js: format === 'umd' ? `.umd.js` : format === 'cjs' ? `.cjs` : `.js`,
+    };
+  },
   // Ensure zero external dependencies
   noExternal: [],
   external: [],
