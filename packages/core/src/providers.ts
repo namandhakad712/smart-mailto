@@ -358,35 +358,29 @@ export const PROVIDERS: Readonly<Record<string, Provider>> = {
     regions: ['cn'],
   },
 
+  // rediff — fallback only (no working compose URL)
   rediff: {
     id: 'rediff',
     name: 'Rediffmail',
-    buildUrl: (p: MailtoParams) => {
-      return (
-        'https://webmail.rediff.com/?compose=Y&to=' +
-        e(p.to.join(',')) +
-        '&subject=' +
-        e(p.subject ?? '') +
-        ''
-      );
+    buildUrl: () => {
+      return 'https://mail.rediff.com/cgi-bin/login.cgi/1000';
     },
     color: '#D10000',
     textColor: '#ffffff',
+    fallbackOnly: true,
     regions: ['in'],
   },
 
+  // seznam — fallback only (no working compose URL)
   seznam: {
     id: 'seznam',
     name: 'Seznam Email',
-    buildUrl: (p: MailtoParams) => {
-      const url = new URL('https://email.seznam.cz/newmessage');
-      url.searchParams.set('to', p.to.join(','));
-      if (p.subject) url.searchParams.set('subject', p.subject);
-      if (p.body) url.searchParams.set('body', p.body);
-      return url.toString();
+    buildUrl: () => {
+      return 'https://email.seznam.cz/';
     },
     color: '#CC0000',
     textColor: '#ffffff',
+    fallbackOnly: true,
     regions: ['cz'],
   },
 
@@ -442,14 +436,16 @@ export const PROVIDERS: Readonly<Record<string, Provider>> = {
     regions: ['it'],
   },
 
+  // mailfence — fallback only (no working compose URL)
   mailfence: {
     id: 'mailfence',
     name: 'Mailfence',
-    buildUrl: (p: MailtoParams) => {
-      return 'https://mailfence.com/sw/mailfence/app.jsp#compose&to=' + e(p.to.join(',')) + '';
+    buildUrl: () => {
+      return 'https://mailfence.com/';
     },
     color: '#37A000',
     textColor: '#ffffff',
+    fallbackOnly: true,
     regions: ['be', 'eu', 'privacy'],
   },
 
@@ -700,14 +696,16 @@ export const PROVIDERS: Readonly<Record<string, Provider>> = {
     regions: ['in'],
   },
 
+  // spike — fallback only (no working compose URL)
   spike: {
     id: 'spike',
     name: 'Spike Mail',
-    buildUrl: (p: MailtoParams) => {
-      return 'https://app.spike.email/compose?to=' + e(p.to.join(',')) + '';
+    buildUrl: () => {
+      return 'https://spikenow.com/web/';
     },
     color: '#6C5CE7',
     textColor: '#ffffff',
+    fallbackOnly: true,
     regions: ['global'],
   },
 

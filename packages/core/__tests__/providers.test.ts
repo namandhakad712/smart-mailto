@@ -155,9 +155,21 @@ describe('Provider URL builders', () => {
   // ── Seznam (Czech Republic) ───────────────────────────────────────────────
 
   describe('seznam', () => {
-    it('uses email.seznam.cz', () => {
+    it('falls back to the current Seznam webmail entry point', () => {
       const url = PROVIDERS['seznam']!.buildUrl(SIMPLE_PARAMS);
-      expect(url).toContain('email.seznam.cz');
+      expect(url).toBe('https://email.seznam.cz/');
+      expect(PROVIDERS['seznam']!.fallbackOnly).toBe(true);
+    });
+  });
+
+  describe.each([
+    ['rediff', 'https://mail.rediff.com/cgi-bin/login.cgi/1000'],
+    ['mailfence', 'https://mailfence.com/'],
+    ['spike', 'https://spikenow.com/web/'],
+  ])('%s', (providerId, fallbackUrl) => {
+    it('uses a safe webmail fallback when no compose deep link is verified', () => {
+      expect(PROVIDERS[providerId]!.buildUrl(SIMPLE_PARAMS)).toBe(fallbackUrl);
+      expect(PROVIDERS[providerId]!.fallbackOnly).toBe(true);
     });
   });
 

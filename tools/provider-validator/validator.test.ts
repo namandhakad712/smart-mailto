@@ -51,6 +51,18 @@ test('fallback-only webmail providers remain covered without making network requ
   assert.ok(Object.values(report).every(result => result.classification === 'fallback-only'));
 });
 
+test('providers without a verified compose deep link remain in fallback-only coverage', () => {
+  const targets = buildProviderTargets();
+  const expectedFallbacks = ['rediff', 'seznam', 'mailfence', 'spike'];
+
+  for (const id of expectedFallbacks) {
+    const target = targets.find(provider => provider.id === id);
+    assert.ok(target);
+    assert.equal(target.fallbackOnly, true);
+    assert.equal(target.url, null);
+  }
+});
+
 test('response classification separates login and bot protection from unreachable endpoints', () => {
   assert.equal(classifyResponse(200, 'https://accounts.google.com/signin'), 'login-required');
   assert.equal(classifyResponse(401, 'https://mail.example.com/compose'), 'login-required');
