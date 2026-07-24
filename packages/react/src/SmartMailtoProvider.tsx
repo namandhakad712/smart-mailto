@@ -10,6 +10,7 @@ import {
   initSmartMailto,
   destroySmartMailto,
   updateConfig,
+  type MailtoParams,
   type SmartMailtoConfig,
 } from '@smart-mailto/core';
 
@@ -17,10 +18,13 @@ import {
 // Context
 // ─────────────────────────────────────────────────────────────────────────────
 
-interface SmartMailtoContextValue {
+export type SmartMailtoOpenOptions = Partial<SmartMailtoConfig> &
+  Pick<MailtoParams, 'subject' | 'body'>;
+
+export interface SmartMailtoContextValue {
   config: SmartMailtoConfig;
   /** Programmatically open the picker for any email string */
-  open: (email: string, overrides?: Partial<SmartMailtoConfig>) => void;
+  open: (email: string, options?: SmartMailtoOpenOptions) => void;
 }
 
 const SmartMailtoContext = createContext<SmartMailtoContextValue | null>(null);
@@ -60,12 +64,23 @@ export function SmartMailtoProvider({ children, ...config }: SmartMailtoProvider
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.theme, config.preferredProvider, config.maxProviders]);
 
-  const open = (email: string, overrides?: Partial<SmartMailtoConfig>) => {
-    import('@smart-mailto/core').then(({ parseMailto, resolveProviders, spawnModal }) => {
-      const params = parseMailto(`mailto:${email}`);
-      const resolved = resolveProviders(params, { ...config, ...overrides });
-      spawnModal(params, resolved, { ...config, ...overrides });
-    });
+  const open = (email: string, options: SmartMailtoOpenOptions = {}) => {
+    const { subject, body, ...overrides } = options;
+
+    import('@smart-mailto/core').then(
+      ({ buildMailtoHref, parseMailto, resolveProviders, spawnModal }) => {
+        const baseParams = parseMailto(`mailto:${email}`);
+        const href = buildMailtoHref({
+          ...baseParams,
+          ...(subject !== undefined && { subject }),
+          ...(body !== undefined && { body }),
+        });
+        const params = parseMailto(href);
+        const modalConfig = { ...config, ...overrides };
+        const resolved = resolveProviders(params, modalConfig);
+        spawnModal(params, resolved, modalConfig);
+      },
+    );
   };
 
   return (
@@ -82,7 +97,7 @@ export function SmartMailtoProvider({ children, ...config }: SmartMailtoProvider
  *
  * @example
  * const { open } = useSmartMailto();
- * <button onClick={() => open('hello@example.com', { subject: 'Hi' })}>
+ * <button onClick={() => open('hello@example.com', { subject: 'Hi', body: 'Hello!' })}>
  *   Email Us
  * </button>
  */

@@ -40,6 +40,8 @@ export { SmartMailto, type SmartMailtoProps } from './SmartMailto.js';
 export {
   SmartMailtoProvider,
   useSmartMailto,
+  type SmartMailtoContextValue,
+  type SmartMailtoOpenOptions,
   type SmartMailtoProviderProps,
 } from './SmartMailtoProvider.js';
 

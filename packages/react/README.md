@@ -41,7 +41,19 @@ import { useSmartMailto } from '@smart-mailto/react';
 
 function ContactButton() {
   const { open } = useSmartMailto();
-  return <button onClick={() => open('hello@example.com')}>Email Us</button>;
+  return (
+    <button
+      onClick={() =>
+        open('hello@example.com', {
+          subject: 'Hello from the website',
+          body: 'I would like to learn more.',
+          theme: 'dark',
+        })
+      }
+    >
+      Email Us
+    </button>
+  );
 }
 ```
 
@@ -67,7 +79,11 @@ Wraps a child element (typically text or a button). Same props as `SmartMailtoCo
 
 ### `useSmartMailto()`
 
-Returns `{ open: (email: string, overrides?: Partial<SmartMailtoConfig>) => void }`.
+Returns `{ open: (email: string, options?: SmartMailtoOpenOptions) => void }`.
+
+`SmartMailtoOpenOptions` accepts `subject` and `body` message fields plus any
+`SmartMailtoConfig` option as a one-call picker override. Address-only calls such as
+`open('hello@example.com')` remain supported.
 
 ## License
 

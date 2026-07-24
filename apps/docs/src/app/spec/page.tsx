@@ -648,7 +648,11 @@ getAllProviders()   // → Provider[]`}</pre>
 
 // useSmartMailto() for programmatic control
 const { open, config } = useSmartMailto();
-open('hello@example.com', { subject: 'Hi' });
+open('hello@example.com', {
+  subject: 'Hi',
+  body: 'I would like to learn more.',
+  theme: 'dark', // optional one-call picker override
+});
 
 // SmartMailto drop-in component replaces <a>
 <SmartMailto href="mailto:hello@example.com" theme="dark">
