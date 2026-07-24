@@ -1,5 +1,15 @@
 # @smart-mailto/demo
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [b5b505e]
+- Updated dependencies [62eeb1e]
+- Updated dependencies [4b75556]
+- Updated dependencies [7143396]
+  - @smart-mailto/core@0.3.0
+
 ## 0.0.2
 
 ### Patch Changes
