@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const mockParseMailto = vi.fn();
@@ -8,9 +8,11 @@ const mockIsValidMailtoParams = vi.fn();
 const mockResolveProviders = vi.fn();
 const mockSpawnModal = vi.fn();
 const mockInitSmartMailto = vi.fn(() => vi.fn());
+const mockBuildMailtoHref = vi.fn();
 
 vi.mock('@smart-mailto/core', () => ({
   parseMailto: (...args: unknown[]) => mockParseMailto(...args),
+  buildMailtoHref: (...args: unknown[]) => mockBuildMailtoHref(...args),
   isValidMailtoParams: (...args: unknown[]) => mockIsValidMailtoParams(...args),
   resolveProviders: (...args: unknown[]) => mockResolveProviders(...args),
   spawnModal: (...args: unknown[]) => mockSpawnModal(...args),
@@ -25,6 +27,7 @@ import { SmartMailtoProvider, useSmartMailto } from '../src/SmartMailtoProvider'
 beforeEach(() => {
   vi.clearAllMocks();
   mockParseMailto.mockReturnValue({ to: ['test@example.com'] });
+  mockBuildMailtoHref.mockReturnValue('mailto:test@example.com');
   mockIsValidMailtoParams.mockReturnValue(true);
   mockResolveProviders.mockReturnValue({
     providers: [{ id: 'gmail', name: 'Gmail', buildUrl: () => 'https://mail.google.com' }],
@@ -200,5 +203,126 @@ describe('useSmartMailto', () => {
     expect(contextValue).toHaveProperty('config');
     expect(contextValue).toHaveProperty('open');
     expect(typeof (contextValue as Record<string, unknown>).open).toBe('function');
+  });
+
+  it('opens with an address only', async () => {
+    function TestComponent() {
+      const { open } = useSmartMailto();
+      return <button onClick={() => open('hello@example.com')}>Open</button>;
+    }
+
+    const user = userEvent.setup();
+    render(
+      <SmartMailtoProvider>
+        <TestComponent />
+      </SmartMailtoProvider>,
+    );
+
+    await user.click(screen.getByText('Open'));
+
+    await waitFor(() => {
+      expect(mockParseMailto).toHaveBeenNthCalledWith(1, 'mailto:hello@example.com');
+      expect(mockBuildMailtoHref).toHaveBeenCalledWith({ to: ['test@example.com'] });
+      expect(mockSpawnModal).toHaveBeenCalled();
+    });
+  });
+
+  it('passes subject and body through the encoded mailto parameters', async () => {
+    const { buildMailtoHref, parseMailto } =
+      await vi.importActual<typeof import('@smart-mailto/core')>('@smart-mailto/core');
+    const messageParams = {
+      to: ['hello@example.com'],
+      subject: 'Hi & welcome?',
+      body: 'Line one\nLine two + details',
+    };
+    const encodedHref =
+      'mailto:hello@example.com?subject=Hi%20%26%20welcome%3F&body=Line%20one%0ALine%20two%20%2B%20details';
+    mockParseMailto.mockImplementation(parseMailto);
+    mockBuildMailtoHref.mockImplementation(buildMailtoHref);
+
+    function TestComponent() {
+      const { open } = useSmartMailto();
+      return (
+        <button
+          onClick={() =>
+            open('hello@example.com', {
+              subject: messageParams.subject,
+              body: messageParams.body,
+            })
+          }
+        >
+          Open
+        </button>
+      );
+    }
+
+    const user = userEvent.setup();
+    render(
+      <SmartMailtoProvider>
+        <TestComponent />
+      </SmartMailtoProvider>,
+    );
+
+    await user.click(screen.getByText('Open'));
+
+    await waitFor(() => {
+      expect(mockBuildMailtoHref).toHaveBeenCalledWith(messageParams);
+      expect(mockParseMailto).toHaveBeenNthCalledWith(2, encodedHref);
+      expect(mockResolveProviders).toHaveBeenCalledWith(messageParams, {});
+      expect(mockSpawnModal).toHaveBeenCalledWith(messageParams, expect.anything(), {});
+    });
+  });
+
+  it('keeps picker overrides out of the mailto parameters', async () => {
+    mockParseMailto.mockReturnValueOnce({ to: ['hello@example.com'] }).mockReturnValueOnce({
+      to: ['hello@example.com'],
+      subject: 'Hi',
+      body: 'Details',
+    });
+
+    function TestComponent() {
+      const { open } = useSmartMailto();
+      return (
+        <button
+          onClick={() =>
+            open('hello@example.com', {
+              subject: 'Hi',
+              body: 'Details',
+              theme: 'dark',
+              preferredProvider: 'protonmail',
+            })
+          }
+        >
+          Open
+        </button>
+      );
+    }
+
+    const user = userEvent.setup();
+    render(
+      <SmartMailtoProvider maxProviders={4}>
+        <TestComponent />
+      </SmartMailtoProvider>,
+    );
+
+    await user.click(screen.getByText('Open'));
+
+    await waitFor(() => {
+      expect(mockBuildMailtoHref).toHaveBeenCalledWith({
+        to: ['hello@example.com'],
+        subject: 'Hi',
+        body: 'Details',
+      });
+      expect(mockResolveProviders).toHaveBeenCalledWith(expect.anything(), {
+        maxProviders: 4,
+        theme: 'dark',
+        preferredProvider: 'protonmail',
+      });
+      expect(mockSpawnModal).toHaveBeenCalledWith(expect.anything(), expect.anything(), {
+        maxProviders: 4,
+        theme: 'dark',
+        preferredProvider: 'protonmail',
+      });
+    });
   });
 });
