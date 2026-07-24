@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { SmartMailto } from '@smart-mailto/react';
 import { useIsDark } from '@/hooks/useIsDark';
+import { captureDemoPageview, createDemoAnalyticsHooks } from '@/lib/demoAnalytics';
 
 const MailIcon = () => (
   <svg
@@ -58,6 +59,14 @@ const CheckIcon = () => (
 export function Demo() {
   const [copied, setCopied] = useState(false);
   const isDark = useIsDark();
+  const pageviewCaptured = useRef(false);
+  const analyticsHooks = useMemo(() => createDemoAnalyticsHooks(), []);
+
+  useEffect(() => {
+    if (pageviewCaptured.current) return;
+    pageviewCaptured.current = true;
+    captureDemoPageview();
+  }, []);
 
   return (
     <div className="max-w-xl mx-auto bg-surface dark:bg-surface-container border border-border dark:border-border p-5 sm:p-7">
@@ -77,7 +86,10 @@ export function Demo() {
         href="mailto:hello@example.com?subject=Hello%20from%20smart-mailto!&body=This%20is%20amazing."
         theme={isDark ? 'dark' : 'light'}
         className="group inline-flex items-center gap-2 bg-red hover:bg-red-dark text-white font-body text-sm font-medium px-6 py-2.5 transition-colors cursor-pointer"
+        onShow={analyticsHooks.onShow}
+        onOpen={analyticsHooks.onOpen}
         onCopy={() => {
+          analyticsHooks.onCopy();
           setCopied(true);
           setTimeout(() => setCopied(false), 2000);
         }}
