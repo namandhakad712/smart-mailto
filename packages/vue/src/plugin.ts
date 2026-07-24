@@ -17,8 +17,6 @@
 import { type App, type Plugin } from 'vue';
 import { initSmartMailto, type SmartMailtoConfig } from '@smart-mailto/core';
 
-let destroyFn: (() => void) | null = null;
-
 /**
  * Vue plugin that initializes smart-mailto globally.
  * Cleans up when the Vue app is unmounted.
@@ -26,13 +24,22 @@ let destroyFn: (() => void) | null = null;
 export const SmartMailtoPlugin: Plugin<SmartMailtoConfig> = {
   install(app: App, config: SmartMailtoConfig = {}) {
     // Initialize global event delegation
-    destroyFn = initSmartMailto(config);
+    const destroy = initSmartMailto(config);
 
     // Provide config to all child components via inject
     app.provide('smartMailtoConfig', config);
 
     // Clean up when app unmounts
-    app.config.globalProperties.$smartMailtoDestroy = destroyFn;
+    app.config.globalProperties.$smartMailtoDestroy = destroy;
+    const unmount = app.unmount.bind(app);
+    let destroyed = false;
+    app.unmount = () => {
+      if (!destroyed) {
+        destroy();
+        destroyed = true;
+      }
+      unmount();
+    };
 
     // Register global component
     app.component('SmartMailto', SmartMailtoComponent);
