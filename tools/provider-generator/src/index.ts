@@ -11,6 +11,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { format, resolveConfig } from 'prettier';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -158,7 +159,7 @@ function idNeedsQuotes(id: string): boolean {
 
 /* ────────────────────────────────────────────────── Main ───────── */
 
-function main() {
+async function main() {
   if (!existsSync(DATA_FILE)) {
     console.error(`❌ Data file not found: ${DATA_FILE}`);
     process.exit(1);
@@ -231,8 +232,14 @@ function main() {
   lines.push('}');
   lines.push('');
 
-  writeFileSync(OUTPUT_FILE, lines.join('\n'), 'utf-8');
+  const prettierConfig = await resolveConfig(OUTPUT_FILE);
+  const output = await format(lines.join('\n'), {
+    ...prettierConfig,
+    parser: 'typescript',
+  });
+
+  writeFileSync(OUTPUT_FILE, output, 'utf-8');
   console.log(`✅ Generated ${OUTPUT_FILE} (${providers.length} providers)`);
 }
 
-main();
+void main();
