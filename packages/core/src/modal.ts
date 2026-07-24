@@ -345,7 +345,8 @@ function buildModalDOM(
   params: MailtoParams,
   resolved: ResolvedProviders,
   config: SmartMailtoConfig,
-  onClose: () => void,
+  onDismiss: () => void,
+  onComplete: () => void,
 ): HTMLElement {
   const i18n = { ...DEFAULT_I18N, ...config.i18n };
   const { providers, detectedRegion } = resolved;
@@ -362,7 +363,7 @@ function buildModalDOM(
 
   // Close on overlay click
   overlay.addEventListener('click', e => {
-    if (e.target === overlay) onClose();
+    if (e.target === overlay) onDismiss();
   });
 
   // Create modal
@@ -401,7 +402,7 @@ function buildModalDOM(
   appendCustomClass(closeBtn, config.classNames?.closeButton);
   closeBtn.setAttribute('aria-label', i18n.close);
   closeBtn.textContent = '✕';
-  closeBtn.addEventListener('click', onClose);
+  closeBtn.addEventListener('click', onDismiss);
 
   header.appendChild(titleArea);
   header.appendChild(closeBtn);
@@ -416,7 +417,7 @@ function buildModalDOM(
   const preferredId = resolved.detectedFromEmail ?? config.preferredProvider ?? null;
 
   mainProviders.forEach(provider => {
-    const btn = createProviderButton(provider, params, config, preferredId, onClose, i18n);
+    const btn = createProviderButton(provider, params, config, preferredId, onComplete, i18n);
     grid.appendChild(btn);
   });
 
@@ -432,7 +433,14 @@ function buildModalDOM(
     actionsRow.className = 'sm-actions-row';
 
     if (nativeProvider) {
-      const nativeBtn = createProviderButton(nativeProvider, params, config, null, onClose, i18n);
+      const nativeBtn = createProviderButton(
+        nativeProvider,
+        params,
+        config,
+        null,
+        onComplete,
+        i18n,
+      );
       nativeBtn.style.flex = '1';
       actionsRow.appendChild(nativeBtn);
     }
@@ -477,7 +485,7 @@ function createProviderButton(
   params: MailtoParams,
   config: SmartMailtoConfig,
   preferredId: string | null,
-  onClose: () => void,
+  onComplete: () => void,
   i18n: typeof DEFAULT_I18N,
 ): HTMLElement {
   const btn = document.createElement('button');
@@ -542,7 +550,7 @@ function createProviderButton(
     // Analytics hook
     config.onOpen?.(provider, params);
 
-    onClose();
+    onComplete();
   });
 
   return btn;
@@ -686,7 +694,7 @@ export function spawnModal(
   let cleanupFocusTrap: (() => void) | null = null;
   let keyHandler: ((e: KeyboardEvent) => void) | null = null;
 
-  const close = () => {
+  const close = (notifyDismissal: boolean) => {
     const overlay = shadow.querySelector('.sm-overlay');
     if (overlay) {
       overlay.classList.remove('sm-open');
@@ -696,13 +704,15 @@ export function spawnModal(
         if (keyHandler) document.removeEventListener('keydown', keyHandler);
         rootNodes.forEach(el => el.removeAttribute('aria-hidden'));
         previousFocus?.focus();
-        config.onClose?.();
+        if (notifyDismissal) config.onClose?.();
       }, 280);
     }
   };
 
   // Build and attach modal DOM
-  const overlayEl = buildModalDOM(params, resolved, config, close);
+  const dismiss = () => close(true);
+  const complete = () => close(false);
+  const overlayEl = buildModalDOM(params, resolved, config, dismiss, complete);
   shadow.appendChild(overlayEl);
   document.body.appendChild(host);
 
@@ -720,7 +730,7 @@ export function spawnModal(
 
   // ESC key close
   keyHandler = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') close();
+    if (e.key === 'Escape') dismiss();
   };
   document.addEventListener('keydown', keyHandler);
 }

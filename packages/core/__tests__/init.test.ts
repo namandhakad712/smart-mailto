@@ -38,7 +38,7 @@ describe('init module', () => {
     expect(() => updateConfig({ theme: 'dark' })).not.toThrow();
   });
 
-  it('intercepts click on mailto links', () => {
+  it('fires onShow when a mailto link opens the picker', () => {
     const onShow = vi.fn();
     initSmartMailto({ onShow });
 
@@ -54,6 +54,7 @@ describe('init module', () => {
       expect.objectContaining({ to: ['test@example.com'], subject: 'Hello' }),
       expect.any(Array),
     );
+    expect(onShow).toHaveBeenCalledTimes(1);
 
     document.body.removeChild(anchor);
   });
