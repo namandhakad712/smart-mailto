@@ -1,4 +1,5 @@
 import SvelteHost from './SvelteHost.svelte';
+import { destroyGlobal, initGlobal, smartMailto } from '@smart-mailto/svelte';
 
 let app: SvelteHost | null = null;
 let detachedLink: HTMLAnchorElement | null = null;
@@ -34,6 +35,8 @@ window.frameworkSmoke = {
   unmount,
   probeAfterUnmount,
   getShowCount: () => showCount,
+  getLegacyExports: () =>
+    [destroyGlobal, initGlobal, smartMailto].every(value => typeof value === 'function'),
 };
 
 mount();

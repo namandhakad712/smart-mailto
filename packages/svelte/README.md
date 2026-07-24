@@ -1,6 +1,6 @@
 # @smart-mailto/svelte
 
-Svelte action and global initializer for the [smart-mailto](https://github.com/namandhakad712/smart-mailto) webmail provider picker.
+Svelte component, action, and global initializer for the [smart-mailto](https://github.com/namandhakad712/smart-mailto) webmail provider picker.
 
 ```bash
 npm i @smart-mailto/svelte
@@ -9,6 +9,24 @@ npm i @smart-mailto/svelte
 Requires `svelte >= 4.0.0`. Includes `@smart-mailto/core` as a dependency.
 
 ## Usage
+
+### `SmartMailto` component
+
+```svelte
+<script>
+  import { SmartMailto } from '@smart-mailto/svelte';
+</script>
+
+<SmartMailto
+  href="mailto:hello@example.com?subject=Hello"
+  theme="dark"
+  maxProviders={4}
+>
+  Contact Us
+</SmartMailto>
+```
+
+The component accepts a required `href`, every `SmartMailtoConfig` option, and standard anchor attributes such as `class`, `id`, and `target`.
 
 ### Svelte action (on any anchor)
 
@@ -39,6 +57,29 @@ Requires `svelte >= 4.0.0`. Includes `@smart-mailto/core` as a dependency.
 ```
 
 ## API
+
+### `SmartMailto`
+
+| Prop                | Type                       | Default                    |
+| ------------------- | -------------------------- | -------------------------- |
+| `href`              | `string`                   | required                   |
+| `theme`             | `light \| dark \| auto`    | `auto`                     |
+| `autoDetectGeo`     | `boolean`                  | `true`                     |
+| `preferredProvider` | `string`                   | —                          |
+| `maxProviders`      | `number`                   | `6`                        |
+| `includeNative`     | `boolean`                  | mobile browsers only       |
+| `includeCopy`       | `boolean`                  | `true`                     |
+| `customProviders`   | `Provider[]`               | `[]`                       |
+| `excludeProviders`  | `string[]`                 | `[]`                       |
+| `classNames`        | `ClassNames`               | built-in styles            |
+| `i18n`              | `Partial<I18nStrings>`     | built-in English copy      |
+| `rememberChoice`    | `boolean`                  | `true`                     |
+| `storageKey`        | `string`                   | `smart-mailto:preferred`   |
+| `onOpen`            | `SmartMailtoHooks.onOpen`  | —                          |
+| `onCopy`            | `SmartMailtoHooks.onCopy`  | —                          |
+| `onClose`           | `SmartMailtoHooks.onClose` | —                          |
+| `onShow`            | `SmartMailtoHooks.onShow`  | —                          |
+| anchor attributes   | `HTMLAnchorAttributes`     | passed to the rendered `a` |
 
 ### `smartMailto` (action)
 
