@@ -756,3 +756,13 @@ export function getProvider(id: string): Provider | null {
 export function getAllProviders(): Provider[] {
   return Object.values(PROVIDERS);
 }
+
+/**
+ * Returns the complete public provider catalog.
+ *
+ * Public catalog surfaces should use this helper so their IDs, names, regions,
+ * colors, and compose behavior cannot drift from the shipped registry.
+ */
+export function getCatalogProviders(): Provider[] {
+  return getAllProviders();
+}
