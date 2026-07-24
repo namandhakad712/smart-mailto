@@ -69,7 +69,8 @@ ${indent}  },`;
   }
 
   if (urlType === 'template' && urlTemplate) {
-    return `${indent}buildUrl: (p: MailtoParams) => {
+    const argument = /\{(?:to|subject|body|cc|bcc)\}/.test(urlTemplate) ? 'p: MailtoParams' : '';
+    return `${indent}buildUrl: (${argument}) => {
 ${indent}  return '${urlTemplate
       .replace(/\{to\}/g, `' + ${eShort}(p.to.join(',')) + '`)
       .replace(/\{subject\}/g, `' + ${eShort}(p.subject ?? '') + '`)

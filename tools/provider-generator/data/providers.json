@@ -226,23 +226,26 @@
     {
       "id": "rediff",
       "name": "Rediffmail",
-      "urlTemplate": "https://webmail.rediff.com/?compose=Y&to={to}&subject={subject}",
+      "urlTemplate": "https://mail.rediff.com/cgi-bin/login.cgi/1000",
       "urlType": "template",
       "noCcBcc": true,
-      "noBody": true,
+      "noSubjectBody": true,
       "color": "#D10000",
       "textColor": "#ffffff",
-      "regions": ["in"]
+      "regions": ["in"],
+      "fallbackOnly": true
     },
     {
       "id": "seznam",
       "name": "Seznam Email",
-      "urlType": "searchParams",
-      "baseUrl": "https://email.seznam.cz/newmessage",
+      "urlTemplate": "https://email.seznam.cz/",
+      "urlType": "template",
       "noCcBcc": true,
+      "noSubjectBody": true,
       "color": "#CC0000",
       "textColor": "#ffffff",
-      "regions": ["cz"]
+      "regions": ["cz"],
+      "fallbackOnly": true
     },
     {
       "id": "onet",
@@ -291,13 +294,14 @@
     {
       "id": "mailfence",
       "name": "Mailfence",
-      "urlTemplate": "https://mailfence.com/sw/mailfence/app.jsp#compose&to={to}",
+      "urlTemplate": "https://mailfence.com/",
       "urlType": "template",
       "noCcBcc": true,
       "noSubjectBody": true,
       "color": "#37A000",
       "textColor": "#ffffff",
-      "regions": ["be", "eu", "privacy"]
+      "regions": ["be", "eu", "privacy"],
+      "fallbackOnly": true
     },
     {
       "id": "runbox",
@@ -511,13 +515,14 @@
     {
       "id": "spike",
       "name": "Spike Mail",
-      "urlTemplate": "https://app.spike.email/compose?to={to}",
+      "urlTemplate": "https://spikenow.com/web/",
       "urlType": "template",
       "noCcBcc": true,
       "noSubjectBody": true,
       "color": "#6C5CE7",
       "textColor": "#ffffff",
-      "regions": ["global"]
+      "regions": ["global"],
+      "fallbackOnly": true
     },
     {
       "id": "native",
