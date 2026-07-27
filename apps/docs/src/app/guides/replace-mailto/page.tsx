@@ -121,7 +121,14 @@ export default function ReplaceMailtoGuide() {
             <p className="mt-4 max-w-[60ch] text-pretty leading-7 text-ink-soft dark:text-text-soft">
               smart-mailto listens for clicks on valid mailto anchors across the document. You
               don&apos;t need to replace the anchor with a custom component or remove its subject
-              and body.
+              and body. Starting from scratch? Use the{' '}
+              <Link
+                className="font-semibold text-red underline-offset-4 hover:underline"
+                href="/tools/mailto-link-generator"
+              >
+                mailto link generator
+              </Link>{' '}
+              to create the anchor first.
             </p>
             <div className="mt-6">
               <CodeBlock label="Your existing HTML">
