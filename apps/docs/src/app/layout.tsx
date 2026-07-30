@@ -59,9 +59,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span className="font-mono text-xs font-bold text-red tracking-[0.3em] uppercase block mb-2">
               ✦ TECHNOLOGY SPECIAL
             </span>
-            <p className="text-4xl md:text-8xl font-headline font-light tracking-tighter text-ink dark:text-text uppercase">
+            <h1 className="text-4xl md:text-8xl font-headline font-light tracking-tighter text-ink dark:text-text uppercase">
               The Internet Times
-            </p>
+            </h1>
             <p className="font-body italic text-ink-soft dark:text-text-soft mt-2 tracking-tight">
               All the protocols that are fit to fix.
             </p>
@@ -125,12 +125,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span>© 2026 smart-mailto — All the protocols that are fit to fix.</span>
             <a
               className="inline-flex items-center gap-1 normal-case tracking-normal hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
-              href="https://tin.computer"
+              href="#"
             >
               <svg aria-hidden="true" className="h-[1em] w-[1em]" viewBox="0 0 32 32">
                 <rect width="32" height="32" fill="#66DC9D" />
               </svg>
-              Growth by Tin
+              Growth by Human
             </a>
           </div>
           <div className="flex gap-6 font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted">
