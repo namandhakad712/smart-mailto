@@ -41,8 +41,9 @@ export default function ReplaceMailtoGuide() {
             Keep your mailto link. Give visitors a better way to open it.
           </h1>
           <p className="mt-6 max-w-2xl text-pretty text-xl leading-relaxed text-ink-soft dark:text-text-soft">
-            Add one package and one initializer. Your existing contact link opens a webmail picker
-            when smart-mailto is available and stays a normal mailto link when it isn&apos;t.
+            Install one package, initialize it once, then keep using normal mailto links. Visitors
+            get a webmail picker when smart-mailto is available and the original link when it
+            isn&apos;t.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
             <GuideDemo />
@@ -53,6 +54,20 @@ export default function ReplaceMailtoGuide() {
               Jump to the code
             </a>
           </div>
+          <p className="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-wider text-ink-muted dark:text-text-muted">
+            <a
+              className="underline-offset-4 hover:text-red hover:underline"
+              href="https://www.npmjs.com/package/@smart-mailto/core"
+            >
+              npm package ↗
+            </a>
+            <a
+              className="underline-offset-4 hover:text-red hover:underline"
+              href="https://github.com/namandhakad712/smart-mailto"
+            >
+              GitHub repository ↗
+            </a>
+          </p>
         </div>
 
         <aside className="border-t-4 border-red bg-surface p-6 dark:bg-surface-container">
@@ -61,9 +76,9 @@ export default function ReplaceMailtoGuide() {
           </p>
           <ol className="mt-5 space-y-5">
             {[
-              ['01', 'Keep the original anchor'],
-              ['02', 'Install @smart-mailto/core'],
-              ['03', 'Initialize it once'],
+              ['01', 'Install @smart-mailto/core'],
+              ['02', 'Initialize it once'],
+              ['03', 'Add or keep a mailto link'],
             ].map(([number, label]) => (
               <li className="flex items-baseline gap-4" key={number}>
                 <span className="font-mono text-xs text-ink-muted dark:text-text-muted">
@@ -83,18 +98,18 @@ export default function ReplaceMailtoGuide() {
           </p>
           <ol className="mt-4 space-y-3 border-l border-border pl-4 font-mono text-xs dark:border-border">
             <li>
-              <a className="text-red hover:text-red-dark" href="#keep-the-link">
-                1. Keep the link
-              </a>
-            </li>
-            <li>
               <a className="text-red hover:text-red-dark" href="#install">
-                2. Install
+                1. Install
               </a>
             </li>
             <li>
               <a className="text-red hover:text-red-dark" href="#initialize">
-                3. Initialize
+                2. Initialize
+              </a>
+            </li>
+            <li>
+              <a className="text-red hover:text-red-dark" href="#add-the-link">
+                3. Add the link
               </a>
             </li>
             <li>
@@ -111,30 +126,9 @@ export default function ReplaceMailtoGuide() {
         </nav>
 
         <div className="space-y-16">
-          <section id="keep-the-link" className="scroll-mt-8">
-            <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-              Step 1
-            </p>
-            <h2 className="mt-3 text-balance font-headline text-3xl font-medium tracking-tight text-ink dark:text-text">
-              Keep the HTML you already have
-            </h2>
-            <p className="mt-4 max-w-[60ch] text-pretty leading-7 text-ink-soft dark:text-text-soft">
-              smart-mailto listens for clicks on valid mailto anchors across the document. You
-              don&apos;t need to replace the anchor with a custom component or remove its subject
-              and body.
-            </p>
-            <div className="mt-6">
-              <CodeBlock label="Your existing HTML">
-                {`<a href="mailto:hello@example.com">
-  Email us
-</a>`}
-              </CodeBlock>
-            </div>
-          </section>
-
           <section id="install" className="scroll-mt-8">
             <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-              Step 2
+              Step 1
             </p>
             <h2 className="mt-3 text-balance font-headline text-3xl font-medium tracking-tight text-ink dark:text-text">
               Install the core package
@@ -149,23 +143,61 @@ export default function ReplaceMailtoGuide() {
 
           <section id="initialize" className="scroll-mt-8">
             <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-              Step 3
+              Step 2
             </p>
             <h2 className="mt-3 text-balance font-headline text-3xl font-medium tracking-tight text-ink dark:text-text">
               Initialize smart-mailto once
             </h2>
             <p className="mt-4 max-w-[60ch] text-pretty leading-7 text-ink-soft dark:text-text-soft">
-              Put this in your browser entry file. One capture-phase listener handles current and
-              future mailto links on the page.
+              Put the import and initializer in your browser entry file. One capture-phase listener
+              handles current and future mailto links on the page.
             </p>
             <div className="mt-6">
               <CodeBlock label="main.js">
                 {`import { initSmartMailto } from '@smart-mailto/core';
+initSmartMailto();`}
+              </CodeBlock>
+            </div>
+            <div className="mt-8 border-t border-border dark:border-border">
+              <h3 className="pt-5 font-headline text-xl text-ink dark:text-text">
+                Two common options
+              </h3>
+              <dl className="mt-4 divide-y divide-border border-b border-border dark:divide-border dark:border-border">
+                <div className="grid gap-2 py-5 sm:grid-cols-[170px_1fr]">
+                  <dt className="font-mono text-sm font-semibold text-red">theme</dt>
+                  <dd className="text-sm leading-6 text-ink-soft dark:text-text-soft">
+                    Use <code>&apos;light&apos;</code> or <code>&apos;dark&apos;</code> to match a
+                    fixed site theme. The default, <code>&apos;auto&apos;</code>, follows the
+                    visitor&apos;s system preference.
+                  </dd>
+                </div>
+                <div className="grid gap-2 py-5 sm:grid-cols-[170px_1fr]">
+                  <dt className="font-mono text-sm font-semibold text-red">preferredProvider</dt>
+                  <dd className="text-sm leading-6 text-ink-soft dark:text-text-soft">
+                    Pass a provider ID such as <code>&apos;gmail&apos;</code> to place it first.
+                    This takes priority over the browser-based regional order.
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </section>
 
-initSmartMailto({
-  theme: 'auto',
-  autoDetectGeo: true,
-});`}
+          <section id="add-the-link" className="scroll-mt-8">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
+              Step 3
+            </p>
+            <h2 className="mt-3 text-balance font-headline text-3xl font-medium tracking-tight text-ink dark:text-text">
+              Add or keep a normal mailto link
+            </h2>
+            <p className="mt-4 max-w-[60ch] text-pretty leading-7 text-ink-soft dark:text-text-soft">
+              smart-mailto listens for valid mailto anchors across the document. You don&apos;t need
+              a custom component, and existing subject and body fields stay intact.
+            </p>
+            <div className="mt-6">
+              <CodeBlock label="Your HTML">
+                {`<a href="mailto:hello@example.com">
+  Email us
+</a>`}
               </CodeBlock>
             </div>
             <div className="mt-6 border-l-4 border-red pl-5">
@@ -245,15 +277,26 @@ initSmartMailto({
               Ready to ship
             </p>
             <h2 className="mx-auto mt-3 max-w-xl text-balance font-headline text-3xl font-medium tracking-tight text-ink dark:text-text">
-              Test the picker, then add the initializer to your site.
+              Three steps, one dependable mailto fallback.
             </h2>
-            <div className="mt-6 flex justify-center">
-              <GuideDemo />
-            </div>
-            <p className="mt-5 text-sm text-ink-soft dark:text-text-soft">
-              Need configuration options?{' '}
+            <p className="mx-auto mt-5 max-w-xl text-sm leading-6 text-ink-soft dark:text-text-soft">
+              Install from{' '}
+              <a
+                className="font-semibold text-red hover:text-red-dark"
+                href="https://www.npmjs.com/package/@smart-mailto/core"
+              >
+                npm
+              </a>
+              , browse the{' '}
+              <a
+                className="font-semibold text-red hover:text-red-dark"
+                href="https://github.com/namandhakad712/smart-mailto"
+              >
+                source on GitHub
+              </a>
+              , or open the{' '}
               <Link className="font-semibold text-red hover:text-red-dark" href="/spec#config">
-                Read the config reference
+                full configuration reference
               </Link>
               .
             </p>
@@ -273,6 +316,12 @@ initSmartMailto({
               href="https://www.npmjs.com/package/@smart-mailto/core"
             >
               View package on npm ↗
+            </a>
+            <a
+              className="mt-3 block font-mono text-[10px] font-bold uppercase tracking-wider text-red hover:text-red-dark"
+              href="https://github.com/namandhakad712/smart-mailto"
+            >
+              Browse source on GitHub ↗
             </a>
           </div>
         </aside>
