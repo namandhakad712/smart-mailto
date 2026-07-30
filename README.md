@@ -117,6 +117,8 @@ The `mailto:` protocol was designed in 1997 for a world where every computer had
 
 ## 🚀 Quick Start
 
+Follow the [practical integration guide](https://smart-mailto.vercel.app/guides/replace-mailto) for a complete setup walkthrough.
+
 ### Installation
 
 ```bash
