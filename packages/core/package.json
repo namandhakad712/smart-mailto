@@ -12,7 +12,7 @@
     "geo-detection",
     "typescript"
   ],
-  "homepage": "https://smart-mailto.vercel.app",
+  "homepage": "https://smart-mailto.vercel.app/guides/replace-mailto",
   "repository": {
     "type": "git",
     "url": "https://github.com/namandhakad712/smart-mailto.git",
