@@ -26,8 +26,6 @@ describe('maintained provider count claims', () => {
       description: string;
     };
     const coreReadme = repositoryFile('packages/core/README.md');
-    const packageReleaseNote = repositoryFile('.changeset/fresh-badgers-pick.md');
-    const registryReleaseNote = repositoryFile('.changeset/perfect-glasses-jog.md');
     const changelog = repositoryFile('CHANGELOG.md');
     const demoHtml = repositoryFile('apps/demo/index.html');
 
@@ -40,13 +38,6 @@ describe('maintained provider count claims', () => {
       `${counts.webmail} webmail entries: ${counts.compose} compose links and ${counts.fallback} fallback pages`,
     );
     expect(coreReadme).toContain(`${counts.webmail} webmail entries plus native and copy actions`);
-    expect(packageReleaseNote).toContain(
-      `${counts.webmail}-entry webmail registry: ${counts.compose} compose links and ${counts.fallback} fallback pages`,
-    );
-    expect(registryReleaseNote).toContain(`expand to ${counts.webmail} webmail entries`);
-    expect(registryReleaseNote).toContain(
-      `${counts.compose} provider compose links and ${counts.fallback} official webmail fallback pages`,
-    );
     expect(changelog).toContain(`registry to ${counts.webmail} webmail entries`);
     expect(changelog).toContain(
       `${counts.webmail} webmail entries plus native-mail and copy-address actions`,
