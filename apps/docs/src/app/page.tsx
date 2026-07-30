@@ -59,7 +59,11 @@ const FAQS = [
   {
     question: 'Which browsers and frameworks does it support?',
     answer:
-      'The core package uses modern browser APIs and works with plain JavaScript or TypeScript. Official packages are also available for React, Vue 3, and Svelte.',
+      'The packages target ES2020, and automated browser coverage currently runs in Chromium. Official peer ranges are React 17+, Vue 3+, and Svelte 4+; Firefox, Safari, WebKit, iOS, and Android browsers are not yet automated.',
+    link: {
+      href: '/docs/browser-support',
+      label: 'Read the browser and framework support matrix.',
+    },
   },
   {
     question: 'What happens when an email provider is not recognized?',
