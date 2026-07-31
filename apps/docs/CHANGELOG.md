@@ -1,5 +1,15 @@
 # docs
 
+## 0.1.3
+
+### Patch Changes
+
+- c92a5bc: Rewrite replace-mailto integration guide with a clearer 3-step structure (keep link → install → initialize) and a link to the mailto link generator tool.
+- c92a5bc: Add interactive mailto link generator tool at /tools/mailto-link-generator — build a properly encoded mailto link with To, subject, body, CC, BCC, and copy the ready-to-use HTML.
+- Updated dependencies [c92a5bc]
+  - @smart-mailto/core@0.3.1
+  - @smart-mailto/react@0.2.2
+
 ## 0.1.2
 
 ### Patch Changes
