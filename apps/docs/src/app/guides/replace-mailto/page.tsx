@@ -300,6 +300,15 @@ initSmartMailto();`}
               </Link>
               .
             </p>
+            <p className="mx-auto mt-4 max-w-xl font-mono text-[10px] uppercase tracking-wider text-ink-muted dark:text-text-muted">
+              Tried the guide?{' '}
+              <a
+                className="font-bold text-red underline-offset-4 hover:text-red-dark hover:underline"
+                href="https://github.com/namandhakad712/smart-mailto/discussions/40"
+              >
+                Share your first stopping point ↗
+              </a>
+            </p>
           </section>
         </div>
 
