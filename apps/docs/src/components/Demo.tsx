@@ -88,6 +88,7 @@ export function Demo() {
         className="group inline-flex items-center gap-2 bg-red hover:bg-red-dark text-white font-body text-sm font-medium px-6 py-2.5 transition-colors cursor-pointer"
         onShow={analyticsHooks.onShow}
         onOpen={analyticsHooks.onOpen}
+        onClose={analyticsHooks.onClose}
         onCopy={() => {
           analyticsHooks.onCopy();
           setCopied(true);

@@ -43,21 +43,23 @@ describe('privacy-safe homepage demo analytics', () => {
     });
   });
 
-  it('captures exactly the four approved demo events', () => {
+  it('captures exactly the five approved demo events', () => {
     const hooks = createDemoAnalyticsHooks();
 
     captureDemoPageview();
     hooks.onShow();
     hooks.onOpen();
     hooks.onCopy();
+    hooks.onClose();
 
     expect(posthog.capture.mock.calls.map(([event]) => event)).toEqual([
       DEMO_EVENTS.pageview,
       DEMO_EVENTS.pickerShown,
       DEMO_EVENTS.providerSelected,
       DEMO_EVENTS.addressCopied,
+      DEMO_EVENTS.pickerDismissed,
     ]);
-    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(4);
+    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(5);
   });
 
   it('allows only non-identifying event properties and drops every other event', () => {
@@ -105,6 +107,7 @@ describe('privacy-safe homepage demo analytics', () => {
     hooks.onShow();
     hooks.onOpen();
     hooks.onCopy();
+    hooks.onClose();
 
     for (const call of capture.mock.calls) {
       expect(call).toHaveLength(1);

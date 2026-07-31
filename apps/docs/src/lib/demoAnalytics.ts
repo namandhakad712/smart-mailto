@@ -9,6 +9,7 @@ export const DEMO_EVENTS = {
   pickerShown: 'demo_picker_shown',
   providerSelected: 'demo_provider_selected',
   addressCopied: 'demo_address_copied',
+  pickerDismissed: 'demo_picker_dismissed',
 } as const;
 
 type DemoEventName = (typeof DEMO_EVENTS)[keyof typeof DEMO_EVENTS];
@@ -64,5 +65,6 @@ export function createDemoAnalyticsHooks(capture = captureDemoEvent) {
     onShow: () => capture(DEMO_EVENTS.pickerShown),
     onOpen: () => capture(DEMO_EVENTS.providerSelected),
     onCopy: () => capture(DEMO_EVENTS.addressCopied),
+    onClose: () => capture(DEMO_EVENTS.pickerDismissed),
   };
 }
