@@ -25,7 +25,7 @@
  */
 
 import { initSmartMailto, destroySmartMailto, type SmartMailtoConfig } from '@smart-mailto/core';
-import type { SvelteComponent, ComponentType } from 'svelte';
+import type { Component } from 'svelte';
 import type { HTMLAnchorAttributes } from 'svelte/elements';
 import SmartMailtoComponent from './SmartMailto.svelte';
 
@@ -45,7 +45,7 @@ export type SmartMailtoProps = SmartMailtoConfig &
  * A smart `<a>` component that opens the provider picker.
  * Accepts all SmartMailtoConfig options plus standard anchor attributes.
  */
-export const SmartMailto = SmartMailtoComponent as ComponentType<SvelteComponent<SmartMailtoProps>>;
+export const SmartMailto = SmartMailtoComponent as Component<SmartMailtoProps>;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Global Init (for app-level "magic mode")

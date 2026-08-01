@@ -1,13 +1,14 @@
+import { mount, unmount as unmountComponent, type Component } from 'svelte';
 import SvelteHost from './SvelteHost.svelte';
 import { destroyGlobal, initGlobal, smartMailto } from '@smart-mailto/svelte';
 
-let app: SvelteHost | null = null;
+let app: ReturnType<Component<Record<string, unknown>>> | null = null;
 let detachedLink: HTMLAnchorElement | null = null;
 let showCount = 0;
 
-function mount() {
+function mountHost() {
   if (app) return;
-  app = new SvelteHost({
+  app = mount(SvelteHost, {
     target: document.getElementById('root')!,
     props: {
       onShow: () => {
@@ -19,8 +20,10 @@ function mount() {
 
 function unmount() {
   detachedLink = document.querySelector<HTMLAnchorElement>('#contact');
-  app?.$destroy();
-  app = null;
+  if (app) {
+    unmountComponent(app);
+    app = null;
+  }
 }
 
 function probeAfterUnmount() {
@@ -31,7 +34,7 @@ function probeAfterUnmount() {
 }
 
 window.frameworkSmoke = {
-  mount,
+  mount: mountHost,
   unmount,
   probeAfterUnmount,
   getShowCount: () => showCount,
@@ -39,4 +42,4 @@ window.frameworkSmoke = {
     [destroyGlobal, initGlobal, smartMailto].every(value => typeof value === 'function'),
 };
 
-mount();
+mountHost();

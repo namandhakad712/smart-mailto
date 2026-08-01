@@ -13,7 +13,7 @@
     "@smart-mailto/core": "workspace:^",
     "@smart-mailto/react": "workspace:^",
     "lucide-react": "^1.17.0",
-    "next": "16.2.6",
+    "next": "16.2.12",
     "posthog-js": "^1.407.1",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -24,9 +24,9 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.2.12",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^2.1.8"
+    "vitest": "^4.1.10"
   }
 }
