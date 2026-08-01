@@ -1,6 +1,6 @@
 {
   "name": "@smart-mailto/demo",
-  "version": "0.0.4",
+  "version": "0.0.3",
   "private": true,
   "description": "Interactive demo for smart-mailto",
   "scripts": {
