@@ -1,6 +1,6 @@
 {
   "name": "@smart-mailto/core",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Zero-dependency, privacy-first mailto enhancer with a geo-aware 51-entry webmail registry",
   "keywords": [
     "mailto",

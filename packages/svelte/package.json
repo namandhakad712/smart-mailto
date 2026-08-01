@@ -1,6 +1,6 @@
 {
   "name": "@smart-mailto/svelte",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Svelte action and global initializer for the smart-mailto webmail provider picker",
   "keywords": [
     "mailto",
