@@ -1,13 +1,5 @@
 # @smart-mailto/framework-smoke
 
-## 0.0.2
-
-### Patch Changes
-
-- @smart-mailto/react@0.2.2
-- @smart-mailto/svelte@0.2.2
-- @smart-mailto/vue@0.2.2
-
 ## 0.0.1
 
 ### Patch Changes

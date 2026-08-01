@@ -1,6 +1,6 @@
 {
   "name": "@smart-mailto/vue",
-  "version": "0.2.2",
+  "version": "0.2.1",
   "description": "Vue 3 plugin and component for the smart-mailto webmail provider picker",
   "keywords": [
     "mailto",
