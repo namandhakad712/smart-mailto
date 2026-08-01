@@ -161,7 +161,7 @@ export default function CdnPage() {
               {
                 pkg: '@smart-mailto/svelte',
                 cmd: 'npm install @smart-mailto/svelte',
-                desc: 'Svelte 4+',
+                desc: 'Svelte 5+',
               },
             ].map(fw => (
               <div key={fw.pkg} className="p-5 border border-border dark:border-border">

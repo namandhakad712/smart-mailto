@@ -9,7 +9,7 @@ pnpm@9 workspace (see `pnpm-workspace.yaml`). Workspaces: `packages/*`, `apps/*`
 | `packages/core`            | Zero-dependency engine, main tests (vitest+jsdom, 90% cov threshold) |
 | `packages/react`           | React wrapper (peer: react>=17)                                      |
 | `packages/vue`             | Vue wrapper (peer: vue>=3)                                           |
-| `packages/svelte`          | Svelte wrapper (peer: svelte>=4)                                     |
+| `packages/svelte`          | Svelte wrapper (peer: svelte>=5)                                     |
 | `apps/docs`                | Next.js 16.2.6 docs site (has own AGENTS.md)                         |
 | `apps/demo`                | Vite demo, alias `@smart-mailto/core` → source TS                    |
 | `tools/provider-validator` | Validates provider URLs weekly via cron                              |

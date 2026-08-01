@@ -59,7 +59,7 @@ const FAQS = [
   {
     question: 'Which browsers and frameworks does it support?',
     answer:
-      'The packages target ES2020, and automated browser coverage currently runs in Chromium. Official peer ranges are React 17+, Vue 3+, and Svelte 4+; Firefox, Safari, WebKit, iOS, and Android browsers are not yet automated.',
+      'The packages target ES2020, and automated browser coverage currently runs in Chromium. Official peer ranges are React 17+, Vue 3+, and Svelte 5+; Firefox, Safari, WebKit, iOS, and Android browsers are not yet automated.',
     link: {
       href: '/docs/browser-support',
       label: 'Read the browser and framework support matrix.',

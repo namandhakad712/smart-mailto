@@ -6,7 +6,7 @@ Svelte component, action, and global initializer for the [smart-mailto](https://
 npm i @smart-mailto/svelte
 ```
 
-Requires `svelte >= 4.0.0`. Includes `@smart-mailto/core` as a dependency.
+Requires `svelte >= 5.0.0`. Includes `@smart-mailto/core` as a dependency.
 
 [Browser and framework support matrix](https://smart-mailto.vercel.app/docs/browser-support)
 

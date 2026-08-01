@@ -99,7 +99,7 @@ const packageRows = [
   {
     package: '@smart-mailto/vue',
     declared: 'Vue 3+',
-    automated: 'Vue 3.5.35 host in Chromium',
+    automated: 'Vue 3.5.40 host in Chromium',
     links: [
       {
         label: 'peer range',
@@ -117,8 +117,8 @@ const packageRows = [
   },
   {
     package: '@smart-mailto/svelte',
-    declared: 'Svelte 4+',
-    automated: 'Svelte 4.2.20 host in Chromium',
+    declared: 'Svelte 5+',
+    automated: 'Svelte 5.56.8 host in Chromium',
     links: [
       {
         label: 'peer range',

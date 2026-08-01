@@ -102,7 +102,7 @@ The `mailto:` protocol was designed in 1997 for a world where every computer had
 
 | Metric                      | Value               | Status                                          |
 | --------------------------- | ------------------- | ----------------------------------------------- |
-| 📦 **Gzipped bundle**       | **< 8 KB**          | ✅ 7.4 KB                                       |
+| 📦 **Gzipped bundle**       | **< 8 KB**          | ✅ 7.5 KB                                       |
 | 🔌 **Runtime dependencies** | **0**               | ✅ Zero                                         |
 | 🌐 **Webmail registry**     | **51** entries      | ✅ **31** compose links + **20** fallback pages |
 | ⚡ **Geo detection**        | **< 1 ms** (~0.4ms) | ✅                                              |
@@ -388,7 +388,7 @@ buildMailtoHref({ to: ['a@x.com', 'b@x.com'], subject: 'Hi', body: 'Hello' });
 | [`@smart-mailto/core`](https://www.npmjs.com/package/@smart-mailto/core)     | Zero-dep framework-agnostic engine | None              |
 | [`@smart-mailto/react`](https://www.npmjs.com/package/@smart-mailto/react)   | React 17+ wrapper                  | `react >= 17`     |
 | [`@smart-mailto/vue`](https://www.npmjs.com/package/@smart-mailto/vue)       | Vue 3 wrapper                      | `vue >= 3`        |
-| [`@smart-mailto/svelte`](https://www.npmjs.com/package/@smart-mailto/svelte) | Svelte 4+ wrapper                  | `svelte >= 4`     |
+| [`@smart-mailto/svelte`](https://www.npmjs.com/package/@smart-mailto/svelte) | Svelte 5+ wrapper                  | `svelte >= 5`     |
 
 ---
 

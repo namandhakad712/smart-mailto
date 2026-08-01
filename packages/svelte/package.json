@@ -43,7 +43,7 @@
     "clean": "rimraf dist"
   },
   "peerDependencies": {
-    "svelte": ">=4.0.0"
+    "svelte": ">=5.0.0"
   },
   "dependencies": {
     "@smart-mailto/core": "workspace:*"
