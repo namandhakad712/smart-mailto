@@ -1,5 +1,12 @@
 # @smart-mailto/react
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [8ef5bd5]
+  - @smart-mailto/core@0.3.1
+
 ## 0.2.1
 
 ### Patch Changes

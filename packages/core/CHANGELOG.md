@@ -1,5 +1,11 @@
 # @smart-mailto/core
 
+## 0.3.1
+
+### Patch Changes
+
+- 8ef5bd5: Update root README with a link to the practical integration guide and set package homepage to /guides/replace-mailto.
+
 ## 0.3.0
 
 ### Minor Changes
