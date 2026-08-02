@@ -223,6 +223,22 @@ initSmartMailto();`}
               choice, and regional signals from the browser&apos;s timezone and language. Geo
               detection makes no network request.
             </p>
+            <div className="mt-7 border-y border-border py-6 dark:border-border">
+              <h3 className="font-headline text-xl text-ink dark:text-text">
+                When native mail already works
+              </h3>
+              <div className="mt-4 grid gap-4 text-sm leading-6 text-ink-soft dark:text-text-soft sm:grid-cols-2 sm:gap-8">
+                <p>
+                  The picker adds a step for visitors whose existing mail handler already works.
+                  Native mail is included by default on mobile. Desktop sites can offer the same
+                  option with <code className="whitespace-nowrap">includeNative: true</code>.
+                </p>
+                <p>
+                  A provider choice is remembered in this site&apos;s local storage and shown first
+                  on later visits. It does not follow the visitor across different sites.
+                </p>
+              </div>
+            </div>
             <div className="mt-7 grid grid-cols-2 gap-px border border-border bg-border dark:border-border dark:bg-border sm:grid-cols-4">
               {PROVIDERS.map(provider => (
                 <div
