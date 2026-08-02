@@ -51,6 +51,22 @@
 
 ---
 
+## 🚀 Quick start
+
+```bash
+npm install @smart-mailto/core
+```
+
+```js
+import { initSmartMailto } from '@smart-mailto/core';
+
+initSmartMailto();
+```
+
+Keep your existing links, such as `<a href="mailto:hello@example.com">Email us</a>`. See the [practical integration guide](https://smart-mailto.vercel.app/guides/replace-mailto) for configuration and framework examples.
+
+---
+
 ## 🎯 The Problem
 
 The `mailto:` protocol was designed in 1997 for a world where every computer had a configured desktop email client. **That world no longer exists.**
@@ -115,21 +131,7 @@ The `mailto:` protocol was designed in 1997 for a world where every computer had
 
 ---
 
-## 🚀 Quick Start
-
-Follow the [practical integration guide](https://smart-mailto.vercel.app/guides/replace-mailto) for a complete setup walkthrough.
-
-### Installation
-
-```bash
-npm install @smart-mailto/core
-# or
-pnpm add @smart-mailto/core
-# or
-yarn add @smart-mailto/core
-```
-
-### CDN (no bundler required)
+## CDN setup
 
 ```html
 <script type="module">
