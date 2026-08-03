@@ -23,9 +23,32 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://smart-mailto.vercel.app'),
   title: 'smart-mailto · A JavaScript mailto: Alternative',
   description:
     "All the protocols that are fit to fix. A zero-dependency JavaScript library that fixes the internet's broken mailto: links.",
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'smart-mailto',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'smart-mailto, the zero-dependency webmail picker for mailto links',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [
+      {
+        url: '/og-image.png',
+        alt: 'smart-mailto, the zero-dependency webmail picker for mailto links',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
