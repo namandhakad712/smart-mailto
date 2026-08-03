@@ -23,9 +23,32 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'smart-mailto · Zero-dependency webmail picker',
+  metadataBase: new URL('https://smart-mailto.vercel.app'),
+  title: 'smart-mailto · A JavaScript mailto: Alternative',
   description:
-    'Add a zero-dependency webmail picker to existing mailto: links. Visitors can compose in webmail, use native mail, or copy the address.',
+    "All the protocols that are fit to fix. A zero-dependency JavaScript library that fixes the internet's broken mailto: links.",
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'smart-mailto',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'smart-mailto, the zero-dependency webmail picker for mailto links',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [
+      {
+        url: '/og-image.png',
+        alt: 'smart-mailto, the zero-dependency webmail picker for mailto links',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -125,12 +148,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span>© 2026 smart-mailto — All the protocols that are fit to fix.</span>
             <a
               className="inline-flex items-center gap-1 normal-case tracking-normal hover:text-ink dark:hover:text-text transition-colors underline-offset-4 hover:underline"
-              href="#"
+              href="https://tin.computer"
             >
               <svg aria-hidden="true" className="h-[1em] w-[1em]" viewBox="0 0 32 32">
                 <rect width="32" height="32" fill="#66DC9D" />
               </svg>
-              Thought by Human
+              Growth by Tin
             </a>
           </div>
           <div className="flex gap-6 font-mono text-xs uppercase tracking-widest text-ink-muted dark:text-text-muted">
