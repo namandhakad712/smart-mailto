@@ -6,6 +6,7 @@ import { SmartMailto } from '@smart-mailto/react';
 import { getAllProviders } from '@smart-mailto/core';
 import { useState, useCallback } from 'react';
 import { useIsDark } from '@/hooks/useIsDark';
+import { captureInstallCopy, DEMO_EVENTS } from '@/lib/demoAnalytics';
 
 const MailIcon = () => (
   <svg
@@ -109,18 +110,30 @@ const FAQ_SCHEMA = {
   })),
 };
 
-function CopyButton({ code, label }: { code: string; label: string }) {
+function CopyButton({
+  code,
+  label,
+  onCopy,
+  analyticsEvent,
+}: {
+  code: string;
+  label: string;
+  onCopy?: () => void;
+  analyticsEvent?: typeof DEMO_EVENTS.installCopied;
+}) {
   const [copied, setCopied] = useState(false);
   const copy = useCallback(async () => {
     await navigator.clipboard.writeText(code);
+    onCopy?.();
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  }, [code]);
+  }, [code, onCopy]);
   return (
     <button
       type="button"
       onClick={copy}
       aria-label={`Copy ${label}`}
+      data-analytics-event={analyticsEvent}
       className="flex min-h-11 shrink-0 items-center gap-1.5 px-2 font-mono text-[10px] uppercase tracking-widest text-text-muted dark:text-text-muted hover:text-red focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red transition-colors"
     >
       {copied ? (
@@ -221,7 +234,12 @@ export default function Home() {
                       <span className="font-mono text-[10px] uppercase tracking-widest text-text-muted dark:text-text-muted">
                         Install
                       </span>
-                      <CopyButton code={INSTALL_COMMAND} label="install command" />
+                      <CopyButton
+                        code={INSTALL_COMMAND}
+                        label="install command"
+                        onCopy={captureInstallCopy}
+                        analyticsEvent={DEMO_EVENTS.installCopied}
+                      />
                     </div>
                     <pre className="font-mono text-xs md:text-sm text-white overflow-x-auto">
                       <code>{INSTALL_COMMAND}</code>
