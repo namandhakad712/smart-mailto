@@ -8,6 +8,7 @@ const posthog = vi.hoisted(() => ({
 vi.mock('posthog-js', () => ({ default: posthog }));
 
 import {
+  captureInstallCopy,
   captureDemoPageview,
   createDemoAnalyticsHooks,
   DEMO_EVENTS,
@@ -43,7 +44,7 @@ describe('privacy-safe homepage demo analytics', () => {
     });
   });
 
-  it('captures exactly the five approved demo events', () => {
+  it('captures exactly the six approved homepage events', () => {
     const hooks = createDemoAnalyticsHooks();
 
     captureDemoPageview();
@@ -51,6 +52,7 @@ describe('privacy-safe homepage demo analytics', () => {
     hooks.onOpen();
     hooks.onCopy();
     hooks.onClose();
+    captureInstallCopy();
 
     expect(posthog.capture.mock.calls.map(([event]) => event)).toEqual([
       DEMO_EVENTS.pageview,
@@ -58,8 +60,42 @@ describe('privacy-safe homepage demo analytics', () => {
       DEMO_EVENTS.providerSelected,
       DEMO_EVENTS.addressCopied,
       DEMO_EVENTS.pickerDismissed,
+      DEMO_EVENTS.installCopied,
     ]);
-    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(5);
+    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(6);
+  });
+
+  it('records one install-copy event with only its fixed page and command position', () => {
+    captureInstallCopy();
+
+    expect(posthog.capture).toHaveBeenCalledOnce();
+    expect(posthog.capture).toHaveBeenCalledWith(DEMO_EVENTS.installCopied, {
+      page: 'homepage',
+      command_position: 'quick_start',
+    });
+
+    const sanitized = sanitizeDemoEvent({
+      event: DEMO_EVENTS.installCopied,
+      properties: {
+        token: 'public-project-key',
+        distinct_id: 'random-device-id',
+        page: 'private-page',
+        command_position: 'private-position',
+        email: 'private@example.com',
+        command: 'npm install private-package',
+      },
+      uuid: 'random-event-id',
+    });
+
+    expect(sanitized?.properties).toEqual({
+      token: 'public-project-key',
+      distinct_id: 'random-device-id',
+      $process_person_profile: false,
+      demo_location: 'homepage_live_demo',
+      page: 'homepage',
+      command_position: 'quick_start',
+    });
+    expect(JSON.stringify(sanitized)).not.toContain('private');
   });
 
   it('allows only non-identifying event properties and drops every other event', () => {
