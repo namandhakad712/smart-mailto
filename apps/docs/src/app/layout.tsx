@@ -24,9 +24,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://smart-mailto.vercel.app'),
-  title: 'smart-mailto · A JavaScript mailto: Alternative',
+  title: 'smart-mailto · Zero-dependency webmail picker',
   description:
-    "All the protocols that are fit to fix. A zero-dependency JavaScript library that fixes the internet's broken mailto: links.",
+    'Add a zero-dependency webmail picker to existing mailto: links. Visitors can compose in webmail, use native mail, or copy the address.',
   openGraph: {
     type: 'website',
     url: '/',
