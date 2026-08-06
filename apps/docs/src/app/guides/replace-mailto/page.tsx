@@ -286,6 +286,30 @@ initSmartMailto();`}
                 </div>
               ))}
             </div>
+            <div className="mt-8 grid gap-px border border-border bg-border dark:border-border dark:bg-border sm:grid-cols-2">
+              <Link
+                className="bg-paper p-5 transition-colors hover:bg-surface dark:bg-bg dark:hover:bg-surface-container"
+                href="/compare/smart-mailto-vs-mailto"
+              >
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-red">
+                  Compare approaches
+                </span>
+                <span className="mt-2 block font-semibold text-ink dark:text-text">
+                  smart-mailto vs. plain mailto →
+                </span>
+              </Link>
+              <Link
+                className="bg-paper p-5 transition-colors hover:bg-surface dark:bg-bg dark:hover:bg-surface-container"
+                href="/guides/mailto-link-opens-nothing"
+              >
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-red">
+                  Troubleshoot first
+                </span>
+                <span className="mt-2 block font-semibold text-ink dark:text-text">
+                  When a mailto link opens nothing →
+                </span>
+              </Link>
+            </div>
           </section>
 
           <section className="border-t-4 border-double border-border pt-10 text-center dark:border-border">
