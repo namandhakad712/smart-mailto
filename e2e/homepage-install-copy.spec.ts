@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('only the homepage installation command is wired to the install-copy event', async ({
+test('the homepage quick-start exposure and install-copy controls are wired narrowly', async ({
   context,
   page,
 }) => {
@@ -9,9 +9,11 @@ test('only the homepage installation command is wired to the install-copy event'
   });
   await page.goto('/');
 
+  const quickStart = page.locator('[data-analytics-event="quick_start_viewed"]');
   const installCopy = page.getByRole('button', { name: 'Copy install command' });
   const initializationCopy = page.getByRole('button', { name: 'Copy initialization code' });
 
+  await expect(quickStart).toHaveCount(1);
   await expect(page.locator('[data-analytics-event="install_copy"]')).toHaveCount(1);
   await expect(installCopy).toHaveAttribute('data-analytics-event', 'install_copy');
   await expect(initializationCopy).not.toHaveAttribute('data-analytics-event', 'install_copy');

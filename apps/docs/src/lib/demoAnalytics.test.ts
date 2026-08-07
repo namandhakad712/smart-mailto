@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const posthog = vi.hoisted(() => ({
   capture: vi.fn(),
@@ -10,9 +10,11 @@ vi.mock('posthog-js', () => ({ default: posthog }));
 import {
   captureInstallCopy,
   captureDemoPageview,
+  captureQuickStartView,
   createDemoAnalyticsHooks,
   DEMO_EVENTS,
   initializeDemoAnalytics,
+  observeQuickStartView,
   POSTHOG_PRIVACY_CONFIG,
   sanitizeDemoEvent,
 } from './demoAnalytics';
@@ -20,6 +22,10 @@ import {
 describe('privacy-safe homepage demo analytics', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it('disables broad collection, profiles, replay, and durable persistence', () => {
@@ -44,7 +50,7 @@ describe('privacy-safe homepage demo analytics', () => {
     });
   });
 
-  it('captures exactly the six approved homepage events', () => {
+  it('captures exactly the seven approved homepage events', () => {
     const hooks = createDemoAnalyticsHooks();
 
     captureDemoPageview();
@@ -52,6 +58,7 @@ describe('privacy-safe homepage demo analytics', () => {
     hooks.onOpen();
     hooks.onCopy();
     hooks.onClose();
+    captureQuickStartView();
     captureInstallCopy();
 
     expect(posthog.capture.mock.calls.map(([event]) => event)).toEqual([
@@ -60,9 +67,83 @@ describe('privacy-safe homepage demo analytics', () => {
       DEMO_EVENTS.providerSelected,
       DEMO_EVENTS.addressCopied,
       DEMO_EVENTS.pickerDismissed,
+      DEMO_EVENTS.quickStartViewed,
       DEMO_EVENTS.installCopied,
     ]);
-    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(6);
+    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(7);
+  });
+
+  it('captures one quick-start view across repeated viewport crossings', () => {
+    let callback: IntersectionObserverCallback = () => undefined;
+    const intersectionObserver = {} as IntersectionObserver;
+    const observer = {
+      disconnect: vi.fn(),
+      observe: vi.fn(),
+    };
+    class MockIntersectionObserver {
+      readonly root = null;
+      readonly rootMargin = '0px';
+      readonly thresholds = [0];
+
+      constructor(nextCallback: IntersectionObserverCallback) {
+        callback = nextCallback;
+      }
+
+      disconnect = observer.disconnect;
+      observe = observer.observe;
+      takeRecords = () => [];
+      unobserve = vi.fn();
+    }
+    vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
+    const element = {} as Element;
+    const capture = vi.fn();
+
+    const cleanup = observeQuickStartView(element, capture);
+    callback([{ isIntersecting: false } as IntersectionObserverEntry], intersectionObserver);
+    callback([{ isIntersecting: true } as IntersectionObserverEntry], intersectionObserver);
+    callback([{ isIntersecting: false } as IntersectionObserverEntry], intersectionObserver);
+    callback([{ isIntersecting: true } as IntersectionObserverEntry], intersectionObserver);
+
+    expect(observer.observe).toHaveBeenCalledOnce();
+    expect(observer.observe).toHaveBeenCalledWith(element);
+    expect(capture).toHaveBeenCalledOnce();
+    expect(observer.disconnect).toHaveBeenCalledOnce();
+
+    cleanup();
+    expect(observer.disconnect).toHaveBeenCalledTimes(2);
+  });
+
+  it('records the quick-start view with only fixed page and position properties', () => {
+    captureQuickStartView();
+
+    expect(posthog.capture).toHaveBeenCalledOnce();
+    expect(posthog.capture).toHaveBeenCalledWith(DEMO_EVENTS.quickStartViewed, {
+      page: 'homepage',
+      command_position: 'quick_start',
+    });
+
+    const sanitized = sanitizeDemoEvent({
+      event: DEMO_EVENTS.quickStartViewed,
+      properties: {
+        token: 'public-project-key',
+        distinct_id: 'random-device-id',
+        $current_url: 'https://example.test/?email=private@example.com',
+        page: 'private-page',
+        command_position: 'private-position',
+        command: 'npm install private-package',
+      },
+      uuid: 'random-event-id',
+    });
+
+    expect(sanitized?.properties).toEqual({
+      token: 'public-project-key',
+      distinct_id: 'random-device-id',
+      $process_person_profile: false,
+      demo_location: 'homepage_live_demo',
+      page: 'homepage',
+      command_position: 'quick_start',
+    });
+    expect(JSON.stringify(sanitized)).not.toContain('private');
   });
 
   it('records one install-copy event with only its fixed page and command position', () => {

@@ -4,9 +4,9 @@ import { Demo } from '@/components/Demo';
 import { ProviderTable } from '@/components/ProviderTable';
 import { SmartMailto } from '@smart-mailto/react';
 import { getAllProviders } from '@smart-mailto/core';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useIsDark } from '@/hooks/useIsDark';
-import { captureInstallCopy, DEMO_EVENTS } from '@/lib/demoAnalytics';
+import { captureInstallCopy, DEMO_EVENTS, observeQuickStartView } from '@/lib/demoAnalytics';
 
 const MailIcon = () => (
   <svg
@@ -172,6 +172,14 @@ function CopyButton({
 
 export default function Home() {
   const isDark = useIsDark();
+  const quickStartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const quickStart = quickStartRef.current;
+    if (!quickStart || typeof IntersectionObserver === 'undefined') return;
+
+    return observeQuickStartView(quickStart);
+  }, []);
 
   return (
     <>
@@ -222,7 +230,11 @@ export default function Home() {
                 </cite>
               </blockquote>
 
-              <div className="bg-code-bg dark:bg-code-bg p-6 rounded-sm border border-border dark:border-border overflow-hidden">
+              <div
+                ref={quickStartRef}
+                data-analytics-event={DEMO_EVENTS.quickStartViewed}
+                className="bg-code-bg dark:bg-code-bg p-6 rounded-sm border border-border dark:border-border overflow-hidden"
+              >
                 <div className="mb-4 border-b border-border dark:border-border pb-2">
                   <span className="font-mono text-[10px] text-text-muted dark:text-text-muted uppercase tracking-[0.2em]">
                     Quick Start
