@@ -304,12 +304,20 @@ export default function MailtoLinkGeneratorPage() {
                 native app, smart-mailto upgrades the same anchor without removing its standard
                 mailto behavior.
               </p>
-              <Link
-                className="mt-4 inline-block font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-red underline-offset-4 hover:underline"
-                href="/guides/replace-mailto"
-              >
-                Read the upgrade guide ΓåÆ
-              </Link>
+              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                <Link
+                  className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-red underline-offset-4 hover:underline"
+                  href="/guides/mailto-not-working-in-chrome"
+                >
+                  Fix mailto in Chrome →
+                </Link>
+                <Link
+                  className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-red underline-offset-4 hover:underline"
+                  href="/guides/replace-mailto"
+                >
+                  Read the upgrade guide →
+                </Link>
+              </div>
             </div>
           </section>
 
