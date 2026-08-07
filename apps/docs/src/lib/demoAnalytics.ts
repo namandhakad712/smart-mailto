@@ -3,8 +3,8 @@ import posthog, { type CaptureResult, type PostHogConfig } from 'posthog-js';
 const POSTHOG_PUBLIC_KEY = 'phc_qCtuutcc4o9VsAZd9jJpWsLMMBcuh6BvCStvqRpT3NZK';
 const POSTHOG_HOST = 'https://us.i.posthog.com';
 const DEMO_LOCATION = 'homepage_live_demo';
-const INSTALL_COPY_PAGE = 'homepage';
-const INSTALL_COPY_POSITION = 'quick_start';
+const QUICK_START_PAGE = 'homepage';
+const QUICK_START_POSITION = 'quick_start';
 
 export const DEMO_EVENTS = {
   pageview: 'homepage_demo_pageview',
@@ -12,6 +12,7 @@ export const DEMO_EVENTS = {
   providerSelected: 'demo_provider_selected',
   addressCopied: 'demo_address_copied',
   pickerDismissed: 'demo_picker_dismissed',
+  quickStartViewed: 'quick_start_viewed',
   installCopied: 'install_copy',
 } as const;
 
@@ -22,11 +23,11 @@ const EVENT_NAMES = new Set<DemoEventName>(Object.values(DEMO_EVENTS));
 export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | null {
   if (!event || !EVENT_NAMES.has(event.event as DemoEventName)) return null;
 
-  const installCopyProperties =
-    event.event === DEMO_EVENTS.installCopied
+  const quickStartProperties =
+    event.event === DEMO_EVENTS.quickStartViewed || event.event === DEMO_EVENTS.installCopied
       ? {
-          page: INSTALL_COPY_PAGE,
-          command_position: INSTALL_COPY_POSITION,
+          page: QUICK_START_PAGE,
+          command_position: QUICK_START_POSITION,
         }
       : {};
 
@@ -38,7 +39,7 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
       distinct_id: event.properties?.distinct_id,
       $process_person_profile: false,
       demo_location: DEMO_LOCATION,
-      ...installCopyProperties,
+      ...quickStartProperties,
     },
   };
 }
@@ -72,11 +73,35 @@ export function captureDemoEvent(event: DemoEventName) {
 
 export const captureDemoPageview = () => captureDemoEvent(DEMO_EVENTS.pageview);
 
+export function captureQuickStartView() {
+  posthog.capture(DEMO_EVENTS.quickStartViewed, {
+    page: QUICK_START_PAGE,
+    command_position: QUICK_START_POSITION,
+  });
+}
+
 export function captureInstallCopy() {
   posthog.capture(DEMO_EVENTS.installCopied, {
-    page: INSTALL_COPY_PAGE,
-    command_position: INSTALL_COPY_POSITION,
+    page: QUICK_START_PAGE,
+    command_position: QUICK_START_POSITION,
   });
+}
+
+export function observeQuickStartView(
+  element: Element,
+  capture = captureQuickStartView,
+): () => void {
+  let captured = false;
+  const observer = new IntersectionObserver(entries => {
+    if (captured || !entries.some(entry => entry.isIntersecting)) return;
+
+    captured = true;
+    capture();
+    observer.disconnect();
+  });
+
+  observer.observe(element);
+  return () => observer.disconnect();
 }
 
 export function createDemoAnalyticsHooks(capture = captureDemoEvent) {
