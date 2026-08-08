@@ -18,8 +18,19 @@ const PUBLIC_ROUTES = [
   '/tools/mailto-link-generator',
 ] as const;
 
+const UPDATED_ROUTES = new Map<string, string>([
+  ['/compare/smart-mailto-vs-mailto', '2026-08-07'],
+  ['/guides/mailto-link-opens-nothing', '2026-08-07'],
+  ['/guides/mailto-not-working-in-chrome', '2026-08-07'],
+]);
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return PUBLIC_ROUTES.map(route => ({
-    url: `${SITE_URL}${route}`,
-  }));
+  return PUBLIC_ROUTES.map(route => {
+    const lastModified = UPDATED_ROUTES.get(route);
+
+    return {
+      url: `${SITE_URL}${route}`,
+      ...(lastModified ? { lastModified } : {}),
+    };
+  });
 }

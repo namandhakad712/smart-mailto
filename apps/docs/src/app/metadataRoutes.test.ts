@@ -23,6 +23,23 @@ describe('search discovery metadata routes', () => {
     ]);
   });
 
+  it('dates only the guides published on August 7, 2026', () => {
+    expect(sitemap().filter(({ lastModified }) => lastModified)).toEqual([
+      {
+        url: `${SITE_URL}/compare/smart-mailto-vs-mailto`,
+        lastModified: '2026-08-07',
+      },
+      {
+        url: `${SITE_URL}/guides/mailto-link-opens-nothing`,
+        lastModified: '2026-08-07',
+      },
+      {
+        url: `${SITE_URL}/guides/mailto-not-working-in-chrome`,
+        lastModified: '2026-08-07',
+      },
+    ]);
+  });
+
   it('allows crawling and points to the production sitemap', () => {
     expect(robots()).toEqual({
       rules: {
