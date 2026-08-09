@@ -238,6 +238,16 @@ export default function MailtoLinkOpensNothingPage() {
               registered to handle it, the browser may pass it to the operating system, or a prior
               choice may leave no useful result.
             </p>
+            <p className="mt-4 max-w-[65ch] text-pretty leading-7 text-ink-soft dark:text-text-soft">
+              If the click fails in Chrome, follow the{' '}
+              <Link
+                className="font-semibold text-red hover:text-red-dark"
+                href="/guides/mailto-not-working-in-chrome"
+              >
+                Chrome-specific troubleshooting guide
+              </Link>{' '}
+              for handler and default-app checks.
+            </p>
             <ol className="mt-7 space-y-5">
               {[
                 [
