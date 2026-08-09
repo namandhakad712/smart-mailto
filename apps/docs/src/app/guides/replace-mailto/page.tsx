@@ -3,10 +3,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { GuideDemo } from '@/components/GuideDemo';
 
+const pageUrl = 'https://smart-mailto.vercel.app/guides/replace-mailto';
+
 export const metadata: Metadata = {
   title: 'Replace a mailto link with smart-mailto',
   description:
     'A practical guide to upgrading an existing mailto link with a webmail provider picker and native fallback.',
+  alternates: {
+    canonical: pageUrl,
+  },
+  openGraph: {
+    url: pageUrl,
+  },
 };
 
 const PROVIDERS = [
