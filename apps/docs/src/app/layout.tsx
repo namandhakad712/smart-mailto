@@ -89,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               All the protocols that are fit to fix.
             </p>
           </div>
-          <nav className="w-full border-t border-b border-ink dark:border-text py-2 flex justify-center gap-8">
+          <nav className="flex w-full flex-wrap justify-center gap-x-5 gap-y-2 border-t border-b border-ink py-2 dark:border-text md:gap-x-8">
             <Link
               className="font-label tracking-tighter uppercase text-ink dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
               href="/"
@@ -124,7 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
               href="/guides/replace-mailto"
             >
-              Guide
+              Install
             </Link>
             <Link
               className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
@@ -134,9 +134,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <Link
               className="font-label tracking-tighter uppercase text-ink-soft dark:text-text-soft font-medium hover:text-red dark:hover:text-red transition-colors duration-200 cursor-pointer active:opacity-80"
-              href="/blog"
+              href="/guides"
             >
-              Blog
+              Guides
             </Link>
           </nav>
         </header>
