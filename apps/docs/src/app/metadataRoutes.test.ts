@@ -8,12 +8,12 @@ describe('search discovery metadata routes', () => {
   it('lists every public page with a production URL', () => {
     expect(sitemap().map(({ url }) => url)).toEqual([
       SITE_URL,
-      `${SITE_URL}/blog`,
       `${SITE_URL}/compare/smart-mailto-vs-mailto`,
       `${SITE_URL}/docs/browser-support`,
       `${SITE_URL}/docs/cdn`,
       `${SITE_URL}/docs/geo-routing`,
       `${SITE_URL}/examples`,
+      `${SITE_URL}/guides`,
       `${SITE_URL}/guides/mailto-link-opens-nothing`,
       `${SITE_URL}/guides/mailto-not-working-in-chrome`,
       `${SITE_URL}/guides/replace-mailto`,
@@ -23,11 +23,15 @@ describe('search discovery metadata routes', () => {
     ]);
   });
 
-  it('dates only the guides published on August 7, 2026', () => {
+  it('dates only pages with a supported publication or update date', () => {
     expect(sitemap().filter(({ lastModified }) => lastModified)).toEqual([
       {
         url: `${SITE_URL}/compare/smart-mailto-vs-mailto`,
         lastModified: '2026-08-07',
+      },
+      {
+        url: `${SITE_URL}/guides`,
+        lastModified: '2026-08-09',
       },
       {
         url: `${SITE_URL}/guides/mailto-link-opens-nothing`,
