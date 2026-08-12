@@ -21,7 +21,7 @@ test('the homepage quick-start exposure and install-copy controls are wired narr
   await installCopy.click();
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-    .toBe('npm install @smart-mailto/core@0.2.0');
+    .toBe('npm install @smart-mailto/core@0.3.0');
 
   await initializationCopy.click();
   await expect
