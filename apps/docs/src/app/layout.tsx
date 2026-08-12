@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span className="hidden md:inline">DIGITAL EDITION</span>
             <div className="flex items-center gap-4">
               <ThemeToggle />
-              <span>PACKAGE v0.2.0</span>
+              <span>PACKAGE v0.3.0</span>
             </div>
           </div>
           <div className="text-center mb-6">
