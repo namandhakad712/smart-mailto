@@ -7,6 +7,7 @@ import { getAllProviders } from '@smart-mailto/core';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useIsDark } from '@/hooks/useIsDark';
 import { captureInstallCopy, DEMO_EVENTS, observeQuickStartView } from '@/lib/demoAnalytics';
+import { INSTALL_COMMAND } from '@/lib/installCommand';
 
 const MailIcon = () => (
   <svg
@@ -27,8 +28,6 @@ const MailIcon = () => (
 const allProviders = getAllProviders();
 const webmailProviders = allProviders.filter(provider => !provider.isNative && !provider.isCopy);
 const featuredProviders = webmailProviders.slice(0, 8);
-
-const INSTALL_COMMAND = 'npm install @smart-mailto/core@0.2.0';
 
 const QUICK_START_CODE = `import { initSmartMailto } from '@smart-mailto/core';
 
@@ -197,7 +196,7 @@ export default function Home() {
               Works in under 1ms with zero network requests.
             </p>
             <div className="mt-6 font-mono text-xs uppercase tracking-tight text-ink-muted dark:text-text-muted border-b border-border dark:border-border pb-4">
-              npm · github.com/namandhakad712/smart-mailto · PACKAGE v0.2.0
+              npm · github.com/namandhakad712/smart-mailto · PACKAGE v0.3.0
             </div>
           </header>
 

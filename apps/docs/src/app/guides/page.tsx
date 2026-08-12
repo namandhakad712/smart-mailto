@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { InstallCommandCopy } from '@/components/InstallCommandCopy';
 
 const pageUrl = 'https://smart-mailto.vercel.app/guides';
 
@@ -131,6 +132,7 @@ export default function GuidesPage() {
             Install the core package, initialize it once, and keep your existing mailto anchors. The
             guide also explains native-mail and copy-address fallbacks.
           </p>
+          <InstallCommandCopy />
           <Link
             className="mt-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-red underline-offset-4 hover:underline"
             href="/guides/replace-mailto"
