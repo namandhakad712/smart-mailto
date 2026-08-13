@@ -9,6 +9,7 @@ vi.mock('posthog-js', () => ({ default: posthog }));
 
 import {
   captureInstallCopy,
+  captureGuidesInstallCopy,
   captureDemoPageview,
   captureQuickStartView,
   createDemoAnalyticsHooks,
@@ -139,7 +140,6 @@ describe('privacy-safe homepage demo analytics', () => {
       token: 'public-project-key',
       distinct_id: 'random-device-id',
       $process_person_profile: false,
-      demo_location: 'homepage_live_demo',
       page: 'homepage',
       command_position: 'quick_start',
     });
@@ -172,9 +172,41 @@ describe('privacy-safe homepage demo analytics', () => {
       token: 'public-project-key',
       distinct_id: 'random-device-id',
       $process_person_profile: false,
-      demo_location: 'homepage_live_demo',
       page: 'homepage',
       command_position: 'quick_start',
+    });
+    expect(JSON.stringify(sanitized)).not.toContain('private');
+  });
+
+  it('records the Guides desk install copy with only its fixed page and control location', () => {
+    captureGuidesInstallCopy();
+
+    expect(posthog.capture).toHaveBeenCalledOnce();
+    expect(posthog.capture).toHaveBeenCalledWith(DEMO_EVENTS.installCopied, {
+      page: 'guides',
+      command_position: 'guide_desk',
+    });
+
+    const sanitized = sanitizeDemoEvent({
+      event: DEMO_EVENTS.installCopied,
+      properties: {
+        token: 'public-project-key',
+        distinct_id: 'random-device-id',
+        page: 'guides',
+        command_position: 'guide_desk',
+        email: 'private@example.com',
+        command: 'npm install private-package',
+        clipboard: 'private clipboard contents',
+      },
+      uuid: 'random-event-id',
+    });
+
+    expect(sanitized?.properties).toEqual({
+      token: 'public-project-key',
+      distinct_id: 'random-device-id',
+      $process_person_profile: false,
+      page: 'guides',
+      command_position: 'guide_desk',
     });
     expect(JSON.stringify(sanitized)).not.toContain('private');
   });
