@@ -4,6 +4,14 @@ import { InstallCommandCopy } from '@/components/InstallCommandCopy';
 
 const pageUrl = 'https://smart-mailto.vercel.app/guides';
 
+const revisionDates = {
+  install: { dateTime: '2026-08-09', label: 'Aug. 9, 2026' },
+  comparison: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
+  troubleshooting: { dateTime: '2026-08-09', label: 'Aug. 9, 2026' },
+  chrome: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
+  generator: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
+} as const;
+
 export const metadata: Metadata = {
   title: 'Mailto Guides for Developers — smart-mailto',
   description:
@@ -29,6 +37,7 @@ const readingPaths = [
       'See when a normal mailto link is enough and when a provider picker earns the extra step.',
     href: '/compare/smart-mailto-vs-mailto',
     meta: 'Decision guide · 6 min',
+    revised: revisionDates.comparison,
     className: 'lg:col-span-2',
   },
   {
@@ -39,6 +48,7 @@ const readingPaths = [
       'Separate broken link markup from browser and operating-system mail-handler problems.',
     href: '/guides/mailto-link-opens-nothing',
     meta: 'General checks · 8 min',
+    revised: revisionDates.troubleshooting,
     className: '',
   },
   {
@@ -49,6 +59,7 @@ const readingPaths = [
       'Work through Chrome protocol handlers, Gmail registration, extensions, and system defaults.',
     href: '/guides/mailto-not-working-in-chrome',
     meta: 'Five fixes · 7 min',
+    revised: revisionDates.chrome,
     className: '',
   },
   {
@@ -59,6 +70,7 @@ const readingPaths = [
       'Generate a correctly encoded mailto URL with recipients, subject, body, cc, and bcc fields.',
     href: '/tools/mailto-link-generator',
     meta: 'Interactive generator',
+    revised: revisionDates.generator,
     className: 'lg:col-span-2',
   },
 ] as const;
@@ -119,9 +131,13 @@ export default function GuidesPage() {
           </p>
         </div>
         <div className="border-l-4 border-red pl-6 md:pl-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-muted dark:text-text-muted">
-            Practical guide · Vanilla JavaScript
-          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-muted dark:text-text-muted">
+            <span>Practical guide · Vanilla JavaScript</span>
+            <span>
+              Revised{' '}
+              <time dateTime={revisionDates.install.dateTime}>{revisionDates.install.label}</time>
+            </span>
+          </div>
           <h2
             className="mt-3 text-balance font-headline text-3xl font-medium tracking-tight text-ink dark:text-text md:text-4xl"
             id="install-guide"
@@ -188,7 +204,12 @@ export default function GuidesPage() {
                 </p>
               </div>
               <div className="mt-8 flex items-center justify-between gap-4 border-t border-border pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-muted dark:border-border dark:text-text-muted">
-                <span>{path.meta}</span>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                  <span>{path.meta}</span>
+                  <span>
+                    Revised <time dateTime={path.revised.dateTime}>{path.revised.label}</time>
+                  </span>
+                </div>
                 <span aria-hidden="true" className="text-base text-red">
                   →
                 </span>
