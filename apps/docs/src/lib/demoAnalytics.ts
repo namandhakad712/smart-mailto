@@ -5,6 +5,8 @@ const POSTHOG_HOST = 'https://us.i.posthog.com';
 const DEMO_LOCATION = 'homepage_live_demo';
 const QUICK_START_PAGE = 'homepage';
 const QUICK_START_POSITION = 'quick_start';
+const GUIDES_PAGE = 'guides';
+const GUIDES_INSTALL_POSITION = 'guide_desk';
 
 export const DEMO_EVENTS = {
   pageview: 'homepage_demo_pageview',
@@ -23,13 +25,20 @@ const EVENT_NAMES = new Set<DemoEventName>(Object.values(DEMO_EVENTS));
 export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | null {
   if (!event || !EVENT_NAMES.has(event.event as DemoEventName)) return null;
 
-  const quickStartProperties =
-    event.event === DEMO_EVENTS.quickStartViewed || event.event === DEMO_EVENTS.installCopied
+  const installCopyProperties =
+    event.event === DEMO_EVENTS.installCopied &&
+    event.properties?.page === GUIDES_PAGE &&
+    event.properties?.command_position === GUIDES_INSTALL_POSITION
       ? {
-          page: QUICK_START_PAGE,
-          command_position: QUICK_START_POSITION,
+          page: GUIDES_PAGE,
+          command_position: GUIDES_INSTALL_POSITION,
         }
-      : {};
+      : event.event === DEMO_EVENTS.installCopied || event.event === DEMO_EVENTS.quickStartViewed
+        ? {
+            page: QUICK_START_PAGE,
+            command_position: QUICK_START_POSITION,
+          }
+        : {};
 
   return {
     uuid: event.uuid,
@@ -38,8 +47,10 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
       token: event.properties?.token,
       distinct_id: event.properties?.distinct_id,
       $process_person_profile: false,
-      demo_location: DEMO_LOCATION,
-      ...quickStartProperties,
+      ...(event.event === DEMO_EVENTS.quickStartViewed || event.event === DEMO_EVENTS.installCopied
+        ? {}
+        : { demo_location: DEMO_LOCATION }),
+      ...installCopyProperties,
     },
   };
 }
@@ -84,6 +95,13 @@ export function captureInstallCopy() {
   posthog.capture(DEMO_EVENTS.installCopied, {
     page: QUICK_START_PAGE,
     command_position: QUICK_START_POSITION,
+  });
+}
+
+export function captureGuidesInstallCopy() {
+  posthog.capture(DEMO_EVENTS.installCopied, {
+    page: GUIDES_PAGE,
+    command_position: GUIDES_INSTALL_POSITION,
   });
 }
 

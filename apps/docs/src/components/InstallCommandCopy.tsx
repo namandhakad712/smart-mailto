@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { captureGuidesInstallCopy } from '@/lib/demoAnalytics';
 import { INSTALL_COMMAND } from '@/lib/installCommand';
 
 type CopyState = 'idle' | 'copied' | 'error';
@@ -11,6 +12,7 @@ export function InstallCommandCopy() {
   const copy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(INSTALL_COMMAND);
+      captureGuidesInstallCopy();
       setCopyState('copied');
       window.setTimeout(() => setCopyState('idle'), 2000);
     } catch {
