@@ -16,6 +16,8 @@ export const DEMO_EVENTS = {
   pickerDismissed: 'demo_picker_dismissed',
   quickStartViewed: 'quick_start_viewed',
   installCopied: 'install_copy',
+  guidesDeskViewed: 'guides_desk_viewed',
+  guidesInstallCopied: 'guides_install_copy',
 } as const;
 
 type DemoEventName = (typeof DEMO_EVENTS)[keyof typeof DEMO_EVENTS];
@@ -25,10 +27,8 @@ const EVENT_NAMES = new Set<DemoEventName>(Object.values(DEMO_EVENTS));
 export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | null {
   if (!event || !EVENT_NAMES.has(event.event as DemoEventName)) return null;
 
-  const installCopyProperties =
-    event.event === DEMO_EVENTS.installCopied &&
-    event.properties?.page === GUIDES_PAGE &&
-    event.properties?.command_position === GUIDES_INSTALL_POSITION
+  const fixedLocationProperties =
+    event.event === DEMO_EVENTS.guidesDeskViewed || event.event === DEMO_EVENTS.guidesInstallCopied
       ? {
           page: GUIDES_PAGE,
           command_position: GUIDES_INSTALL_POSITION,
@@ -47,10 +47,13 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
       token: event.properties?.token,
       distinct_id: event.properties?.distinct_id,
       $process_person_profile: false,
-      ...(event.event === DEMO_EVENTS.quickStartViewed || event.event === DEMO_EVENTS.installCopied
+      ...(event.event === DEMO_EVENTS.quickStartViewed ||
+      event.event === DEMO_EVENTS.installCopied ||
+      event.event === DEMO_EVENTS.guidesDeskViewed ||
+      event.event === DEMO_EVENTS.guidesInstallCopied
         ? {}
         : { demo_location: DEMO_LOCATION }),
-      ...installCopyProperties,
+      ...fixedLocationProperties,
     },
   };
 }
@@ -99,7 +102,14 @@ export function captureInstallCopy() {
 }
 
 export function captureGuidesInstallCopy() {
-  posthog.capture(DEMO_EVENTS.installCopied, {
+  posthog.capture(DEMO_EVENTS.guidesInstallCopied, {
+    page: GUIDES_PAGE,
+    command_position: GUIDES_INSTALL_POSITION,
+  });
+}
+
+export function captureGuidesDeskView() {
+  posthog.capture(DEMO_EVENTS.guidesDeskViewed, {
     page: GUIDES_PAGE,
     command_position: GUIDES_INSTALL_POSITION,
   });
