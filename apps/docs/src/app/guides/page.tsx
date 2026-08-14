@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { GuidesDeskAnalytics } from '@/components/GuidesDeskAnalytics';
 import { InstallCommandCopy } from '@/components/InstallCommandCopy';
 
 const pageUrl = 'https://smart-mailto.vercel.app/guides';
@@ -78,6 +79,7 @@ const readingPaths = [
 export default function GuidesPage() {
   return (
     <article className="mx-auto max-w-6xl">
+      <GuidesDeskAnalytics />
       <header className="grid gap-10 border-b border-border pb-12 dark:border-border lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
         <div>
           <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
