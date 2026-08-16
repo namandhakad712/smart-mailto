@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Browser & framework support ┬╖ smart-mailto',
+  title: 'Which Browsers and Frameworks Support smart-mailto?',
   description:
-    'The tested browser engine, framework peer ranges, and required browser APIs for smart-mailto.',
+    'See smart-mailto’s tested Chromium coverage, React 17+, Vue 3+, Svelte 5+, required browser APIs, and unverified browser boundaries.',
 };
 
 const repositoryUrl = 'https://github.com/namandhakad712/smart-mailto/blob/main';
@@ -238,7 +238,7 @@ export default function BrowserSupportPage() {
           Compatibility record
         </p>
         <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.05] tracking-tight text-ink dark:text-text md:text-7xl">
-          Browser and framework support
+          Which browsers and frameworks support smart-mailto?
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-ink-soft dark:text-text-soft">
           smart-mailto targets ES2020 and is automatically exercised in Chromium. Firefox, Safari,

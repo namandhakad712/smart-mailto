@@ -30,16 +30,44 @@ describe('search discovery metadata routes', () => {
         lastModified: '2026-08-07',
       },
       {
+        url: `${SITE_URL}/docs/browser-support`,
+        lastModified: '2026-08-16',
+      },
+      {
+        url: `${SITE_URL}/docs/cdn`,
+        lastModified: '2026-08-16',
+      },
+      {
+        url: `${SITE_URL}/docs/geo-routing`,
+        lastModified: '2026-08-16',
+      },
+      {
+        url: `${SITE_URL}/examples`,
+        lastModified: '2026-08-16',
+      },
+      {
         url: `${SITE_URL}/guides`,
         lastModified: '2026-08-09',
       },
       {
         url: `${SITE_URL}/guides/mailto-link-opens-nothing`,
-        lastModified: '2026-08-07',
+        lastModified: '2026-08-16',
       },
       {
         url: `${SITE_URL}/guides/mailto-not-working-in-chrome`,
         lastModified: '2026-08-07',
+      },
+      {
+        url: `${SITE_URL}/guides/replace-mailto`,
+        lastModified: '2026-08-16',
+      },
+      {
+        url: `${SITE_URL}/providers`,
+        lastModified: '2026-08-16',
+      },
+      {
+        url: `${SITE_URL}/spec`,
+        lastModified: '2026-08-16',
       },
     ]);
   });

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'CDN / Vanilla JS — smart-mailto',
+  title: 'How to Use smart-mailto with Vanilla JavaScript and a CDN',
   description:
-    'Use smart-mailto from a CDN via UMD bundle. No build tools required — just a script tag.',
+    'Add smart-mailto to a plain HTML page with a CDN script and initialize existing mailto links without a bundler or framework.',
 };
 
 function CodeBlock({ label, children }: { label: string; children: React.ReactNode }) {
@@ -46,7 +46,7 @@ export default function CdnPage() {
           Guide · CDN & Vanilla JavaScript
         </p>
         <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.05] tracking-tight text-ink dark:text-text md:text-7xl">
-          CDN Usage
+          Use smart-mailto with a CDN and vanilla JavaScript
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-ink-soft dark:text-text-soft">
           smart-mailto ships a UMD bundle for use directly from a CDN. No bundler, no framework, no

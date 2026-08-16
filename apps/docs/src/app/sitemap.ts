@@ -20,9 +20,16 @@ const PUBLIC_ROUTES = [
 
 const UPDATED_ROUTES = new Map<string, string>([
   ['/compare/smart-mailto-vs-mailto', '2026-08-07'],
+  ['/docs/browser-support', '2026-08-16'],
+  ['/docs/cdn', '2026-08-16'],
+  ['/docs/geo-routing', '2026-08-16'],
+  ['/examples', '2026-08-16'],
   ['/guides', '2026-08-09'],
-  ['/guides/mailto-link-opens-nothing', '2026-08-07'],
+  ['/guides/mailto-link-opens-nothing', '2026-08-16'],
   ['/guides/mailto-not-working-in-chrome', '2026-08-07'],
+  ['/guides/replace-mailto', '2026-08-16'],
+  ['/providers', '2026-08-16'],
+  ['/spec', '2026-08-16'],
 ]);
 
 export default function sitemap(): MetadataRoute.Sitemap {

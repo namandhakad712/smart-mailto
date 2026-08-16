@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Geo-Routing — smart-mailto',
+  title: 'How smart-mailto Chooses Regional Webmail Providers',
   description:
-    'How smart-mailto detects user location using only browser APIs — zero network requests, completes in < 1ms.',
+    'See how smart-mailto orders regional webmail providers from browser timezone and language signals without IP lookup, cookies, or network requests.',
 };
 
 function CodeBlock({ label, children }: { label: string; children: React.ReactNode }) {
@@ -47,11 +47,11 @@ export default function GeoRoutingPage() {
           Architecture · Zero-Network Geolocation
         </p>
         <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.05] tracking-tight text-ink dark:text-text md:text-7xl">
-          Geo-Routing
+          How does smart-mailto choose regional providers?
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-ink-soft dark:text-text-soft">
-          smart-mailto detects user location using only browser APIs — no IP geolocation, no network
-          requests, no privacy trade-offs. The entire detection runs in less than 1 millisecond.
+          smart-mailto uses browser timezone and language signals to order regional providers. It
+          does not use IP lookup, cookies, or network requests for this detection.
         </p>
       </header>
 
