@@ -151,6 +151,16 @@ export default function GuidesPage() {
             guide also explains native-mail and copy-address fallbacks.
           </p>
           <InstallCommandCopy />
+          <p className="mt-3 max-w-3xl text-pretty text-sm leading-6 text-ink-muted dark:text-text-muted">
+            Installation stalled?{' '}
+            <a
+              className="font-semibold text-red underline underline-offset-4 transition-colors duration-200 hover:text-red-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
+              href="https://github.com/namandhakad712/smart-mailto/discussions/40"
+            >
+              Share your setup feedback in Discussion #40
+            </a>{' '}
+            with your framework, first unclear step, exact error, and final outcome.
+          </p>
           <Link
             className="mt-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-red underline-offset-4 hover:underline"
             href="/guides/replace-mailto"
