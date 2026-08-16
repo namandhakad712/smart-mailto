@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: 'How to Use smart-mailto with Vanilla JavaScript and a CDN',
   description:
     'Add smart-mailto to a plain HTML page with a CDN script and initialize existing mailto links without a bundler or framework.',
+  alternates: {
+    canonical: 'https://smart-mailto.vercel.app/docs/cdn',
+  },
 };
 
 function CodeBlock({ label, children }: { label: string; children: React.ReactNode }) {

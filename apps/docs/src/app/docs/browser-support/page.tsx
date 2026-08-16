@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'Which Browsers and Frameworks Support smart-mailto?',
   description:
     'See smart-mailto’s tested Chromium coverage, React 17+, Vue 3+, Svelte 5+, required browser APIs, and unverified browser boundaries.',
+  alternates: {
+    canonical: 'https://smart-mailto.vercel.app/docs/browser-support',
+  },
 };
 
 const repositoryUrl = 'https://github.com/namandhakad712/smart-mailto/blob/main';
