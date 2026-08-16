@@ -3,7 +3,9 @@ import { expect, test } from '@playwright/test';
 test('browser support page states the tested boundary and evidence', async ({ page }) => {
   await page.goto('/docs/browser-support');
 
-  await expect(page.getByRole('heading', { name: 'Browser and framework support' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Which browsers and frameworks support smart-mailto?' }),
+  ).toBeVisible();
   await expect(page.getByRole('rowheader', { name: 'Playwright Chromium' })).toBeVisible();
   await expect(page.getByRole('cell', { name: 'React 17+' })).toBeVisible();
   await expect(page.getByText('Firefox', { exact: true })).toBeVisible();
