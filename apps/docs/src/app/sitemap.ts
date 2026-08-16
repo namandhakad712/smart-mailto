@@ -26,7 +26,7 @@ const UPDATED_ROUTES = new Map<string, string>([
   ['/examples', '2026-08-16'],
   ['/guides', '2026-08-09'],
   ['/guides/mailto-link-opens-nothing', '2026-08-16'],
-  ['/guides/mailto-not-working-in-chrome', '2026-08-07'],
+  ['/guides/mailto-not-working-in-chrome', '2026-08-16'],
   ['/guides/replace-mailto', '2026-08-16'],
   ['/providers', '2026-08-16'],
   ['/spec', '2026-08-16'],

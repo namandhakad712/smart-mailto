@@ -55,7 +55,7 @@ describe('search discovery metadata routes', () => {
       },
       {
         url: `${SITE_URL}/guides/mailto-not-working-in-chrome`,
-        lastModified: '2026-08-07',
+        lastModified: '2026-08-16',
       },
       {
         url: `${SITE_URL}/guides/replace-mailto`,
