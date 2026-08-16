@@ -6,18 +6,18 @@ import { GuideDemo } from '@/components/GuideDemo';
 const pageUrl = 'https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing';
 
 export const metadata: Metadata = {
-  title: 'Mailto Link Opens Nothing? Fix the Link and Its Fallback',
+  title: 'Mailto Link Not Working? 4 Checks and Fallbacks',
   description:
-    'Troubleshoot a mailto link that does nothing. Check the href, browser handler, and operating-system mail app, then add a webmail or copy fallback.',
+    'Fix a mailto link that does nothing or opens the wrong app. Check the href, page scripts, browser handler, and default mail app, then add a fallback.',
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: 'article',
     url: pageUrl,
-    title: 'Mailto link opens nothing? A developer troubleshooting guide',
+    title: 'Mailto link not working? 4 checks and fallbacks',
     description:
-      'Check the link, browser handler, and native mail setup, then give visitors a useful fallback.',
+      'Check the href, page scripts, browser handler, and default mail app, then give visitors a useful fallback.',
   },
   robots: {
     index: true,
@@ -66,6 +66,40 @@ const faqSchema = {
   })),
 };
 
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to fix a mailto link that is not working',
+  description:
+    'Check the link and page scripts, browser protocol handler, default mail app, and visitor fallback.',
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Test a minimal mailto link and page scripts',
+      text: 'Test one known-good mailto address, then confirm that page JavaScript does not cancel the click without opening a destination.',
+      url: `${pageUrl}#check-the-link`,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Check the browser protocol handler',
+      text: 'Try a private window and review the browser protocol-handler settings for mailto links.',
+      url: `${pageUrl}#check-the-browser`,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Confirm the default mail app',
+      text: 'Confirm that the operating system has a mail application set as the default handler for email links.',
+      url: `${pageUrl}#check-the-system`,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Add a visitor-controlled fallback',
+      text: 'Show the address, offer a webmail picker, or use a contact form when receipt must be recorded.',
+      url: `${pageUrl}#choose-a-fallback`,
+    },
+  ],
+};
+
 const providers = [
   { name: 'Gmail', logo: '/provider-logos/gmail.svg' },
   { name: 'Outlook', logo: '/provider-logos/outlook-personal.svg' },
@@ -95,6 +129,10 @@ export default function MailtoLinkOpensNothingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         type="application/ld+json"
       />
+      <script
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        type="application/ld+json"
+      />
 
       <header className="grid gap-10 border-b border-border pb-12 dark:border-border lg:grid-cols-[minmax(0,1fr)_330px] lg:items-end">
         <div>
@@ -102,11 +140,12 @@ export default function MailtoLinkOpensNothingPage() {
             Troubleshooting guide · For website owners
           </p>
           <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.04] tracking-tight text-ink dark:text-text md:text-7xl">
-            Mailto link opens nothing? Start with the link, then the handler.
+            Mailto link not working? Find where the click breaks.
           </h1>
           <p className="mt-6 max-w-2xl text-pretty text-xl leading-relaxed text-ink-soft dark:text-text-soft">
-            A dead click can come from the page or the visitor&apos;s device. This sequence tells
-            you which one failed, what you can fix, and how to leave a useful fallback.
+            If a click does nothing, opens the wrong app, or flashes a blank tab, the failure sits
+            in one of four places: the link, page scripts, browser handler, or default mail app.
+            Work through them in order, then add a fallback visitors can control.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
             <a
@@ -133,7 +172,7 @@ export default function MailtoLinkOpensNothingPage() {
           </p>
           <ol className="mt-5 space-y-5">
             {[
-              ['01', 'Test a minimal mailto link'],
+              ['01', 'Test the link and page scripts'],
               ['02', 'Check the browser handler'],
               ['03', 'Check the default mail app'],
               ['04', 'Add a visitor-controlled fallback'],
@@ -157,7 +196,7 @@ export default function MailtoLinkOpensNothingPage() {
           <ol className="mt-4 space-y-3 border-l border-border pl-4 font-mono text-xs dark:border-border">
             <li>
               <a className="text-red hover:text-red-dark" href="#check-the-link">
-                1. Check the link
+                1. Check the link and scripts
               </a>
             </li>
             <li>
@@ -189,11 +228,12 @@ export default function MailtoLinkOpensNothingPage() {
               Check 1 · Your page
             </p>
             <h2 className="mt-3 text-balance font-headline text-3xl font-medium tracking-tight text-ink dark:text-text">
-              Reduce the link to one known-good address
+              Test one known-good link, then check page scripts
             </h2>
             <p className="mt-4 max-w-[65ch] text-pretty leading-7 text-ink-soft dark:text-text-soft">
               Start without a subject, body, CC, or BCC. A basic anchor separates invalid markup
-              from a device that has no useful mail handler.
+              from a device that has no useful mail handler. If it still fails, confirm that page
+              JavaScript does not cancel the click without opening a destination.
             </p>
             <div className="mt-6">
               <CodeBlock label="Minimal HTML">

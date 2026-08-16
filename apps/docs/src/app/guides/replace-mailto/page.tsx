@@ -6,9 +6,9 @@ import { GuideDemo } from '@/components/GuideDemo';
 const pageUrl = 'https://smart-mailto.vercel.app/guides/replace-mailto';
 
 export const metadata: Metadata = {
-  title: 'Replace a mailto link with smart-mailto',
+  title: 'How to Replace a Mailto Link with a Webmail Picker',
   description:
-    'A practical guide to upgrading an existing mailto link with a webmail provider picker and native fallback.',
+    'Install smart-mailto, initialize it once, and keep your existing mailto links while adding webmail, native-mail, and copy-address choices.',
   alternates: {
     canonical: pageUrl,
   },
@@ -46,7 +46,7 @@ export default function ReplaceMailtoGuide() {
             Practical guide · Vanilla JavaScript
           </p>
           <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.05] tracking-tight text-ink dark:text-text md:text-7xl">
-            Keep your mailto link. Give visitors a better way to open it.
+            How to replace a mailto link with a webmail picker
           </h1>
           <p className="mt-6 max-w-2xl text-pretty text-xl leading-relaxed text-ink-soft dark:text-text-soft">
             Install one package, initialize it once, then keep using normal mailto links. Visitors

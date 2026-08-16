@@ -959,19 +959,18 @@ export default function ExamplesPage() {
           Side by Side
         </span>
         <h1 className="text-4xl font-headline font-normal text-ink dark:text-text">
-          Before vs. After
+          What does smart-mailto change on a contact page?
         </h1>
         <p className="font-headline text-xl md:text-2xl font-semibold text-ink dark:text-text mt-2 max-w-3xl mx-auto leading-snug">
-          Even the biggest tech companies ship{' '}
+          Six simulated contact pages compare ordinary{' '}
           <code className="font-mono text-sm bg-red-50 dark:bg-red-950/30 px-1.5 py-0.5 rounded text-red-600 dark:text-red-400 font-bold">
             mailto:
           </code>{' '}
-          links that break when no mail client is configured. By default, the picker also lets
-          visitors copy the email address instead of opening a listed provider.
+          links with smart-mailto&apos;s webmail picker and copy-address fallback.
         </p>
         <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50 rounded-lg text-xs text-red-700 dark:text-red-400">
-          <span className="font-bold">This is a visualization of a real problem:</span> even the
-          biggest tech companies ship broken email links.
+          <span className="font-bold">These are demonstrations, not customer case studies.</span>
+          Each pair keeps the same email intent and changes the visitor&apos;s available choices.
         </div>
       </div>
 

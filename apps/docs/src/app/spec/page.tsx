@@ -231,11 +231,11 @@ export default function SpecPage() {
           Technical Reference
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          Spec
+          How do I configure smart-mailto?
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
-          Complete API reference for @smart-mailto/core. Types, functions, configuration, and
-          architecture.
+          Use this API reference to configure @smart-mailto/core, parse links, resolve providers,
+          control the picker, and connect framework adapters.
         </p>
       </header>
 

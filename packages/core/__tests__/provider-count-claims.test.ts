@@ -59,7 +59,7 @@ describe('maintained provider count claims', () => {
     const specPage = repositoryFile('apps/docs/src/app/spec/page.tsx');
 
     expect(providerTable).toContain('{providers.length} webmail entries:');
-    expect(providerPage).toContain('{WEBMAIL_PROVIDERS.length} Webmail Entries.');
+    expect(providerPage).toContain('{WEBMAIL_PROVIDERS.length} webmail entries:');
     expect(specPage).toContain('{webmailProviders.length} webmail entries:');
   });
 });

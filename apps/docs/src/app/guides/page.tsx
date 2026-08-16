@@ -44,7 +44,7 @@ const readingPaths = [
   {
     number: '03',
     label: 'Troubleshooting',
-    title: 'Mailto link opens nothing',
+    title: 'Mailto link not working',
     description:
       'Separate broken link markup from browser and operating-system mail-handler problems.',
     href: '/guides/mailto-link-opens-nothing',

@@ -178,12 +178,12 @@ export default function ProvidersPage() {
           Provider Registry
         </span>
         <h1 className="text-5xl md:text-6xl font-headline font-normal leading-tight tracking-tight text-ink dark:text-text mb-4">
-          {WEBMAIL_PROVIDERS.length} Webmail Entries.
+          Which webmail providers can smart-mailto open?
         </h1>
         <p className="text-lg text-ink-soft dark:text-text-soft">
-          {COMPOSE_PROVIDER_COUNT} provider compose links and {FALLBACK_PROVIDER_COUNT} official
-          webmail fallback pages. Prefill support varies by provider; native mail and copy-address
-          remain separate fallback actions.
+          Browse {WEBMAIL_PROVIDERS.length} webmail entries: {COMPOSE_PROVIDER_COUNT} provider
+          compose links and {FALLBACK_PROVIDER_COUNT} official webmail fallback pages. Prefill
+          support varies by provider; native mail and copy-address remain separate fallback actions.
         </p>
       </header>
 
