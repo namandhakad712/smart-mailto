@@ -8,7 +8,7 @@ npm i @smart-mailto/svelte
 
 Requires `svelte >= 5.0.0`. Includes `@smart-mailto/core` as a dependency.
 
-[Guides desk](https://smart-mailto.vercel.app/guides) · [Browser and framework support matrix](https://smart-mailto.vercel.app/docs/browser-support)
+[Fix a mailto link that opens nothing](https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing) · [Browser and framework support matrix](https://smart-mailto.vercel.app/docs/browser-support)
 
 ## Usage
 
