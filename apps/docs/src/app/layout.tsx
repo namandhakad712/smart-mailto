@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   title: 'smart-mailto · Zero-dependency webmail picker',
   description:
     'Add a zero-dependency webmail picker to existing mailto: links. Visitors can compose in webmail, use native mail, or copy the address.',
+  alternates: {
+    canonical: 'https://smart-mailto.vercel.app',
+  },
   openGraph: {
     type: 'website',
     url: '/',

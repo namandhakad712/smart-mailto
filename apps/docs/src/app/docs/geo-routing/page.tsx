@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'How smart-mailto Chooses Regional Webmail Providers',
   description:
     'See how smart-mailto orders regional webmail providers from browser timezone and language signals without IP lookup, cookies, or network requests.',
+  alternates: {
+    canonical: 'https://smart-mailto.vercel.app/docs/geo-routing',
+  },
 };
 
 function CodeBlock({ label, children }: { label: string; children: React.ReactNode }) {
