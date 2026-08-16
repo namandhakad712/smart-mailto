@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GuideDemo } from '@/components/GuideDemo';
+import { replaceMailtoHowToSchema } from '@/lib/guideStructuredData';
 
 const pageUrl = 'https://smart-mailto.vercel.app/guides/replace-mailto';
 
@@ -40,6 +41,11 @@ function CodeBlock({ label, children }: { label: string; children: React.ReactNo
 export default function ReplaceMailtoGuide() {
   return (
     <article className="mx-auto max-w-6xl">
+      <script
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(replaceMailtoHowToSchema) }}
+        type="application/ld+json"
+      />
+
       <header className="grid gap-10 border-b border-border pb-12 dark:border-border lg:grid-cols-[minmax(0,1fr)_340px] lg:items-end">
         <div>
           <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">

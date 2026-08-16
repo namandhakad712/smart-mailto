@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { chromeHowToSchema } from '@/lib/guideStructuredData';
 
 const pageUrl = 'https://smart-mailto.vercel.app/guides/mailto-not-working-in-chrome';
 
@@ -84,6 +85,10 @@ export default function MailtoNotWorkingInChromePage() {
     <article className="mx-auto max-w-6xl">
       <script
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        type="application/ld+json"
+      />
+      <script
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(chromeHowToSchema) }}
         type="application/ld+json"
       />
 

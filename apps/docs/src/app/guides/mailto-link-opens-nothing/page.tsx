@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GuideDemo } from '@/components/GuideDemo';
+import { brokenMailtoHowToSchema } from '@/lib/guideStructuredData';
 
 const pageUrl = 'https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing';
 
@@ -66,40 +67,6 @@ const faqSchema = {
   })),
 };
 
-const howToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'How to fix a mailto link that is not working',
-  description:
-    'Check the link and page scripts, browser protocol handler, default mail app, and visitor fallback.',
-  step: [
-    {
-      '@type': 'HowToStep',
-      name: 'Test a minimal mailto link and page scripts',
-      text: 'Test one known-good mailto address, then confirm that page JavaScript does not cancel the click without opening a destination.',
-      url: `${pageUrl}#check-the-link`,
-    },
-    {
-      '@type': 'HowToStep',
-      name: 'Check the browser protocol handler',
-      text: 'Try a private window and review the browser protocol-handler settings for mailto links.',
-      url: `${pageUrl}#check-the-browser`,
-    },
-    {
-      '@type': 'HowToStep',
-      name: 'Confirm the default mail app',
-      text: 'Confirm that the operating system has a mail application set as the default handler for email links.',
-      url: `${pageUrl}#check-the-system`,
-    },
-    {
-      '@type': 'HowToStep',
-      name: 'Add a visitor-controlled fallback',
-      text: 'Show the address, offer a webmail picker, or use a contact form when receipt must be recorded.',
-      url: `${pageUrl}#choose-a-fallback`,
-    },
-  ],
-};
-
 const providers = [
   { name: 'Gmail', logo: '/provider-logos/gmail.svg' },
   { name: 'Outlook', logo: '/provider-logos/outlook-personal.svg' },
@@ -130,7 +97,7 @@ export default function MailtoLinkOpensNothingPage() {
         type="application/ld+json"
       />
       <script
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(brokenMailtoHowToSchema) }}
         type="application/ld+json"
       />
 
