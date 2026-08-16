@@ -37,3 +37,4 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           playwright: true
+          autoAcceptChanges: seo/search-question-guides-20260816
