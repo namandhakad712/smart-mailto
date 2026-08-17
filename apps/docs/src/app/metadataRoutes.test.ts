@@ -20,6 +20,7 @@ describe('search discovery metadata routes', () => {
       `${SITE_URL}/providers`,
       `${SITE_URL}/spec`,
       `${SITE_URL}/tools/mailto-link-generator`,
+      `${SITE_URL}/tools/test-mailto-link`,
     ]);
   });
 
@@ -68,6 +69,10 @@ describe('search discovery metadata routes', () => {
       {
         url: `${SITE_URL}/spec`,
         lastModified: '2026-08-16',
+      },
+      {
+        url: `${SITE_URL}/tools/test-mailto-link`,
+        lastModified: '2026-08-17',
       },
     ]);
   });

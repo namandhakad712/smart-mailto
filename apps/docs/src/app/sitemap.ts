@@ -16,6 +16,7 @@ const PUBLIC_ROUTES = [
   '/providers',
   '/spec',
   '/tools/mailto-link-generator',
+  '/tools/test-mailto-link',
 ] as const;
 
 const UPDATED_ROUTES = new Map<string, string>([
@@ -30,6 +31,7 @@ const UPDATED_ROUTES = new Map<string, string>([
   ['/guides/replace-mailto', '2026-08-16'],
   ['/providers', '2026-08-16'],
   ['/spec', '2026-08-16'],
+  ['/tools/test-mailto-link', '2026-08-17'],
 ]);
 
 export default function sitemap(): MetadataRoute.Sitemap {

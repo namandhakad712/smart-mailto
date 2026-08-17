@@ -202,6 +202,16 @@ export default function MailtoLinkOpensNothingPage() {
               from a device that has no useful mail handler. If it still fails, confirm that page
               JavaScript does not cancel the click without opening a destination.
             </p>
+            <p className="mt-4 max-w-[65ch] text-pretty leading-7 text-ink-soft dark:text-text-soft">
+              Prefer a guided check? Run the{' '}
+              <Link
+                className="font-semibold text-red hover:text-red-dark"
+                href="/tools/test-mailto-link"
+              >
+                live mailto link test
+              </Link>{' '}
+              to compare a known-good link with your own markup.
+            </p>
             <div className="mt-6">
               <CodeBlock label="Minimal HTML">
                 {'<a href="mailto:hello@example.com">Email us</a>'}

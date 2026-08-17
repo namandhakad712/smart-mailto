@@ -10,13 +10,14 @@ const revisionDates = {
   comparison: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
   troubleshooting: { dateTime: '2026-08-09', label: 'Aug. 9, 2026' },
   chrome: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
+  test: { dateTime: '2026-08-17', label: 'Aug. 17, 2026' },
   generator: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
 } as const;
 
 export const metadata: Metadata = {
   title: 'Mailto Guides for Developers — smart-mailto',
   description:
-    'Compare plain mailto links, troubleshoot links that open nothing, fix Chrome handler setup, generate a mailto URL, or install smart-mailto.',
+    'Test a mailto link, troubleshoot links that open nothing, fix Chrome handler setup, generate a mailto URL, compare options, or install smart-mailto.',
   alternates: {
     canonical: pageUrl,
   },
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: 'Mailto guides for developers',
     description:
-      'Five practical routes for comparing, fixing, generating, and upgrading mailto links.',
+      'Six practical routes for testing, comparing, fixing, generating, and upgrading mailto links.',
   },
 };
 
@@ -65,6 +66,17 @@ const readingPaths = [
   },
   {
     number: '05',
+    label: 'Test',
+    title: 'Test a mailto link',
+    description:
+      'Run a known-good link and separate broken HTML from browser or default mail-app setup.',
+    href: '/tools/test-mailto-link',
+    meta: 'Live test · 8 min',
+    revised: revisionDates.test,
+    className: '',
+  },
+  {
+    number: '06',
     label: 'Tool',
     title: 'Build a mailto link',
     description:
@@ -72,7 +84,7 @@ const readingPaths = [
     href: '/tools/mailto-link-generator',
     meta: 'Interactive generator',
     revised: revisionDates.generator,
-    className: 'lg:col-span-2',
+    className: '',
   },
 ] as const;
 
@@ -83,14 +95,14 @@ export default function GuidesPage() {
       <header className="grid gap-10 border-b border-border pb-12 dark:border-border lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
         <div>
           <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-            Guide desk · Five practical routes
+            Guide desk · Six practical routes
           </p>
           <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.04] tracking-tight text-ink dark:text-text md:text-7xl">
             Start with the mailto problem in front of you.
           </h1>
           <p className="mt-6 max-w-2xl text-pretty text-xl leading-relaxed text-ink-soft dark:text-text-soft">
-            Compare the options, repair a dead click, fix Chrome, generate a link, or add a webmail
-            picker to the links you already have.
+            Test a link, compare the options, repair a dead click, fix Chrome, generate a link, or
+            add a webmail picker to the links you already have.
           </p>
           <Link
             className="mt-8 inline-flex min-h-11 items-center justify-center gap-3 bg-red px-6 py-3 font-body font-semibold text-white transition-colors duration-200 hover:bg-red-dark active:opacity-80"
@@ -108,7 +120,7 @@ export default function GuidesPage() {
             Choose your route
           </p>
           <ol className="mt-5 space-y-4">
-            {['Install', 'Compare', 'Troubleshoot', 'Fix Chrome', 'Generate'].map(
+            {['Install', 'Compare', 'Troubleshoot', 'Fix Chrome', 'Test', 'Generate'].map(
               (label, index) => (
                 <li className="flex items-baseline gap-4" key={label}>
                   <span className="font-mono text-xs text-ink-muted dark:text-text-muted">
@@ -127,7 +139,7 @@ export default function GuidesPage() {
         className="grid gap-8 py-12 lg:grid-cols-[200px_1fr]"
       >
         <div>
-          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 05</p>
+          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 06</p>
           <p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-red">
             Start here
           </p>
@@ -184,7 +196,7 @@ export default function GuidesPage() {
               className="mt-2 font-headline text-3xl font-medium tracking-tight text-ink dark:text-text"
               id="more-guides"
             >
-              Four more ways in
+              Five more ways in
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-ink-muted dark:text-text-muted">
@@ -201,7 +213,7 @@ export default function GuidesPage() {
               <div>
                 <div className="flex items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
                   <span className="font-bold text-red">{path.label}</span>
-                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 05</span>
+                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 06</span>
                 </div>
                 <h3 className="mt-8 max-w-xl text-balance font-headline text-2xl font-medium tracking-tight text-ink dark:text-text md:text-3xl">
                   <Link
