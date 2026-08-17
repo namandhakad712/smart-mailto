@@ -21,6 +21,8 @@ initSmartMailto({
 
 Every `mailto:` link on the page now opens a provider picker modal instead of triggering the OS default mail app.
 
+[Mailto link opens nothing? Follow the troubleshooting guide.](https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing)
+
 ## Manual / Programmatic
 
 ```ts
