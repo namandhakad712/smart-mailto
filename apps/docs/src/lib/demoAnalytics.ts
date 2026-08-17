@@ -8,6 +8,17 @@ const QUICK_START_POSITION = 'quick_start';
 const GUIDES_PAGE = 'guides';
 const GUIDES_INSTALL_POSITION = 'guide_desk';
 
+export const GUIDES_VISIT_SOURCES = {
+  directInvitation: 'direct_invitation',
+  search: 'search',
+  repository: 'repository',
+  unclassified: 'unclassified',
+} as const;
+
+export type GuidesVisitSource = (typeof GUIDES_VISIT_SOURCES)[keyof typeof GUIDES_VISIT_SOURCES];
+
+const GUIDES_VISIT_SOURCE_VALUES = new Set<GuidesVisitSource>(Object.values(GUIDES_VISIT_SOURCES));
+
 export const DEMO_EVENTS = {
   pageview: 'homepage_demo_pageview',
   pickerShown: 'demo_picker_shown',
@@ -24,21 +35,33 @@ type DemoEventName = (typeof DEMO_EVENTS)[keyof typeof DEMO_EVENTS];
 
 const EVENT_NAMES = new Set<DemoEventName>(Object.values(DEMO_EVENTS));
 
+function normalizeGuidesVisitSource(value: unknown): GuidesVisitSource {
+  return typeof value === 'string' && GUIDES_VISIT_SOURCE_VALUES.has(value as GuidesVisitSource)
+    ? (value as GuidesVisitSource)
+    : GUIDES_VISIT_SOURCES.unclassified;
+}
+
 export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | null {
   if (!event || !EVENT_NAMES.has(event.event as DemoEventName)) return null;
 
   const fixedLocationProperties =
-    event.event === DEMO_EVENTS.guidesDeskViewed || event.event === DEMO_EVENTS.guidesInstallCopied
+    event.event === DEMO_EVENTS.guidesDeskViewed
       ? {
           page: GUIDES_PAGE,
           command_position: GUIDES_INSTALL_POSITION,
+          visit_source: normalizeGuidesVisitSource(event.properties?.visit_source),
         }
-      : event.event === DEMO_EVENTS.installCopied || event.event === DEMO_EVENTS.quickStartViewed
+      : event.event === DEMO_EVENTS.guidesInstallCopied
         ? {
-            page: QUICK_START_PAGE,
-            command_position: QUICK_START_POSITION,
+            page: GUIDES_PAGE,
+            command_position: GUIDES_INSTALL_POSITION,
           }
-        : {};
+        : event.event === DEMO_EVENTS.installCopied || event.event === DEMO_EVENTS.quickStartViewed
+          ? {
+              page: QUICK_START_PAGE,
+              command_position: QUICK_START_POSITION,
+            }
+          : {};
 
   return {
     uuid: event.uuid,
@@ -108,10 +131,13 @@ export function captureGuidesInstallCopy() {
   });
 }
 
-export function captureGuidesDeskView() {
+export function captureGuidesDeskView(
+  visitSource: GuidesVisitSource = GUIDES_VISIT_SOURCES.unclassified,
+) {
   posthog.capture(DEMO_EVENTS.guidesDeskViewed, {
     page: GUIDES_PAGE,
     command_position: GUIDES_INSTALL_POSITION,
+    visit_source: normalizeGuidesVisitSource(visitSource),
   });
 }
 

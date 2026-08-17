@@ -15,6 +15,7 @@ import {
   captureQuickStartView,
   createDemoAnalyticsHooks,
   DEMO_EVENTS,
+  GUIDES_VISIT_SOURCES,
   initializeDemoAnalytics,
   observeQuickStartView,
   POSTHOG_PRIVACY_CONFIG,
@@ -216,13 +217,14 @@ describe('privacy-safe homepage demo analytics', () => {
     expect(JSON.stringify(sanitized)).not.toContain('private');
   });
 
-  it('records the distinct Guides desk view with only fixed location properties', () => {
-    captureGuidesDeskView();
+  it('records the distinct Guides desk view with one allowed visit source', () => {
+    captureGuidesDeskView(GUIDES_VISIT_SOURCES.directInvitation);
 
     expect(posthog.capture).toHaveBeenCalledOnce();
     expect(posthog.capture).toHaveBeenCalledWith(DEMO_EVENTS.guidesDeskViewed, {
       page: 'guides',
       command_position: 'guide_desk',
+      visit_source: 'direct_invitation',
     });
 
     const sanitized = sanitizeDemoEvent({
@@ -232,6 +234,7 @@ describe('privacy-safe homepage demo analytics', () => {
         distinct_id: 'random-device-id',
         page: 'private-page',
         command_position: 'private-position',
+        visit_source: 'direct_invitation',
         $current_url: 'https://example.test/?email=private@example.com',
       },
       uuid: 'random-event-id',
@@ -243,8 +246,32 @@ describe('privacy-safe homepage demo analytics', () => {
       $process_person_profile: false,
       page: 'guides',
       command_position: 'guide_desk',
+      visit_source: 'direct_invitation',
     });
     expect(JSON.stringify(sanitized)).not.toContain('private');
+  });
+
+  it('falls back to an unclassified Guides visit when the source is missing or invalid', () => {
+    captureGuidesDeskView();
+
+    expect(posthog.capture).toHaveBeenCalledWith(DEMO_EVENTS.guidesDeskViewed, {
+      page: 'guides',
+      command_position: 'guide_desk',
+      visit_source: 'unclassified',
+    });
+
+    const sanitized = sanitizeDemoEvent({
+      event: DEMO_EVENTS.guidesDeskViewed,
+      properties: {
+        token: 'public-project-key',
+        distinct_id: 'random-device-id',
+        visit_source: 'private-campaign-name',
+      },
+      uuid: 'random-event-id',
+    });
+
+    expect(sanitized?.properties?.visit_source).toBe('unclassified');
+    expect(JSON.stringify(sanitized)).not.toContain('private-campaign-name');
   });
 
   it('allows only non-identifying event properties and drops every other event', () => {
