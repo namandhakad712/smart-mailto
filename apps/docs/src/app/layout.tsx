@@ -1,26 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Inter, JetBrains_Mono, Sora } from 'next/font/google';
 import { ThemeInit, ThemeToggle } from './theme';
 import './globals.css';
-
-const sora = Sora({
-  variable: '--font-headline',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-});
-
-const inter = Inter({
-  variable: '--font-body',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-mono',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://smart-mailto.vercel.app'),
@@ -56,15 +37,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
         <ThemeInit />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        {/* Runtime loading preserves the brand typefaces without making a deployment depend on Google Fonts. */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
