@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { MailtoTester } from './MailtoTester';
+import { MailtoTestInstallCopy } from './MailtoTestInstallCopy';
 
 const pageUrl = 'https://smart-mailto.vercel.app/tools/test-mailto-link';
 
@@ -23,10 +25,6 @@ export const metadata: Metadata = {
     follow: true,
   },
 };
-
-const basicTestHref = 'mailto:hello@example.com';
-const encodedTestHref =
-  'mailto:hello@example.com?subject=Website%20question&body=Hi%20there%2C%0A%0AI%20am%20testing%20this%20mailto%20link.';
 
 const faqItems = [
   {
@@ -119,30 +117,18 @@ export default function TestMailtoLinkPage() {
             Test a mailto link in 30 seconds.
           </h1>
           <p className="mt-6 max-w-2xl text-pretty text-xl leading-relaxed text-ink-soft dark:text-text-soft">
-            Open one known-good link before debugging your own. The result tells you whether to
-            inspect the HTML, the browser&apos;s mail handler, or the device&apos;s default app.
+            Paste your href to reveal every recipient and message field. The tester points to the
+            exact syntax problem before you investigate the browser or device.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              className="inline-flex min-h-11 items-center justify-center gap-3 bg-red px-6 py-3 font-body font-semibold text-white transition-colors duration-200 hover:bg-red-dark active:opacity-80"
-              href={basicTestHref}
-            >
-              Run the basic test
-              <span aria-hidden="true" className="material-symbols-outlined text-lg">
-                open_in_new
-              </span>
-            </a>
-            <a
-              className="inline-flex min-h-11 items-center justify-center border border-border px-5 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-red transition-colors hover:border-red dark:border-border"
-              href={encodedTestHref}
-            >
-              Test subject and body
-            </a>
-          </div>
-          <p className="mt-4 max-w-xl text-sm leading-6 text-ink-muted dark:text-text-muted">
-            Both links use an example address. They only open a draft. Close the draft without
-            sending it when the test is complete.
-          </p>
+          <a
+            className="mt-8 inline-flex min-h-11 items-center justify-center gap-3 bg-red px-6 py-3 font-body font-semibold text-white transition-colors duration-200 hover:bg-red-dark active:opacity-80"
+            href="#tester"
+          >
+            Test your link
+            <span aria-hidden="true" className="material-symbols-outlined text-lg">
+              arrow_downward
+            </span>
+          </a>
         </div>
 
         <aside className="border-t-4 border-red bg-surface p-6 dark:bg-surface-container">
@@ -167,7 +153,11 @@ export default function TestMailtoLinkPage() {
         </aside>
       </header>
 
-      <div className="grid gap-14 py-14 lg:grid-cols-[190px_minmax(0,700px)_1fr]">
+      <div className="py-12">
+        <MailtoTester />
+      </div>
+
+      <div className="grid gap-14 border-t border-border py-14 lg:grid-cols-[190px_minmax(0,700px)_1fr]">
         <nav aria-label="On this page" className="hidden lg:block">
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-ink-muted dark:text-text-muted">
             On this page
@@ -375,6 +365,7 @@ expect(mailto.searchParams.get('subject')).toBe('Website question');`}
                   Use native mail when it is configured, open a selected webmail compose page, or
                   copy the address without abandoning the contact attempt.
                 </p>
+                <MailtoTestInstallCopy />
                 <Link
                   className="mt-5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-red underline-offset-4 hover:underline"
                   href="/guides/replace-mailto"
