@@ -13,6 +13,8 @@ import {
   captureGuidesInstallCopy,
   captureDemoPageview,
   captureQuickStartView,
+  captureMailtoTestInstallCopy,
+  captureMailtoTestRun,
   createDemoAnalyticsHooks,
   DEMO_EVENTS,
   GUIDES_VISIT_SOURCES,
@@ -53,7 +55,7 @@ describe('privacy-safe homepage demo analytics', () => {
     });
   });
 
-  it('captures exactly the nine approved product events', () => {
+  it('captures exactly the eleven approved product events', () => {
     const hooks = createDemoAnalyticsHooks();
 
     captureDemoPageview();
@@ -65,6 +67,8 @@ describe('privacy-safe homepage demo analytics', () => {
     captureInstallCopy();
     captureGuidesDeskView();
     captureGuidesInstallCopy();
+    captureMailtoTestRun();
+    captureMailtoTestInstallCopy();
 
     expect(posthog.capture.mock.calls.map(([event]) => event)).toEqual([
       DEMO_EVENTS.pageview,
@@ -76,8 +80,49 @@ describe('privacy-safe homepage demo analytics', () => {
       DEMO_EVENTS.installCopied,
       DEMO_EVENTS.guidesDeskViewed,
       DEMO_EVENTS.guidesInstallCopied,
+      DEMO_EVENTS.mailtoTestRun,
+      DEMO_EVENTS.mailtoTestInstallCopied,
     ]);
-    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(9);
+    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(11);
+  });
+
+  it('records tester actions with fixed fields and no mailto contents', () => {
+    captureMailtoTestRun();
+    captureMailtoTestInstallCopy();
+
+    expect(posthog.capture.mock.calls).toEqual([
+      [DEMO_EVENTS.mailtoTestRun, { page: 'mailto_link_tester', command_position: 'tester' }],
+      [
+        DEMO_EVENTS.mailtoTestInstallCopied,
+        { page: 'mailto_link_tester', command_position: 'tester' },
+      ],
+    ]);
+
+    for (const event of [DEMO_EVENTS.mailtoTestRun, DEMO_EVENTS.mailtoTestInstallCopied]) {
+      const sanitized = sanitizeDemoEvent({
+        event,
+        properties: {
+          token: 'public-project-key',
+          distinct_id: 'random-device-id',
+          page: 'private-page',
+          command_position: 'private-position',
+          href: 'mailto:private@example.com?subject=private',
+          recipient: 'private@example.com',
+          subject: 'private subject',
+          body: 'private body',
+        },
+        uuid: 'random-event-id',
+      });
+
+      expect(sanitized?.properties).toEqual({
+        token: 'public-project-key',
+        distinct_id: 'random-device-id',
+        $process_person_profile: false,
+        page: 'mailto_link_tester',
+        command_position: 'tester',
+      });
+      expect(JSON.stringify(sanitized)).not.toContain('private@example.com');
+    }
   });
 
   it('captures one quick-start view across repeated viewport crossings', () => {

@@ -7,6 +7,8 @@ const QUICK_START_PAGE = 'homepage';
 const QUICK_START_POSITION = 'quick_start';
 const GUIDES_PAGE = 'guides';
 const GUIDES_INSTALL_POSITION = 'guide_desk';
+const MAILTO_TEST_PAGE = 'mailto_link_tester';
+const MAILTO_TEST_POSITION = 'tester';
 
 export const GUIDES_VISIT_SOURCES = {
   directInvitation: 'direct_invitation',
@@ -29,6 +31,8 @@ export const DEMO_EVENTS = {
   installCopied: 'install_copy',
   guidesDeskViewed: 'guides_desk_viewed',
   guidesInstallCopied: 'guides_install_copy',
+  mailtoTestRun: 'mailto_test_run',
+  mailtoTestInstallCopied: 'mailto_test_install_copy',
 } as const;
 
 type DemoEventName = (typeof DEMO_EVENTS)[keyof typeof DEMO_EVENTS];
@@ -56,12 +60,19 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
             page: GUIDES_PAGE,
             command_position: GUIDES_INSTALL_POSITION,
           }
-        : event.event === DEMO_EVENTS.installCopied || event.event === DEMO_EVENTS.quickStartViewed
+        : event.event === DEMO_EVENTS.mailtoTestRun ||
+            event.event === DEMO_EVENTS.mailtoTestInstallCopied
           ? {
-              page: QUICK_START_PAGE,
-              command_position: QUICK_START_POSITION,
+              page: MAILTO_TEST_PAGE,
+              command_position: MAILTO_TEST_POSITION,
             }
-          : {};
+          : event.event === DEMO_EVENTS.installCopied ||
+              event.event === DEMO_EVENTS.quickStartViewed
+            ? {
+                page: QUICK_START_PAGE,
+                command_position: QUICK_START_POSITION,
+              }
+            : {};
 
   return {
     uuid: event.uuid,
@@ -73,7 +84,9 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
       ...(event.event === DEMO_EVENTS.quickStartViewed ||
       event.event === DEMO_EVENTS.installCopied ||
       event.event === DEMO_EVENTS.guidesDeskViewed ||
-      event.event === DEMO_EVENTS.guidesInstallCopied
+      event.event === DEMO_EVENTS.guidesInstallCopied ||
+      event.event === DEMO_EVENTS.mailtoTestRun ||
+      event.event === DEMO_EVENTS.mailtoTestInstallCopied
         ? {}
         : { demo_location: DEMO_LOCATION }),
       ...fixedLocationProperties,
@@ -138,6 +151,20 @@ export function captureGuidesDeskView(
     page: GUIDES_PAGE,
     command_position: GUIDES_INSTALL_POSITION,
     visit_source: normalizeGuidesVisitSource(visitSource),
+  });
+}
+
+export function captureMailtoTestRun() {
+  posthog.capture(DEMO_EVENTS.mailtoTestRun, {
+    page: MAILTO_TEST_PAGE,
+    command_position: MAILTO_TEST_POSITION,
+  });
+}
+
+export function captureMailtoTestInstallCopy() {
+  posthog.capture(DEMO_EVENTS.mailtoTestInstallCopied, {
+    page: MAILTO_TEST_PAGE,
+    command_position: MAILTO_TEST_POSITION,
   });
 }
 

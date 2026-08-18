@@ -42,6 +42,7 @@
 <p>
   <a href="https://smart-mailto.vercel.app"><strong>📖 Documentation</strong></a> ·
   <a href="https://smart-mailto.vercel.app/guides"><strong>🧭 Guides</strong></a> ·
+  <a href="https://smart-mailto.vercel.app/tools/test-mailto-link"><strong>🧪 Test a mailto link</strong></a> ·
   <a href="https://smart-mailto.vercel.app/docs/browser-support"><strong>🌐 Compatibility</strong></a> ·
   <a href="https://smart-mailto.vercel.app/examples"><strong>💡 Examples</strong></a> ·
   <a href="https://www.npmjs.com/package/@smart-mailto/core"><strong>📦 npm</strong></a> ·

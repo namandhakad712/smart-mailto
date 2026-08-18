@@ -388,6 +388,7 @@ export default function Home() {
             <div className="space-y-2">
               {[
                 { label: 'Documentation', href: '/spec' },
+                { label: 'Test a mailto link', href: '/tools/test-mailto-link' },
                 { label: 'Provider Registry', href: '/providers' },
                 { label: 'GitHub', href: 'https://github.com/namandhakad712/smart-mailto' },
                 { label: 'npm', href: 'https://npmjs.com/package/@smart-mailto/core' },
