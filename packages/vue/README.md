@@ -8,7 +8,7 @@ npm i @smart-mailto/vue
 
 Requires `vue >= 3.0.0`. Includes `@smart-mailto/core` as a dependency.
 
-[Fix a mailto link that opens nothing](https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing) · [Browser and framework support matrix](https://smart-mailto.vercel.app/docs/browser-support)
+[Test a mailto link](https://smart-mailto.vercel.app/tools/test-mailto-link) · [Fix a mailto link that opens nothing](https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing) · [Browser and framework support matrix](https://smart-mailto.vercel.app/docs/browser-support)
 
 ## Usage
 
