@@ -4,6 +4,7 @@ const SITE_URL = 'https://smart-mailto.vercel.app';
 
 const PUBLIC_ROUTES = [
   '',
+  '/compare/mailto-alternatives',
   '/compare/smart-mailto-vs-mailto',
   '/docs/browser-support',
   '/docs/cdn',
@@ -12,6 +13,8 @@ const PUBLIC_ROUTES = [
   '/guides',
   '/guides/mailto-link-opens-nothing',
   '/guides/mailto-not-working-in-chrome',
+  '/guides/mailto-opens-wrong-email-app',
+  '/guides/mailto-without-email-client',
   '/guides/replace-mailto',
   '/providers',
   '/spec',
@@ -20,6 +23,7 @@ const PUBLIC_ROUTES = [
 ] as const;
 
 const UPDATED_ROUTES = new Map<string, string>([
+  ['/compare/mailto-alternatives', '2026-08-19'],
   ['/compare/smart-mailto-vs-mailto', '2026-08-07'],
   ['/docs/browser-support', '2026-08-16'],
   ['/docs/cdn', '2026-08-16'],
@@ -28,6 +32,8 @@ const UPDATED_ROUTES = new Map<string, string>([
   ['/guides', '2026-08-09'],
   ['/guides/mailto-link-opens-nothing', '2026-08-16'],
   ['/guides/mailto-not-working-in-chrome', '2026-08-16'],
+  ['/guides/mailto-opens-wrong-email-app', '2026-08-19'],
+  ['/guides/mailto-without-email-client', '2026-08-19'],
   ['/guides/replace-mailto', '2026-08-16'],
   ['/providers', '2026-08-16'],
   ['/spec', '2026-08-16'],

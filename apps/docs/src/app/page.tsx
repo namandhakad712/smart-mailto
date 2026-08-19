@@ -389,6 +389,7 @@ export default function Home() {
               {[
                 { label: 'Documentation', href: '/spec' },
                 { label: 'Test a mailto link', href: '/tools/test-mailto-link' },
+                { label: 'Fix a mailto problem', href: '/guides/mailto-link-opens-nothing' },
                 { label: 'Provider Registry', href: '/providers' },
                 { label: 'GitHub', href: 'https://github.com/namandhakad712/smart-mailto' },
                 { label: 'npm', href: 'https://npmjs.com/package/@smart-mailto/core' },

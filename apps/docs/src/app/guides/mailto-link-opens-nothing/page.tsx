@@ -155,6 +155,53 @@ export default function MailtoLinkOpensNothingPage() {
         </aside>
       </header>
 
+      <nav
+        aria-labelledby="match-symptom-heading"
+        className="grid gap-6 border-b border-border py-8 dark:border-border lg:grid-cols-[220px_1fr] lg:items-start"
+      >
+        <div>
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-red">
+            Match the symptom
+          </p>
+          <h2
+            className="mt-2 font-headline text-2xl font-medium tracking-tight text-ink dark:text-text"
+            id="match-symptom-heading"
+          >
+            Take the shortest useful path.
+          </h2>
+        </div>
+        <div className="grid gap-px border border-border bg-border dark:border-border dark:bg-border sm:grid-cols-3">
+          {[
+            {
+              label: 'A mail app opens, but it is the wrong one',
+              href: '/guides/mailto-opens-wrong-email-app',
+            },
+            {
+              label: 'No email client is configured',
+              href: '/guides/mailto-without-email-client',
+            },
+            {
+              label: 'You need to compare contact fallbacks',
+              href: '/compare/mailto-alternatives',
+            },
+          ].map((item, index) => (
+            <Link
+              className="group bg-paper p-5 text-sm font-semibold leading-6 text-ink transition-colors duration-200 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-inset dark:bg-bg dark:text-text dark:hover:bg-surface-container"
+              href={item.href}
+              key={item.href}
+            >
+              <span className="mb-3 block font-mono text-[10px] font-bold text-red">
+                0{index + 1}
+              </span>
+              {item.label}
+              <span aria-hidden="true" className="ml-2 text-red">
+                →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </nav>
+
       <div className="grid gap-14 py-14 lg:grid-cols-[190px_minmax(0,700px)_1fr]">
         <nav aria-label="On this page" className="hidden lg:block">
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-ink-muted dark:text-text-muted">
