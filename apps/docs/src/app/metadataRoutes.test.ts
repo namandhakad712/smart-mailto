@@ -72,7 +72,7 @@ describe('search discovery metadata routes', () => {
       },
       {
         url: `${SITE_URL}/tools/test-mailto-link`,
-        lastModified: '2026-08-17',
+        lastModified: '2026-08-18',
       },
     ]);
   });
