@@ -69,7 +69,7 @@ Keep your existing links, such as `<a href="mailto:hello@example.com">Email us</
 
 Questions or setup trouble? Share [installation feedback in Discussion #40](https://github.com/namandhakad712/smart-mailto/discussions/40).
 
-Plain `mailto:` is still the simplest choice when visitors have a working mail app. If it opens the wrong app or nothing at all, [compare smart-mailto with plain mailto](https://smart-mailto.vercel.app/compare/smart-mailto-vs-mailto) or [troubleshoot a mailto link that does nothing](https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing).
+Plain `mailto:` is still the simplest choice when visitors have a working mail app. If it opens the wrong app, follow the [wrong email app guide](https://smart-mailto.vercel.app/guides/mailto-opens-wrong-email-app). If the device has no configured client, follow the [no email client guide](https://smart-mailto.vercel.app/guides/mailto-without-email-client). For an unknown dead click, [troubleshoot a mailto link that does nothing](https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing), or [compare smart-mailto with plain mailto](https://smart-mailto.vercel.app/compare/smart-mailto-vs-mailto) before changing the setup.
 
 ---
 
