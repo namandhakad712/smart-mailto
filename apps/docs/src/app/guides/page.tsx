@@ -9,15 +9,18 @@ const revisionDates = {
   install: { dateTime: '2026-08-09', label: 'Aug. 9, 2026' },
   comparison: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
   troubleshooting: { dateTime: '2026-08-09', label: 'Aug. 9, 2026' },
+  wrongApp: { dateTime: '2026-08-19', label: 'Aug. 19, 2026' },
+  noClient: { dateTime: '2026-08-19', label: 'Aug. 19, 2026' },
   chrome: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
   test: { dateTime: '2026-08-17', label: 'Aug. 17, 2026' },
   generator: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
+  alternatives: { dateTime: '2026-08-19', label: 'Aug. 19, 2026' },
 } as const;
 
 export const metadata: Metadata = {
   title: 'Mailto Guides for Developers — smart-mailto',
   description:
-    'Test a mailto link, troubleshoot links that open nothing, fix Chrome handler setup, generate a mailto URL, compare options, or install smart-mailto.',
+    'Test a mailto link, fix wrong-app and no-client failures, troubleshoot Chrome, compare contact options, generate a mailto URL, or install smart-mailto.',
   alternates: {
     canonical: pageUrl,
   },
@@ -26,24 +29,13 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: 'Mailto guides for developers',
     description:
-      'Six practical routes for testing, comparing, fixing, generating, and upgrading mailto links.',
+      'Nine practical routes for testing, comparing, fixing, generating, and upgrading mailto links.',
   },
 };
 
 const readingPaths = [
   {
     number: '02',
-    label: 'Comparison',
-    title: 'smart-mailto vs. plain mailto',
-    description:
-      'See when a normal mailto link is enough and when a provider picker earns the extra step.',
-    href: '/compare/smart-mailto-vs-mailto',
-    meta: 'Decision guide · 6 min',
-    revised: revisionDates.comparison,
-    className: 'lg:col-span-2',
-  },
-  {
-    number: '03',
     label: 'Troubleshooting',
     title: 'Mailto link not working',
     description:
@@ -54,7 +46,29 @@ const readingPaths = [
     className: '',
   },
   {
+    number: '03',
+    label: 'Wrong app',
+    title: 'Mailto opens the wrong email app',
+    description:
+      'Reset the browser or system default first, then offer a picker when the site cannot control visitor setup.',
+    href: '/guides/mailto-opens-wrong-email-app',
+    meta: 'Focused failure guide',
+    revised: revisionDates.wrongApp,
+    className: '',
+  },
+  {
     number: '04',
+    label: 'No client',
+    title: 'Mailto without an email client',
+    description:
+      'Give visitors a working path when their device has no configured desktop mail handler.',
+    href: '/guides/mailto-without-email-client',
+    meta: 'Device fallback guide',
+    revised: revisionDates.noClient,
+    className: '',
+  },
+  {
+    number: '05',
     label: 'Chrome',
     title: 'Mailto not working in Chrome',
     description:
@@ -65,7 +79,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '05',
+    number: '06',
     label: 'Test',
     title: 'Test a mailto link',
     description:
@@ -76,7 +90,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '06',
+    number: '07',
     label: 'Tool',
     title: 'Build a mailto link',
     description:
@@ -85,6 +99,28 @@ const readingPaths = [
     meta: 'Interactive generator',
     revised: revisionDates.generator,
     className: '',
+  },
+  {
+    number: '08',
+    label: 'Alternatives',
+    title: 'Compare four mailto alternatives',
+    description:
+      'Compare plain mailto, contact forms, copy-address controls, and smart-mailto without forcing one winner.',
+    href: '/compare/mailto-alternatives',
+    meta: 'Four-way comparison',
+    revised: revisionDates.alternatives,
+    className: 'lg:col-span-2',
+  },
+  {
+    number: '09',
+    label: 'Comparison',
+    title: 'smart-mailto vs. plain mailto',
+    description:
+      'See when a normal mailto link is enough and when a provider picker earns the extra step.',
+    href: '/compare/smart-mailto-vs-mailto',
+    meta: 'Decision guide · 6 min',
+    revised: revisionDates.comparison,
+    className: 'lg:col-span-2',
   },
 ] as const;
 
@@ -95,14 +131,14 @@ export default function GuidesPage() {
       <header className="grid gap-10 border-b border-border pb-12 dark:border-border lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
         <div>
           <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-            Guide desk · Six practical routes
+            Guide desk · Nine practical routes
           </p>
           <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.04] tracking-tight text-ink dark:text-text md:text-7xl">
             Start with the mailto problem in front of you.
           </h1>
           <p className="mt-6 max-w-2xl text-pretty text-xl leading-relaxed text-ink-soft dark:text-text-soft">
-            Test a link, compare the options, repair a dead click, fix Chrome, generate a link, or
-            add a webmail picker to the links you already have.
+            Test a link, repair a dead click or wrong-app handoff, handle a missing email client,
+            compare the options, or add a webmail picker to the links you already have.
           </p>
           <Link
             className="mt-8 inline-flex min-h-11 items-center justify-center gap-3 bg-red px-6 py-3 font-body font-semibold text-white transition-colors duration-200 hover:bg-red-dark active:opacity-80"
@@ -120,16 +156,24 @@ export default function GuidesPage() {
             Choose your route
           </p>
           <ol className="mt-5 space-y-4">
-            {['Install', 'Compare', 'Troubleshoot', 'Fix Chrome', 'Test', 'Generate'].map(
-              (label, index) => (
-                <li className="flex items-baseline gap-4" key={label}>
-                  <span className="font-mono text-xs text-ink-muted dark:text-text-muted">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="font-body font-semibold text-ink dark:text-text">{label}</span>
-                </li>
-              ),
-            )}
+            {[
+              'Install',
+              'Troubleshoot',
+              'Fix the wrong app',
+              'Handle no client',
+              'Fix Chrome',
+              'Test',
+              'Generate',
+              'Compare alternatives',
+              'Compare mailto',
+            ].map((label, index) => (
+              <li className="flex items-baseline gap-4" key={label}>
+                <span className="font-mono text-xs text-ink-muted dark:text-text-muted">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="font-body font-semibold text-ink dark:text-text">{label}</span>
+              </li>
+            ))}
           </ol>
         </aside>
       </header>
@@ -139,7 +183,7 @@ export default function GuidesPage() {
         className="grid gap-8 py-12 lg:grid-cols-[200px_1fr]"
       >
         <div>
-          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 06</p>
+          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 09</p>
           <p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-red">
             Start here
           </p>
@@ -196,7 +240,7 @@ export default function GuidesPage() {
               className="mt-2 font-headline text-3xl font-medium tracking-tight text-ink dark:text-text"
               id="more-guides"
             >
-              Five more ways in
+              Eight more ways in
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-ink-muted dark:text-text-muted">
@@ -213,7 +257,7 @@ export default function GuidesPage() {
               <div>
                 <div className="flex items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
                   <span className="font-bold text-red">{path.label}</span>
-                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 06</span>
+                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 09</span>
                 </div>
                 <h3 className="mt-8 max-w-xl text-balance font-headline text-2xl font-medium tracking-tight text-ink dark:text-text md:text-3xl">
                   <Link
