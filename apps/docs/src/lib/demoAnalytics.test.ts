@@ -14,7 +14,7 @@ import {
   captureDemoPageview,
   captureQuickStartView,
   captureMailtoTestInstallCopy,
-  captureMailtoTestRun,
+  captureMailtoTestOutcome,
   createDemoAnalyticsHooks,
   DEMO_EVENTS,
   GUIDES_VISIT_SOURCES,
@@ -55,7 +55,7 @@ describe('privacy-safe homepage demo analytics', () => {
     });
   });
 
-  it('captures exactly the eleven approved product events', () => {
+  it('captures exactly the thirteen approved product events', () => {
     const hooks = createDemoAnalyticsHooks();
 
     captureDemoPageview();
@@ -67,7 +67,9 @@ describe('privacy-safe homepage demo analytics', () => {
     captureInstallCopy();
     captureGuidesDeskView();
     captureGuidesInstallCopy();
-    captureMailtoTestRun();
+    captureMailtoTestOutcome('valid');
+    captureMailtoTestOutcome('warning');
+    captureMailtoTestOutcome('invalid');
     captureMailtoTestInstallCopy();
 
     expect(posthog.capture.mock.calls.map(([event]) => event)).toEqual([
@@ -80,25 +82,37 @@ describe('privacy-safe homepage demo analytics', () => {
       DEMO_EVENTS.installCopied,
       DEMO_EVENTS.guidesDeskViewed,
       DEMO_EVENTS.guidesInstallCopied,
-      DEMO_EVENTS.mailtoTestRun,
+      DEMO_EVENTS.mailtoTestValid,
+      DEMO_EVENTS.mailtoTestWarning,
+      DEMO_EVENTS.mailtoTestInvalid,
       DEMO_EVENTS.mailtoTestInstallCopied,
     ]);
-    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(11);
+    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(13);
   });
 
-  it('records tester actions with fixed fields and no mailto contents', () => {
-    captureMailtoTestRun();
+  it('records tester outcomes with fixed names and fields, and ignores empty runs', () => {
+    captureMailtoTestOutcome('valid');
+    captureMailtoTestOutcome('warning');
+    captureMailtoTestOutcome('invalid');
+    captureMailtoTestOutcome('empty');
     captureMailtoTestInstallCopy();
 
     expect(posthog.capture.mock.calls).toEqual([
-      [DEMO_EVENTS.mailtoTestRun, { page: 'mailto_link_tester', command_position: 'tester' }],
+      [DEMO_EVENTS.mailtoTestValid, { page: 'mailto_link_tester', command_position: 'tester' }],
+      [DEMO_EVENTS.mailtoTestWarning, { page: 'mailto_link_tester', command_position: 'tester' }],
+      [DEMO_EVENTS.mailtoTestInvalid, { page: 'mailto_link_tester', command_position: 'tester' }],
       [
         DEMO_EVENTS.mailtoTestInstallCopied,
         { page: 'mailto_link_tester', command_position: 'tester' },
       ],
     ]);
 
-    for (const event of [DEMO_EVENTS.mailtoTestRun, DEMO_EVENTS.mailtoTestInstallCopied]) {
+    for (const event of [
+      DEMO_EVENTS.mailtoTestValid,
+      DEMO_EVENTS.mailtoTestWarning,
+      DEMO_EVENTS.mailtoTestInvalid,
+      DEMO_EVENTS.mailtoTestInstallCopied,
+    ]) {
       const sanitized = sanitizeDemoEvent({
         event,
         properties: {
@@ -106,10 +120,15 @@ describe('privacy-safe homepage demo analytics', () => {
           distinct_id: 'random-device-id',
           page: 'private-page',
           command_position: 'private-position',
+          $current_url: 'https://example.test/?mailto=private@example.com',
+          $referrer: 'https://private.example.test',
+          $set: { email: 'private@example.com' },
+          $session_recording_enabled: true,
           href: 'mailto:private@example.com?subject=private',
           recipient: 'private@example.com',
           subject: 'private subject',
           body: 'private body',
+          diagnostic_code: 'private-diagnostic',
         },
         uuid: 'random-event-id',
       });
@@ -123,6 +142,14 @@ describe('privacy-safe homepage demo analytics', () => {
       });
       expect(JSON.stringify(sanitized)).not.toContain('private@example.com');
     }
+
+    expect(
+      sanitizeDemoEvent({
+        event: 'mailto_test_run',
+        properties: { token: 'public-project-key' },
+        uuid: 'random-event-id',
+      }),
+    ).toBeNull();
   });
 
   it('captures one quick-start view across repeated viewport crossings', () => {

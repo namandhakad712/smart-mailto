@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { captureMailtoTestRun } from '@/lib/demoAnalytics';
+import { captureMailtoTestOutcome } from '@/lib/demoAnalytics';
 import {
   BROKEN_MAILTO_EXAMPLE,
   testMailtoLink,
@@ -35,9 +35,10 @@ export function MailtoTester() {
   const [result, setResult] = useState<MailtoTestResult>({ status: 'empty', diagnostics: [] });
 
   function run(nextValue = value) {
+    const nextResult = testMailtoLink(nextValue);
     setValue(nextValue);
-    setResult(testMailtoLink(nextValue));
-    captureMailtoTestRun();
+    setResult(nextResult);
+    captureMailtoTestOutcome(nextResult.status);
   }
 
   const resultTitle =

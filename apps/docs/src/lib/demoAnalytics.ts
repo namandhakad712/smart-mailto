@@ -31,13 +31,25 @@ export const DEMO_EVENTS = {
   installCopied: 'install_copy',
   guidesDeskViewed: 'guides_desk_viewed',
   guidesInstallCopied: 'guides_install_copy',
-  mailtoTestRun: 'mailto_test_run',
+  mailtoTestValid: 'mailto_test_valid',
+  mailtoTestWarning: 'mailto_test_warning',
+  mailtoTestInvalid: 'mailto_test_invalid',
   mailtoTestInstallCopied: 'mailto_test_install_copy',
 } as const;
 
 type DemoEventName = (typeof DEMO_EVENTS)[keyof typeof DEMO_EVENTS];
+type MailtoTestStatus = 'empty' | 'invalid' | 'warning' | 'valid';
 
 const EVENT_NAMES = new Set<DemoEventName>(Object.values(DEMO_EVENTS));
+const MAILTO_TEST_OUTCOME_EVENTS = {
+  invalid: DEMO_EVENTS.mailtoTestInvalid,
+  warning: DEMO_EVENTS.mailtoTestWarning,
+  valid: DEMO_EVENTS.mailtoTestValid,
+} as const satisfies Record<Exclude<MailtoTestStatus, 'empty'>, DemoEventName>;
+const MAILTO_TEST_EVENT_NAMES = new Set<DemoEventName>([
+  ...Object.values(MAILTO_TEST_OUTCOME_EVENTS),
+  DEMO_EVENTS.mailtoTestInstallCopied,
+]);
 
 function normalizeGuidesVisitSource(value: unknown): GuidesVisitSource {
   return typeof value === 'string' && GUIDES_VISIT_SOURCE_VALUES.has(value as GuidesVisitSource)
@@ -60,8 +72,7 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
             page: GUIDES_PAGE,
             command_position: GUIDES_INSTALL_POSITION,
           }
-        : event.event === DEMO_EVENTS.mailtoTestRun ||
-            event.event === DEMO_EVENTS.mailtoTestInstallCopied
+        : MAILTO_TEST_EVENT_NAMES.has(event.event as DemoEventName)
           ? {
               page: MAILTO_TEST_PAGE,
               command_position: MAILTO_TEST_POSITION,
@@ -85,8 +96,7 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
       event.event === DEMO_EVENTS.installCopied ||
       event.event === DEMO_EVENTS.guidesDeskViewed ||
       event.event === DEMO_EVENTS.guidesInstallCopied ||
-      event.event === DEMO_EVENTS.mailtoTestRun ||
-      event.event === DEMO_EVENTS.mailtoTestInstallCopied
+      MAILTO_TEST_EVENT_NAMES.has(event.event as DemoEventName)
         ? {}
         : { demo_location: DEMO_LOCATION }),
       ...fixedLocationProperties,
@@ -154,8 +164,10 @@ export function captureGuidesDeskView(
   });
 }
 
-export function captureMailtoTestRun() {
-  posthog.capture(DEMO_EVENTS.mailtoTestRun, {
+export function captureMailtoTestOutcome(status: MailtoTestStatus) {
+  if (status === 'empty') return;
+
+  posthog.capture(MAILTO_TEST_OUTCOME_EVENTS[status], {
     page: MAILTO_TEST_PAGE,
     command_position: MAILTO_TEST_POSITION,
   });
