@@ -424,28 +424,27 @@ getDomainsForProvider('gmail');
 
       <Section id="storage" title="Storage">
         <p className="text-sm text-ink-soft dark:text-text-soft mb-6">
-          localStorage-based preference persistence. All operations are SSR-safe and silently fail
-          in incognito/private browsing.
+          Saved choices use localStorage. Clear one to show the picker again.
         </p>
         <div className="bg-surface dark:bg-surface-container border border-border dark:border-border p-4 font-mono text-xs mb-6">
-          <pre className="text-ink dark:text-text whitespace-pre-wrap">{`savePreference('gmail');         // Persist user's choice
+          <pre className="text-ink dark:text-text whitespace-pre-wrap">{`savePreference('gmail');         // Save the choice
 loadPreference();                // → 'gmail' | null
-clearPreference();               // Remove persisted choice
+clearPreference();               // Show picker next time
 isStorageAvailable();            // → boolean (false in SSR/incognito)`}</pre>
         </div>
       </Section>
 
       <Section id="init" title="Initialization">
         <p className="text-sm text-ink-soft dark:text-text-soft mb-6">
-          Global initialization via capture-phase event delegation on{' '}
+          Capture-phase delegation on{' '}
           <code className="text-[10px] font-mono bg-surface dark:bg-surface-container px-1">
             document
-          </code>
-          . Intercepts all{' '}
+          </code>{' '}
+          intercepts{' '}
           <code className="text-[10px] font-mono bg-surface dark:bg-surface-container px-1">
             mailto:
           </code>{' '}
-          link clicks. Modal and icons are dynamically imported to keep the core bundle tiny.
+          clicks. The modal and icons load only when needed.
         </p>
         <div className="bg-surface dark:bg-surface-container border border-border dark:border-border p-4 font-mono text-xs mb-6">
           <pre className="text-ink dark:text-text whitespace-pre-wrap">{`import { initSmartMailto, destroySmartMailto, isInitialized, updateConfig } from '@smart-mailto/core';
@@ -453,6 +452,7 @@ isStorageAvailable();            // → boolean (false in SSR/incognito)`}</pre>
 const destroy = initSmartMailto({
   theme: 'dark',
   autoDetectGeo: true,
+  skipPickerOnRememberedChoice: false,
   maxProviders: 6,
   // ...config
 });
@@ -501,9 +501,7 @@ updateConfig({ theme: 'light' });  // Update config at runtime`}</pre>
       </Section>
 
       <Section id="config" title="SmartMailtoConfig">
-        <p className="text-sm text-ink-soft dark:text-text-soft mb-6">
-          Full configuration interface. All options are optional and have sensible defaults.
-        </p>
+        <p className="text-sm text-ink-soft dark:text-text-soft mb-6">All options are optional.</p>
         <ApiTable
           rows={[
             {
@@ -575,6 +573,13 @@ updateConfig({ theme: 'light' });  // Update config at runtime`}</pre>
               name: 'rememberChoice',
               type: 'boolean',
               desc: "Persist user's provider choice to localStorage.",
+              optional: true,
+              default: 'true',
+            },
+            {
+              name: 'skipPickerOnRememberedChoice',
+              type: 'boolean',
+              desc: 'Skip the picker when a saved provider is valid.',
               optional: true,
               default: 'true',
             },

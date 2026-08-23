@@ -248,8 +248,9 @@ initSmartMailto();`}
                   option with <code className="whitespace-nowrap">includeNative: true</code>.
                 </p>
                 <p>
-                  A provider choice is remembered in this site&apos;s local storage and shown first
-                  on later visits. It does not follow the visitor across different sites.
+                  Later clicks on this site open the remembered provider directly. Set{' '}
+                  <code>skipPickerOnRememberedChoice: false</code> to keep the picker, or add{' '}
+                  <code>data-smart-mailto-force-picker</code> to a change-app link.
                 </p>
               </div>
             </div>

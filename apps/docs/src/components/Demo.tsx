@@ -77,7 +77,7 @@ export function Demo() {
         <div>
           <h3 className="font-body text-sm font-semibold text-ink dark:text-text">Live demo</h3>
           <p className="font-mono text-[0.625rem] text-ink-muted dark:text-text-muted">
-            Click to trigger smart-mailto
+            Pick once. Later clicks compose.
           </p>
         </div>
       </div>
@@ -109,7 +109,7 @@ export function Demo() {
         onClose={analyticsHooks.onClose}
         onCopy={analyticsHooks.onCopy}
       >
-        Choose a different email app
+        Change email app
       </SmartMailto>
 
       {copied && (

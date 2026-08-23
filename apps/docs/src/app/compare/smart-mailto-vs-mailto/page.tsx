@@ -72,7 +72,7 @@ const faqItems = [
   {
     question: 'Does the picker add an extra step?',
     answer:
-      'Yes. Visitors with a working mail handler see a choice before their composer opens. Sites can include native mail, and a remembered provider is shown first on later visits to the same site.',
+      'Only for the first choice. Later clicks open the remembered provider directly on the same site; a change-app link can reopen the picker.',
   },
   {
     question: 'When should I keep a plain mailto link?',
@@ -325,8 +325,9 @@ export default function SmartMailtoVsMailtoPage() {
             to continue: webmail, native mail, or copy address.
           </p>
           <p className="mt-5 max-w-[65ch] text-pretty leading-7 text-ink-soft dark:text-text-soft">
-            A remembered provider stays in this site&apos;s local storage. It is shown first on a
-            later visit to the same site, but it does not follow the visitor elsewhere.
+            A remembered provider stays in this site&apos;s local storage and opens directly on
+            later clicks. A change-app link reopens the picker; the choice does not follow visitors
+            elsewhere.
           </p>
         </div>
         <aside className="border-t-4 border-red bg-surface p-6 dark:bg-surface-container">
