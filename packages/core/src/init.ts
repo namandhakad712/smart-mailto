@@ -17,6 +17,7 @@
 import type { SmartMailtoConfig } from './types.js';
 import { parseMailto, isValidMailtoParams } from './parser.js';
 import { resolveProviders } from './resolver.js';
+import { openRememberedProvider } from './remembered.js';
 
 // Module state
 let initialized = false;
@@ -74,7 +75,10 @@ export function initSmartMailto(config: SmartMailtoConfig = {}): () => void {
     // Resolve providers — synchronous, < 1ms
     const resolved = resolveProviders(params, activeConfig);
 
-    // Fire analytics hook
+    const forcePicker = target.hasAttribute('data-smart-mailto-force-picker');
+    if (!forcePicker && openRememberedProvider(params, resolved, activeConfig)) return;
+
+    // Fire only when the picker is actually shown
     activeConfig.onShow?.(params, resolved.providers);
 
     // Dynamically import the UI to keep the core bundle small

@@ -13,6 +13,7 @@
   export let classNames = undefined;
   export let i18n = undefined;
   export let rememberChoice = undefined;
+  export let skipPickerOnRememberedChoice = undefined;
   export let storageKey = undefined;
   export let onOpen = undefined;
   export let onCopy = undefined;
@@ -31,6 +32,7 @@
     classNames,
     i18n,
     rememberChoice,
+    skipPickerOnRememberedChoice,
     storageKey,
     onOpen,
     onCopy,

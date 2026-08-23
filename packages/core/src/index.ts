@@ -23,6 +23,7 @@ export { PROVIDERS, getProvider, getAllProviders, getCatalogProviders } from './
 export { collectGeoSignals, getGeoOrderedProviderIds, detectRegionLabel } from './geo.js';
 export { detectProviderFromEmail, getDomainsForProvider } from './detector.js';
 export { resolveProviders } from './resolver.js';
+export { openRememberedProvider } from './remembered.js';
 export { savePreference, loadPreference, clearPreference, isStorageAvailable } from './storage.js';
 export { initSmartMailto, destroySmartMailto, isInitialized, updateConfig } from './init.js';
 export { spawnModal } from './modal.js';

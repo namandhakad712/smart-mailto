@@ -51,7 +51,13 @@ export const SmartMailtoPlugin: Plugin<SmartMailtoConfig> = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { h, inject, defineComponent, type PropType } from 'vue';
-import { parseMailto, isValidMailtoParams, resolveProviders, spawnModal } from '@smart-mailto/core';
+import {
+  parseMailto,
+  isValidMailtoParams,
+  resolveProviders,
+  openRememberedProvider,
+  spawnModal,
+} from '@smart-mailto/core';
 
 /**
  * SmartMailto Vue component.
@@ -95,6 +101,18 @@ export const SmartMailtoComponent = defineComponent({
       type: Boolean,
       default: true,
     },
+    rememberChoice: {
+      type: Boolean,
+      default: undefined,
+    },
+    skipPickerOnRememberedChoice: {
+      type: Boolean,
+      default: undefined,
+    },
+    storageKey: {
+      type: String,
+      default: undefined,
+    },
   },
   emits: ['open', 'copy', 'close'],
   setup(props, { slots, emit }) {
@@ -116,12 +134,21 @@ export const SmartMailtoComponent = defineComponent({
         maxProviders: props.maxProviders,
         includeNative: props.includeNative,
         includeCopy: props.includeCopy,
+        rememberChoice: props.rememberChoice,
+        skipPickerOnRememberedChoice: props.skipPickerOnRememberedChoice,
+        storageKey: props.storageKey,
         onOpen: (provider, params) => emit('open', provider, params),
         onCopy: email => emit('copy', email),
         onClose: () => emit('close'),
       };
 
       const resolved = resolveProviders(params, config);
+      const forcePicker = (e.currentTarget as HTMLElement | null)?.hasAttribute(
+        'data-smart-mailto-force-picker',
+      );
+      if (!forcePicker && openRememberedProvider(params, resolved, config)) return;
+
+      config.onShow?.(params, resolved.providers);
       spawnModal(params, resolved, config);
     };
 
