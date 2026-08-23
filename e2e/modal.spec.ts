@@ -23,3 +23,39 @@ test('SmartMailto modal opens when clicking the trigger', async ({ page }) => {
   const providers = page.locator('.sm-provider-btn');
   await expect(providers.first()).toBeVisible();
 });
+
+test('remembered choice skips the picker and the change link restores it', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, '__smartMailtoOpenedUrls', {
+      value: [] as string[],
+      writable: false,
+    });
+    window.open = (url?: string | URL) => {
+      (
+        window as typeof window & { __smartMailtoOpenedUrls: string[] }
+      ).__smartMailtoOpenedUrls.push(String(url));
+      return null;
+    };
+  });
+  await page.goto('/');
+
+  const sendLink = page.getByRole('link', { name: 'Send us an email' });
+  await sendLink.click();
+  await page.getByRole('listitem', { name: 'Open in Gmail' }).click();
+  await expect(page.locator('#__smart-mailto-host__')).toHaveCount(0);
+
+  await sendLink.click();
+  await expect(page.locator('#__smart-mailto-host__')).toHaveCount(0);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (window as typeof window & { __smartMailtoOpenedUrls: string[] }).__smartMailtoOpenedUrls
+            .length,
+      ),
+    )
+    .toBe(2);
+
+  await page.getByRole('link', { name: 'Choose a different email app' }).click();
+  await expect(page.locator('.sm-modal')).toBeVisible();
+});

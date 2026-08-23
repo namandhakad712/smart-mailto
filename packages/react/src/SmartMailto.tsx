@@ -30,6 +30,7 @@ import {
   parseMailto,
   isValidMailtoParams,
   resolveProviders,
+  openRememberedProvider,
   spawnModal,
   type SmartMailtoConfig,
 } from '@smart-mailto/core';
@@ -61,6 +62,7 @@ export function SmartMailto({
   classNames,
   i18n,
   rememberChoice,
+  skipPickerOnRememberedChoice,
   storageKey,
   onOpen,
   onCopy,
@@ -81,6 +83,7 @@ export function SmartMailto({
     classNames,
     i18n,
     rememberChoice,
+    skipPickerOnRememberedChoice,
     storageKey,
     onOpen,
     onCopy,
@@ -102,6 +105,12 @@ export function SmartMailto({
 
     // Must be called synchronously within click handler (Safari popup blocker)
     const resolved = resolveProviders(params, config);
+    const forcePicker = e.currentTarget.hasAttribute('data-smart-mailto-force-picker');
+    if (!forcePicker && openRememberedProvider(params, resolved, config)) {
+      onClick?.(e);
+      return;
+    }
+
     onShow?.(params, resolved.providers);
     spawnModal(params, resolved, config);
 

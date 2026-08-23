@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 const mockParseMailto = vi.fn();
 const mockIsValidMailtoParams = vi.fn();
 const mockResolveProviders = vi.fn();
+const mockOpenRememberedProvider = vi.fn();
 const mockSpawnModal = vi.fn();
 const mockBuildMailtoHref = vi.fn();
 const mockDestroySmartMailto = vi.fn();
@@ -17,6 +18,7 @@ vi.mock('@smart-mailto/core', () => ({
   buildMailtoHref: (...args: unknown[]) => mockBuildMailtoHref(...args),
   isValidMailtoParams: (...args: unknown[]) => mockIsValidMailtoParams(...args),
   resolveProviders: (...args: unknown[]) => mockResolveProviders(...args),
+  openRememberedProvider: (...args: unknown[]) => mockOpenRememberedProvider(...args),
   spawnModal: (...args: unknown[]) => mockSpawnModal(...args),
   initSmartMailto: (...args: unknown[]) => mockInitSmartMailto(...args),
   destroySmartMailto: vi.fn(),
@@ -31,6 +33,7 @@ beforeEach(() => {
   mockParseMailto.mockReturnValue({ to: ['test@example.com'] });
   mockBuildMailtoHref.mockReturnValue('mailto:test@example.com');
   mockIsValidMailtoParams.mockReturnValue(true);
+  mockOpenRememberedProvider.mockReturnValue(false);
   mockResolveProviders.mockReturnValue({
     providers: [{ id: 'gmail', name: 'Gmail', buildUrl: () => 'https://mail.google.com' }],
     detectedRegion: 'global',
@@ -128,6 +131,39 @@ describe('SmartMailto', () => {
     expect(onShow).toHaveBeenCalledTimes(1);
   });
 
+  it('skips the picker when a remembered provider opens', async () => {
+    mockOpenRememberedProvider.mockReturnValue(true);
+    const onShow = vi.fn();
+    const user = userEvent.setup();
+
+    render(
+      <SmartMailto href="mailto:a@b.com" onShow={onShow}>
+        Remembered
+      </SmartMailto>,
+    );
+
+    await user.click(screen.getByText('Remembered'));
+
+    expect(mockSpawnModal).not.toHaveBeenCalled();
+    expect(onShow).not.toHaveBeenCalled();
+  });
+
+  it('forces the picker for a change-provider link', async () => {
+    mockOpenRememberedProvider.mockReturnValue(true);
+    const user = userEvent.setup();
+
+    render(
+      <SmartMailto href="mailto:a@b.com" data-smart-mailto-force-picker>
+        Change provider
+      </SmartMailto>,
+    );
+
+    await user.click(screen.getByText('Change provider'));
+
+    expect(mockOpenRememberedProvider).not.toHaveBeenCalled();
+    expect(mockSpawnModal).toHaveBeenCalled();
+  });
+
   it('passes config props through to resolveProviders', async () => {
     const user = userEvent.setup();
 
@@ -137,6 +173,7 @@ describe('SmartMailto', () => {
         theme="dark"
         preferredProvider="protonmail"
         maxProviders={4}
+        skipPickerOnRememberedChoice={false}
       >
         Config
       </SmartMailto>,
@@ -150,6 +187,7 @@ describe('SmartMailto', () => {
         theme: 'dark',
         preferredProvider: 'protonmail',
         maxProviders: 4,
+        skipPickerOnRememberedChoice: false,
       }),
     );
   });

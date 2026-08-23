@@ -21,6 +21,16 @@ initSmartMailto({
 
 Every `mailto:` link on the page now opens a provider picker modal instead of triggering the OS default mail app.
 
+After a visitor chooses a provider, later clicks open that provider directly. Keep the picker on every click with `skipPickerOnRememberedChoice: false`.
+
+Give visitors a one-click way to change providers with a second mailto link:
+
+```html
+<a href="mailto:hello@example.com" data-smart-mailto-force-picker>Change email app</a>
+```
+
+Or clear the stored choice in code with `clearPreference()` before the next click.
+
 [Mailto link opens nothing? Follow the troubleshooting guide.](https://smart-mailto.vercel.app/guides/mailto-link-opens-nothing)
 
 ## Manual / Programmatic
@@ -45,6 +55,8 @@ await spawnModal(params, resolved, { theme: 'dark' });
 | `getGeoOrderedProviderIds(signals)`     | Region-aware sort                               |
 | `collectGeoSignals()`                   | Read timeZone, locale, device                   |
 | `resolveProviders(params, config?)`     | Resolve + order providers                       |
+| `openRememberedProvider(...)`           | Open an available saved provider directly       |
+| `clearPreference(key?)`                 | Clear the saved provider choice                 |
 | `spawnModal(params, resolved, config?)` | Programmatic modal                              |
 | `VERSION`                               | Library version string                          |
 

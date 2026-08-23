@@ -153,6 +153,11 @@ export interface SmartMailtoConfig extends SmartMailtoHooks {
    */
   rememberChoice?: boolean;
   /**
+   * Open a valid remembered provider directly instead of showing the picker.
+   * Set to false to preserve the picker on every click. Defaults to true.
+   */
+  skipPickerOnRememberedChoice?: boolean;
+  /**
    * localStorage key for persisting the user's preferred provider.
    * Defaults to 'smart-mailto:preferred'.
    */

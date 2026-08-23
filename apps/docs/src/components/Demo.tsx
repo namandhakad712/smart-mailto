@@ -99,6 +99,19 @@ export function Demo() {
         <ArrowRightIcon />
       </SmartMailto>
 
+      <SmartMailto
+        href="mailto:hello@example.com?subject=Hello%20from%20smart-mailto!&body=This%20is%20amazing."
+        theme={isDark ? 'dark' : 'light'}
+        data-smart-mailto-force-picker
+        className="mt-3 block min-h-11 py-3 font-mono text-[0.625rem] text-ink-muted underline underline-offset-4 decoration-border hover:text-red focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red dark:text-text-muted dark:decoration-border"
+        onShow={analyticsHooks.onShow}
+        onOpen={analyticsHooks.onOpen}
+        onClose={analyticsHooks.onClose}
+        onCopy={analyticsHooks.onCopy}
+      >
+        Choose a different email app
+      </SmartMailto>
+
       {copied && (
         <div className="mt-3 flex items-center gap-1.5 font-mono text-[0.625rem] text-ink-soft dark:text-text-soft">
           <CheckIcon />

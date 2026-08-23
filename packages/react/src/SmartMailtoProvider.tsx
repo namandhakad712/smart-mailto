@@ -80,6 +80,7 @@ export function SmartMailtoProvider({ children, ...config }: SmartMailtoProvider
     config.classNames,
     config.i18n,
     config.rememberChoice,
+    config.skipPickerOnRememberedChoice,
     config.storageKey,
     config.onOpen,
     config.onCopy,
