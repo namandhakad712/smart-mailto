@@ -56,6 +56,6 @@ test('remembered choice skips the picker and the change link restores it', async
     )
     .toBe(2);
 
-  await page.getByRole('link', { name: 'Choose a different email app' }).click();
+  await page.getByRole('link', { name: 'Change email app' }).click();
   await expect(page.locator('.sm-modal')).toBeVisible();
 });
