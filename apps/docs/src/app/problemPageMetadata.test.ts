@@ -11,6 +11,10 @@ describe('problem page canonical metadata', () => {
       `${SITE_URL}/guides/mailto-opens-wrong-email-app`,
     ],
     [
+      './guides/mailto-multiple-recipients/page.tsx',
+      `${SITE_URL}/guides/mailto-multiple-recipients`,
+    ],
+    [
       './guides/mailto-without-email-client/page.tsx',
       `${SITE_URL}/guides/mailto-without-email-client`,
     ],

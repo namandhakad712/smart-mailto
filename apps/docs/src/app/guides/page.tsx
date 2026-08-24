@@ -14,6 +14,7 @@ const revisionDates = {
   chrome: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
   test: { dateTime: '2026-08-17', label: 'Aug. 17, 2026' },
   generator: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
+  multipleRecipients: { dateTime: '2026-08-24', label: 'Aug. 24, 2026' },
   alternatives: { dateTime: '2026-08-19', label: 'Aug. 19, 2026' },
 } as const;
 
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: 'Mailto guides for developers',
     description:
-      'Nine practical routes for testing, comparing, fixing, generating, and upgrading mailto links.',
+      'Ten practical routes for testing, comparing, fixing, generating, and upgrading mailto links.',
   },
 };
 
@@ -102,6 +103,17 @@ const readingPaths = [
   },
   {
     number: '08',
+    label: 'Recipients',
+    title: 'Add multiple mailto recipients',
+    description:
+      'Use valid HTML for multiple To, CC, and BCC addresses, then test the client handoff.',
+    href: '/guides/mailto-multiple-recipients',
+    meta: 'HTML examples · RFC 6068',
+    revised: revisionDates.multipleRecipients,
+    className: '',
+  },
+  {
+    number: '09',
     label: 'Alternatives',
     title: 'Compare four mailto alternatives',
     description:
@@ -112,7 +124,7 @@ const readingPaths = [
     className: 'lg:col-span-2',
   },
   {
-    number: '09',
+    number: '10',
     label: 'Comparison',
     title: 'smart-mailto vs. plain mailto',
     description:
@@ -131,7 +143,7 @@ export default function GuidesPage() {
       <header className="grid gap-10 border-b border-border pb-12 dark:border-border lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
         <div>
           <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-            Guide desk · Nine practical routes
+            Guide desk · Ten practical routes
           </p>
           <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.04] tracking-tight text-ink dark:text-text md:text-7xl">
             Start with the mailto problem in front of you.
@@ -183,7 +195,7 @@ export default function GuidesPage() {
         className="grid gap-8 py-12 lg:grid-cols-[200px_1fr]"
       >
         <div>
-          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 09</p>
+          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 10</p>
           <p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-red">
             Start here
           </p>
@@ -240,7 +252,7 @@ export default function GuidesPage() {
               className="mt-2 font-headline text-3xl font-medium tracking-tight text-ink dark:text-text"
               id="more-guides"
             >
-              Eight more ways in
+              Nine more ways in
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-ink-muted dark:text-text-muted">
@@ -257,7 +269,7 @@ export default function GuidesPage() {
               <div>
                 <div className="flex items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
                   <span className="font-bold text-red">{path.label}</span>
-                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 09</span>
+                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 10</span>
                 </div>
                 <h3 className="mt-8 max-w-xl text-balance font-headline text-2xl font-medium tracking-tight text-ink dark:text-text md:text-3xl">
                   <Link

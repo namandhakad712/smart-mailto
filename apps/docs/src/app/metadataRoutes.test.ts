@@ -16,6 +16,7 @@ describe('search discovery metadata routes', () => {
       `${SITE_URL}/examples`,
       `${SITE_URL}/guides`,
       `${SITE_URL}/guides/mailto-link-opens-nothing`,
+      `${SITE_URL}/guides/mailto-multiple-recipients`,
       `${SITE_URL}/guides/mailto-not-working-in-chrome`,
       `${SITE_URL}/guides/mailto-opens-wrong-email-app`,
       `${SITE_URL}/guides/mailto-without-email-client`,
@@ -60,6 +61,10 @@ describe('search discovery metadata routes', () => {
       {
         url: `${SITE_URL}/guides/mailto-link-opens-nothing`,
         lastModified: '2026-08-16',
+      },
+      {
+        url: `${SITE_URL}/guides/mailto-multiple-recipients`,
+        lastModified: '2026-08-24',
       },
       {
         url: `${SITE_URL}/guides/mailto-not-working-in-chrome`,
