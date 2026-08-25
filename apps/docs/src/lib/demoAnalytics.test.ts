@@ -8,6 +8,7 @@ const posthog = vi.hoisted(() => ({
 vi.mock('posthog-js', () => ({ default: posthog }));
 
 import {
+  ARRIVAL_SOURCES,
   captureInstallCopy,
   captureGuidesDeskView,
   captureGuidesInstallCopy,
@@ -15,14 +16,20 @@ import {
   captureQuickStartView,
   captureMailtoTestInstallCopy,
   captureMailtoTestOutcome,
+  classifyArrivalSource,
   createDemoAnalyticsHooks,
+  createSitePageviewTracker,
   DEMO_EVENTS,
   GUIDES_VISIT_SOURCES,
   initializeDemoAnalytics,
   observeQuickStartView,
   POSTHOG_PRIVACY_CONFIG,
+  sanitizePagePath,
+  sanitizeReferrerOrigin,
   sanitizeDemoEvent,
+  SITE_PAGEVIEW_EVENT,
 } from './demoAnalytics';
+import { PUBLIC_PAGE_PATHS } from './publicRoutes';
 
 describe('privacy-safe homepage demo analytics', () => {
   beforeEach(() => {
@@ -88,6 +95,142 @@ describe('privacy-safe homepage demo analytics', () => {
       DEMO_EVENTS.mailtoTestInstallCopied,
     ]);
     expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(13);
+  });
+
+  it('classifies each fixed arrival source without retaining referrer paths', () => {
+    expect(classifyArrivalSource('https://example.test/', '')).toBe(ARRIVAL_SOURCES.direct);
+    expect(
+      classifyArrivalSource('https://example.test/', 'https://www.google.com/search?q=mail'),
+    ).toBe(ARRIVAL_SOURCES.search);
+    expect(classifyArrivalSource('https://example.test/', 'https://github.com/org/repo')).toBe(
+      ARRIVAL_SOURCES.repository,
+    );
+    expect(
+      classifyArrivalSource('https://example.test/', 'https://www.devtoolsdirectory.com/tools'),
+    ).toBe(ARRIVAL_SOURCES.directory);
+    expect(classifyArrivalSource('https://example.test/', 'https://example.org/article')).toBe(
+      ARRIVAL_SOURCES.other,
+    );
+    expect(classifyArrivalSource('https://example.test/', 'not a valid referrer')).toBe(
+      ARRIVAL_SOURCES.unclassified,
+    );
+    expect(classifyArrivalSource('https://example.test/?visit_source=repository', '')).toBe(
+      ARRIVAL_SOURCES.repository,
+    );
+    expect(sanitizeReferrerOrigin('https://www.google.com/search?q=private')).toBe(
+      'https://www.google.com',
+    );
+  });
+
+  it('captures one initial view and one view per new client-side path', () => {
+    const capture = vi.fn();
+    const tracker = createSitePageviewTracker(
+      'https://smart-mailto.vercel.app/?visit_source=direct_invitation&email=private@example.com#private',
+      'https://private.example.test/path?recipient=private@example.com',
+      capture,
+    );
+
+    tracker.captureInitial();
+    tracker.captureInitial();
+    tracker.captureNavigation('https://smart-mailto.vercel.app/?another=private#fragment');
+    tracker.captureNavigation('/guides?recipient=private@example.com#subject');
+    tracker.captureNavigation('/guides?different=private');
+    tracker.captureNavigation('/providers');
+
+    expect(capture.mock.calls).toEqual([
+      [
+        SITE_PAGEVIEW_EVENT,
+        {
+          page_path: '/',
+          referrer_origin: 'https://private.example.test',
+          arrival_source: 'direct',
+          controlled_event: true,
+        },
+      ],
+      [
+        SITE_PAGEVIEW_EVENT,
+        {
+          page_path: '/guides',
+          referrer_origin: 'https://private.example.test',
+          arrival_source: 'direct',
+          controlled_event: true,
+        },
+      ],
+      [
+        SITE_PAGEVIEW_EVENT,
+        {
+          page_path: '/providers',
+          referrer_origin: 'https://private.example.test',
+          arrival_source: 'direct',
+          controlled_event: true,
+        },
+      ],
+    ]);
+    expect(JSON.stringify(capture.mock.calls)).not.toContain('private@example.com');
+    expect(JSON.stringify(capture.mock.calls)).not.toContain('/path');
+  });
+
+  it('sanitizes sitewide pageviews to four anonymous fixed fields', () => {
+    const sanitized = sanitizeDemoEvent({
+      event: SITE_PAGEVIEW_EVENT,
+      properties: {
+        token: 'public-project-key',
+        distinct_id: 'random-device-id',
+        page_path: '/guides/replace-mailto?recipient=private@example.com#private',
+        referrer_origin: 'https://github.com/private/repository?email=private@example.com',
+        arrival_source: 'repository',
+        controlled_event: true,
+        $current_url: 'https://example.test/?email=private@example.com',
+        $referrer: 'https://private.example.test/path',
+        recipient: 'private@example.com',
+        subject: 'private subject',
+        body: 'private body',
+      },
+      uuid: 'random-event-id',
+    });
+
+    expect(sanitized).toEqual({
+      uuid: 'random-event-id',
+      event: SITE_PAGEVIEW_EVENT,
+      properties: {
+        token: 'public-project-key',
+        distinct_id: 'random-device-id',
+        $process_person_profile: false,
+        page_path: '/guides/replace-mailto',
+        referrer_origin: 'https://github.com',
+        arrival_source: 'repository',
+        controlled_event: true,
+      },
+    });
+    expect(JSON.stringify(sanitized)).not.toContain('private@example.com');
+    expect(JSON.stringify(sanitized)).not.toContain('private subject');
+    expect(JSON.stringify(sanitized)).not.toContain('private body');
+  });
+
+  it('drops invalid pageviews and strips query strings and fragments from paths', () => {
+    expect(sanitizePagePath('/spec?recipient=private@example.com#private')).toBe('/spec');
+    expect(sanitizePagePath('mailto:private@example.com?subject=private')).toBeNull();
+    expect(sanitizePagePath('/private@example.com')).toBeNull();
+    expect(
+      sanitizeDemoEvent({
+        event: SITE_PAGEVIEW_EVENT,
+        properties: { page_path: 'mailto:private@example.com' },
+        uuid: 'random-event-id',
+      }),
+    ).toBeNull();
+  });
+
+  it('covers all eighteen public sitemap routes through the shared route registry', () => {
+    const capture = vi.fn();
+    const tracker = createSitePageviewTracker('https://smart-mailto.vercel.app/', '', capture);
+
+    tracker.captureInitial();
+    for (const route of PUBLIC_PAGE_PATHS.slice(1)) tracker.captureNavigation(route);
+
+    expect(PUBLIC_PAGE_PATHS).toHaveLength(18);
+    expect(capture.mock.calls.map(([, properties]) => properties.page_path)).toEqual(
+      PUBLIC_PAGE_PATHS,
+    );
   });
 
   it('records tester outcomes with fixed names and fields, and ignores empty runs', () => {
@@ -377,7 +520,7 @@ describe('privacy-safe homepage demo analytics', () => {
     expect(
       sanitizeDemoEvent({
         uuid: 'random-event-id',
-        event: '$pageview',
+        event: '$pageleave',
         properties: { token: 'public-project-key' },
       }),
     ).toBeNull();
