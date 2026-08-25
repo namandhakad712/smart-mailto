@@ -1,0 +1,22 @@
+export const PUBLIC_PAGE_PATHS = [
+  '/',
+  '/compare/mailto-alternatives',
+  '/compare/smart-mailto-vs-mailto',
+  '/docs/browser-support',
+  '/docs/cdn',
+  '/docs/geo-routing',
+  '/examples',
+  '/guides',
+  '/guides/mailto-link-opens-nothing',
+  '/guides/mailto-multiple-recipients',
+  '/guides/mailto-not-working-in-chrome',
+  '/guides/mailto-opens-wrong-email-app',
+  '/guides/mailto-without-email-client',
+  '/guides/replace-mailto',
+  '/providers',
+  '/spec',
+  '/tools/mailto-link-generator',
+  '/tools/test-mailto-link',
+] as const;
+
+export const PUBLIC_PAGE_PATH_SET = new Set<string>(PUBLIC_PAGE_PATHS);

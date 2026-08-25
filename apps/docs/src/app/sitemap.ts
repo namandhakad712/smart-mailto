@@ -1,27 +1,8 @@
 import type { MetadataRoute } from 'next';
 
-const SITE_URL = 'https://smart-mailto.vercel.app';
+import { PUBLIC_PAGE_PATHS } from '../lib/publicRoutes';
 
-const PUBLIC_ROUTES = [
-  '',
-  '/compare/mailto-alternatives',
-  '/compare/smart-mailto-vs-mailto',
-  '/docs/browser-support',
-  '/docs/cdn',
-  '/docs/geo-routing',
-  '/examples',
-  '/guides',
-  '/guides/mailto-link-opens-nothing',
-  '/guides/mailto-multiple-recipients',
-  '/guides/mailto-not-working-in-chrome',
-  '/guides/mailto-opens-wrong-email-app',
-  '/guides/mailto-without-email-client',
-  '/guides/replace-mailto',
-  '/providers',
-  '/spec',
-  '/tools/mailto-link-generator',
-  '/tools/test-mailto-link',
-] as const;
+const SITE_URL = 'https://smart-mailto.vercel.app';
 
 const UPDATED_ROUTES = new Map<string, string>([
   ['/compare/mailto-alternatives', '2026-08-19'],
@@ -43,11 +24,11 @@ const UPDATED_ROUTES = new Map<string, string>([
 ]);
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return PUBLIC_ROUTES.map(route => {
+  return PUBLIC_PAGE_PATHS.map(route => {
     const lastModified = UPDATED_ROUTES.get(route);
 
     return {
-      url: `${SITE_URL}${route}`,
+      url: route === '/' ? SITE_URL : `${SITE_URL}${route}`,
       ...(lastModified ? { lastModified } : {}),
     };
   });
