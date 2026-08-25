@@ -79,7 +79,7 @@ The `mailto:` protocol was designed in 1997 for a world where every computer had
 
 | Pain Point               | Impact                                       |
 | ------------------------ | -------------------------------------------- |
-| 🖥️ **Desktop users**     | ~40% have no configured mail client          |
+| 🖥️ **Desktop users**     | No configured mail client                    |
 | 🍎 **macOS users**       | Unwanted desktop app invocations             |
 | 🐧 **Linux / Corporate** | No handler or locked-down default client     |
 | 📱 **Mobile users**      | Blank screens or forced into unwanted apps   |
@@ -94,7 +94,7 @@ The `mailto:` protocol was designed in 1997 for a world where every computer had
 **smart-mailto** intercepts every `mailto:` link on your page and shows a beautiful, geo-aware provider picker modal. Zero configuration required — it just works.
 
 ```html
-<!-- Before — broken for ~40% of the internet -->
+<!-- Before — can fail without a configured mail client -->
 <a href="mailto:hello@company.com">Contact Us</a>
 
 <!-- After — one line of JavaScript -->
