@@ -206,8 +206,8 @@ export default function Home() {
                 The{' '}
                 <code className="font-mono bg-surface dark:bg-surface-container px-1">mailto:</code>{' '}
                 protocol was designed in 1997 for a world where every computer had a desktop email
-                client. That world no longer exists. Today, 40% of users have no mail client
-                configured, and corporate users are locked into webmail.
+                client. That world no longer exists. A visitor may have no mail client configured or
+                may be limited to webmail by a corporate environment.
               </p>
               <p className="text-ink-soft dark:text-text-soft">
                 smart-mailto intercepts every{' '}
