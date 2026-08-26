@@ -91,6 +91,10 @@ describe('search discovery metadata routes', () => {
         lastModified: '2026-08-16',
       },
       {
+        url: `${SITE_URL}/tools/mailto-link-generator`,
+        lastModified: '2026-08-26',
+      },
+      {
         url: `${SITE_URL}/tools/test-mailto-link`,
         lastModified: '2026-08-18',
       },

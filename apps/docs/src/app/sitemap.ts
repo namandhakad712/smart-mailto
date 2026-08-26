@@ -20,6 +20,7 @@ const UPDATED_ROUTES = new Map<string, string>([
   ['/guides/replace-mailto', '2026-08-16'],
   ['/providers', '2026-08-16'],
   ['/spec', '2026-08-16'],
+  ['/tools/mailto-link-generator', '2026-08-26'],
   ['/tools/test-mailto-link', '2026-08-18'],
 ]);
 

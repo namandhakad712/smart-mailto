@@ -48,7 +48,7 @@ const faqItems = [
   {
     question: 'Why does a correct mailto link open the wrong app?',
     answer:
-      'The browser hands the link to the visitorΓÇÖs configured mail handler. A valid link can therefore open a desktop app, a webmail service, or nothing useful if no handler is configured.',
+      'The browser hands the link to the visitor’s configured mail handler. A valid link can therefore open a desktop app, a webmail service, or nothing useful if no handler is configured.',
   },
 ];
 
@@ -84,7 +84,7 @@ export default function MailtoLinkGeneratorPage() {
       <header className="grid gap-8 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_270px] lg:items-end">
         <div>
           <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-            Free tool ┬╖ No signup
+            Free tool · No signup
           </p>
           <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.04] tracking-tight text-ink dark:text-text md:text-7xl">
             Mailto link generator
@@ -356,7 +356,7 @@ export default function MailtoLinkGeneratorPage() {
               className="mt-5 inline-block font-mono text-[10px] font-bold uppercase tracking-wider text-red hover:text-red-dark"
               href="/spec"
             >
-              Browse technical specs ΓåÆ
+              Browse technical specs →
             </Link>
           </div>
         </aside>

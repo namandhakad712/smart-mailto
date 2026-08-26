@@ -1,28 +1,10 @@
 'use client';
 
+import { buildMailtoHtml, buildMailtoLink } from '@/lib/mailtoGenerator';
 import { useMemo, useState } from 'react';
 
 type CopyTarget = 'link' | 'html';
-
-function normalizeAddresses(value: string) {
-  return value
-    .split(/[,\n;]/)
-    .map(address => address.trim())
-    .filter(Boolean)
-    .join(',');
-}
-
-function encodeHeader(value: string) {
-  return encodeURIComponent(value);
-}
-
-function escapeHtml(value: string) {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('"', '&quot;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;');
-}
+type CopyState = { target: CopyTarget; result: 'copied' | 'failed' } | null;
 
 export function MailtoGenerator() {
   const [to, setTo] = useState('hello@example.com');
@@ -31,31 +13,32 @@ export function MailtoGenerator() {
   const [subject, setSubject] = useState('Website enquiry');
   const [body, setBody] = useState('Hi,\n\nI have a question about...');
   const [linkText, setLinkText] = useState('Email us');
-  const [copied, setCopied] = useState<CopyTarget | null>(null);
+  const [copyState, setCopyState] = useState<CopyState>(null);
 
-  const mailtoLink = useMemo(() => {
-    const recipient = normalizeAddresses(to);
-    const headers = [
-      ['cc', normalizeAddresses(cc)],
-      ['bcc', normalizeAddresses(bcc)],
-      ['subject', subject],
-      ['body', body],
-    ]
-      .filter(([, value]) => value.length > 0)
-      .map(([key, value]) => `${key}=${encodeHeader(value)}`);
-
-    return `mailto:${recipient}${headers.length > 0 ? `?${headers.join('&')}` : ''}`;
-  }, [bcc, body, cc, subject, to]);
-
-  const html = useMemo(
-    () => `<a href="${escapeHtml(mailtoLink)}">${escapeHtml(linkText.trim() || 'Send email')}</a>`,
-    [linkText, mailtoLink],
+  const mailtoLink = useMemo(
+    () => buildMailtoLink({ to, cc, bcc, subject, body }),
+    [bcc, body, cc, subject, to],
   );
 
+  const html = useMemo(() => buildMailtoHtml(mailtoLink, linkText), [linkText, mailtoLink]);
+
   async function copy(value: string, target: CopyTarget) {
-    await navigator.clipboard.writeText(value);
-    setCopied(target);
-    window.setTimeout(() => setCopied(current => (current === target ? null : current)), 1800);
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopyState({ target, result: 'copied' });
+    } catch {
+      setCopyState({ target, result: 'failed' });
+    }
+
+    window.setTimeout(
+      () => setCopyState(current => (current?.target === target ? null : current)),
+      1800,
+    );
+  }
+
+  function copyLabel(target: CopyTarget, idleLabel: string, copiedLabel: string) {
+    if (copyState?.target !== target) return idleLabel;
+    return copyState.result === 'copied' ? copiedLabel : 'Copy failed';
   }
 
   const inputClass =
@@ -104,7 +87,7 @@ export function MailtoGenerator() {
               id="mailto-to"
               inputMode="email"
               onChange={event => setTo(event.target.value)}
-              placeholder="hello@example.com"
+              placeholder="hello@example.com, team@example.com"
               type="text"
               value={to}
             />
@@ -120,7 +103,7 @@ export function MailtoGenerator() {
                 id="mailto-cc"
                 inputMode="email"
                 onChange={event => setCc(event.target.value)}
-                placeholder="copy@example.com"
+                placeholder="copy@example.com, team@example.com"
                 type="text"
                 value={cc}
               />
@@ -134,7 +117,7 @@ export function MailtoGenerator() {
                 id="mailto-bcc"
                 inputMode="email"
                 onChange={event => setBcc(event.target.value)}
-                placeholder="archive@example.com"
+                placeholder="archive@example.com, records@example.com"
                 type="text"
                 value={bcc}
               />
@@ -194,11 +177,12 @@ export function MailtoGenerator() {
                 Mailto link
               </label>
               <button
+                aria-live="polite"
                 className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-red hover:text-red-dark"
                 onClick={() => copy(mailtoLink, 'link')}
                 type="button"
               >
-                {copied === 'link' ? 'Copied' : 'Copy link'}
+                {copyLabel('link', 'Copy link', 'Link copied')}
               </button>
             </div>
             <textarea
@@ -227,19 +211,30 @@ export function MailtoGenerator() {
           </div>
 
           <button
+            aria-live="polite"
             className="mt-6 w-full bg-red px-5 py-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-red-dark active:opacity-80"
             onClick={() => copy(html, 'html')}
             type="button"
           >
-            {copied === 'html' ? 'HTML copied' : 'Copy HTML'}
+            {copyLabel('html', 'Copy HTML', 'HTML copied')}
           </button>
 
           <a
             className="mt-4 text-center font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-red underline-offset-4 hover:underline"
             href={mailtoLink}
           >
-            Test the generated link Γåù
+            Test the generated link ↗
           </a>
+
+          <p className="mt-4 text-center text-sm leading-6 text-ink-soft dark:text-text-soft">
+            Valid link still opens the wrong app?{' '}
+            <a
+              className="font-semibold text-red underline-offset-4 hover:underline"
+              href="/guides/replace-mailto"
+            >
+              Use smart-mailto.
+            </a>
+          </p>
         </div>
       </div>
     </section>
