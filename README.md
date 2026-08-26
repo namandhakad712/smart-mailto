@@ -55,6 +55,8 @@
 
 ## 🚀 Quick start
 
+[Try the mailto link generator](https://smart-mailto.vercel.app/tools/mailto-link-generator) before installing.
+
 ```bash
 npm install @smart-mailto/core
 ```

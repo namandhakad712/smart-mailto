@@ -2,6 +2,8 @@
 
 React components and hooks for the [smart-mailto](https://github.com/namandhakad712/smart-mailto) webmail provider picker.
 
+[Try the mailto link generator](https://smart-mailto.vercel.app/tools/mailto-link-generator) before installing.
+
 ```bash
 npm i @smart-mailto/react
 ```

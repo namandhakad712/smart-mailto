@@ -2,6 +2,8 @@
 
 Zero-dependency, framework-agnostic engine that replaces broken `mailto:` links with a geo-aware webmail picker modal. **7.5 KB gzipped. 51 webmail entries: 31 compose links and 20 fallback pages. Zero network requests.** Prefill support varies by provider.
 
+[Try the mailto link generator](https://smart-mailto.vercel.app/tools/mailto-link-generator) before installing.
+
 ```bash
 npm i @smart-mailto/core
 ```
