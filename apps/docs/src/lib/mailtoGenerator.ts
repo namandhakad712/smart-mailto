@@ -6,6 +6,8 @@ export type MailtoGeneratorFields = {
   body?: string;
 };
 
+export type MailtoGeneratorCopyTarget = 'url' | 'html';
+
 export function normalizeMailtoAddresses(value: string) {
   return value
     .split(/[,\n;]/)
@@ -48,4 +50,24 @@ export function buildMailtoLink({
 
 export function buildMailtoHtml(mailtoLink: string, linkText: string) {
   return `<a href="${escapeHtml(mailtoLink)}">${escapeHtml(linkText.trim() || 'Send email')}</a>`;
+}
+
+export async function copyMailtoGeneratorOutput(
+  value: string,
+  target: MailtoGeneratorCopyTarget,
+  writeText: (nextValue: string) => Promise<void>,
+  onCopied: (nextTarget: MailtoGeneratorCopyTarget) => void,
+): Promise<boolean> {
+  try {
+    await writeText(value);
+  } catch {
+    return false;
+  }
+
+  try {
+    onCopied(target);
+  } catch {
+    // A tracking failure cannot turn a successful clipboard write into a failed copy.
+  }
+  return true;
 }

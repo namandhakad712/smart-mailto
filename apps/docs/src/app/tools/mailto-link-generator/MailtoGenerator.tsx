@@ -1,10 +1,15 @@
 'use client';
 
-import { buildMailtoHtml, buildMailtoLink } from '@/lib/mailtoGenerator';
+import { createMailtoGeneratorAnalytics } from '@/lib/demoAnalytics';
+import {
+  buildMailtoHtml,
+  buildMailtoLink,
+  copyMailtoGeneratorOutput,
+  type MailtoGeneratorCopyTarget,
+} from '@/lib/mailtoGenerator';
 import { useMemo, useState } from 'react';
 
-type CopyTarget = 'link' | 'html';
-type CopyState = { target: CopyTarget; result: 'copied' | 'failed' } | null;
+type CopyState = { target: MailtoGeneratorCopyTarget; result: 'copied' | 'failed' } | null;
 
 export function MailtoGenerator() {
   const [to, setTo] = useState('hello@example.com');
@@ -14,6 +19,7 @@ export function MailtoGenerator() {
   const [body, setBody] = useState('Hi,\n\nI have a question about...');
   const [linkText, setLinkText] = useState('Email us');
   const [copyState, setCopyState] = useState<CopyState>(null);
+  const analytics = useMemo(() => createMailtoGeneratorAnalytics(), []);
 
   const mailtoLink = useMemo(
     () => buildMailtoLink({ to, cc, bcc, subject, body }),
@@ -22,13 +28,14 @@ export function MailtoGenerator() {
 
   const html = useMemo(() => buildMailtoHtml(mailtoLink, linkText), [linkText, mailtoLink]);
 
-  async function copy(value: string, target: CopyTarget) {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopyState({ target, result: 'copied' });
-    } catch {
-      setCopyState({ target, result: 'failed' });
-    }
+  async function copy(value: string, target: MailtoGeneratorCopyTarget) {
+    const copied = await copyMailtoGeneratorOutput(
+      value,
+      target,
+      nextValue => navigator.clipboard.writeText(nextValue),
+      analytics.onCopySucceeded,
+    );
+    setCopyState({ target, result: copied ? 'copied' : 'failed' });
 
     window.setTimeout(
       () => setCopyState(current => (current?.target === target ? null : current)),
@@ -36,7 +43,7 @@ export function MailtoGenerator() {
     );
   }
 
-  function copyLabel(target: CopyTarget, idleLabel: string, copiedLabel: string) {
+  function copyLabel(target: MailtoGeneratorCopyTarget, idleLabel: string, copiedLabel: string) {
     if (copyState?.target !== target) return idleLabel;
     return copyState.result === 'copied' ? copiedLabel : 'Copy failed';
   }
@@ -86,7 +93,10 @@ export function MailtoGenerator() {
               className={inputClass}
               id="mailto-to"
               inputMode="email"
-              onChange={event => setTo(event.target.value)}
+              onChange={event => {
+                analytics.onMeaningfulEdit();
+                setTo(event.target.value);
+              }}
               placeholder="hello@example.com, team@example.com"
               type="text"
               value={to}
@@ -102,7 +112,10 @@ export function MailtoGenerator() {
                 className={inputClass}
                 id="mailto-cc"
                 inputMode="email"
-                onChange={event => setCc(event.target.value)}
+                onChange={event => {
+                  analytics.onMeaningfulEdit();
+                  setCc(event.target.value);
+                }}
                 placeholder="copy@example.com, team@example.com"
                 type="text"
                 value={cc}
@@ -116,7 +129,10 @@ export function MailtoGenerator() {
                 className={inputClass}
                 id="mailto-bcc"
                 inputMode="email"
-                onChange={event => setBcc(event.target.value)}
+                onChange={event => {
+                  analytics.onMeaningfulEdit();
+                  setBcc(event.target.value);
+                }}
                 placeholder="archive@example.com, records@example.com"
                 type="text"
                 value={bcc}
@@ -131,7 +147,10 @@ export function MailtoGenerator() {
             <input
               className={inputClass}
               id="mailto-subject"
-              onChange={event => setSubject(event.target.value)}
+              onChange={event => {
+                analytics.onMeaningfulEdit();
+                setSubject(event.target.value);
+              }}
               placeholder="How can we help?"
               type="text"
               value={subject}
@@ -145,7 +164,10 @@ export function MailtoGenerator() {
             <textarea
               className={`${inputClass} min-h-36 resize-y leading-6`}
               id="mailto-body"
-              onChange={event => setBody(event.target.value)}
+              onChange={event => {
+                analytics.onMeaningfulEdit();
+                setBody(event.target.value);
+              }}
               placeholder="Write the opening text for the email..."
               value={body}
             />
@@ -158,7 +180,10 @@ export function MailtoGenerator() {
             <input
               className={inputClass}
               id="mailto-link-text"
-              onChange={event => setLinkText(event.target.value)}
+              onChange={event => {
+                analytics.onMeaningfulEdit();
+                setLinkText(event.target.value);
+              }}
               placeholder="Email us"
               type="text"
               value={linkText}
@@ -179,10 +204,10 @@ export function MailtoGenerator() {
               <button
                 aria-live="polite"
                 className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-red hover:text-red-dark"
-                onClick={() => copy(mailtoLink, 'link')}
+                onClick={() => copy(mailtoLink, 'url')}
                 type="button"
               >
-                {copyLabel('link', 'Copy link', 'Link copied')}
+                {copyLabel('url', 'Copy link', 'Link copied')}
               </button>
             </div>
             <textarea

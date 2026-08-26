@@ -16,6 +16,7 @@ import {
   captureQuickStartView,
   captureMailtoTestInstallCopy,
   captureMailtoTestOutcome,
+  createMailtoGeneratorAnalytics,
   classifyArrivalSource,
   createDemoAnalyticsHooks,
   createSitePageviewTracker,
@@ -62,8 +63,9 @@ describe('privacy-safe homepage demo analytics', () => {
     });
   });
 
-  it('captures exactly the thirteen approved product events', () => {
+  it('captures exactly the fifteen approved product events', () => {
     const hooks = createDemoAnalyticsHooks();
+    const generator = createMailtoGeneratorAnalytics();
 
     captureDemoPageview();
     hooks.onShow();
@@ -78,6 +80,8 @@ describe('privacy-safe homepage demo analytics', () => {
     captureMailtoTestOutcome('warning');
     captureMailtoTestOutcome('invalid');
     captureMailtoTestInstallCopy();
+    generator.onMeaningfulEdit();
+    generator.onCopySucceeded('url');
 
     expect(posthog.capture.mock.calls.map(([event]) => event)).toEqual([
       DEMO_EVENTS.pageview,
@@ -93,8 +97,10 @@ describe('privacy-safe homepage demo analytics', () => {
       DEMO_EVENTS.mailtoTestWarning,
       DEMO_EVENTS.mailtoTestInvalid,
       DEMO_EVENTS.mailtoTestInstallCopied,
+      DEMO_EVENTS.mailtoGeneratorGenerated,
+      DEMO_EVENTS.mailtoGeneratorCopied,
     ]);
-    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(13);
+    expect(new Set(Object.values(DEMO_EVENTS)).size).toBe(15);
   });
 
   it('classifies each fixed arrival source without retaining referrer paths', () => {
@@ -290,6 +296,86 @@ describe('privacy-safe homepage demo analytics', () => {
       sanitizeDemoEvent({
         event: 'mailto_test_run',
         properties: { token: 'public-project-key' },
+        uuid: 'random-event-id',
+      }),
+    ).toBeNull();
+  });
+
+  it('records one meaningful generator edit and successful copies with fixed fields only', () => {
+    const generator = createMailtoGeneratorAnalytics({ controlledEvent: true });
+
+    generator.onMeaningfulEdit();
+    generator.onMeaningfulEdit();
+    generator.onCopySucceeded('url');
+    generator.onCopySucceeded('html');
+
+    expect(posthog.capture.mock.calls).toEqual([
+      [
+        DEMO_EVENTS.mailtoGeneratorGenerated,
+        {
+          page: 'mailto_link_generator',
+          command_position: 'generator',
+          controlled_event: true,
+        },
+      ],
+      [
+        DEMO_EVENTS.mailtoGeneratorCopied,
+        {
+          page: 'mailto_link_generator',
+          command_position: 'generator',
+          controlled_event: true,
+          copy_target: 'url',
+        },
+      ],
+      [
+        DEMO_EVENTS.mailtoGeneratorCopied,
+        {
+          page: 'mailto_link_generator',
+          command_position: 'generator',
+          controlled_event: true,
+          copy_target: 'html',
+        },
+      ],
+    ]);
+
+    for (const [event, copyTarget] of [
+      [DEMO_EVENTS.mailtoGeneratorGenerated, undefined],
+      [DEMO_EVENTS.mailtoGeneratorCopied, 'url'],
+      [DEMO_EVENTS.mailtoGeneratorCopied, 'html'],
+    ] as const) {
+      const sanitized = sanitizeDemoEvent({
+        event,
+        properties: {
+          token: 'public-project-key',
+          distinct_id: 'random-device-id',
+          controlled_event: true,
+          copy_target: copyTarget,
+          recipient: 'private@example.com',
+          subject: 'private subject',
+          body: 'private body',
+          link_text: 'private link text',
+          generated_url: 'mailto:private@example.com?subject=private',
+          generated_html: '<a href="mailto:private@example.com">Private</a>',
+        },
+        uuid: 'random-event-id',
+      });
+
+      expect(sanitized?.properties).toEqual({
+        token: 'public-project-key',
+        distinct_id: 'random-device-id',
+        $process_person_profile: false,
+        page: 'mailto_link_generator',
+        command_position: 'generator',
+        controlled_event: true,
+        ...(copyTarget ? { copy_target: copyTarget } : {}),
+      });
+      expect(JSON.stringify(sanitized)).not.toContain('private');
+    }
+
+    expect(
+      sanitizeDemoEvent({
+        event: DEMO_EVENTS.mailtoGeneratorCopied,
+        properties: { copy_target: 'private-target' },
         uuid: 'random-event-id',
       }),
     ).toBeNull();
