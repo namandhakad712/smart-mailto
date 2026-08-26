@@ -11,6 +11,8 @@ const GUIDES_PAGE = 'guides';
 const GUIDES_INSTALL_POSITION = 'guide_desk';
 const MAILTO_TEST_PAGE = 'mailto_link_tester';
 const MAILTO_TEST_POSITION = 'tester';
+const MAILTO_GENERATOR_PAGE = 'mailto_link_generator';
+const MAILTO_GENERATOR_POSITION = 'generator';
 export const SITE_PAGEVIEW_EVENT = '$pageview';
 
 export const ARRIVAL_SOURCES = {
@@ -73,10 +75,13 @@ export const DEMO_EVENTS = {
   mailtoTestWarning: 'mailto_test_warning',
   mailtoTestInvalid: 'mailto_test_invalid',
   mailtoTestInstallCopied: 'mailto_test_install_copy',
+  mailtoGeneratorGenerated: 'mailto_generator_generated',
+  mailtoGeneratorCopied: 'mailto_generator_copied',
 } as const;
 
 type DemoEventName = (typeof DEMO_EVENTS)[keyof typeof DEMO_EVENTS];
 type MailtoTestStatus = 'empty' | 'invalid' | 'warning' | 'valid';
+export type MailtoGeneratorCopyTarget = 'url' | 'html';
 
 const EVENT_NAMES = new Set<DemoEventName>(Object.values(DEMO_EVENTS));
 const MAILTO_TEST_OUTCOME_EVENTS = {
@@ -87,6 +92,10 @@ const MAILTO_TEST_OUTCOME_EVENTS = {
 const MAILTO_TEST_EVENT_NAMES = new Set<DemoEventName>([
   ...Object.values(MAILTO_TEST_OUTCOME_EVENTS),
   DEMO_EVENTS.mailtoTestInstallCopied,
+]);
+const MAILTO_GENERATOR_EVENT_NAMES = new Set<DemoEventName>([
+  DEMO_EVENTS.mailtoGeneratorGenerated,
+  DEMO_EVENTS.mailtoGeneratorCopied,
 ]);
 
 type PageviewCapture = (
@@ -251,9 +260,25 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
   }
 
   if (!EVENT_NAMES.has(event.event as DemoEventName)) return null;
+  const generatorCopyTarget = event.properties?.copy_target;
+  if (
+    event.event === DEMO_EVENTS.mailtoGeneratorCopied &&
+    generatorCopyTarget !== 'url' &&
+    generatorCopyTarget !== 'html'
+  ) {
+    return null;
+  }
 
-  const fixedLocationProperties =
-    event.event === DEMO_EVENTS.guidesDeskViewed
+  const fixedLocationProperties = MAILTO_GENERATOR_EVENT_NAMES.has(event.event as DemoEventName)
+    ? {
+        page: MAILTO_GENERATOR_PAGE,
+        command_position: MAILTO_GENERATOR_POSITION,
+        controlled_event: event.properties?.controlled_event === true,
+        ...(event.event === DEMO_EVENTS.mailtoGeneratorCopied
+          ? { copy_target: generatorCopyTarget }
+          : {}),
+      }
+    : event.event === DEMO_EVENTS.guidesDeskViewed
       ? {
           page: GUIDES_PAGE,
           command_position: GUIDES_INSTALL_POSITION,
@@ -288,7 +313,8 @@ export function sanitizeDemoEvent(event: CaptureResult | null): CaptureResult | 
       event.event === DEMO_EVENTS.installCopied ||
       event.event === DEMO_EVENTS.guidesDeskViewed ||
       event.event === DEMO_EVENTS.guidesInstallCopied ||
-      MAILTO_TEST_EVENT_NAMES.has(event.event as DemoEventName)
+      MAILTO_TEST_EVENT_NAMES.has(event.event as DemoEventName) ||
+      MAILTO_GENERATOR_EVENT_NAMES.has(event.event as DemoEventName)
         ? {}
         : { demo_location: DEMO_LOCATION }),
       ...fixedLocationProperties,
@@ -378,6 +404,48 @@ export function captureMailtoTestInstallCopy() {
     page: MAILTO_TEST_PAGE,
     command_position: MAILTO_TEST_POSITION,
   });
+}
+
+type MailtoGeneratorCapture = (event: DemoEventName, properties: Record<string, unknown>) => void;
+
+export function createMailtoGeneratorAnalytics({
+  controlledEvent = typeof window !== 'undefined'
+    ? isControlledPageview(window.location.href)
+    : false,
+  capture = (event, properties) => posthog.capture(event, properties),
+}: {
+  controlledEvent?: boolean;
+  capture?: MailtoGeneratorCapture;
+} = {}) {
+  const locationProperties = {
+    page: MAILTO_GENERATOR_PAGE,
+    command_position: MAILTO_GENERATOR_POSITION,
+    controlled_event: controlledEvent,
+  } as const;
+  let generatedCaptured = false;
+
+  const captureSafely: MailtoGeneratorCapture = (event, properties) => {
+    try {
+      capture(event, properties);
+    } catch {
+      // Analytics must never interfere with generator output or clipboard feedback.
+    }
+  };
+
+  return {
+    onMeaningfulEdit() {
+      if (generatedCaptured) return;
+
+      generatedCaptured = true;
+      captureSafely(DEMO_EVENTS.mailtoGeneratorGenerated, locationProperties);
+    },
+    onCopySucceeded(copyTarget: MailtoGeneratorCopyTarget) {
+      captureSafely(DEMO_EVENTS.mailtoGeneratorCopied, {
+        ...locationProperties,
+        copy_target: copyTarget,
+      });
+    },
+  };
 }
 
 export function observeQuickStartView(

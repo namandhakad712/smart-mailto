@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { buildMailtoHtml, buildMailtoLink } from './mailtoGenerator';
+import { describe, expect, it, vi } from 'vitest';
+import { buildMailtoHtml, buildMailtoLink, copyMailtoGeneratorOutput } from './mailtoGenerator';
 
 describe('mailto link generator', () => {
   it('normalizes multiple To, CC, and BCC recipients', () => {
@@ -35,5 +35,28 @@ describe('mailto link generator', () => {
     ).toBe(
       '<a href="mailto:hello@example.com?subject=Sales%20%26%20support">Ask &lt;Sales&gt; &amp; &quot;Support&quot;</a>',
     );
+  });
+
+  it('records only the fixed target after a successful clipboard write', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    const onCopied = vi.fn();
+    const privateOutput = 'mailto:private@example.com?subject=Private';
+
+    await expect(
+      copyMailtoGeneratorOutput(privateOutput, 'url', writeText, onCopied),
+    ).resolves.toBe(true);
+    expect(writeText).toHaveBeenCalledWith(privateOutput);
+    expect(onCopied).toHaveBeenCalledWith('url');
+    expect(onCopied.mock.calls.flat()).not.toContain(privateOutput);
+  });
+
+  it('does not record a copy when the clipboard write fails', async () => {
+    const writeText = vi.fn().mockRejectedValue(new Error('clipboard unavailable'));
+    const onCopied = vi.fn();
+
+    await expect(
+      copyMailtoGeneratorOutput('private generated output', 'html', writeText, onCopied),
+    ).resolves.toBe(false);
+    expect(onCopied).not.toHaveBeenCalled();
   });
 });
