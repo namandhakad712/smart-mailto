@@ -417,7 +417,7 @@ export default function Home() {
             Try it yourself
           </h3>
           <p className="font-body italic text-ink-soft dark:text-text-soft mt-2">
-            Click the button below to see smart-mailto in action.
+            Choose a provider, then we open a ready-to-send draft.
           </p>
         </div>
         <Demo />
