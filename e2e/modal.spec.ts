@@ -5,7 +5,7 @@ test('SmartMailto modal opens when clicking the trigger', async ({ page }) => {
   await page.goto('/');
 
   // Wait for the Demo component to be ready
-  const trigger = page.locator('a[data-smart-mailto="true"]').first();
+  const trigger = page.getByRole('link', { name: 'Open the email app picker' });
   await expect(trigger).toBeVisible();
 
   // Click the trigger link
@@ -39,7 +39,7 @@ test('remembered choice skips the picker and the change link restores it', async
   });
   await page.goto('/');
 
-  const sendLink = page.getByRole('link', { name: 'Send us an email' });
+  const sendLink = page.getByRole('link', { name: 'Open the email app picker' });
   await sendLink.click();
   await page.getByRole('listitem', { name: 'Open in Gmail' }).click();
   await expect(page.locator('#__smart-mailto-host__')).toHaveCount(0);

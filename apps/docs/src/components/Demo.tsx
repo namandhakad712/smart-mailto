@@ -95,7 +95,7 @@ export function Demo() {
           setTimeout(() => setCopied(false), 2000);
         }}
       >
-        <span>Send us an email</span>
+        <span>Open the email app picker</span>
         <ArrowRightIcon />
       </SmartMailto>
 
