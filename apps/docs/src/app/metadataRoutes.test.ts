@@ -16,10 +16,13 @@ describe('search discovery metadata routes', () => {
       `${SITE_URL}/examples`,
       `${SITE_URL}/guides`,
       `${SITE_URL}/guides/mailto-link-opens-nothing`,
+      `${SITE_URL}/guides/mailto-button`,
       `${SITE_URL}/guides/mailto-multiple-recipients`,
       `${SITE_URL}/guides/mailto-not-working-in-chrome`,
       `${SITE_URL}/guides/mailto-opens-wrong-email-app`,
+      `${SITE_URL}/guides/mailto-subject-body-encoding`,
       `${SITE_URL}/guides/mailto-without-email-client`,
+      `${SITE_URL}/guides/prefilled-email-templates`,
       `${SITE_URL}/guides/replace-mailto`,
       `${SITE_URL}/providers`,
       `${SITE_URL}/spec`,
@@ -56,11 +59,15 @@ describe('search discovery metadata routes', () => {
       },
       {
         url: `${SITE_URL}/guides`,
-        lastModified: '2026-08-09',
+        lastModified: '2026-08-31',
       },
       {
         url: `${SITE_URL}/guides/mailto-link-opens-nothing`,
         lastModified: '2026-08-16',
+      },
+      {
+        url: `${SITE_URL}/guides/mailto-button`,
+        lastModified: '2026-08-31',
       },
       {
         url: `${SITE_URL}/guides/mailto-multiple-recipients`,
@@ -75,8 +82,16 @@ describe('search discovery metadata routes', () => {
         lastModified: '2026-08-19',
       },
       {
+        url: `${SITE_URL}/guides/mailto-subject-body-encoding`,
+        lastModified: '2026-08-31',
+      },
+      {
         url: `${SITE_URL}/guides/mailto-without-email-client`,
         lastModified: '2026-08-19',
+      },
+      {
+        url: `${SITE_URL}/guides/prefilled-email-templates`,
+        lastModified: '2026-08-31',
       },
       {
         url: `${SITE_URL}/guides/replace-mailto`,

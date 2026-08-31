@@ -15,13 +15,16 @@ const revisionDates = {
   test: { dateTime: '2026-08-17', label: 'Aug. 17, 2026' },
   generator: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
   multipleRecipients: { dateTime: '2026-08-24', label: 'Aug. 24, 2026' },
+  encoding: { dateTime: '2026-08-31', label: 'Aug. 31, 2026' },
+  button: { dateTime: '2026-08-31', label: 'Aug. 31, 2026' },
+  templates: { dateTime: '2026-08-31', label: 'Aug. 31, 2026' },
   alternatives: { dateTime: '2026-08-19', label: 'Aug. 19, 2026' },
 } as const;
 
 export const metadata: Metadata = {
   title: 'Mailto Guides for Developers — smart-mailto',
   description:
-    'Test a mailto link, fix wrong-app and no-client failures, troubleshoot Chrome, compare contact options, generate a mailto URL, or install smart-mailto.',
+    'Build, test, style, and troubleshoot mailto links. Use working examples for encoding, buttons, templates, recipients, browser failures, and provider choice.',
   alternates: {
     canonical: pageUrl,
   },
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: 'Mailto guides for developers',
     description:
-      'Ten practical routes for testing, comparing, fixing, generating, and upgrading mailto links.',
+      'Thirteen practical routes for testing, styling, fixing, generating, and upgrading mailto links.',
   },
 };
 
@@ -114,6 +117,39 @@ const readingPaths = [
   },
   {
     number: '09',
+    label: 'Encoding',
+    title: 'Encode a mailto subject and body',
+    description:
+      'Handle spaces, punctuation, ampersands, question marks, and multiline body copy correctly.',
+    href: '/guides/mailto-subject-body-encoding',
+    meta: 'HTML examples · RFC 6068',
+    revised: revisionDates.encoding,
+    className: '',
+  },
+  {
+    number: '10',
+    label: 'Buttons',
+    title: 'Put a mailto link on a button',
+    description:
+      'Style an accessible anchor as a button and keep the encoded mailto destination visible in HTML.',
+    href: '/guides/mailto-button',
+    meta: 'HTML and CSS example',
+    revised: revisionDates.button,
+    className: '',
+  },
+  {
+    number: '11',
+    label: 'Templates',
+    title: 'Use a prefilled email template',
+    description:
+      'Start support, sales, and feedback emails with short editable prompts and safe placeholders.',
+    href: '/guides/prefilled-email-templates',
+    meta: 'Three copy-ready patterns',
+    revised: revisionDates.templates,
+    className: '',
+  },
+  {
+    number: '12',
     label: 'Alternatives',
     title: 'Compare four mailto alternatives',
     description:
@@ -124,7 +160,7 @@ const readingPaths = [
     className: 'lg:col-span-2',
   },
   {
-    number: '10',
+    number: '13',
     label: 'Comparison',
     title: 'smart-mailto vs. plain mailto',
     description:
@@ -143,7 +179,7 @@ export default function GuidesPage() {
       <header className="grid gap-10 border-b border-border pb-12 dark:border-border lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
         <div>
           <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-            Guide desk · Ten practical routes
+            Guide desk · Thirteen practical routes
           </p>
           <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.04] tracking-tight text-ink dark:text-text md:text-7xl">
             Start with the mailto problem in front of you.
@@ -176,6 +212,10 @@ export default function GuidesPage() {
               'Fix Chrome',
               'Test',
               'Generate',
+              'Add recipients',
+              'Encode message fields',
+              'Style a mailto button',
+              'Prefill a template',
               'Compare alternatives',
               'Compare mailto',
             ].map((label, index) => (
@@ -195,7 +235,7 @@ export default function GuidesPage() {
         className="grid gap-8 py-12 lg:grid-cols-[200px_1fr]"
       >
         <div>
-          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 10</p>
+          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 13</p>
           <p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-red">
             Start here
           </p>
@@ -252,7 +292,7 @@ export default function GuidesPage() {
               className="mt-2 font-headline text-3xl font-medium tracking-tight text-ink dark:text-text"
               id="more-guides"
             >
-              Nine more ways in
+              Twelve more ways in
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-ink-muted dark:text-text-muted">
@@ -269,7 +309,7 @@ export default function GuidesPage() {
               <div>
                 <div className="flex items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
                   <span className="font-bold text-red">{path.label}</span>
-                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 10</span>
+                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 13</span>
                 </div>
                 <h3 className="mt-8 max-w-xl text-balance font-headline text-2xl font-medium tracking-tight text-ink dark:text-text md:text-3xl">
                   <Link
