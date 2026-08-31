@@ -7,6 +7,7 @@ const pageUrl = 'https://smart-mailto.vercel.app/guides';
 
 const revisionDates = {
   install: { dateTime: '2026-08-09', label: 'Aug. 9, 2026' },
+  mailtoLink: { dateTime: '2026-08-31', label: 'Aug. 31, 2026' },
   comparison: { dateTime: '2026-08-07', label: 'Aug. 7, 2026' },
   troubleshooting: { dateTime: '2026-08-09', label: 'Aug. 9, 2026' },
   wrongApp: { dateTime: '2026-08-19', label: 'Aug. 19, 2026' },
@@ -33,13 +34,24 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: 'Mailto guides for developers',
     description:
-      'Thirteen practical routes for testing, styling, fixing, generating, and upgrading mailto links.',
+      'Fourteen practical routes for learning, testing, styling, fixing, generating, and upgrading mailto links.',
   },
 };
 
 const readingPaths = [
   {
     number: '02',
+    label: 'HTML basics',
+    title: 'Learn mailto link syntax',
+    description:
+      'Copy valid HTML, add optional fields, encode values, and understand what the client handoff can do.',
+    href: '/guides/mailto-link',
+    meta: 'HTML reference · RFC 6068',
+    revised: revisionDates.mailtoLink,
+    className: '',
+  },
+  {
+    number: '03',
     label: 'Troubleshooting',
     title: 'Mailto link not working',
     description:
@@ -50,7 +62,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '03',
+    number: '04',
     label: 'Wrong app',
     title: 'Mailto opens the wrong email app',
     description:
@@ -61,7 +73,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '04',
+    number: '05',
     label: 'No client',
     title: 'Mailto without an email client',
     description:
@@ -72,7 +84,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '05',
+    number: '06',
     label: 'Chrome',
     title: 'Mailto not working in Chrome',
     description:
@@ -83,7 +95,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '06',
+    number: '07',
     label: 'Test',
     title: 'Test a mailto link',
     description:
@@ -94,7 +106,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '07',
+    number: '08',
     label: 'Tool',
     title: 'Build a mailto link',
     description:
@@ -105,7 +117,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '08',
+    number: '09',
     label: 'Recipients',
     title: 'Add multiple mailto recipients',
     description:
@@ -116,7 +128,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '09',
+    number: '10',
     label: 'Encoding',
     title: 'Encode a mailto subject and body',
     description:
@@ -127,7 +139,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '10',
+    number: '11',
     label: 'Buttons',
     title: 'Put a mailto link on a button',
     description:
@@ -138,7 +150,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '11',
+    number: '12',
     label: 'Templates',
     title: 'Use a prefilled email template',
     description:
@@ -149,7 +161,7 @@ const readingPaths = [
     className: '',
   },
   {
-    number: '12',
+    number: '13',
     label: 'Alternatives',
     title: 'Compare four mailto alternatives',
     description:
@@ -160,7 +172,7 @@ const readingPaths = [
     className: 'lg:col-span-2',
   },
   {
-    number: '13',
+    number: '14',
     label: 'Comparison',
     title: 'smart-mailto vs. plain mailto',
     description:
@@ -179,7 +191,7 @@ export default function GuidesPage() {
       <header className="grid gap-10 border-b border-border pb-12 dark:border-border lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
         <div>
           <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-red">
-            Guide desk · Thirteen practical routes
+            Guide desk · Fourteen practical routes
           </p>
           <h1 className="max-w-4xl text-balance font-headline text-5xl font-normal leading-[1.04] tracking-tight text-ink dark:text-text md:text-7xl">
             Start with the mailto problem in front of you.
@@ -206,6 +218,7 @@ export default function GuidesPage() {
           <ol className="mt-5 space-y-4">
             {[
               'Install',
+              'Learn mailto basics',
               'Troubleshoot',
               'Fix the wrong app',
               'Handle no client',
@@ -235,7 +248,7 @@ export default function GuidesPage() {
         className="grid gap-8 py-12 lg:grid-cols-[200px_1fr]"
       >
         <div>
-          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 13</p>
+          <p className="font-mono text-xs text-ink-muted dark:text-text-muted">01 / 14</p>
           <p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-red">
             Start here
           </p>
@@ -292,7 +305,7 @@ export default function GuidesPage() {
               className="mt-2 font-headline text-3xl font-medium tracking-tight text-ink dark:text-text"
               id="more-guides"
             >
-              Twelve more ways in
+              Thirteen more ways in
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-ink-muted dark:text-text-muted">
@@ -309,7 +322,7 @@ export default function GuidesPage() {
               <div>
                 <div className="flex items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
                   <span className="font-bold text-red">{path.label}</span>
-                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 13</span>
+                  <span className="text-ink-muted dark:text-text-muted">{path.number} / 14</span>
                 </div>
                 <h3 className="mt-8 max-w-xl text-balance font-headline text-2xl font-medium tracking-tight text-ink dark:text-text md:text-3xl">
                   <Link

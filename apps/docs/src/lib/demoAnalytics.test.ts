@@ -226,14 +226,14 @@ describe('privacy-safe homepage demo analytics', () => {
     ).toBeNull();
   });
 
-  it('covers all twenty-one public sitemap routes through the shared route registry', () => {
+  it('covers all twenty-two public sitemap routes through the shared route registry', () => {
     const capture = vi.fn();
     const tracker = createSitePageviewTracker('https://smart-mailto.vercel.app/', '', capture);
 
     tracker.captureInitial();
     for (const route of PUBLIC_PAGE_PATHS.slice(1)) tracker.captureNavigation(route);
 
-    expect(PUBLIC_PAGE_PATHS).toHaveLength(21);
+    expect(PUBLIC_PAGE_PATHS).toHaveLength(22);
     expect(capture.mock.calls.map(([, properties]) => properties.page_path)).toEqual(
       PUBLIC_PAGE_PATHS,
     );

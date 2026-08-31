@@ -7,6 +7,7 @@ export const PUBLIC_PAGE_PATHS = [
   '/docs/geo-routing',
   '/examples',
   '/guides',
+  '/guides/mailto-link',
   '/guides/mailto-link-opens-nothing',
   '/guides/mailto-button',
   '/guides/mailto-multiple-recipients',
