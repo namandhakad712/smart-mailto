@@ -15,6 +15,7 @@ describe('search discovery metadata routes', () => {
       `${SITE_URL}/docs/geo-routing`,
       `${SITE_URL}/examples`,
       `${SITE_URL}/guides`,
+      `${SITE_URL}/guides/mailto-link`,
       `${SITE_URL}/guides/mailto-link-opens-nothing`,
       `${SITE_URL}/guides/mailto-button`,
       `${SITE_URL}/guides/mailto-multiple-recipients`,
@@ -59,6 +60,10 @@ describe('search discovery metadata routes', () => {
       },
       {
         url: `${SITE_URL}/guides`,
+        lastModified: '2026-08-31',
+      },
+      {
+        url: `${SITE_URL}/guides/mailto-link`,
         lastModified: '2026-08-31',
       },
       {

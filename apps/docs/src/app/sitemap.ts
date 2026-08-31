@@ -12,6 +12,7 @@ const UPDATED_ROUTES = new Map<string, string>([
   ['/docs/geo-routing', '2026-08-16'],
   ['/examples', '2026-08-16'],
   ['/guides', '2026-08-31'],
+  ['/guides/mailto-link', '2026-08-31'],
   ['/guides/mailto-link-opens-nothing', '2026-08-16'],
   ['/guides/mailto-button', '2026-08-31'],
   ['/guides/mailto-multiple-recipients', '2026-08-24'],

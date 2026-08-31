@@ -11,11 +11,12 @@ const newRoutes = [
 ] as const;
 
 describe('new mailto page discovery paths', () => {
-  it('lists thirteen practical routes on the Guides desk', () => {
-    expect(guideDeskSource).toContain('Guide desk · Thirteen practical routes');
-    expect(guideDeskSource).toContain('01 / 13');
-    expect(guideDeskSource).toContain('{path.number} / 13');
-    expect(guideDeskSource).toContain('Twelve more ways in');
+  it('lists fourteen practical routes on the Guides desk', () => {
+    expect(guideDeskSource).toContain('Guide desk · Fourteen practical routes');
+    expect(guideDeskSource).toContain('01 / 14');
+    expect(guideDeskSource).toContain('{path.number} / 14');
+    expect(guideDeskSource).toContain('Thirteen more ways in');
+    expect(guideDeskSource).toContain("href: '/guides/mailto-link'");
     expect(guideDeskSource).toContain("href: '/guides/mailto-multiple-recipients'");
     expect(guideDeskSource).toContain("href: '/guides/mailto-subject-body-encoding'");
     expect(guideDeskSource).toContain("href: '/guides/mailto-button'");
